@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>NIO - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Java Non blocking IO 学习笔记  Java NIO 简介 Java NIO（Non blocking IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同，NIO支持面向缓冲区的、基于通道的IO操作。NIO将以更加高效的方式进行文件的读写操作。">
+<meta name="keywords" content="nio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NIO">
+<meta property="og:url" content="http://yoursite.com/2018/09/07/NIO/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="Java Non blocking IO 学习笔记  Java NIO 简介 Java NIO（Non blocking IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同，NIO支持面向缓冲区的、基于通道的IO操作。NIO将以更加高效的方式进行文件的读写操作。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/random/13.jpg">
+<meta property="og:updated_time" content="2018-11-05T10:55:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NIO">
+<meta name="twitter:description" content="Java Non blocking IO 学习笔记  Java NIO 简介 Java NIO（Non blocking IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同，NIO支持面向缓冲区的、基于通道的IO操作。NIO将以更加高效的方式进行文件的读写操作。">
+<meta name="twitter:image" content="http://yoursite.com/img/random/13.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="NIO" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/img/random/13.jpg" alt="NIO">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-09-07T03:44:11.000Z">2018-09-07</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    39 minutes read (About 5890 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                NIO
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Java Non blocking IO 学习笔记</p>
+</blockquote>
+<h1 id="Java-NIO-简介"><a href="#Java-NIO-简介" class="headerlink" title="Java NIO 简介"></a>Java NIO 简介</h1><p> Java NIO（Non blocking IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同，NIO支持面向缓冲区的、基于通道的IO操作。NIO将以更加高效的方式进行文件的读写操作。</p>
+ <a id="more"></a>
+<h1 id="Java-NIO-与-IO-的主要区别"><a href="#Java-NIO-与-IO-的主要区别" class="headerlink" title="Java NIO 与 IO 的主要区别"></a>Java NIO 与 IO 的主要区别</h1><table>
+<thead>
+<tr>
+<th>IO</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面向流(Stream Oriented)</td>
+<td>面向缓冲区(Buffer Oriented)</td>
+</tr>
+<tr>
+<td>阻塞IO(Blocking IO)</td>
+<td>非阻塞IO(Non Blocking IO)</td>
+</tr>
+<tr>
+<td>(无)</td>
+<td>选择器(Selectors)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="缓冲区-Buffer-和通道-Channel"><a href="#缓冲区-Buffer-和通道-Channel" class="headerlink" title="缓冲区(Buffer)和通道(Channel)"></a>缓冲区(Buffer)和通道(Channel)</h1><blockquote>
+<p>Java NIO系统的核心在于：通道(Channel)和缓冲区(Buffer)。通道表示打开到 IO 设备(例如：文件、套接字)的连接。若需要使用 NIO 系统，需要获取用于连接 IO 设备的通道以及用于容纳数据的缓冲区。然后操作缓冲区，对数据进行处理。简而言之，Channel 负责传输， Buffer 负责存储。</p>
+</blockquote>
+<h2 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h2><p>缓冲区（Buffer）：一个用于特定基本数据类型的容器。由 java.nio 包定义的，所有缓冲区都是 Buffer 抽象类的子类。</p>
+<p>Java NIO 中的 Buffer 主要用于与 NIO 通道进行交互，数据是从通道读入缓冲区，从缓冲区写入通道中的。</p>
+<p>Buffer 就像一个数组，可以保存多个相同类型的数据。根据数据类型不同(boolean 除外) ，有以下 Buffer 常用子类： </p>
+<p><code>ByteBuffer</code> / <code>CharBuffer</code> / <code>ShortBuffer</code> / <code>IntBuffer</code> / <code>LongBuffer</code> / <code>FloatBuffer</code> / <code>DoubleBuffer</code></p>
+<p>上述 Buffer 类 他们都采用相似的方法进行管理数据，只是各自管理的数据类型不同而已。都是通过如下方法获取一个 Buffer 对象：</p>
+<pre><code>static XxxBuffer allocate(int capacity) : 创建一个容量为 capacity 的 XxxBuffer 对象
+</code></pre><p>基本属性：</p>
+<ul>
+<li><p>容量 (capacity) ：表示 Buffer 最大数据容量，缓冲区容量不能为负，并且创建后不能更改。</p>
+</li>
+<li><p>限制 (limit)：第一个不应该读取或写入的数据的索引，即位于 limit 后的数据不可读写。缓冲区的限制不能为负，并且不能大于其容量。</p>
+</li>
+<li><p>位置 (position)：下一个要读取或写入的数据的索引。缓冲区的位置不能为负，并且不能大于其限制</p>
+</li>
+<li><p>标记 (mark)与重置 (reset)：标记是一个索引，通过 Buffer 中的 mark() 方法指定 Buffer 中一个特定的position，之后可以通过调用 reset() 方法恢复到这个 position.</p>
+</li>
+<li><p>标记、位置、限制、容量遵守以下不变式： 0 &lt;= mark &lt;= position &lt;= limit &lt;= capacity</p>
+</li>
+</ul>
+<p><img src="/post_image/nio_img/1.jpg" alt="Alt text"></p>
+<p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方 法</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte get()</td>
+<td>读取单个字节</td>
+</tr>
+<tr>
+<td>Buffer put(byte b)</td>
+<td>写入单个字节到缓冲区</td>
+</tr>
+<tr>
+<td>Buffer clear()</td>
+<td>清空缓冲区并返回对缓冲区的引用</td>
+</tr>
+<tr>
+<td>Buffer flip()</td>
+<td>将缓冲区的界限设置为当前位置，并将当前位置充值为 0</td>
+</tr>
+<tr>
+<td>int capacity()</td>
+<td>返回 Buffer 的 capacity 大小</td>
+</tr>
+<tr>
+<td>boolean hasRemaining()</td>
+<td>判断缓冲区中是否还有元素</td>
+</tr>
+<tr>
+<td>int limit()</td>
+<td>返回 Buffer 的界限(limit) 的位置</td>
+</tr>
+<tr>
+<td>Buffer limit(int n)</td>
+<td>将设置缓冲区界限为 n, 并返回一个具有新 limit 的缓冲区对象</td>
+</tr>
+<tr>
+<td>Buffer mark()</td>
+<td>对缓冲区设置标记</td>
+</tr>
+<tr>
+<td>int position()</td>
+<td>返回缓冲区的当前位置 position</td>
+</tr>
+<tr>
+<td>Buffer position(int n)</td>
+<td>将设置缓冲区的当前位置为 n , 并返回修改后的 Buffer 对象</td>
+</tr>
+<tr>
+<td>int remaining()</td>
+<td>返回 position 和 limit 之间的元素个数</td>
+</tr>
+<tr>
+<td>Buffer reset()</td>
+<td>将位置 position 转到以前设置的 mark 所在的位置</td>
+</tr>
+<tr>
+<td>Buffer rewind()</td>
+<td>将位置设为为 0， 取消设置的 mark</td>
+</tr>
+</tbody>
+</table>
+<p>用例：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestBuffer</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 分配一个指定容量的缓冲区</span></span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">        System.out.println(<span class="hljs-string">"-----&lt; allocate &gt;-----"</span>);</span><br><span class="line">        showAttribute(buffer); <span class="hljs-comment">// position:0 - limit:1024 - capacity:1024</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 存数据到缓冲区</span></span><br><span class="line">        buffer.put(<span class="hljs-string">"abcde"</span>.getBytes()); <span class="hljs-comment">// 存入了5个字节</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"-----&lt; put &gt;-----"</span>);</span><br><span class="line">        showAttribute(buffer); <span class="hljs-comment">// position:5 - limit:1024 - capacity:1024</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 切换到读取数据，将缓冲区的界限设置为当前位置（5），并将当前位置充值为 0（从0开始读取）</span></span><br><span class="line">        buffer.flip();</span><br><span class="line">        System.out.println(<span class="hljs-string">"-----&lt; flip &gt;-----"</span>);</span><br><span class="line">        showAttribute(buffer); <span class="hljs-comment">// position:从 0 开始读 - limit:5 - capacity:1024</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 这个时候如果存入数据会报错，因为指针在0，界限是5，而存入的数据长度10大于界限。</span></span><br><span class="line"><span class="hljs-comment">//        buffer.put("zhangyu123".getBytes());</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 取数据</span></span><br><span class="line">        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[buffer.limit()];</span><br><span class="line">        buffer.get(bytes);</span><br><span class="line">        System.out.println(<span class="hljs-keyword">new</span> String(bytes, <span class="hljs-number">0</span>, bytes.length));</span><br><span class="line">        System.out.println(<span class="hljs-string">"-----&lt; get &gt;-----"</span>);</span><br><span class="line">        showAttribute(buffer); <span class="hljs-comment">// position:5 - limit:5 - capacity:1024</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 重复读取</span></span><br><span class="line">        buffer.rewind();</span><br><span class="line">        System.out.println(<span class="hljs-string">"-----&lt; rewind &gt;-----"</span>);</span><br><span class="line">        showAttribute(buffer); <span class="hljs-comment">// position:0 - limit:5 - capacity:1024</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 清空缓存区，缓存区的数据依旧存在，只是position到了0，limit和capacity变为最大容量数值，数据处于游离状态。</span></span><br><span class="line">        buffer.clear();</span><br><span class="line">        System.out.println(<span class="hljs-string">"-----&lt; clear &gt;-----"</span>);</span><br><span class="line">        showAttribute(buffer); <span class="hljs-comment">// position:0 - limit:1024 - capacity:1024</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testMark</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        String s = <span class="hljs-string">"abcde"</span>;</span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">        buffer.put(s.getBytes());</span><br><span class="line">        buffer.flip();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[buffer.limit()];</span><br><span class="line">        buffer.get(bytes, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// 从缓冲区获取从0开始的两个字符</span></span><br><span class="line">        System.out.println(<span class="hljs-keyword">new</span> String(bytes, <span class="hljs-number">0</span>, bytes.length)); <span class="hljs-comment">// ab</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"position:"</span> + buffer.position()); <span class="hljs-comment">// 2</span></span><br><span class="line"></span><br><span class="line">        buffer.mark(); <span class="hljs-comment">// 对位置 2 做标记，继续往下读。</span></span><br><span class="line"></span><br><span class="line">        buffer.get(bytes, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>);</span><br><span class="line">        System.out.println(<span class="hljs-keyword">new</span> String(bytes, <span class="hljs-number">0</span>, bytes.length)); <span class="hljs-comment">// abcd</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"position:"</span> + buffer.position()); <span class="hljs-comment">// 4</span></span><br><span class="line"></span><br><span class="line">        buffer.reset(); <span class="hljs-comment">// position 重新恢复到了 2</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"position:"</span> + buffer.position()); <span class="hljs-comment">// 2</span></span><br><span class="line"></span><br><span class="line">        System.out.println((<span class="hljs-keyword">char</span>) buffer.get()); <span class="hljs-comment">// 获取下一个字节 c</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (buffer.hasRemaining()) System.out.println(buffer.remaining()); <span class="hljs-comment">// 获得剩余字节数量 2</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test3</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//分配直接缓冲区</span></span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocateDirect(<span class="hljs-number">1024</span>);</span><br><span class="line">        System.out.println(buf.isDirect());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showAttribute</span><span class="hljs-params">(ByteBuffer buffer)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"position:"</span> + buffer.position());</span><br><span class="line">        System.out.println(<span class="hljs-string">"limit:"</span> + buffer.limit());</span><br><span class="line">        System.out.println(<span class="hljs-string">"capacity:"</span> + buffer.capacity());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>非直接缓冲区：通过 allocate() 方法分配缓冲区，将缓冲区建立在 JVM 的内存中。</p>
+<p>直接缓冲区：通过 allocateDirect() 方法分配直接缓冲区，将缓冲区建立在物理内存中。可以提高效率。弊端：直接在系统内存中建立（分配、销毁）缓存比在JVM中建立缓存内存消耗要大,并且当我们的应用程序将数据写入到系统内存之后数据是不可控的（不归应用程序管了），缓存中的数据什么写入到磁盘由操作系统决定。使用直接缓冲区最好的场景是当我们需要长时间在缓存中操作数据或者大量的数据时，此时的效率会得到很大的提高。</p>
+<h2 id="通道"><a href="#通道" class="headerlink" title="通道"></a>通道</h2><p> 通道（Channel）：由 java.nio.channels 包定义的。Channel 表示 IO 源与目标打开的连接。Channel 类似于传统的“流”。只不过 Channel 本身不能直接访问数据，Channel 只能与Buffer 进行交互。</p>
+<p>主要实现类：</p>
+<pre><code>java.nio.channels.Channel 接口：
+      |--FileChannel
+      |--SocketChannel
+      |--ServerSocketChannel
+      |--DatagramChannel
+</code></pre><p>获取通道的几种方式：</p>
+<ol>
+<li><p>Java 针对支持通道的类提供了 getChannel() 方法</p>
+<pre><code> 本地 IO：
+ FileInputStream/FileOutputStream
+ RandomAccessFile
+
+网络IO：
+ Socket
+ ServerSocket
+ DatagramSocket
+</code></pre></li>
+<li><p>在 JDK 1.7 中的 NIO.2 针对各个通道提供了静态方法 open()</p>
+</li>
+<li>在 JDK 1.7 中的 NIO.2 的 Files 工具类的 newByteChannel()</li>
+</ol>
+<h1 id="文件通道-FileChannel"><a href="#文件通道-FileChannel" class="headerlink" title="文件通道(FileChannel)"></a>文件通道(FileChannel)</h1><p>FileChannel 的常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方 法</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int read(ByteBuffer dst)</td>
+<td>从 Channel 中读取数据到 ByteBuffer</td>
+</tr>
+<tr>
+<td>long read(ByteBuffer[] dsts)</td>
+<td>将 Channel 中的数据“分散”到 ByteBuffer[]</td>
+</tr>
+<tr>
+<td>int write(ByteBuffer src)</td>
+<td>将 ByteBuffer 中的数据写入到 Channel</td>
+</tr>
+<tr>
+<td>long write(ByteBuffer[] srcs)</td>
+<td>将 ByteBuffer[] 中的数据“聚集”到 Channel</td>
+</tr>
+<tr>
+<td>long position()</td>
+<td>返回此通道的文件位置</td>
+</tr>
+<tr>
+<td>FileChannel position(long p)</td>
+<td>设置此通道的文件位置</td>
+</tr>
+<tr>
+<td>long size()</td>
+<td>返回此通道的文件的当前大小</td>
+</tr>
+<tr>
+<td>FileChannel truncate(long s)</td>
+<td>将此通道的文件截取为给定大小</td>
+</tr>
+<tr>
+<td>void force(boolean metaData)</td>
+<td>强制将所有对此通道的文件更新写入到存储设备中</td>
+</tr>
+</tbody>
+</table>
+<p>以文件传输体验通道的数据传输：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFileChannel</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 利用通道和非直接缓冲区传输文件</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        FileInputStream in = <span class="hljs-keyword">null</span>;</span><br><span class="line">        FileOutputStream out = <span class="hljs-keyword">null</span>;</span><br><span class="line">        FileChannel inChannel = <span class="hljs-keyword">null</span>;</span><br><span class="line">        FileChannel outChannel = <span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            in = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">"img/mm.jpg"</span>);</span><br><span class="line">            out = <span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">"img/mm2.jpg"</span>);</span><br><span class="line">            <span class="hljs-comment">// 通过输入输出流获得通道</span></span><br><span class="line">            inChannel = in.getChannel();</span><br><span class="line">            outChannel = out.getChannel();</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment">// 构建缓冲区</span></span><br><span class="line">            ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">while</span> (inChannel.read(buffer) != -<span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 从输入通道中读取内容到缓冲区</span></span><br><span class="line">                buffer.flip(); <span class="hljs-comment">// 切换成读取数据模式</span></span><br><span class="line">                outChannel.write(buffer); <span class="hljs-comment">// 写入缓冲区数据到输出通道</span></span><br><span class="line">                buffer.clear(); <span class="hljs-comment">// 清空缓冲区，用于下一次存储</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            outChannel.close();</span><br><span class="line">            inChannel.close();</span><br><span class="line">            out.close();</span><br><span class="line">            in.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 利用通道和直接缓冲区传输文件（内存映射文件）</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test2</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * open() 方式打开通道</span></span><br><span class="line"><span class="hljs-comment">         *</span></span><br><span class="line"><span class="hljs-comment">         * StandardOpenOption.READ : 以只读方式创建通道</span></span><br><span class="line"><span class="hljs-comment">         * StandardOpenOption.CREATE: 若文件存在覆盖，不存在创建。</span></span><br><span class="line"><span class="hljs-comment">         * StandardOpenOption.CREATE_NEW: 若文件不存在创建，存在报错。</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        FileChannel inChannel = FileChannel.open(Paths.get(<span class="hljs-string">"img/mm.jpg"</span>), StandardOpenOption.READ);</span><br><span class="line">        FileChannel outChannel = FileChannel.open(Paths.get(<span class="hljs-string">"img/mm2.jpg"</span>), StandardOpenOption.READ,</span><br><span class="line">                StandardOpenOption.WRITE, StandardOpenOption.CREATE);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 构建内存映射文件（数据在物理内存中的映射，也是直接缓冲区）</span></span><br><span class="line">        MappedByteBuffer inMappedBuf = inChannel.map(FileChannel.MapMode.READ_ONLY, <span class="hljs-number">0</span>, inChannel.size());</span><br><span class="line">        MappedByteBuffer outMappedBuf = outChannel.map(FileChannel.MapMode.READ_WRITE, <span class="hljs-number">0</span>, inChannel.size());</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 对直接缓冲区进行数据读取</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"byte:"</span> + inMappedBuf.limit() + <span class="hljs-string">"k"</span>);</span><br><span class="line">        <span class="hljs-keyword">byte</span>[] dst = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[inMappedBuf.limit()];</span><br><span class="line">        inMappedBuf.get(dst);</span><br><span class="line">        outMappedBuf.put(dst);</span><br><span class="line"></span><br><span class="line">        inChannel.close();</span><br><span class="line">        outChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 直接利用通道进行传输，将源通道中的数据传输到目标通道中去。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test3</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        FileChannel inChannel = FileChannel.open(Paths.get(<span class="hljs-string">"img/mm.jpg"</span>), StandardOpenOption.READ);</span><br><span class="line">        FileChannel outChannel = FileChannel.open(Paths.get(<span class="hljs-string">"img/mm2.jpg"</span>), StandardOpenOption.READ,</span><br><span class="line">                StandardOpenOption.WRITE, StandardOpenOption.CREATE);</span><br><span class="line"></span><br><span class="line">        inChannel.transferTo(<span class="hljs-number">0</span>, inChannel.size(), outChannel); <span class="hljs-comment">// 把输入管道的数据传到输出管道中去</span></span><br><span class="line"><span class="hljs-comment">//        outChannel.transferFrom(inChannel,0,inChannel.size()); // 从输入管道中传输数据到输出管道中来</span></span><br><span class="line"></span><br><span class="line">        outChannel.close();</span><br><span class="line">        inChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="RandomAccessFile-类"><a href="#RandomAccessFile-类" class="headerlink" title="RandomAccessFile 类"></a>RandomAccessFile 类</h2><p>在某些应用场景，我们需要在一个数据流中的末尾插入数据，通常的方式是先把文件全部读取出来，再用插入的数据拼接到末尾，然后重新写入。但是当数据量特别大时，内存占用会特别的高甚至溢出。</p>
+<blockquote>
+<p>RandomAccessFile是Java中输入，输出流体系中功能最丰富的文件内容访问类，它提供很多方法来操作文件，包括读写支持，与普通的IO流相比，它最大的特别之处就是支持任意访问的方式，程序可以直接跳到任意地方来读写数据。<br>如果我们只希望访问文件的部分内容，而不是把文件从头读到尾，使用RandomAccessFile将会带来更简洁的代码以及更好的性能。</p>
+</blockquote>
+<p>通过用例练习RandomAccessFile：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestRandomAccessFile</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 读取任意位置的文件内容</span></span><br><span class="line"><span class="hljs-comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment">     * r 代表以只读方式打开指定文件</span></span><br><span class="line"><span class="hljs-comment">     * rw 以读写方式打开指定文件</span></span><br><span class="line"><span class="hljs-comment">     * rws 读写方式打开，并对内容或元数据都同步写入底层存储设备</span></span><br><span class="line"><span class="hljs-comment">     * rwd 读写方式打开，对文件内容的更新同步更新至底层存储设备</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">randomReadFile</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        RandomAccessFile read = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">"src/subject_1/TestBuffer.java"</span>, <span class="hljs-string">"r"</span>);</span><br><span class="line">        System.out.println(<span class="hljs-string">"文件指针初始位置："</span> + read.getFilePointer());</span><br><span class="line">        read.seek(<span class="hljs-number">1000</span>); <span class="hljs-comment">// 将指针定位到某个位置</span></span><br><span class="line">        FileChannel readChannel = read.getChannel();  <span class="hljs-comment">// 从指定位置开始读取，获得通道</span></span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>); <span class="hljs-comment">// 创建缓冲区，可以将容量设为通道大小`(int) readChannel.size()`这样就不用循环读取</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 控制台打印的同时还将数据传输到输出通道</span></span><br><span class="line">        RandomAccessFile write = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">"src/subject_1/TestBuffer.txt"</span>, <span class="hljs-string">"rw"</span>);</span><br><span class="line">        FileChannel writeChannel = write.getChannel();</span><br><span class="line">        <span class="hljs-keyword">while</span> (readChannel.read(buffer) != -<span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 不断的将输入通道中的数据读取到缓冲区</span></span><br><span class="line">            buffer.flip(); <span class="hljs-comment">// 开启读取模式，读取完毕之后 position 到了数据末尾，进行下一次读取。</span></span><br><span class="line">            System.out.println(<span class="hljs-keyword">new</span> String(buffer.array(), <span class="hljs-number">0</span>, buffer.limit()));</span><br><span class="line">            writeChannel.write(buffer);</span><br><span class="line">            buffer.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 追加数据到文件的指定位置</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">randomWriteFile</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        RandomAccessFile write = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">"src/subject_1/TestBuffer.txt"</span>, <span class="hljs-string">"rw"</span>);</span><br><span class="line">        write.seek(write.length()); <span class="hljs-comment">// 将文件指针移动到末尾</span></span><br><span class="line">        write.write(<span class="hljs-string">"---------&lt; this is append content &gt;--------"</span>.getBytes());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 在任意处插入数据，如果不将插入点之后的数据备份的话，插入的数据会覆盖插入点之后的数据。</span></span><br><span class="line"><span class="hljs-comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment">     * - 将插入点之后的数据存入临时文件</span></span><br><span class="line"><span class="hljs-comment">     * - 将数据插入到插入点</span></span><br><span class="line"><span class="hljs-comment">     * - 将临时文件中的内容插入到旧文件</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">randomReadWriteFile</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        File tempFile = File.createTempFile(<span class="hljs-string">"src/subject_1/tmp"</span>, <span class="hljs-string">"txt"</span>, <span class="hljs-keyword">null</span>);</span><br><span class="line">        tempFile.deleteOnExit(); <span class="hljs-comment">// JVM退出时删除</span></span><br><span class="line">        <span class="hljs-comment">// 建立临时文件的输入输出通道</span></span><br><span class="line">        FileChannel temInChannel = <span class="hljs-keyword">new</span> FileInputStream(tempFile).getChannel();</span><br><span class="line">        FileChannel temOutChannel = <span class="hljs-keyword">new</span> FileOutputStream(tempFile).getChannel();</span><br><span class="line"></span><br><span class="line">        RandomAccessFile target = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">"src/subject_1/target.txt"</span>, <span class="hljs-string">"rw"</span>);</span><br><span class="line">        <span class="hljs-keyword">int</span> seekIndex = <span class="hljs-number">1210</span>; <span class="hljs-comment">// 插入点</span></span><br><span class="line">        target.seek(seekIndex);</span><br><span class="line">        FileChannel targetChannel = target.getChannel();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 将目标文件插入点之后的数据创建通道传输到临时文件中的通道</span></span><br><span class="line">        temOutChannel.transferFrom(targetChannel, <span class="hljs-number">0</span>, targetChannel.size());</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 指针回到插入点，插入数据。</span></span><br><span class="line">        target.seek(seekIndex);</span><br><span class="line">        target.write(<span class="hljs-string">"[ this is append content ]\n"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 复制插入点之后的数据.读取临时文件通道中的数据，将临时文件通道数据传输到目标文件通道。如果能读取到说明数据传输成功</span></span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">2048</span>);</span><br><span class="line">        <span class="hljs-keyword">while</span> (temInChannel.read(buffer) != -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">            buffer.flip();</span><br><span class="line">            System.out.println(<span class="hljs-keyword">new</span> String(buffer.array(), <span class="hljs-number">0</span>, buffer.limit()));</span><br><span class="line">            targetChannel.write(buffer);</span><br><span class="line">            buffer.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分散和聚集"><a href="#分散和聚集" class="headerlink" title="分散和聚集"></a>分散和聚集</h2><p>分散读取（Scattering Reads）是指从 Channel 中读取的数据“分散”到多个 Buffer 中（按照缓冲区的顺序，从 Channel 中读取的数据依次将 Buffer 填满）。</p>
+<p><img src="/post_image/nio_img/2.jpg" alt="Alt text"></p>
+<p>聚集写入（Gathering Writes）是指将多个 Buffer 中的数据“聚集”到 Channel（按照缓冲区的顺序，写入 position 和 limit 之间的数据到 Channel）。</p>
+<p><img src="/post_image/nio_img/3.jpg" alt="Alt text"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ScatterAndGather</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 分散读取与聚集写入</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        RandomAccessFile file = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">"src/subject_1/target.txt"</span>, <span class="hljs-string">"rw"</span>);</span><br><span class="line">        FileChannel channel = file.getChannel();</span><br><span class="line">        <span class="hljs-comment">// 分配两个缓冲区</span></span><br><span class="line">        ByteBuffer buf1 = ByteBuffer.allocate(<span class="hljs-number">100</span>);</span><br><span class="line">        ByteBuffer buf2 = ByteBuffer.allocate((<span class="hljs-keyword">int</span>) channel.size() - <span class="hljs-number">100</span>);</span><br><span class="line">        <span class="hljs-comment">// 分散读取到缓冲区</span></span><br><span class="line">        ByteBuffer[] buffers = &#123;buf1, buf2&#125;;</span><br><span class="line">        channel.read(buffers); <span class="hljs-comment">// 将输入通道的中的数据依次分散读取到不同的缓冲区</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (ByteBuffer buffer : buffers) &#123;</span><br><span class="line">            buffer.flip();</span><br><span class="line">            System.out.println(<span class="hljs-keyword">new</span> String(buffer.array(), <span class="hljs-number">0</span>, buffer.limit()));</span><br><span class="line">            System.out.println(<span class="hljs-string">"-----&lt; 分割 &gt;-----"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 聚集写入到文件</span></span><br><span class="line">        FileChannel bakChannel = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">"src/subject_1/target_bak.txt"</span>, <span class="hljs-string">"rw"</span>).getChannel();</span><br><span class="line">        bakChannel.write(buffers);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="字符集-Charset"><a href="#字符集-Charset" class="headerlink" title="字符集 Charset"></a>字符集 Charset</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestCharset</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 查看支持的所有字符集</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        SortedMap&lt;String, Charset&gt; map = Charset.availableCharsets();</span><br><span class="line">        Set&lt;Map.Entry&lt;String, Charset&gt;&gt; set = map.entrySet();</span><br><span class="line">        Iterator&lt;Map.Entry&lt;String, Charset&gt;&gt; iterator = set.iterator();</span><br><span class="line">        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Map.Entry&lt;String, Charset&gt; entry = iterator.next();</span><br><span class="line">            System.out.println(entry.getKey() + <span class="hljs-string">" &lt;&gt; "</span> + entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"defaultCharset: "</span> + Charset.defaultCharset());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 编码：字符 -&gt; 字节数组</span></span><br><span class="line"><span class="hljs-comment">     * 解码：字节数组 -&gt; 字符</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test2</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CharacterCodingException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 以指定编码加载字符集</span></span><br><span class="line">        Charset gbk = Charset.forName(<span class="hljs-string">"GBK"</span>);</span><br><span class="line">        Charset utf8 = Charset.forName(<span class="hljs-string">"UTF-8"</span>);</span><br><span class="line">        <span class="hljs-comment">// 创建编码器</span></span><br><span class="line">        CharsetEncoder gbkEncoder = gbk.newEncoder();</span><br><span class="line">        CharsetEncoder utf8Encoder = utf8.newEncoder();</span><br><span class="line">        <span class="hljs-comment">// 创建解码器</span></span><br><span class="line">        CharsetDecoder utf8Decoder = utf8.newDecoder();</span><br><span class="line">        CharsetDecoder gbkDecoder = gbk.newDecoder();</span><br><span class="line">        <span class="hljs-comment">// 将数据放到缓冲区</span></span><br><span class="line">        CharBuffer buffer = CharBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">        buffer.put(<span class="hljs-string">"测试编码解码"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 对字符使用 GBK 编码，切换到读模式，指针从0开始。</span></span><br><span class="line">        buffer.flip();</span><br><span class="line">        ByteBuffer byteBuffer = gbkEncoder.encode(buffer);</span><br><span class="line">        <span class="hljs-comment">// ByteBuffer byteBuffer = utf8Encoder.encode(buffer); // 使用 UTF8 编码</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; byteBuffer.limit(); i++) &#123;</span><br><span class="line">            System.out.println(byteBuffer.get());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 使用 GBK 解码</span></span><br><span class="line">        byteBuffer.flip();</span><br><span class="line">        CharBuffer cb = gbkDecoder.decode(byteBuffer);</span><br><span class="line">        System.out.println(<span class="hljs-keyword">new</span> String(cb.array(), <span class="hljs-number">0</span>, cb.limit()));</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 使用 UTF8 解码，失败</span></span><br><span class="line">        byteBuffer.flip();</span><br><span class="line">        CharBuffer cb1 = utf8Decoder.decode(byteBuffer);</span><br><span class="line">        System.out.println(<span class="hljs-keyword">new</span> String(cb1.array(), <span class="hljs-number">0</span>, cb1.limit()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="NIO-的非阻塞式网络通信"><a href="#NIO-的非阻塞式网络通信" class="headerlink" title="NIO 的非阻塞式网络通信"></a>NIO 的非阻塞式网络通信</h1><blockquote>
+<p>传统的 IO 流都是阻塞式的。也就是说，当一个线程调用 read() 或 write() 时，该线程被阻塞，直到有一些数据被读取或写入，该线程在此期间不能执行其他任务。因此，在完成网络通信进行 IO 操作时，由于线程会阻塞，所以服务器端必须为每个客户端都提供一个独立的线程进行处理，当服务器端需要处理大量客户端时，性能急剧下降。<br><br>Java NIO 是非阻塞模式的。当线程从某通道进行读写数据时，若没有数据可用时，该线程可以进行其他任务。线程通常将非阻塞 IO 的空闲时间用于在其他通道上执行 IO 操作，所以单独的线程可以管理多个输入和输出通道。因此，NIO 可以让服务器端使用一个或有限几个线程来同时处理连接到服务器端的所有客户端。</p>
+</blockquote>
+<p>通过用例代码验证阻塞式网络通信：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BlockingNioTest</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 客户端：发送数据</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">client</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 打开网络IO通道</span></span><br><span class="line">        SocketChannel socketChannel = SocketChannel.open(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-string">"localhost"</span>, <span class="hljs-number">1998</span>));</span><br><span class="line">        <span class="hljs-comment">// 读模式打开本地传输文件通道</span></span><br><span class="line">        FileChannel inChannel = FileChannel.open(Paths.get(<span class="hljs-string">"img/mm.jpg"</span>), StandardOpenOption.READ);</span><br><span class="line">        <span class="hljs-comment">// 传输</span></span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">        <span class="hljs-keyword">while</span> (inChannel.read(buffer) != -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">            buffer.flip();</span><br><span class="line">            socketChannel.write(buffer);</span><br><span class="line">            buffer.clear();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 接收服务端反馈信息</span></span><br><span class="line"><span class="hljs-comment">         * 调用 read()/write() 方法当前线程会进入阻塞状态，如果不强制停止write，不会进行下面的操作。 </span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        socketChannel.shutdownOutput();</span><br><span class="line">        <span class="hljs-keyword">while</span> (socketChannel.read(buffer) != -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"接收服务器反馈中..."</span>);</span><br><span class="line">            buffer.flip();</span><br><span class="line">            System.out.println(<span class="hljs-keyword">new</span> String(buffer.array(), <span class="hljs-number">0</span>, buffer.limit()));</span><br><span class="line">            buffer.clear();</span><br><span class="line">        &#125;</span><br><span class="line">        inChannel.close();</span><br><span class="line">        socketChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 服务器端：接收数据</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">server</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 打开网络IO通道</span></span><br><span class="line">        ServerSocketChannel ssChannel = ServerSocketChannel.open();</span><br><span class="line">        <span class="hljs-comment">// 绑定连接，进入阻塞状态</span></span><br><span class="line">        ssChannel.bind(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-string">"localhost"</span>, <span class="hljs-number">1998</span>));</span><br><span class="line">        <span class="hljs-comment">// 获取客户端的连接通道</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"服务端等待获取客户端连接通道..."</span>);</span><br><span class="line">        SocketChannel socketChannel = ssChannel.accept();</span><br><span class="line">        System.out.println(<span class="hljs-string">"成功获取到客户端连接通道！"</span>);</span><br><span class="line">        <span class="hljs-comment">// 从客户端连接通道读取数据到本地</span></span><br><span class="line">        FileChannel outChannel = FileChannel.open(Paths.get(<span class="hljs-string">"src/subject_2/mm.jpg"</span>), StandardOpenOption.WRITE,</span><br><span class="line">                StandardOpenOption.CREATE);</span><br><span class="line">        <span class="hljs-comment">// 传输</span></span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">        <span class="hljs-keyword">while</span> (socketChannel.read(buffer) != -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">            buffer.flip();</span><br><span class="line">            outChannel.write(buffer);</span><br><span class="line">            buffer.clear();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">/*发送反馈信息给客户端*/</span></span><br><span class="line">        buffer.put(<span class="hljs-string">"[服务端]：消息接收成功！"</span>.getBytes());</span><br><span class="line">        buffer.flip();</span><br><span class="line">        socketChannel.write(buffer);</span><br><span class="line"></span><br><span class="line">        outChannel.close();</span><br><span class="line">        socketChannel.close();</span><br><span class="line">        ssChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="选择器-Selector"><a href="#选择器-Selector" class="headerlink" title="选择器(Selector)"></a>选择器(Selector)</h2><p>选择器（Selector） 是 SelectableChannle 对象的多路复用器，Selector 可以同时监控多个 SelectableChannel 的 IO 状况，也就是说，利用 Selector 可使一个单独的线程管理多个Channel。Selector 是非阻塞 IO 的核心。</p>
+<pre><code>java.nio.channels.Channel 接口：
+          |--SelectableChannel
+              |--SocketChannel
+              |--ServerSocketChannel
+              |--DatagramChannel
+
+              |--Pipe.SinkChannel
+              |--Pipe.SourceChannel
+</code></pre><p>非阻塞式IO及选择器的用例说明：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NonBlockingNioTest</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">client</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        SocketChannel sChannel = SocketChannel.open(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-string">"localhost"</span>, <span class="hljs-number">1998</span>));</span><br><span class="line">        sChannel.configureBlocking(<span class="hljs-keyword">false</span>); <span class="hljs-comment">//切换非阻塞模式</span></span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">        buf.put((<span class="hljs-keyword">new</span> Date().toString()).getBytes());</span><br><span class="line">        buf.flip();</span><br><span class="line">        sChannel.write(buf);</span><br><span class="line">        buf.clear();</span><br><span class="line">        sChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">server</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ServerSocketChannel ssChannel = ServerSocketChannel.open();</span><br><span class="line">        ssChannel.configureBlocking(<span class="hljs-keyword">false</span>); <span class="hljs-comment">// 服务端通道切换非阻塞模式</span></span><br><span class="line">        ssChannel.bind(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-number">1998</span>));</span><br><span class="line"></span><br><span class="line">        Selector selector = Selector.open(); <span class="hljs-comment">// 获取选择器</span></span><br><span class="line">        <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">         * 将服务器通道注册到选择器上, 并且指定“监听接收事件”。</span></span><br><span class="line"><span class="hljs-comment">         * - 读: SelectionKey.OP_READ</span></span><br><span class="line"><span class="hljs-comment">         * - 写: SelectionKey.OP_WRITE</span></span><br><span class="line"><span class="hljs-comment">         * - 连接: SelectionKey.OP_CONNECT</span></span><br><span class="line"><span class="hljs-comment">         * - 接收: SelectionKey.OP_ACCEPT</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        ssChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 轮询式的获取选择器上已经“准备就绪”的事件</span></span><br><span class="line">        <span class="hljs-keyword">while</span> (selector.select() &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-comment">// 获取当前选择器中所有注册的“选择键(已就绪的监听事件)”</span></span><br><span class="line">            Iterator&lt;SelectionKey&gt; it = selector.selectedKeys().iterator();</span><br><span class="line">            <span class="hljs-keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">                SelectionKey sk = it.next(); <span class="hljs-comment">// 获取准备“就绪”的事件</span></span><br><span class="line">                <span class="hljs-keyword">if</span> (sk.isAcceptable()) &#123; <span class="hljs-comment">// 若事件是 “接收就绪”，获取客户端连接</span></span><br><span class="line">                    SocketChannel sChannel = ssChannel.accept();</span><br><span class="line">                    sChannel.configureBlocking(<span class="hljs-keyword">false</span>); <span class="hljs-comment">// 客户端切换非阻塞模式</span></span><br><span class="line">                    sChannel.register(selector, SelectionKey.OP_READ); <span class="hljs-comment">// 将客户端通道注册到选择器上</span></span><br><span class="line"></span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sk.isReadable()) &#123; <span class="hljs-comment">// 获取当前选择器上“读就绪”状态的通道</span></span><br><span class="line">                    SocketChannel sChannel = (SocketChannel) sk.channel();</span><br><span class="line">                    ByteBuffer buf = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">                    <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;</span><br><span class="line">                    <span class="hljs-keyword">while</span> ((len = sChannel.read(buf)) &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                        buf.flip();</span><br><span class="line">                        System.out.println(<span class="hljs-keyword">new</span> String(buf.array(), <span class="hljs-number">0</span>, len));</span><br><span class="line">                        buf.clear();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                it.remove(); <span class="hljs-comment">// 取消选择键 SelectionKey</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SocketChannel、ServerSocketChannel、DatagramChannel"><a href="#SocketChannel、ServerSocketChannel、DatagramChannel" class="headerlink" title="SocketChannel、ServerSocketChannel、DatagramChannel"></a>SocketChannel、ServerSocketChannel、DatagramChannel</h2><p>Java NIO中的SocketChannel是一个连接到TCP网络套接字的通道。操作步骤：</p>
+<ul>
+<li>打开 SocketChannel</li>
+<li>读写数据</li>
+<li>关闭 SocketChannel</li>
+</ul>
+<p>Java NIO中的 ServerSocketChannel 是一个可以监听新进来的TCP连接的通道，就像标准IO中的ServerSocket一样。</p>
+<p>Java NIO中的DatagramChannel是一个能收发UDP包的通道。操作步骤：</p>
+<ul>
+<li>打开 DatagramChannel</li>
+<li>接收/发送数据</li>
+</ul>
+<h1 id="管道-Pipe"><a href="#管道-Pipe" class="headerlink" title="管道(Pipe)"></a>管道(Pipe)</h1><p>Java NIO 管道是2个线程之间的单向数据连接。Pipe有一个source通道和一个sink通道。数据会被写到sink通道，从source通道读取。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PipTest</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Pipe pipe = Pipe.open(); <span class="hljs-comment">// 获取管道</span></span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocate(<span class="hljs-number">1024</span>); <span class="hljs-comment">// 将缓冲区中的数据写入管道</span></span><br><span class="line"></span><br><span class="line">        Pipe.SinkChannel sinkChannel = pipe.sink();</span><br><span class="line">        buf.put(<span class="hljs-string">"通过单向管道发送数据"</span>.getBytes());</span><br><span class="line">        buf.flip();</span><br><span class="line">        sinkChannel.write(buf);</span><br><span class="line"></span><br><span class="line">        Pipe.SourceChannel sourceChannel = pipe.source(); <span class="hljs-comment">// 读取缓冲区中的数据</span></span><br><span class="line">        buf.flip();</span><br><span class="line">        <span class="hljs-keyword">int</span> len = sourceChannel.read(buf);</span><br><span class="line">        System.out.println(<span class="hljs-keyword">new</span> String(buf.array(), <span class="hljs-number">0</span>, len));</span><br><span class="line"></span><br><span class="line">        sourceChannel.close();</span><br><span class="line">        sinkChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Java-NIO2-Path、Paths-与-Files"><a href="#Java-NIO2-Path、Paths-与-Files" class="headerlink" title="Java NIO2 (Path、Paths 与 Files )"></a>Java NIO2 (Path、Paths 与 Files )</h1><p>java.nio.file.Path 接口代表一个平台无关的平台路径，描述了目录结构中文件的位置。</p>
+<p>Paths 提供的 get() 方法用来获取 Path 对象：</p>
+<pre><code>Path get(String first, String … more) : 用于将多个字符串串连成路径。
+</code></pre><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean endsWith(String path)</td>
+<td>判断是否以 path 路径结束</td>
+</tr>
+<tr>
+<td>boolean startsWith(String path)</td>
+<td>判断是否以 path 路径开始</td>
+</tr>
+<tr>
+<td>boolean isAbsolute()</td>
+<td>判断是否是绝对路径</td>
+</tr>
+<tr>
+<td>Path getFileName()</td>
+<td>返回与调用 Path 对象关联的文件名</td>
+</tr>
+<tr>
+<td>Path getName(int idx)</td>
+<td>返回的指定索引位置 idx 的路径名称</td>
+</tr>
+<tr>
+<td>int getNameCount()</td>
+<td>返回Path 根目录后面元素的数量</td>
+</tr>
+<tr>
+<td>Path getParent()</td>
+<td>返回Path对象包含整个路径，不包含 Path 对象指定的文件路径</td>
+</tr>
+<tr>
+<td>Path getRoot()</td>
+<td>返回调用 Path 对象的根路径</td>
+</tr>
+<tr>
+<td>Path resolve(Path p)</td>
+<td>将相对路径解析为绝对路径</td>
+</tr>
+<tr>
+<td>Path toAbsolutePath()</td>
+<td>作为绝对路径返回调用 Path 对象</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回调用 Path 对象的字符串表示形式</td>
+</tr>
+</tbody>
+</table>
+<p>java.nio.file.Files 用于操作文件或目录的工具类。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Path copy(Path src, Path dest, CopyOption … how)</td>
+<td>文件的复制</td>
+</tr>
+<tr>
+<td>Path createDirectory(Path path, FileAttribute&lt;?&gt; … attr)</td>
+<td>创建一个目录</td>
+</tr>
+<tr>
+<td>Path createFile(Path path, FileAttribute&lt;?&gt; … arr)</td>
+<td>创建一个文件</td>
+</tr>
+<tr>
+<td>void delete(Path path)</td>
+<td>删除一个文件</td>
+</tr>
+<tr>
+<td>Path move(Path src, Path dest, CopyOption…how)</td>
+<td>将 src 移动到 dest 位置</td>
+</tr>
+<tr>
+<td>long size(Path path)</td>
+<td>返回 path 指定文件的大小</td>
+</tr>
+<tr>
+<td>boolean exists(Path path, LinkOption … opts)</td>
+<td>判断文件是否存在</td>
+</tr>
+<tr>
+<td>boolean isDirectory(Path path, LinkOption … opts)</td>
+<td>判断是否是目录</td>
+</tr>
+<tr>
+<td>boolean isExecutable(Path path)</td>
+<td>判断是否是可执行文件</td>
+</tr>
+<tr>
+<td>boolean isHidden(Path path)</td>
+<td>判断是否是隐藏文件</td>
+</tr>
+<tr>
+<td>boolean isReadable(Path path)</td>
+<td>判断文件是否可读</td>
+</tr>
+<tr>
+<td>boolean isWritable(Path path)</td>
+<td>判断文件是否可写</td>
+</tr>
+<tr>
+<td>boolean notExists(Path path, LinkOption … opts)</td>
+<td>判断文件是否不存在</td>
+</tr>
+<tr>
+<td>SeekableByteChannel newByteChannel(Path path, OpenOption…how)</td>
+<td>获取与指定文件的连接</td>
+</tr>
+<tr>
+<td>DirectoryStream newDirectoryStream(Path path)</td>
+<td>打开 path 指定的目录</td>
+</tr>
+<tr>
+<td>InputStream newInputStream(Path path, OpenOption…how)</td>
+<td>获取 InputStream 对象</td>
+</tr>
+<tr>
+<td>OutputStream newOutputStream(Path path, OpenOption…how)</td>
+<td>获取 OutputStream 对象</td>
+</tr>
+</tbody>
+</table>
+<h1 id="自动资源管理"><a href="#自动资源管理" class="headerlink" title="自动资源管理"></a>自动资源管理</h1><blockquote>
+<p>Java 7 增加了一个新特性，该特性提供了另外一种管理资源的方式，这种方式能自动关闭文件。这个特性有时被称为自动资源管理(Automatic Resource Management, ARM)， 该特性以 try 语句的扩展版为基础。自动资源管理主要用于，当不再需要文件（或其他资源）时，可以防止无意中忘记释放它们。</p>
+</blockquote>
+<p>语法：</p>
+<pre><code>try( 需要关闭的资源声明 ){
+    //可能发生异常的语句
+}catch( 异常类型 变量名 ){
+    //异常的处理语句
+}
+……
+finally{
+    //一定执行的语句
+}
+</code></pre><p>当 try 代码块结束时，自动释放资源。因此不需要显示的调用 close() 方法。该形式也称为“带资源的 try 语句”。注意：</p>
+<ul>
+<li>try 语句中声明的资源被隐式声明为 final ，资源的作用局限于带资源的 try 语句</li>
+<li>可以在一条 try 语句中管理多个资源，每个资源以“;” 隔开即可。</li>
+<li>需要关闭的资源，必须实现了 AutoCloseable 接口或其自接口 Closeable</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestNIO_2</span> </span>&#123;</span><br><span class="line">	<span class="hljs-comment">//自动资源管理：自动关闭实现 AutoCloseable 接口的资源</span></span><br><span class="line">	<span class="hljs-meta">@Test</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">		<span class="hljs-keyword">try</span>(FileChannel inChannel = FileChannel.open(Paths.get(<span class="hljs-string">"1.jpg"</span>), StandardOpenOption.READ);</span><br><span class="line">				FileChannel outChannel = FileChannel.open(Paths.get(<span class="hljs-string">"2.jpg"</span>), StandardOpenOption.WRITE, StandardOpenOption.CREATE))&#123;</span><br><span class="line">			</span><br><span class="line">			ByteBuffer buf = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">			inChannel.read(buf);</span><br><span class="line">			</span><br><span class="line">		&#125;<span class="hljs-keyword">catch</span>(IOException e)&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/nio/">nio</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/09/13/Spring-Annotation-development/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring Annotation development</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/09/01/线程高级/">
+                <span class="level-item">线程高级</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'Just Do It...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/tou.jpg" alt="harry.zh">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        not just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Java-NIO-简介">
+        <span class="has-mr-6">1</span>
+        <span>Java NIO 简介</span>
+        </a></li><li>
+        <a class="is-flex" href="#Java-NIO-与-IO-的主要区别">
+        <span class="has-mr-6">2</span>
+        <span>Java NIO 与 IO 的主要区别</span>
+        </a></li><li>
+        <a class="is-flex" href="#缓冲区-Buffer-和通道-Channel">
+        <span class="has-mr-6">3</span>
+        <span>缓冲区(Buffer)和通道(Channel)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#缓冲区">
+        <span class="has-mr-6">3.1</span>
+        <span>缓冲区</span>
+        </a></li><li>
+        <a class="is-flex" href="#通道">
+        <span class="has-mr-6">3.2</span>
+        <span>通道</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#文件通道-FileChannel">
+        <span class="has-mr-6">4</span>
+        <span>文件通道(FileChannel)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#RandomAccessFile-类">
+        <span class="has-mr-6">4.1</span>
+        <span>RandomAccessFile 类</span>
+        </a></li><li>
+        <a class="is-flex" href="#分散和聚集">
+        <span class="has-mr-6">4.2</span>
+        <span>分散和聚集</span>
+        </a></li><li>
+        <a class="is-flex" href="#字符集-Charset">
+        <span class="has-mr-6">4.3</span>
+        <span>字符集 Charset</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#NIO-的非阻塞式网络通信">
+        <span class="has-mr-6">5</span>
+        <span>NIO 的非阻塞式网络通信</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#选择器-Selector">
+        <span class="has-mr-6">5.1</span>
+        <span>选择器(Selector)</span>
+        </a></li><li>
+        <a class="is-flex" href="#SocketChannel、ServerSocketChannel、DatagramChannel">
+        <span class="has-mr-6">5.2</span>
+        <span>SocketChannel、ServerSocketChannel、DatagramChannel</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#管道-Pipe">
+        <span class="has-mr-6">6</span>
+        <span>管道(Pipe)</span>
+        </a></li><li>
+        <a class="is-flex" href="#Java-NIO2-Path、Paths-与-Files">
+        <span class="has-mr-6">7</span>
+        <span>Java NIO2 (Path、Paths 与 Files )</span>
+        </a></li><li>
+        <a class="is-flex" href="#自动资源管理">
+        <span class="has-mr-6">8</span>
+        <span>自动资源管理</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="NIO" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 harry&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

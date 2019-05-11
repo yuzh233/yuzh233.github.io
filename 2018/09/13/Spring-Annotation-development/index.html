@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Spring Annotation development - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="https://docs.spring.io/spring/docs/5.0.9.RELEASE/spring-framework-reference/web.html  组件注册 @Configuration @ComponentScan @Bean @Scope @Lazy @Conditional @Import">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Annotation development">
+<meta property="og:url" content="http://yoursite.com/2018/09/13/Spring-Annotation-development/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="https://docs.spring.io/spring/docs/5.0.9.RELEASE/spring-framework-reference/web.html  组件注册 @Configuration @ComponentScan @Bean @Scope @Lazy @Conditional @Import">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/random/18.jpg">
+<meta property="og:updated_time" content="2018-11-05T10:55:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Annotation development">
+<meta name="twitter:description" content="https://docs.spring.io/spring/docs/5.0.9.RELEASE/spring-framework-reference/web.html  组件注册 @Configuration @ComponentScan @Bean @Scope @Lazy @Conditional @Import">
+<meta name="twitter:image" content="http://yoursite.com/img/random/18.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="Spring Annotation development" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/img/random/18.jpg" alt="Spring Annotation development">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-09-13T13:40:36.000Z">2018-09-13</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 minutes read (About 2297 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Spring Annotation development
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><a href="https://docs.spring.io/spring/docs/5.0.9.RELEASE/spring-framework-reference/web.html" target="_blank" rel="noopener">https://docs.spring.io/spring/docs/5.0.9.RELEASE/spring-framework-reference/web.html</a></p>
+</blockquote>
+<h2 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h2><ul>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig.java" target="_blank" rel="noopener">@Configuration</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig.java" target="_blank" rel="noopener">@ComponentScan</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig.java" target="_blank" rel="noopener">@Bean</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig2.java" target="_blank" rel="noopener">@Scope</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig2.java" target="_blank" rel="noopener">@Lazy</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig2.java" target="_blank" rel="noopener">@Conditional</a></li>
+<li><p><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig2.java" target="_blank" rel="noopener">@Import</a></p>
+<a id="more"></a>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2></li>
+<li><p><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig3.java" target="_blank" rel="noopener">@Bean 指定初始化和销毁方法</a></p>
+</li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/pojo/Dog.java" target="_blank" rel="noopener">实现 InitializingBean和DisposableBean 指定初始化和销毁方法</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/pojo/Cat.java" target="_blank" rel="noopener">@PostConstruct / @PreDestroy 指定初始化和销毁方法</a></li>
+</ul>
+<h2 id="属性赋值"><a href="#属性赋值" class="headerlink" title="属性赋值"></a>属性赋值</h2><ul>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/pojo/Person.java" target="_blank" rel="noopener">@Value 赋值</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/pojo/Person.java" target="_blank" rel="noopener">@PropertySource 加载外部配置文件</a></li>
+</ul>
+<h2 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h2><ul>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig5.java" target="_blank" rel="noopener">@Autowired / @Qualifier / @Primary</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig5.java" target="_blank" rel="noopener">@Resource / @Inject</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/pojo/Red.java" target="_blank" rel="noopener">实现 Aware 注入 Spring 底层组件</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig6.java" target="_blank" rel="noopener">@Profile 环境搭建</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/test/xyz/yuzh/learn/spring/annotation/test/Main6Test.java" target="_blank" rel="noopener">@Profile 环境激活</a></li>
+</ul>
+<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><ul>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/aop/LogAspect.java" target="_blank" rel="noopener">@Aspect / @Pointcut / @Before / @After / @AfterReturning / @AfterThrowing / @Around </a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig7.java" target="_blank" rel="noopener">@EnableAspectJAutoProxy</a></li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/service/UserService.java" target="_blank" rel="noopener">@Transactional</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig8.java" target="_blank" rel="noopener">@EnableTransactionManagement</a></li>
+<li><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/src/main/java/xyz/yuzh/learn/spring/annotation/config/MainConfig8.java" target="_blank" rel="noopener">DataSource / Template / PlatformTransactionManager</a></li>
+</ul>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><ul>
+<li><p><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/Servlet3.0/src/xyz/yuzh/learn/spring/annotation/servlet/HelloServlet.java" target="_blank" rel="noopener">自定义组件 @WebServlet / @WebFilter / @WebListener </a></p>
+</li>
+<li><p><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/Servlet3.0/src/xyz/yuzh/learn/spring/annotation/servlet/MyServletContainerInitializer.java" target="_blank" rel="noopener">ServletContainerInitializer 初始化器</a></p>
+</li>
+<li><p><a href="https://github.com/yuzh233/SpringAnnotation/blob/master/Servlet3.0/src/xyz/yuzh/learn/spring/annotation/servlet/MyServletContainerInitializer.java" target="_blank" rel="noopener">利用 ServletContainerInitializer.ServletContext / ServletContextListener.ServletContext 添加第三方组件</a></p>
+</li>
+</ul>
+<h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><h3 id="Web-配置类"><a href="#Web-配置类" class="headerlink" title="Web 配置类"></a>Web 配置类</h3><p>组件加载流程：</p>
+<ol>
+<li><p>导入 webmvc 包后，lib 中多了一个 <code>spring-web-4.3.12.RELEASE.jar</code> </p>
+</li>
+<li><p>web容器在启动的时候，会扫描每个jar包下的 META-INF/services/javax.servlet.ServletContainerInitializer 。此时在 <code>spring-web-4.3.12.RELEASE.jar</code> 包中扫描到了该文件：</p>
+<p> <img src="/post_image/spring_img/1.jpg" alt="Alt text"></p>
+</li>
+<li><p>加载文件中指定的类： <code>org.springframework.web.SpringServletContainerInitializer</code> </p>
+<p> <img src="/post_image/spring_img/2.jpg" alt="Alt text"></p>
+</li>
+<li><p>SpringServletContainerInitializer 会加载 WebApplicationInitializer 接口下所有的组件。并且为 WebApplicationInitializer 组件创建对象（当组件不是接口，不是抽象类时）</p>
+</li>
+</ol>
+<p>我们的 <code>web配置类</code> 要继承的类： <code>AbstractAnnotationConfigDispatcherServletInitializer</code> 是 WebApplicationInitializer 接口的间接子类。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyWebAppInitializer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 加载根容器的配置类：Spring配置</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Class[]&#123;RootConfig.class&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 加载webmvc容器的配置类：SpringMVC 配置</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Class[]&#123;MvcConfig.class&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取 DispatcherServlet 的映射信息</span></span><br><span class="line"><span class="hljs-comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment">     * - `/` 拦截所有请求（包括静态资源（xx.js,xx.png）），但是不包括*.jsp；</span></span><br><span class="line"><span class="hljs-comment">     * - `/*` 拦截所有请求；连*.jsp页面都拦截；jsp页面是tomcat的jsp引擎解析的；</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> String[] getServletMappings() &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> String[]&#123;<span class="hljs-string">"/"</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SpringMVC-配置类"><a href="#SpringMVC-配置类" class="headerlink" title="SpringMVC 配置类"></a>SpringMVC 配置类</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@ComponentScan</span>(value = &#123;<span class="hljs-string">"xyz.yuzh.learn.spring.annotation"</span>&#125;, includeFilters = &#123;</span><br><span class="line">        <span class="hljs-meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION, classes = Controller.class)</span><br><span class="line">&#125;, useDefaultFilters = <span class="hljs-keyword">false</span>)</span><br><span class="line"><span class="hljs-meta">@EnableWebMvc</span> <span class="hljs-comment">// 开启 SpringMVC 定制配置功能，等同于 &lt;mvc:annotation-driven/&gt;</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebConfig</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebMvcConfigurerAdapter</span> </span>&#123; <span class="hljs-comment">// WebMvcConfigurerAdapter抽象类 实现了 WebMvcConfigurer 接口来定制MVC的所有配置，实现抽象类使得我们不必重写所有所有接口方法</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 定制视图解析器</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configureViewResolvers</span><span class="hljs-params">(ViewResolverRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.jsp(<span class="hljs-string">"/WEB-INF/views/"</span>, <span class="hljs-string">".jsp"</span>); <span class="hljs-comment">// 若不加参数默认为：("/WEB-INF/",".jsp")</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 开启静态资源访问 相当于 &lt;mvc:default-servlet-handler&gt;</span></span><br><span class="line"><span class="hljs-comment">     *     springMVC 默认拦截所有的请求包括静态资源，解除静态资源访问限制，但仅对WEB根目录下文件有效，如果文件在WEB-INF解除无效。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-comment">/*@Override</span></span><br><span class="line"><span class="hljs-comment">    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) &#123;</span></span><br><span class="line"><span class="hljs-comment">        configurer.enable();</span></span><br><span class="line"><span class="hljs-comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 定制拦截器</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(<span class="hljs-keyword">new</span> MyIntercepter()).addPathPatterns(<span class="hljs-string">"/**"</span>); <span class="hljs-comment">// 拦截所有目录及文件</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 这种方式访问 WEB-INF 下的静态资源 &lt;mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"/&gt;</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addResourceHandlers</span><span class="hljs-params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addResourceHandler(<span class="hljs-string">"/resources/**"</span>).addResourceLocations(<span class="hljs-string">"/WEB-INF/resources/"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多配置查阅 <a href="https://docs.spring.io/spring/docs/5.0.9.RELEASE/spring-framework-reference/web.html#mvc-config-static-resources" target="_blank" rel="noopener">文档</a></p>
+<h2 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h2><h3 id="Servlet-3-0-异步处理"><a href="#Servlet-3-0-异步处理" class="headerlink" title="Servlet 3.0 异步处理"></a>Servlet 3.0 异步处理</h3><p>在Servlet 3.0之前，Servlet采用Thread-Per-Request的方式处理请求。即每一次Http请求都由某一个线程从头到尾负责处理。</p>
+<p>如果一个请求需要进行IO操作，比如访问数据库、调用第三方服务接口等，那么其所对应的线程将同步地等待IO操作完成， 而IO操作是非常慢的，所以此时的线程并不能及时地释放回线程池以供后续使用，在并发量越来越大的情况下，当线程池已满，许多请求不能及时的被处理。这将带来严重的性能问题。</p>
+<p>即便是像Spring、Struts这样的高层框架也脱离不了这样的桎梏，因为他们都是建立在Servlet之上的。为了解决这样的问题，Servlet 3.0引入了异步处理，然后在Servlet 3.1中又引入了非阻塞IO来进一步增强异步处理的性能。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@WebServlet</span>(value = <span class="hljs-string">"/async"</span>, asyncSupported = <span class="hljs-keyword">true</span>) <span class="hljs-comment">// 支持异步处理asyncSupported=true</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloAsyncServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 开启异步模式</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"主线程开始。。。"</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">        AsyncContext startAsync = req.startAsync();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//业务逻辑进行异步处理; 开始异步处理</span></span><br><span class="line">        startAsync.start(<span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">                <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                    System.out.println(<span class="hljs-string">"副线程开始 "</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">                    sayHello();</span><br><span class="line">                    startAsync.complete(); <span class="hljs-comment">// 异步处理完</span></span><br><span class="line">                    AsyncContext asyncContext = req.getAsyncContext(); <span class="hljs-comment">// 获取到异步上下文</span></span><br><span class="line">                    ServletResponse response = asyncContext.getResponse(); <span class="hljs-comment">// 获取响应</span></span><br><span class="line">                    response.getWriter().write(<span class="hljs-string">"hello async..."</span>);</span><br><span class="line">                    System.out.println(<span class="hljs-string">"副线程结束 "</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(<span class="hljs-string">"主线程结束。。。"</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sayHello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread() + <span class="hljs-string">" processing..."</span>);</span><br><span class="line">        Thread.sleep(<span class="hljs-number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SpringMVC-异步处理"><a href="#SpringMVC-异步处理" class="headerlink" title="SpringMVC 异步处理"></a>SpringMVC 异步处理</h3><p>基于 <code>Callable</code> 的简单异步处理。返回 Callable 结果对象，将 Callable 对象放入异步处理线程处理结果，主线程结束，等待异步线程返回结果渲染页面。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Controller</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncController</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 异步处理</span></span><br><span class="line"><span class="hljs-comment">     * 1. 控制器返回 Callable</span></span><br><span class="line"><span class="hljs-comment">     * 2. Spring 异步处理，将Callable 提交到 TaskExecutor 使用一个隔离的线程进行执行</span></span><br><span class="line"><span class="hljs-comment">     * 3. DispatcherServlet 和所有的 Filter 退出 web 容器的线程，但是 response 保持打开状态；</span></span><br><span class="line"><span class="hljs-comment">     * 4. Callable 返回结果，Spring MVC 将请求重新派发给容器，恢复之前的处理；</span></span><br><span class="line"><span class="hljs-comment">     * 5. 根据 Callable 返回的结果。Spring MVC 继续进行视图渲染流程等（从收请求-视图渲染）。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@ResponseBody</span></span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/async01"</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Callable&lt;String&gt; <span class="hljs-title">async01</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"主线程开始."</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line"></span><br><span class="line">        Callable&lt;String&gt; callable = <span class="hljs-keyword">new</span> Callable&lt;String&gt;() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                System.out.println(<span class="hljs-string">"副线程开始."</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">                Thread.sleep(<span class="hljs-number">2000</span>);</span><br><span class="line">                System.out.println(<span class="hljs-string">"副线程开始."</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-string">"Callable&lt;String&gt; async01()"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="hljs-string">"主线程结束."</span> + Thread.currentThread() + <span class="hljs-string">"-&gt;"</span> + System.currentTimeMillis());</span><br><span class="line">        <span class="hljs-keyword">return</span> callable;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基于 <code>DeferredResult</code> 的异步处理。这种方式的特点在于可以从不同的线程异步地产生返回值，配合 JMS ，可以实现在其他控制器中返回本次请求的结果。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/quotes"</span>)</span><br><span class="line"><span class="hljs-meta">@ResponseBody</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> DeferredResult&lt;String&gt; <span class="hljs-title">quotes</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    DeferredResult&lt;String&gt; deferredResult = <span class="hljs-keyword">new</span> DeferredResult&lt;String&gt;();</span><br><span class="line">    <span class="hljs-comment">// 把这个对象存在一个地方</span></span><br><span class="line">    <span class="hljs-keyword">return</span> deferredResult;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 在某个地方获取对象并存入对象的值然后返回</span></span><br><span class="line">deferredResult.setResult(data);</span><br></pre></td></tr></table></figure>
+<p>用例：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Controller</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**************************************************</span></span><br><span class="line"><span class="hljs-comment">     *                 DeferredResult</span></span><br><span class="line"><span class="hljs-comment">     **************************************************/</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 处理请求：创建订单</span></span><br><span class="line"><span class="hljs-comment">     * - 1. 构建 DeferredResult 对象，设置超时事件，失败提示</span></span><br><span class="line"><span class="hljs-comment">     * - 2. 通过 JMS 发送一个 DeferredResultQueue 对象的消息，该对象存储 DeferredResult.</span></span><br><span class="line"><span class="hljs-comment">     * - 3. 若接收端在限定时间内给 DeferredResult 存入了结果，则返回 DeferredResult 的结果，否则结果是失败提示。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@ResponseBody</span></span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/createOrder"</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> DeferredResult&lt;Object&gt; <span class="hljs-title">createOrder</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        DeferredResult&lt;Object&gt; deferredResult = <span class="hljs-keyword">new</span> DeferredResult&lt;&gt;((<span class="hljs-keyword">long</span>) <span class="hljs-number">3000</span>, <span class="hljs-string">"create fail..."</span>);</span><br><span class="line">        <span class="hljs-comment">// 模拟发送消息：把结果对象存入一个队列中，假设 DeferredResultQueue 队列就是消息通知内容</span></span><br><span class="line">        DeferredResultQueue.save(deferredResult);</span><br><span class="line">        <span class="hljs-comment">// 等待异步存入结果到 deferredResult 中并返回，超时则失败</span></span><br><span class="line">        <span class="hljs-keyword">return</span> deferredResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 模拟异步的存入请求结果：执行创建</span></span><br><span class="line"><span class="hljs-comment">     * - 1. 监听 JMS 消息，获得消息内容（DeferredResultQueue对象）</span></span><br><span class="line"><span class="hljs-comment">     * - 2. 从消息对象 DeferredResultQueue 中拿到 DeferredResult 延迟异步结果对象。</span></span><br><span class="line"><span class="hljs-comment">     * - 3. 执行业务逻辑，赋值。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@ResponseBody</span></span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/create"</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//创建订单</span></span><br><span class="line">        String order = UUID.randomUUID().toString();</span><br><span class="line">        <span class="hljs-comment">// 获取到消息通知，从中获取到需要存取结果的对象</span></span><br><span class="line">        DeferredResult&lt;Object&gt; deferredResult = DeferredResultQueue.get();</span><br><span class="line">        <span class="hljs-comment">// 向结果对象存入值，请求返回结果</span></span><br><span class="line">        deferredResult.setResult(order);</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">"success: "</span> + order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DeferredResultQueue</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ConcurrentLinkedQueue&lt;DeferredResult&lt;Object&gt;&gt; queue = <span class="hljs-keyword">new</span> ConcurrentLinkedQueue&lt;DeferredResult&lt;Object&gt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">save</span><span class="hljs-params">(DeferredResult&lt;Object&gt; deferredResult)</span> </span>&#123;</span><br><span class="line">        queue.add(deferredResult);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> DeferredResult&lt;Object&gt; <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> queue.poll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SSM-零配置整合"><a href="#SSM-零配置整合" class="headerlink" title="SSM 零配置整合"></a>SSM 零配置整合</h2><ul>
+<li><p>Web： WebInitializer </p>
+<p>  spring context / spring mvc context / postFilter …</p>
+</li>
+<li><p>Spring：RootConfig</p>
+<p>  dataSource / transactionManager / sqlSessionFactory …</p>
+</li>
+<li><p>Spring MVC: DispatcherServletConfig</p>
+<p>  viewResolvers / resourceHandlers …</p>
+</li>
+</ul>
+<p><a href="https://github.com/yuzh233/SpringAnnotation/tree/master/SSM-Annotation" target="_blank" rel="noopener">demo</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/spring/">spring</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/07/Git 实用指南/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Git 实用指南</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/09/07/NIO/">
+                <span class="level-item">NIO</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'Just Do It...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/tou.jpg" alt="harry.zh">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        not just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#组件注册">
+        <span class="has-mr-6">1</span>
+        <span>组件注册</span>
+        </a></li><li>
+        <a class="is-flex" href="#生命周期">
+        <span class="has-mr-6">2</span>
+        <span>生命周期</span>
+        </a></li><li>
+        <a class="is-flex" href="#属性赋值">
+        <span class="has-mr-6">3</span>
+        <span>属性赋值</span>
+        </a></li><li>
+        <a class="is-flex" href="#自动装配">
+        <span class="has-mr-6">4</span>
+        <span>自动装配</span>
+        </a></li><li>
+        <a class="is-flex" href="#AOP">
+        <span class="has-mr-6">5</span>
+        <span>AOP</span>
+        </a></li><li>
+        <a class="is-flex" href="#事务">
+        <span class="has-mr-6">6</span>
+        <span>事务</span>
+        </a></li><li>
+        <a class="is-flex" href="#Servlet">
+        <span class="has-mr-6">7</span>
+        <span>Servlet</span>
+        </a></li><li>
+        <a class="is-flex" href="#SpringMVC">
+        <span class="has-mr-6">8</span>
+        <span>SpringMVC</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Web-配置类">
+        <span class="has-mr-6">8.1</span>
+        <span>Web 配置类</span>
+        </a></li><li>
+        <a class="is-flex" href="#SpringMVC-配置类">
+        <span class="has-mr-6">8.2</span>
+        <span>SpringMVC 配置类</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#异步处理">
+        <span class="has-mr-6">9</span>
+        <span>异步处理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Servlet-3-0-异步处理">
+        <span class="has-mr-6">9.1</span>
+        <span>Servlet 3.0 异步处理</span>
+        </a></li><li>
+        <a class="is-flex" href="#SpringMVC-异步处理">
+        <span class="has-mr-6">9.2</span>
+        <span>SpringMVC 异步处理</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#SSM-零配置整合">
+        <span class="has-mr-6">10</span>
+        <span>SSM 零配置整合</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="Spring Annotation development" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 harry&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

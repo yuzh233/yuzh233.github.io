@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>分布式技术入坑指南（三） - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="11.Solr索引库的搭建与使用（单机版和集群版）下载地址：https://lucene.apache.org/solr/ 单机版搭建* 版本：solr-4.10.3 * windows下的配置完全一样。 第一步：把solr 的压缩包上传到Linux系统第二步：解压solr。第三步：把solr部署到Tomcat下。 路径：`/opt/solr-4.10.3/dist/solr-4.10.3.war">
+<meta name="keywords" content="分布式,solr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式技术入坑指南（三）">
+<meta property="og:url" content="http://yoursite.com/2018/07/22/分布式技术入坑指南（三）/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="11.Solr索引库的搭建与使用（单机版和集群版）下载地址：https://lucene.apache.org/solr/ 单机版搭建* 版本：solr-4.10.3 * windows下的配置完全一样。 第一步：把solr 的压缩包上传到Linux系统第二步：解压solr。第三步：把solr部署到Tomcat下。 路径：`/opt/solr-4.10.3/dist/solr-4.10.3.war">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/random/8.jpg">
+<meta property="og:updated_time" content="2018-11-05T10:55:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式技术入坑指南（三）">
+<meta name="twitter:description" content="11.Solr索引库的搭建与使用（单机版和集群版）下载地址：https://lucene.apache.org/solr/ 单机版搭建* 版本：solr-4.10.3 * windows下的配置完全一样。 第一步：把solr 的压缩包上传到Linux系统第二步：解压solr。第三步：把solr部署到Tomcat下。 路径：`/opt/solr-4.10.3/dist/solr-4.10.3.war">
+<meta name="twitter:image" content="http://yoursite.com/img/random/8.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="分布式技术入坑指南（三）" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/img/random/8.jpg" alt="分布式技术入坑指南（三）">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-07-22T07:37:25.000Z">2018-07-22</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 minutes read (About 2714 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                分布式技术入坑指南（三）
+            
+        </h1>
+        <div class="content">
+            <h1 id="11-Solr索引库的搭建与使用（单机版和集群版）"><a href="#11-Solr索引库的搭建与使用（单机版和集群版）" class="headerlink" title="11.Solr索引库的搭建与使用（单机版和集群版）"></a>11.Solr索引库的搭建与使用（单机版和集群版）</h1><p>下载地址：<a href="https://lucene.apache.org/solr/" target="_blank" rel="noopener">https://lucene.apache.org/solr/</a></p>
+<h2 id="单机版"><a href="#单机版" class="headerlink" title="单机版"></a>单机版</h2><h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><pre><code>* 版本：solr-4.10.3
+* windows下的配置完全一样。
+</code></pre><p>第一步：把solr 的压缩包上传到Linux系统<br>第二步：解压solr。<br>第三步：把solr部署到Tomcat下。</p>
+<pre><code>路径：`/opt/solr-4.10.3/dist/solr-4.10.3.war`
+</code></pre><p>第四步：解压缩war包。可以启动Tomcat解压。<br><a id="more"></a><br>第五步：把/root/solr-4.10.3/example/lib/ext目录下的所有的jar包，添加到solr工程中。<br>第六步：创建一个solrhome。安装包自带有一个solrhome：<code>/example/solr</code>，该目录就是一个solrhome。复制此目录到自己创建solrhome。<br>第七步：关联solr及solrhome。需要修改solr工程的web.xml文件。</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">env-entry</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">env-entry-name</span>&gt;</span>solr/home<span class="hljs-tag">&lt;/<span class="hljs-name">env-entry-name</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">env-entry-value</span>&gt;</span>/opt/solrhome<span class="hljs-tag">&lt;/<span class="hljs-name">env-entry-value</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">env-entry-type</span>&gt;</span>java.lang.String<span class="hljs-tag">&lt;/<span class="hljs-name">env-entry-type</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">env-entry</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第八步：启动Tomcat<br><a href="http://192.168.184.130:8080/solr/" target="_blank" rel="noopener">http://192.168.184.130:8080/solr/</a></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>添加文档必须有id域，其他域 必须在solr的schema.xml中定义。
+</code></pre><p>schema.xml中定义</p>
+<blockquote>
+<p>本系统业务所需要的业务域有：<br>1、商品Id  使用schema.xml中的id域<br>2、商品标题<br>3、商品卖点<br>4、商品价格<br>5、商品图片<br>6、分类名称<br>7、商品描述</p>
+</blockquote>
+<h4 id="配置中文分词器"><a href="#配置中文分词器" class="headerlink" title="配置中文分词器"></a>配置中文分词器</h4><p>创建对应的业务域。需要制定中文分析器。<br>下载地址：<a href="https://code.google.com/archive/p/ik-analyzer/downloads" target="_blank" rel="noopener">https://code.google.com/archive/p/ik-analyzer/downloads</a></p>
+<p>第一步：把中文分析器添加到solr工程中。<br>    1、把<code>IKAnalyzer2012FF_u1.jar</code>添加到solr工程的lib目录下。<br>    2、把扩展词典、配置文件放到solr工程的WEB-INF/classes目录下。</p>
+<p>第二步：配置一个FieldType，制定使用IKAnalyzer</p>
+<pre><code>修改solrHome中的schema.xml文件，添加FieldType。
+路径：`/opt/solrhome/collection1/conf/schema.xml`
+</code></pre><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">fieldType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"text_ik"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"solr.TextField"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">analyzer</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org.wltea.analyzer.lucene.IKAnalyzer"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第三步：配置业务域，type制定使用自定义的FieldType。<br>设置业务系统Field</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_title"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text_ik"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"true"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_sell_point"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text_ik"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"true"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_price"</span>  <span class="hljs-attr">type</span>=<span class="hljs-string">"long"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"true"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_image"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"string"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"false"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_category_name"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"string"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_desc"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text_ik"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"false"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">field</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item_keywords"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text_ik"</span> <span class="hljs-attr">indexed</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">stored</span>=<span class="hljs-string">"false"</span> <span class="hljs-attr">multiValued</span>=<span class="hljs-string">"true"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">copyField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"item_title"</span> <span class="hljs-attr">dest</span>=<span class="hljs-string">"item_keywords"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">copyField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"item_sell_point"</span> <span class="hljs-attr">dest</span>=<span class="hljs-string">"item_keywords"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">copyField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"item_category_name"</span> <span class="hljs-attr">dest</span>=<span class="hljs-string">"item_keywords"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">copyField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"item_desc"</span> <span class="hljs-attr">dest</span>=<span class="hljs-string">"item_keywords"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/post_image/2018-7-22/1.jpg" alt="Alt text"><br>第四步：重启tomcat<br><img src="/post_image/2018-7-22/2.jpg" alt="Alt text"></p>
+<h4 id="Tomcat启动后访问不了？"><a href="#Tomcat启动后访问不了？" class="headerlink" title="Tomcat启动后访问不了？"></a>Tomcat启动后访问不了？</h4><p>多次出现这样的问题，启动之后访问不了，一定要看日志！<code>/opt/apache-tomcat-8.5.32/logs/catalina.out</code>。</p>
+<ul>
+<li>由于本机中dubbo-admin和solr放在了同一个tomcat，而dubbo-admin启动需要先开启zookeeper服务，所以tomcat一直处于启动状态。</li>
+<li>Linux中多次启动关闭Tomcat下次启动会异常，需要强制杀死进程 <code>kill -s 9 pid</code> 然后再启动。</li>
+</ul>
+<h3 id="测试CRUD"><a href="#测试CRUD" class="headerlink" title="测试CRUD"></a>测试CRUD</h3><pre><code>使用SolrJ可以实现索引库的增删改查操作。
+</code></pre><p>Maven:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- solr客户端 --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.solr<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>solr-solrj<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="添加到文档"><a href="#添加到文档" class="headerlink" title="添加到文档"></a>添加到文档</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * 第一步：把solrJ的jar包添加到工程中。</span></span><br><span class="line"><span class="hljs-comment"> * 第二步：创建一个SolrServer，使用HttpSolrServer创建对象。</span></span><br><span class="line"><span class="hljs-comment"> * 第三步：创建一个文档对象SolrInputDocument对象。</span></span><br><span class="line"><span class="hljs-comment"> * 第四步：向文档中添加域。必须有id域，域的名称必须在schema.xml中定义。</span></span><br><span class="line"><span class="hljs-comment"> * 第五步：把文档添加到索引库中。</span></span><br><span class="line"><span class="hljs-comment"> * 第六步：提交。</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> Exception</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@Test</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addDocument</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 第一步：把solrJ的jar包添加到工程中。</span></span><br><span class="line">    <span class="hljs-comment">// 第二步：创建一个SolrServer，使用HttpSolrServer创建对象。</span></span><br><span class="line">    SolrServer solrServer = <span class="hljs-keyword">new</span> HttpSolrServer(<span class="hljs-string">"http://192.168.184.130:8080/solr"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第三步：创建一个文档对象SolrInputDocument对象。</span></span><br><span class="line">    SolrInputDocument document = <span class="hljs-keyword">new</span> SolrInputDocument();</span><br><span class="line">    <span class="hljs-comment">// 第四步：向文档中添加域。必须有id域，域的名称必须在schema.xml中定义。</span></span><br><span class="line">    document.addField(<span class="hljs-string">"id"</span>, <span class="hljs-string">"test001"</span>);</span><br><span class="line">    document.addField(<span class="hljs-string">"item_title"</span>, <span class="hljs-string">"测试商品"</span>);</span><br><span class="line">    document.addField(<span class="hljs-string">"item_price"</span>, <span class="hljs-string">"199"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第五步：把文档添加到索引库中。</span></span><br><span class="line">    solrServer.add(document);</span><br><span class="line">    <span class="hljs-comment">// 第六步：提交。</span></span><br><span class="line">    solrServer.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * 第一步：创建一个SolrServer对象。</span></span><br><span class="line"><span class="hljs-comment"> * 第二步：调用SolrServer对象的根据id删除的方法。</span></span><br><span class="line"><span class="hljs-comment"> * 第三步：提交。</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> Exception</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@Test</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteDocumentById</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 第一步：创建一个SolrServer对象。</span></span><br><span class="line">    SolrServer solrServer = <span class="hljs-keyword">new</span> HttpSolrServer(<span class="hljs-string">"http://192.168.184.130:8080/solr"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第二步：调用SolrServer对象的根据id删除的方法。</span></span><br><span class="line">    solrServer.deleteById(<span class="hljs-string">"1"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第三步：提交。</span></span><br><span class="line">    solrServer.commit();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * 根据查询删除</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@Test</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteDocumentByQuery</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    SolrServer solrServer = <span class="hljs-keyword">new</span> HttpSolrServer(<span class="hljs-string">"http://192.168.184.130:8080/solr"</span>);</span><br><span class="line">    solrServer.deleteByQuery(<span class="hljs-string">"title:change.me"</span>);</span><br><span class="line">    solrServer.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * 第一步：创建一个SolrServer对象</span></span><br><span class="line"><span class="hljs-comment"> * 第二步：创建一个SolrQuery对象。</span></span><br><span class="line"><span class="hljs-comment"> * 第三步：向SolrQuery中添加查询条件、过滤条件。。。</span></span><br><span class="line"><span class="hljs-comment"> * 第四步：执行查询。得到一个Response对象。</span></span><br><span class="line"><span class="hljs-comment"> * 第五步：取查询结果。</span></span><br><span class="line"><span class="hljs-comment"> * 第六步：遍历结果并打印。</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> Exception</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@Test</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">queryDocument</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 第一步：创建一个SolrServer对象</span></span><br><span class="line">    SolrServer solrServer = <span class="hljs-keyword">new</span> HttpSolrServer(<span class="hljs-string">"http://192.168.184.130:8080/solr"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第二步：创建一个SolrQuery对象。</span></span><br><span class="line">    SolrQuery query = <span class="hljs-keyword">new</span> SolrQuery();</span><br><span class="line">    <span class="hljs-comment">// 第三步：向SolrQuery中添加查询条件、过滤条件。。。</span></span><br><span class="line">    query.setQuery(<span class="hljs-string">"*:*"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第四步：执行查询。得到一个Response对象。</span></span><br><span class="line">    QueryResponse response = solrServer.query(query);</span><br><span class="line">    <span class="hljs-comment">// 第五步：取查询结果。</span></span><br><span class="line">    SolrDocumentList solrDocumentList = response.getResults();</span><br><span class="line">    System.out.println(<span class="hljs-string">"查询结果的总记录数："</span> + solrDocumentList.getNumFound());</span><br><span class="line">    <span class="hljs-comment">// 第六步：遍历结果并打印。</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (SolrDocument solrDocument : solrDocumentList) &#123;</span><br><span class="line">        System.out.println(solrDocument.get(<span class="hljs-string">"id"</span>));</span><br><span class="line">        System.out.println(solrDocument.get(<span class="hljs-string">"item_title"</span>));</span><br><span class="line">        System.out.println(solrDocument.get(<span class="hljs-string">"item_price"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * 高亮查询</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@Test</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">queryDocumentWithHighLighting</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 第一步：创建一个SolrServer对象</span></span><br><span class="line">    SolrServer solrServer = <span class="hljs-keyword">new</span> HttpSolrServer(<span class="hljs-string">"http://192.168.184.130:8080/solr"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第二步：创建一个SolrQuery对象。</span></span><br><span class="line">    SolrQuery query = <span class="hljs-keyword">new</span> SolrQuery();</span><br><span class="line">    <span class="hljs-comment">// 第三步：向SolrQuery中添加查询条件、过滤条件。。。</span></span><br><span class="line">    query.setQuery(<span class="hljs-string">"测试"</span>);</span><br><span class="line">    <span class="hljs-comment">//指定默认搜索域</span></span><br><span class="line">    query.set(<span class="hljs-string">"df"</span>, <span class="hljs-string">"item_keywords"</span>);</span><br><span class="line">    <span class="hljs-comment">//开启高亮显示</span></span><br><span class="line">    query.setHighlight(<span class="hljs-keyword">true</span>);</span><br><span class="line">    <span class="hljs-comment">//高亮显示的域</span></span><br><span class="line">    query.addHighlightField(<span class="hljs-string">"item_title"</span>);</span><br><span class="line">    query.setHighlightSimplePre(<span class="hljs-string">"&lt;em&gt;"</span>);</span><br><span class="line">    query.setHighlightSimplePost(<span class="hljs-string">"&lt;/em&gt;"</span>);</span><br><span class="line">    <span class="hljs-comment">// 第四步：执行查询。得到一个Response对象。</span></span><br><span class="line">    QueryResponse response = solrServer.query(query);</span><br><span class="line">    <span class="hljs-comment">// 第五步：取查询结果。</span></span><br><span class="line">    SolrDocumentList solrDocumentList = response.getResults();</span><br><span class="line">    System.out.println(<span class="hljs-string">"查询结果的总记录数："</span> + solrDocumentList.getNumFound());</span><br><span class="line">    <span class="hljs-comment">// 第六步：遍历结果并打印。</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (SolrDocument solrDocument : solrDocumentList) &#123;</span><br><span class="line">        System.out.println(solrDocument.get(<span class="hljs-string">"id"</span>));</span><br><span class="line">        <span class="hljs-comment">//取高亮显示</span></span><br><span class="line">        Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; highlighting = response.getHighlighting();</span><br><span class="line">        List&lt;String&gt; list = highlighting.get(solrDocument.get(<span class="hljs-string">"id"</span>)).get(<span class="hljs-string">"item_title"</span>);</span><br><span class="line">        String itemTitle = <span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (list != <span class="hljs-keyword">null</span> &amp;&amp; list.size() &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            itemTitle = list.get(<span class="hljs-number">0</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            itemTitle = (String) solrDocument.get(<span class="hljs-string">"item_title"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(itemTitle);</span><br><span class="line">        System.out.println(solrDocument.get(<span class="hljs-string">"item_price"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="搭建搜索服务工程"><a href="#搭建搜索服务工程" class="headerlink" title="搭建搜索服务工程"></a>搭建搜索服务工程</h3><p><img src="/post_image/2018-7-22/3.jpg" alt="Alt text"></p>
+<h2 id="分布式集群版"><a href="#分布式集群版" class="headerlink" title="分布式集群版"></a>分布式集群版</h2><p>一些概念</p>
+<blockquote>
+<p>SolrCloud<br>是Solr提供基于Solr和Zookeeper的分布式搜索方案，它的主要思想是使用Zookeeper作为集群的配置信息中心。</p>
+</blockquote>
+<h3 id="Solr集群的系统架构"><a href="#Solr集群的系统架构" class="headerlink" title="Solr集群的系统架构"></a>Solr集群的系统架构</h3><p><img src="/post_image/2018-7-22/4.jpg" alt="Alt text"></p>
+<h3 id="需要实现的solr集群架构"><a href="#需要实现的solr集群架构" class="headerlink" title="需要实现的solr集群架构"></a>需要实现的solr集群架构</h3><p><img src="/post_image/2018-7-22/5.jpg" alt="Alt text"></p>
+<p>Zookeeper作为集群的管理工具。<br>1、集群管理：容错、负载均衡。<br>2、配置文件的集中管理<br>3、集群的入口</p>
+<h3 id="搭建伪分布式"><a href="#搭建伪分布式" class="headerlink" title="搭建伪分布式"></a>搭建伪分布式</h3><ul>
+<li>需要三个zookeeper节点</li>
+<li>需要四个tomcat节点</li>
+</ul>
+<h3 id="Zookeeper集群搭建"><a href="#Zookeeper集群搭建" class="headerlink" title="Zookeeper集群搭建"></a>Zookeeper集群搭建</h3><p>第一步：创建solr集群的根目录 <code>/opt/solrCloud/</code><br>第二步：解压 zookeeper.tar.gz 并在根目录下复制三份</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x. 11 1000 1000    4096 7月  22 20:15 zookeeper01</span><br><span class="line">drwxr-xr-x. 11 root root    4096 7月  22 20:18 zookeeper02</span><br><span class="line">drwxr-xr-x. 11 root root    4096 7月  22 20:18 zookeeper03</span><br></pre></td></tr></table></figure>
+<p>第三步：在每一个zookeeper中创建<code>data</code>目录，在data中创建文件 <code>myid</code>，内容就是每个实例的id，比如：1，2，3<br>第四步：把每一个zookeeper下的conf目录下的zoo_sample.cfg文件改名为zoo.cfg<br>第五步：修改配置文件</p>
+<ul>
+<li>dataDir</li>
+<li>clientPort</li>
+<li>集群的节点列表</li>
+</ul>
+<p><img src="/post_image/2018-7-22/6.jpg" alt="Alt text"><br>1.集群的节点列表，1、2、3代表节点的id<br>2.ip后的端口号是zookeeper内部通讯的端口和投票选举的端口，每个端口不能重复。</p>
+<p>第六步：启动每个zookeeper实例</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@yuzh solrCloud]# vim zookeeper_start_all.sh </span><br><span class="line"></span><br><span class="line">cd /opt/solrCloud/zookeeper01/bin</span><br><span class="line">./zkServer.sh start</span><br><span class="line"></span><br><span class="line">cd /opt/solrCloud/zookeeper02/bin</span><br><span class="line">./zkServer.sh start</span><br><span class="line"></span><br><span class="line">cd /opt/solrCloud/zookeeper03/bin</span><br><span class="line">./zkServer.sh start</span><br></pre></td></tr></table></figure>
+<p>授权、启动。</p>
+<h3 id="Solr集群搭建"><a href="#Solr集群搭建" class="headerlink" title="Solr集群搭建"></a>Solr集群搭建</h3><p>第一步：创建四个tomcat实例。每个tomcat运行在不同的端口。8180、8280、8380、8480<br>第二步：部署solr的war包。把单机版的solr工程复制到集群中<b>每个</b>的tomcat中。<br>第三步：为<b>每个</b>solr实例创建一个对应的solrhome。使用单机版的solrhome复制四份。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x.  4 root root 4096 7月  23 14:40 solrhome01</span><br><span class="line">drwxr-xr-x.  4 root root 4096 7月  23 14:40 solrhome02</span><br><span class="line">drwxr-xr-x.  4 root root 4096 7月  23 14:40 solrhome03</span><br><span class="line">drwxr-xr-x.  4 root root 4096 7月  23 14:40 solrhome04</span><br><span class="line">drwxr-xr-x.  9 root root 4096 7月  22 20:23 tomcat01</span><br><span class="line">drwxr-xr-x.  9 root root 4096 7月  22 20:24 tomcat02</span><br><span class="line">drwxr-xr-x.  9 root root 4096 7月  22 20:24 tomcat03</span><br><span class="line">drwxr-xr-x.  9 root root 4096 7月  22 20:24 tomcat04</span><br></pre></td></tr></table></figure>
+<p>第四步：需要修改<b>每个</b>tomcat实例中的solr的web.xml文件。把solrhome关联起来。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;env-entry&gt;</span><br><span class="line">   &lt;env-entry-name&gt;solr/home&lt;/env-entry-name&gt;</span><br><span class="line">   &lt;env-entry-value&gt;/opt/solrCloud/solrhome01&lt;/env-entry-value&gt;</span><br><span class="line">   &lt;env-entry-type&gt;java.lang.String&lt;/env-entry-type&gt;</span><br><span class="line">&lt;/env-entry&gt;</span><br></pre></td></tr></table></figure>
+<p>第五步：配置SolrCloud相关的配置。<b>每个</b>solrhome下都有一个solr.xml，把其中的ip及端口号配置好。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;solrcloud&gt;</span><br><span class="line">  &lt;!-- 本机IP --&gt;</span><br><span class="line">  &lt;str name=&quot;host&quot;&gt;192.168.184.130&lt;/str&gt;</span><br><span class="line">  &lt;!-- 每个solr对应的solrhome所属的tomcat端口号 --&gt;</span><br><span class="line">  &lt;int name=&quot;hostPort&quot;&gt;8180&lt;/int&gt;</span><br><span class="line">  &lt;str name=&quot;hostContext&quot;&gt;$&#123;hostContext:solr&#125;&lt;/str&gt;</span><br><span class="line">  &lt;int name=&quot;zkClientTimeout&quot;&gt;$&#123;zkClientTimeout:30000&#125;&lt;/int&gt;</span><br><span class="line">  &lt;bool name=&quot;genericCoreNodeNames&quot;&gt;$&#123;genericCoreNodeNames:true&#125;&lt;/bool&gt;</span><br><span class="line">&lt;/solrcloud&gt;</span><br></pre></td></tr></table></figure>
+<p>第六步：让zookeeper统一管理配置文件。</p>
+<pre><code>需要把`solrhome/collection1/conf`目录上传到zookeeper。上传任意solrhome中的配置文件即可。（需要保证zookeeper集群是启动的状态）
+</code></pre><p>使用工具上传配置文件：<br>执行<br><code>/opt/solr-4.10.3/example/scripts/cloud-scripts/zkcli.sh</code><br>注意不是<code>zookeeper/bin</code>中的<code>zkCli.sh</code></p>
+<blockquote>
+<p>./zkcli.sh -zkhost 192.168.184.130:2181,192.168.184.130:2182,192.168.184.130:2183 -cmd upconfig -confdir /opt/solrCloud/solrhome01/collection1/conf -confname myconf</p>
+</blockquote>
+<p>第七步：修改每一个<code>tomcat/bin</code>目录下的<code>catalina.sh</code> 文件，关联<code>solr</code>和<code>zookeeper</code>。<br>把此配置添加到配置文件中：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=&quot;-DzkHost=192.168.184.130:2181,192.168.184.130:2182,192.168.184.130:2183&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/post_image/2018-7-22/7.jpg" alt="Alt text"></p>
+<p>第八步：启动每个tomcat实例。要保证zookeeper集群是启动状态。<br>第九步：访问集群 <code>http://192.168.184.130:8180/solr</code></p>
+<blockquote>
+<p>创建新的Collection进行分片处理:<br><a href="http://192.168.184.130:8180/solr/admin/collections?action=CREATE&amp;name=collection2&amp;numShards=2&amp;replicationFactor=2" target="_blank" rel="noopener">http://192.168.184.130:8180/solr/admin/collections?action=CREATE&amp;name=collection2&amp;numShards=2&amp;replicationFactor=2</a><br>删除不用的Collection:<br><a href="http://192.168.184.130:8180/solr/admin/collections?action=DELETE&amp;name=collection1" target="_blank" rel="noopener">http://192.168.184.130:8180/solr/admin/collections?action=DELETE&amp;name=collection1</a></p>
+</blockquote>
+<p>注意：关闭防火墙吧，端口太多了。每次开机之后防火墙会自动重启。</p>
+<h2 id="使用solrJ管理集群"><a href="#使用solrJ管理集群" class="headerlink" title="使用solrJ管理集群"></a>使用solrJ管理集群</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> xyz.taotao.search.test;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.client.solrj.SolrQuery;</span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.client.solrj.SolrServerException;</span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.client.solrj.impl.CloudSolrServer;</span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.client.solrj.response.QueryResponse;</span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.common.SolrDocument;</span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.common.SolrDocumentList;</span><br><span class="line"><span class="hljs-keyword">import</span> org.apache.solr.common.SolrInputDocument;</span><br><span class="line"><span class="hljs-keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Created with IntelliJ IDEA.</span></span><br><span class="line"><span class="hljs-comment"> * Author: yu_zh</span></span><br><span class="line"><span class="hljs-comment"> * DateTime: 2018/07/23 14:46</span></span><br><span class="line"><span class="hljs-comment"> * Solr集群版客户端连接测试</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SolrCloudTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//1.创建集群版Solr，传入zookeeper集群地址。</span></span><br><span class="line">        CloudSolrServer solrServer = <span class="hljs-keyword">new</span> CloudSolrServer(<span class="hljs-string">"192.168.184.130:2181,192.168.184.130:2182,192.168.184.130:2183"</span>);</span><br><span class="line">        <span class="hljs-comment">//2.设置默认集合属性</span></span><br><span class="line">        solrServer.setDefaultCollection(<span class="hljs-string">"collection2"</span>);</span><br><span class="line">        <span class="hljs-comment">//3.创建文档对象</span></span><br><span class="line">        SolrInputDocument document = <span class="hljs-keyword">new</span> SolrInputDocument();</span><br><span class="line">        <span class="hljs-comment">//4.向文档对象添加业务域（这些域要在配置文件 schema.xml 中存在）</span></span><br><span class="line">        document.addField(<span class="hljs-string">"id"</span>, <span class="hljs-string">"test01"</span>);</span><br><span class="line">        document.addField(<span class="hljs-string">"item_title"</span>, <span class="hljs-string">"测试商品"</span>);</span><br><span class="line">        document.addField(<span class="hljs-string">"item_price"</span>, <span class="hljs-string">"100"</span>);</span><br><span class="line">        <span class="hljs-comment">//5.把文档对象写入索引库</span></span><br><span class="line">        solrServer.add(document);</span><br><span class="line">        <span class="hljs-comment">//6.提交操作</span></span><br><span class="line">        solrServer.commit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">query</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//创建solrServer对象实现类CloudSolrServer对象</span></span><br><span class="line">        CloudSolrServer solrServer = <span class="hljs-keyword">new</span> CloudSolrServer(<span class="hljs-string">"192.168.184.130:2181,192.168.184.130:2182,192.168.184.130:2183"</span>);</span><br><span class="line">        <span class="hljs-comment">//设置查询的默认集合</span></span><br><span class="line">        solrServer.setDefaultCollection(<span class="hljs-string">"collection2"</span>);</span><br><span class="line">        <span class="hljs-comment">//创建SolrQuery查询</span></span><br><span class="line">        SolrQuery solrQuery = <span class="hljs-keyword">new</span> SolrQuery();</span><br><span class="line">        <span class="hljs-comment">//添加查询条件</span></span><br><span class="line">        solrQuery.setQuery(<span class="hljs-string">"*:*"</span>);</span><br><span class="line">        <span class="hljs-comment">//执行查询，得到结果集对象</span></span><br><span class="line">        QueryResponse queryResponse = solrServer.query(solrQuery);</span><br><span class="line">        <span class="hljs-comment">//操作结果</span></span><br><span class="line">        SolrDocumentList resultList = queryResponse.getResults();</span><br><span class="line">        System.out.println(<span class="hljs-string">"总记录数："</span> + resultList.getNumFound());</span><br><span class="line">        <span class="hljs-keyword">for</span> (SolrDocument solrDocument : resultList) &#123;</span><br><span class="line">            System.out.println(solrDocument.get(<span class="hljs-string">"id"</span>));</span><br><span class="line">            System.out.println(solrDocument.get(<span class="hljs-string">"item_title"</span>));</span><br><span class="line">            System.out.println(solrDocument.get(<span class="hljs-string">"item_price"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把搜索业务功能切换到集群版</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">"http://www.springframework.org/schema/context"</span> <span class="hljs-attr">xmlns:p</span>=<span class="hljs-string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:aop</span>=<span class="hljs-string">"http://www.springframework.org/schema/aop"</span> <span class="hljs-attr">xmlns:tx</span>=<span class="hljs-string">"http://www.springframework.org/schema/tx"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:dubbo</span>=<span class="hljs-string">"http://code.alibabatech.com/schema/dubbo"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 单机版 --&gt;</span></span><br><span class="line">   <span class="hljs-comment">&lt;!-- &lt;bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer"&gt;</span></span><br><span class="line"><span class="hljs-comment">        &lt;constructor-arg name="baseURL" value="http://192.168.184.130:8080/solr"/&gt;</span></span><br><span class="line"><span class="hljs-comment">    &lt;/bean&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 集群版 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"cloudSolrServer"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org.apache.solr.client.solrj.impl.CloudSolrServer"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"zkHost"</span></span></span><br><span class="line"><span class="hljs-tag">                         <span class="hljs-attr">value</span>=<span class="hljs-string">"192.168.184.130:2181,192.168.184.130:2182,192.168.184.130:2183"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">constructor-arg</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"defaultCollection"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"collection2"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>OVER~~😭</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/solr/">solr</a>, <a class="has-link-grey -link" href="/tags/分布式/">分布式</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/07/25/分布式技术入坑指南（四）/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">分布式技术入坑指南（四）</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/07/14/分布式技术入坑指南（二）/">
+                <span class="level-item">分布式技术入坑指南（二）</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'Just Do It...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/tou.jpg" alt="harry.zh">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        not just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#11-Solr索引库的搭建与使用（单机版和集群版）">
+        <span class="has-mr-6">1</span>
+        <span>11.Solr索引库的搭建与使用（单机版和集群版）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#单机版">
+        <span class="has-mr-6">1.1</span>
+        <span>单机版</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#搭建">
+        <span class="has-mr-6">1.1.1</span>
+        <span>搭建</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用">
+        <span class="has-mr-6">1.1.2</span>
+        <span>使用</span>
+        </a></li><li>
+        <a class="is-flex" href="#测试CRUD">
+        <span class="has-mr-6">1.1.3</span>
+        <span>测试CRUD</span>
+        </a></li><li>
+        <a class="is-flex" href="#搭建搜索服务工程">
+        <span class="has-mr-6">1.1.4</span>
+        <span>搭建搜索服务工程</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#分布式集群版">
+        <span class="has-mr-6">1.2</span>
+        <span>分布式集群版</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Solr集群的系统架构">
+        <span class="has-mr-6">1.2.1</span>
+        <span>Solr集群的系统架构</span>
+        </a></li><li>
+        <a class="is-flex" href="#需要实现的solr集群架构">
+        <span class="has-mr-6">1.2.2</span>
+        <span>需要实现的solr集群架构</span>
+        </a></li><li>
+        <a class="is-flex" href="#搭建伪分布式">
+        <span class="has-mr-6">1.2.3</span>
+        <span>搭建伪分布式</span>
+        </a></li><li>
+        <a class="is-flex" href="#Zookeeper集群搭建">
+        <span class="has-mr-6">1.2.4</span>
+        <span>Zookeeper集群搭建</span>
+        </a></li><li>
+        <a class="is-flex" href="#Solr集群搭建">
+        <span class="has-mr-6">1.2.5</span>
+        <span>Solr集群搭建</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#使用solrJ管理集群">
+        <span class="has-mr-6">1.3</span>
+        <span>使用solrJ管理集群</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="分布式技术入坑指南（三）" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 harry&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

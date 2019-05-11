@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Git 实用指南 - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="版本控制系统（VCS） 版本控制 / 主动提交 / 中央仓库 构成了一个最核心的版本控制系统。  版本控制：最基本的功能 版本控制系统最基本的功能是版本控制。版本控制，简单的理解就是在文件中的修改历程中保存修改历史，我们可以方便的撤销之前对文件的修改。 在普通文本编辑器中，我们可以使用 Undo 操作回退到上一次的操作；在程序编码，我们可以通过 VCS 回退到指定的一次操作，而不仅仅是上一次操作。">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 实用指南">
+<meta property="og:url" content="http://yoursite.com/2018/10/07/Git 实用指南/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="版本控制系统（VCS） 版本控制 / 主动提交 / 中央仓库 构成了一个最核心的版本控制系统。  版本控制：最基本的功能 版本控制系统最基本的功能是版本控制。版本控制，简单的理解就是在文件中的修改历程中保存修改历史，我们可以方便的撤销之前对文件的修改。 在普通文本编辑器中，我们可以使用 Undo 操作回退到上一次的操作；在程序编码，我们可以通过 VCS 回退到指定的一次操作，而不仅仅是上一次操作。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/random/106.jpg">
+<meta property="og:updated_time" content="2018-11-05T10:55:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 实用指南">
+<meta name="twitter:description" content="版本控制系统（VCS） 版本控制 / 主动提交 / 中央仓库 构成了一个最核心的版本控制系统。  版本控制：最基本的功能 版本控制系统最基本的功能是版本控制。版本控制，简单的理解就是在文件中的修改历程中保存修改历史，我们可以方便的撤销之前对文件的修改。 在普通文本编辑器中，我们可以使用 Undo 操作回退到上一次的操作；在程序编码，我们可以通过 VCS 回退到指定的一次操作，而不仅仅是上一次操作。">
+<meta name="twitter:image" content="http://yoursite.com/img/random/106.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="Git 实用指南" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/img/random/106.jpg" alt="Git 实用指南">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-07T07:56:57.000Z">2018-10-07</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    an hour read (About 9679 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Git 实用指南
+            
+        </h1>
+        <div class="content">
+            <h2 id="版本控制系统（VCS）"><a href="#版本控制系统（VCS）" class="headerlink" title="版本控制系统（VCS）"></a>版本控制系统（VCS）</h2><blockquote>
+<p><strong>版本控制</strong> / <strong>主动提交</strong> / <strong>中央仓库</strong> 构成了一个最核心的版本控制系统。</p>
+</blockquote>
+<p><strong>版本控制：最基本的功能</strong></p>
+<p>版本控制系统最基本的功能是版本控制。版本控制，简单的理解就是在文件中的修改历程中保存修改历史，我们可以方便的撤销之前对文件的修改。</p>
+<p>在普通文本编辑器中，我们可以使用 Undo 操作回退到上一次的操作；在程序编码，我们可以通过 VCS 回退到指定的一次操作，而不仅仅是上一次操作。</p>
+<p><strong>主动提交机制：VCS 与普通文本编辑器的区别</strong></p>
+<p>使用普通文本编辑器的时候，一次保存就是一次改动，对版本的 <code>控制</code> 仅仅是回退到上一次操作。而正常情况下，我们的程序代码修改的生命周期十分长，一次代码的修改，在几天后、几个月后、甚至几年后都可能被翻出来。此时像普通编辑器的“自动保存提交”的功能在对历史代码审查、回退中会变得非常繁琐和无章可循。所以和普通文本编辑器的“撤销”功能不同，VCS 保存修改历史，使用 <code>主动提交改动</code> 的机制。</p>
+<p>所谓 <code>主动提交改动</code> ，是指每次代码的修改和保存不会自动提交，需要手动提交（commit）到仓库，VCS 会把这次提交记录到版本历史中，当往后需要回退到这个版本，可以在 VCS 的历史提交纪录中找到这条记录。<br><a id="more"></a><br><strong>中央仓库：多人合作的同步需求</strong></p>
+<p>中央仓库作为代码的存储中心，所有人的改动都上传到这里，所有人都可以看到并下载别人上传的改动。</p>
+<p>版本控制 / 主动提交 / 中央仓库 这三个要素，共同构成了版本控制系统 VCS 的核心：开发团队中的每个人向中央仓库中主动提交自己的改动和同步别人的改动，并在需要的时候查看和操作历史的版本，这就是版本控制系统。</p>
+<p><strong>中央式版本控制系统</strong></p>
+<p>最基本的模型是：在一台服务器中初始化一个中央仓库，每个人从中央仓库下载初始版本开始并行开发，提交各自的代码到中央仓库并更新其他人的代码同步到自己的机器上。</p>
+<p>团队中的每个人需要做的就是：1. 第一次加入团队，从中央仓库取代码到本地； 2. 写好的新功能提交到中央仓库； 3. 同事有新的代码提交，及时同步到本地。实际开发中当然还会经常需要处理代码冲突、查看代码历史、回退代码版本等。</p>
+<h2 id="分布式版本控制系统（DVCS）"><a href="#分布式版本控制系统（DVCS）" class="headerlink" title="分布式版本控制系统（DVCS）"></a>分布式版本控制系统（DVCS）</h2><p>分布式 VCS 和中央式 VCS 的区别在于：分布式 VCS 除了有中央仓库之外，还有本地仓库，团队中的每个人的机器上都有一个本地仓库，这个仓库中保存着版本的所有历史，每个人都可以在自己的机器的本地仓库中提交代码、查看历史而无需联网与中央仓库交互，取而代之的，只需要和本地仓库交互。</p>
+<p>中央式 VCS 的中央仓库有两个主要功能：<code>保存版本历史</code> /  <code>同步代码</code> 。而在分布式的 VCS 中，保存版本历史转移到了每个人的本地仓库，中央仓库只剩下同步代码这一个主要任务。当然中央仓库也会保存版本历史，不过这个历史只是作为团队同步代码的中转站。</p>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><ol>
+<li><p>在 github 上新建一个仓库： <code>git-practical-guide</code></p>
+</li>
+<li><p>在指定路径克隆该远程仓库到本地： <code>git clone https://github.com/yuzh233/git-practical-guide.git</code></p>
+</li>
+<li><p>查看日志： <code>git log</code> ，若日志信息太长，按 q 退出。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="hljs-built_in">log</span></span><br><span class="line">commit 0a00230727018a14d481fe482e8e85f7b312e39c (HEAD -&gt; master, origin/master, origin/HEAD)</span><br><span class="line">Author: yu_zh &lt;yuzh233@163.com&gt;</span><br><span class="line">Date:   Wed Oct 3 00:23:27 2018 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br><span class="line">    </span><br><span class="line">-- github 默认创建了一次提交</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个文件，自己创建一个提交：但先查看一下状态 <code>git status</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with <span class="hljs-string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="hljs-string">"git add &lt;file&gt;..."</span> to include <span class="hljs-keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">        README.md</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="hljs-string">"git add"</span> to track)</span><br><span class="line"></span><br><span class="line">-- 当前分支是主分支，并且当前分支是最新的（相对于中央仓库）</span><br><span class="line">-- 有一个未追踪的文件 “README.md” ,可以使用 git add 追踪文件（提交）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>追踪文件： <code>git add README.md</code>，再次 <code>git status</code>。 添加全部文件到暂存区：<code>git add . / git add -A</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with <span class="hljs-string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="hljs-string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   README.md</span><br><span class="line"></span><br><span class="line">-- 当前分支是最新的，已暂存一个新文件：README.md，该文件由“未追踪”变成了“已暂存”，表明这个文件被改动的部分已进入“暂存区”</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提交文件：<code>git commit</code> 。进入 vim 填写提交的描述信息保存退出即可。也可以 <code>git commit -m &quot;描述信息&quot;</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br><span class="line"></span><br><span class="line">*** Please tell me who you are.</span><br><span class="line"></span><br><span class="line">Run</span><br><span class="line"></span><br><span class="line">  git config --global user.email <span class="hljs-string">"you@example.com"</span></span><br><span class="line">  git config --global user.name <span class="hljs-string">"Your Name"</span></span><br><span class="line"></span><br><span class="line">to <span class="hljs-built_in">set</span> your account<span class="hljs-string">'s default identity.</span></span><br><span class="line"><span class="hljs-string">Omit --global to set the identity only in this repository.</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">fatal: unable to auto-detect email address (got '</span>Administrator@YU-ZH.(none)<span class="hljs-string">')</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">-- 首次提交需要指明身份（额外一点：github的贡献值是以邮箱地址作为提交的记录标识，如果 setting 里面没有添加该邮箱，那么贡献值会不存在。）</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">Administrator@YU-ZH MINGW64 /d/IdeaProjects/git-practical-guide (master)</span></span><br><span class="line"><span class="hljs-string">$ git config --global user.email "yuzh233@gmail.com"</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">Administrator@YU-ZH MINGW64 /d/IdeaProjects/git-practical-guide (master)</span></span><br><span class="line"><span class="hljs-string">$ git config --global user.name "yu.zh"</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">Administrator@YU-ZH MINGW64 /d/IdeaProjects/git-practical-guide (master)</span></span><br><span class="line"><span class="hljs-string">$ git commit</span></span><br><span class="line"><span class="hljs-string">[master 967f40b] add README.md</span></span><br><span class="line"><span class="hljs-string"> 1 file changed, 76 insertions(+)</span></span><br><span class="line"><span class="hljs-string"> create mode 100644 README.md</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再查看一次日志吧：<code>git log</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="hljs-built_in">log</span></span><br><span class="line">commit 967f40b3fd29f102fc84f62ac9d20243db2a99b4 (HEAD -&gt; master)</span><br><span class="line">Author: yu.zh &lt;yuzh233@gmail.com&gt;</span><br><span class="line">Date:   Wed Oct 3 21:50:03 2018 +0800</span><br><span class="line"></span><br><span class="line">    add README.md</span><br><span class="line"></span><br><span class="line">commit 0a00230727018a14d481fe482e8e85f7b312e39c (origin/master, origin/HEAD)</span><br><span class="line">Author: yu_zh &lt;yuzh233@163.com&gt;</span><br><span class="line">Date:   Wed Oct 3 00:23:27 2018 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br><span class="line"></span><br><span class="line">-- 可以看到，一共有两次提交记录，最近的一次提交在最前面。</span><br><span class="line">-- origin/master, origin/HEAD 是对远端仓库的 master 和 HEAD 的本地镜像。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当我们的文件有修改时，需要更新到本地仓库。先看一下状态是个好习惯： <code>git status</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is ahead of <span class="hljs-string">'origin/master'</span> by 1 commit.</span><br><span class="line">  (use <span class="hljs-string">"git push"</span> to publish your <span class="hljs-built_in">local</span> commits)</span><br><span class="line"></span><br><span class="line">Changes not staged <span class="hljs-keyword">for</span> commit:</span><br><span class="line">  (use <span class="hljs-string">"git add &lt;file&gt;..."</span> to update what will be committed)</span><br><span class="line">  (use <span class="hljs-string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="hljs-keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">        modified:   README.md</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="hljs-string">"git add"</span> and/or <span class="hljs-string">"git commit -a"</span>)</span><br><span class="line"></span><br><span class="line">-- 当前位于主分支，当前分支“领先于”远程仓库主分支一个提交</span><br><span class="line">-- 未提交的一个更改 README.md ，git 认识这个文件，但它不是一个新文件了，我们把它同步为最新的。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依然是： <code>git add README.md</code></p>
+</li>
+<li><p>查看状态： <code>git status</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is ahead of <span class="hljs-string">'origin/master'</span> by 1 commit.</span><br><span class="line">  (use <span class="hljs-string">"git push"</span> to publish your <span class="hljs-built_in">local</span> commits)</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="hljs-string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   README.md</span><br><span class="line"></span><br><span class="line">-- 一个文件被改动了</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提交： <code>git commit</code></p>
+</li>
+<li><p>此时查看下日志：<code>git log</code></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="hljs-built_in">log</span></span><br><span class="line">commit 7ba78ab8cef21de0174884ef13fb6210f9552fe3 (HEAD -&gt; master)</span><br><span class="line">Author: yu.zh &lt;yuzh233@gmail.com&gt;</span><br><span class="line">Date:   Wed Oct 3 22:10:13 2018 +0800</span><br><span class="line"></span><br><span class="line">    update README.md</span><br><span class="line"></span><br><span class="line">commit 967f40b3fd29f102fc84f62ac9d20243db2a99b4</span><br><span class="line">Author: yu.zh &lt;yuzh233@gmail.com&gt;</span><br><span class="line">Date:   Wed Oct 3 21:50:03 2018 +0800</span><br><span class="line"></span><br><span class="line">    add README.md</span><br><span class="line"></span><br><span class="line">commit 0a00230727018a14d481fe482e8e85f7b312e39c (origin/master, origin/HEAD)</span><br><span class="line">Author: yu_zh &lt;yuzh233@163.com&gt;</span><br><span class="line">Date:   Wed Oct 3 00:23:27 2018 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时本地仓库已经领先于中央仓库，把本地仓库推送到中央仓库：<code>git push</code> / <code>git push origin master</code></p>
+</li>
+</ol>
+<p><strong>小结</strong></p>
+<ul>
+<li><p>git clone url</p>
+</li>
+<li><p>git log</p>
+</li>
+<li><p>git status</p>
+</li>
+<li><p>git add 文件 / git add . / git add -A</p>
+</li>
+<li><p>git commit / git commit -m “info”</p>
+</li>
+<li><p>git push / git push origin master</p>
+</li>
+</ul>
+<h2 id="本地初始化仓库并推送到-GitHub"><a href="#本地初始化仓库并推送到-GitHub" class="headerlink" title="本地初始化仓库并推送到 GitHub"></a>本地初始化仓库并推送到 GitHub</h2><ol>
+<li><p>某个项目文件夹执行 <code>git init</code></p>
+</li>
+<li><p><code>git log / git add / git commit / git status</code> 啥的都来一遍</p>
+</li>
+<li><p>在 github 创建与本地同名的仓库，如果本地有 README.md 远程就不要勾选创建这个文件，否则会冲突。</p>
+</li>
+<li><p>关联远程库: <code>git remote add origin git@github.com:yuzh233/demo.git</code> or <code>git remote add origin https://github.com/yuzh233/demo.git</code></p>
+</li>
+<li><p>推送到远程库：<code>git push -u origin master</code> ，需要先关联 GitHub 与本机的 SSH Key.</p>
+</li>
+</ol>
+<h2 id="关联-GitHub-与本机的-SSH-Key"><a href="#关联-GitHub-与本机的-SSH-Key" class="headerlink" title="关联 GitHub 与本机的 SSH Key"></a>关联 GitHub 与本机的 SSH Key</h2><ol>
+<li><p>先确保已经在 git 中保存了全局用户名和邮箱</p>
+<p> git config –global user.name “yourname”</p>
+<p> git config –global user.email“<a href="mailto:your@email.com" target="_blank" rel="noopener">your@email.com</a>“</p>
+</li>
+<li><p>删除 C:\Users\Administrator.ssh\known_hosts 文件</p>
+</li>
+<li><p>bash 输入 <code>ssh-keygen -t rsa -C &quot;yuzh233@gmail.com&quot;</code>，出现提示信息，一路回车，然后系统会自动在.ssh文件夹下生成两个文件，id_rsa 和 id_rsa.pub。</p>
+</li>
+<li><p>打开 id_rsa.pub 将全部内容复制到 Github-&gt;setting-&gt;SSH and GPG keys-&gt;New SSH key-&gt;key</p>
+</li>
+<li><p><code>ssh -T git@github.com</code></p>
+</li>
+</ol>
+<h2 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h2><p>pull 指令用于从中央仓库更新代码到本地仓库。当多人协作开发时，同事 A 先于同事 B push 自己的本地仓库代码到中央仓库后，同事 B 再 push 自己的本地仓库时会报错，原因是远程仓库含有本地没有的 commit 而导致 push 失败。此时同事 B 需要使用 <code>git pull</code> 将同事 A push 到远程仓库的内容更新下来，这样同事 B 的本地仓库就含有远程仓库的commit了，然后同事 B 才能执行自己的 push。</p>
+<p>一种场景：同事A　commit了一条记录并 push 到远程仓库。同事B 也在自己的本地仓库中 commit 了一条记录后试图 push。此时 git 会发现远程仓库含有本地未有的提交 push 失败。于是同事B 执行 <code>git pull</code> ，<strong>此时的 pull 并不会和往常一样结束，而是会进入一个 vim 的信息提示界面，需要输入提交信息（git默认填写了信息），原因是git不仅发现远程仓库含有本地仓库没有的提交，本地仓库也含有远程仓库没有的提交，git会将远程仓库的 commit 和本地仓库的 commit 合并（git mage）产生一条新的提交并添加默认描述信息。</strong> 退出保存信息提示界面之后，pull就完成了，然后执行 push，此时本地仓库含有远程仓库所有的提交不会失败。</p>
+<h2 id="HEAD-master-branch-理解"><a href="#HEAD-master-branch-理解" class="headerlink" title="HEAD / master / branch 理解"></a>HEAD / master / branch 理解</h2><p>指向 commit 的快捷方式：<strong>引用</strong></p>
+<p><img src="/post_image/git_img/image_1.png" alt="git log"></p>
+<p>括号里的 <code>HEAD -&gt; master, origin/master, origin/HEAD</code> ，都是指向这个 commit 的引用。commit 后面一大串的字符是当前提交的唯一标识符（SHA-1 校验和），提供引用机制是为了简化标识符，方便记忆。</p>
+<p><strong>HEAD</strong> 指向当前最新的 commit ，当前 commit 在哪里，HEAD 就在哪里，这是一个永远指向当前 commit 的引用。</p>
+<p>HEAD 除了可以指向 commit，还可以指向一个 <strong>branch</strong>，当它指向某个 branch 的时候，会通过这个 branch 来间接地指向某个 commit；另外，当 HEAD 在提交时自动向前移动的时候，它会像一个拖钩一样带着它所指向的 branch 一起移动。</p>
+<p>我们创建一个 commit 之后查看 log：</p>
+<p><img src="/post_image/git_img/image_2.png" alt></p>
+<p>最新的 commit 被创建后，HEAD 和 master 这两个引用都指向了它，而在上面第一张图中的后两个引用 origin/master 和 origin/HEAD 则依然停留在原先的位置。</p>
+<p><strong>branch</strong> 可以理解为从初始 commit 到 branch 所指向的 commit 之间的所有 commit 集合的一个串。</p>
+<ul>
+<li><p>所有的 branch 之间都是平等的</p>
+</li>
+<li><p>branch 包含了从初始 commit 到它的所有路径，而不是一条路径。并且，这些路径之间也是彼此平等的。</p>
+</li>
+</ul>
+<p><strong>master</strong> 是一个特殊的 branch ,是git默认的分支（主分支）。新创建一个 repository 的第一个 commit 时，会把 master 指向它，并把 HEAD 指向 master。</p>
+<ul>
+<li><p>新建的仓库中的第一个 commit 会被 master 自动指向</p>
+</li>
+<li><p>在 git clone 时，会自动 checkout 出 master</p>
+</li>
+</ul>
+<h2 id="branch-xx-checkout-branch-xx-checkout-d-xx-branch-d-xx-branch-a"><a href="#branch-xx-checkout-branch-xx-checkout-d-xx-branch-d-xx-branch-a" class="headerlink" title="branch xx / checkout branch xx / checkout -d xx / branch -d xx / branch -a"></a>branch xx / checkout branch xx / checkout -d xx / branch -d xx / branch -a</h2><p>创建一个分支：<code>git branch feature1</code></p>
+<p>切换到这个分支：<code>git checkout feature1</code>，此时 HEAD 指向了 feature1 这和分支了。</p>
+<pre><code>创建一个分支并切换过去：git checkout -b feature1
+</code></pre><p>我们在 feature1 分支中创建一个提交：添加 feature1.txt。此时 HEAD<br>指向了 feature1，feature1 指向当前提交。</p>
+<p>又切换回 master 分支：<code>git checkout master</code>，在 master 创建一个提交：添加 master.txt，此时出现了分叉（两个分支有不同的提交）。</p>
+<p>删除刚刚创建的分支：<code>git branch -d feature1</code></p>
+<ul>
+<li><p>HEAD 指向的 branch 不能删除。如果要删除 HEAD 指向的 branch，需要先用 checkout 把 HEAD 指向其他地方。</p>
+</li>
+<li><p>branch 只是一个引用，删除引用并不会删除该引用路径上的所有 commit 集合（不过一个 commit 不在任何一个 branch 路径上，就是个野生 commit 了，会被 git 垃圾回收掉）</p>
+</li>
+<li><p>没有被合并到 master 过的 branch 在删除时会失败。强制删除将 <code>-d</code> 改为 <code>-D</code></p>
+</li>
+</ul>
+<p>删除远程的分支：<code>git push origin -d feature1</code></p>
+<p>查看所有分支：<code>git branch -a</code></p>
+<h2 id="push-的本质"><a href="#push-的本质" class="headerlink" title="push 的本质"></a>push 的本质</h2><p>push 是把当前的分支上传到远程仓库，并把这个 branch 的路径上的所有 commits 也一并上传。</p>
+<p>push 的时候，如果当前分支是一个本地创建的分支，需要指定远程仓库名和分支名，用 <code>git push origin 分支名</code> 的格式，而不能只用 git push；或者可以通过 <code>git config</code> 修改 push.default 来改变 push 时的行为逻辑。</p>
+<p>push 之后上传当前分支，并不会上传 HEAD；远程仓库的 HEAD 是永远指向默认分支（即 master）的。</p>
+<h2 id="git-merge-lt-被合并分支-gt"><a href="#git-merge-lt-被合并分支-gt" class="headerlink" title="git merge &lt;被合并分支&gt;"></a>git merge &lt;被合并分支&gt;</h2><p><code>merge(合并)</code> 从目标 commit（被合并分支的最新commit） 和当前 commit （即 HEAD 所指向的最新 commit）分叉的位置起，把目标 commit 的路径上的所有 commit 的内容一并应用到当前 commit，然后自动生成一个新的 commit。</p>
+<p><img src="/post_image/git_img/15fddc2a9c60eca3.jpg" alt></p>
+<p>HEAD 指向 master，说明当前在主分支，执行 <code>git merge branch1</code>之后 git 会 在 commit 2 （交叉位置），将commit 5 和commit 6 合并到 commit 4，然后生成一个新的提交。</p>
+<pre><code>首先创建一个分支 branch1，开始并行开发：
+    git branch branch1
+-------------------------------------
+在 master 分支创建两个文件：
+    touch a.txt
+    touch b.txt
+
+添加并提交这两个文件：
+    git add a.txt b.txt
+    git commit -m &quot;add a.txt b.txt&quot;
+
+此时 master 分支有这两个文件
+-------------------------------------
+切换到 branch1 分支：
+    git chekout branch1
+
+创建一个文件 c.txt 添加并提交：
+    touch c.txt
+    git add c.txt
+    git commit -m &quot;add c.txt&quot;
+
+此时 branch1 分支含有 c.txt 这个文件
+--------------------------------------
+master 有自己的新提交：“a.txt / b.txt”，branch1有自己的新提交：“c.txt”，此时想将 branch1 的提交合并到 master 主分支上：
+
+    git checkout master 先切换到主分支
+    git merge branch1
+
+于是 master 就含有 a.txt / b.txt / c.txt 这三个文件了。
+</code></pre><h3 id="冲突（conflict）"><a href="#冲突（conflict）" class="headerlink" title="冲突（conflict）"></a>冲突（conflict）</h3><blockquote>
+<p>merge 在做合并的时候，是有一定的自动合并能力的：如果一个分支改了 A 文件，另一个分支改了 B 文件，那么合并后就是既改 A 也改 B，这个动作会自动完成；如果两个分支都改了同一个文件，但一个改的是第 1 行，另一个改的是第 2 行，那么合并后就是第 1 行和第 2 行都改，也是自动完成。<br><br>但如果两个分支修改了同一部分内容，merge 的自动算法就搞不定了。这种情况 Git 称之为：冲突（Conflict）。</p>
+</blockquote>
+<p>例如：git仓库中有一个文件 <code>shopping-list.txt</code>，内容如下：</p>
+<pre><code>移动硬盘
+女装
+</code></pre><p>我们用两个分支分别修改文件的同一个地方，先创建一个分支 feature1：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch feature1</span><br></pre></td></tr></table></figure>
+<p>在 master 中修改内容并提交：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    移动硬盘</span><br><span class="line">    女装（已买）</span><br><span class="line"></span><br><span class="line">git add shopping-list.txt</span><br><span class="line">git commit -m <span class="hljs-string">"购买女装"</span></span><br></pre></td></tr></table></figure>
+<p>切换到 feature1 修改并提交：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature1</span><br><span class="line"></span><br><span class="line">    移动硬盘</span><br><span class="line">    女装（没买）</span><br><span class="line"></span><br><span class="line">git add shopping-list.txt</span><br><span class="line">git commit -m <span class="hljs-string">"没买女装"</span></span><br></pre></td></tr></table></figure>
+<p>此时切换回 master ，执行 <code>git merge feature1</code>，git 傻了</p>
+<p><img src="/post_image/git_img/image_3.png" alt></p>
+<p>在 shopping-list.txt 中出现了 “merge conflict”，自动合并失败，要求 “fix conflicts and then commit the result”（把冲突解决掉后提交）</p>
+<p><strong>第一步：解决冲突</strong>，打开冲突的文件：</p>
+<pre><code>移动硬盘
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+女装（已买）
+=======
+女装（没买）
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature1
+</code></pre><p>发现内容有些变化，Git 虽然没有帮你完成自动 merge，但它对文件还是做了一些工作：它把两个分支冲突的内容放在了一起，并用符号标记出了它们的边界以及它们的出处。</p>
+<p>我们要保留主分支的更改，即：“购买女装”，只要删除掉 feature1 的修改，再把 Git 添加的那三行 <code>&lt;&lt;&lt; === &gt;&gt;&gt;</code> 辅助文字也删掉，保存文件退出，冲突就解决了。</p>
+<p><strong>第二步：手动提交</strong>，提交解决冲突之后的文件：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add shopping-list.txt <span class="hljs-comment"># 这里 commit 前也需要先 add 一下</span></span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+<p>如果要放弃这次 merge ，可以执行：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --abort</span><br></pre></td></tr></table></figure>
+<h3 id="HEAD-领先于目标-commit"><a href="#HEAD-领先于目标-commit" class="headerlink" title="HEAD 领先于目标 commit"></a>HEAD 领先于目标 commit</h3><p>如果 merge 时的目标 commit 和 HEAD 处的 commit 并不存在分叉，而是 HEAD 领先于目标 commit。</p>
+<p><img src="/post_image/git_img/15fddc2b2357b9d9.jpg" alt></p>
+<p>那么 merge 就没必要再创建一个新的 commit 来进行合并操作，因为并没有什么需要合并的。在这种情况下， Git 什么也不会做，merge 是一个空操作。</p>
+<h3 id="HEAD-落后于目标-commit"><a href="#HEAD-落后于目标-commit" class="headerlink" title="HEAD 落后于目标 commit"></a>HEAD 落后于目标 commit</h3><p>如果 HEAD 和目标 commit 不存在分叉，但 HEAD 落后于目标 commit。那么 Git 会直接把 HEAD（以及它所指向的 branch，如果有的话）移动到目标 commit。这也叫做：“fast-forward”。</p>
+<p><img src="/post_image/git_img/15fddc2b0913daf4.jpg" alt></p>
+<p>fast-forward 这种场景在 pull 中经常遇到：本地的 master 没有新提交，而远端仓库中有同事提交了新内容到 master，此时的 HEAD 落后于目标 commit（远程的 HEAD），而造成 “fast-forward”。</p>
+<h2 id="Feature-Branching-工作流"><a href="#Feature-Branching-工作流" class="headerlink" title="Feature Branching 工作流"></a>Feature Branching 工作流</h2><blockquote>
+<p>之前的工作模型是：所有人都在 master 分支上工作，commit 了代码通过 push 推送到远程仓库，获取别人的 commit 通过 pull。这种模型的局限性在于：每一个人的代码在被大家看到的时候，是它正式进入生产环境的时候。<strong>所有人的代码都直接 push 到远程的 master，这就导致了每个人的代码在正式启用（投入生产环境）前无法被别人看到。</strong> 这样就让代码在正式启用前的讨论和审阅极不方便。</p>
+</blockquote>
+<p>feature branching 工作流解决了这种问题，该工作流的核心特点如下：</p>
+<ul>
+<li><p>任何一个新功能（feature）和 bug 的修复都用一个新的 branch 来写；</p>
+</li>
+<li><p>branch 写完之后，合并到 master，再删除这个 branch。</p>
+</li>
+</ul>
+<p>这种工作流为团队协作间的 <strong>代码审阅 / 一人多任务</strong> 提供解决方案。</p>
+<h3 id="代码审阅（branch-commit-push-review-merge）"><a href="#代码审阅（branch-commit-push-review-merge）" class="headerlink" title="代码审阅（branch / commit / push / review / merge）"></a>代码审阅（branch / commit / push / review / merge）</h3><p>假如要开发一个新的功能，我们创建一个分支 books ，开始开发：</p>
+<pre><code>git checkout -b books # 创建分支并切换过去
+</code></pre><p>十几个 commit 过后，功能开发完毕，告诉同事功能开发完毕，有时间帮我 review 一下呗，分支名是 books，然后把这个分支 push 上去：</p>
+<pre><code># 确保当前在 books 分支，将当前分支 push 到远程仓库的 books 分支。
+git push origin books
+</code></pre><p>[ 模拟同事：review 刚刚上传的 books 分支：]</p>
+<pre><code># 克隆同事的仓库到桌面（如果同事有这个仓库就是 git pull ）
+git clone https://github.com/yuzh233/git-practical-guide.git
+cd git-practical-guide
+git checkout books # 切换到同事刚刚开发新功能的分支：books
+开始 review ...
+</code></pre><p>[ review 完毕，同事：我觉得很 OK 啊~ 可以合并了！]</p>
+<p>于是我一顿操作：</p>
+<pre><code>git checkout master
+git pull # 保持更新，是个好习惯
+git merge books
+-- 此时 books 分支的内容合并到了 master 工作目录 --
+</code></pre><p>紧接着，把合并后的 master push 上去，并删除本地和远程的 books 分支：</p>
+<pre><code>git push
+git branch -d books # 删除本地 books 分支
+git push origin -d books # 删除远程 books 分支
+</code></pre><p>一切都是这么的完美，然而此时一个同事发现不对，说：“嘿！你的代码缩进怎么是 tab ，快改成空格，不然砍死你哦~”，我一看情况不对，立马重复上面的操作：<code>新建分支、改代码、推送上去、同事审阅、合并、再推送、删除分支</code>，ok，空格党觉得很ok，乎~ perfect。[ 然而，发现事情没有这么简单… ]</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git branch books</span><br><span class="line">git checkout books</span><br><span class="line">--- tab 改为 空格 git add / git commit ---</span><br><span class="line">git push origin books</span><br><span class="line">---  review... ok ---</span><br><span class="line">git checkout master</span><br><span class="line">git merge books # 这里会出现 Fast-forward，原因是当前commit（HEAD）落后于目标commit（books 的 commit 比 master 的 HEAD 领先）</span><br><span class="line">git push</span><br><span class="line">git branch -d books</span><br><span class="line">git push origin -d books</span><br></pre></td></tr></table></figure>
+<h3 id="pull-request"><a href="#pull-request" class="headerlink" title="pull request"></a>pull request</h3><blockquote>
+<p>在上一主题，同事取到我的新功能审阅代码，都是在自己本地中打开，觉得有问题一般都是通过短信电话，发邮件等。这样的审阅是很不方便的，而 pull request 就是对前面代码审阅过程的简化。</p>
+</blockquote>
+<p>pull request 不是 git 的内容，而是 git 服务提供商（如 GitHub）提供的一种便捷功能，可以让团队方便的讨论一个 <code>branch</code>，并在讨论结束后一件合并这个 <code>branch</code> 到 <code>master</code>。</p>
+<p>如：现在创建一个分支修改购物清单：“购买SSD”，并推送到远程仓库，github 会自动提示是否 pull request:</p>
+<p><img src="/post_image/git_img/微信图片_20181005135002.png" alt></p>
+<p>创建一个 pull request：</p>
+<p><img src="/post_image/git_img/微信图片_20181005135102.png" alt></p>
+<p>创建之后，其他同事就可以在 github 上看到我们的拉请求。他们可以在这个页面查看我们的所有 commit 并提建议，我们就可以根据同事们的建议提交新的 commit 并 push 到这个分支，这个页面会随着 push 展示最新的 commit。</p>
+<p><img src="/post_image/git_img/微信图片_20181005135301.png" alt></p>
+<p>我们在 feature1 分支又决定不买SSD了，于是更新后重新 push，此时该界面也同步更新了一条 commit：</p>
+<p><img src="/post_image/git_img/微信图片_20181005140213.png" alt></p>
+<p>就这样，根据同事的意见不断的 push 新 commit 之后，最终一致决定没问题可以合并到 master 了，点击 <code>Merge pull request</code> ，GitHub 会自动在中央仓库中将 <code>feature1</code> 合并到 <code>master</code>。</p>
+<h3 id="一人多任务"><a href="#一人多任务" class="headerlink" title="一人多任务"></a>一人多任务</h3><p>利用 feature branching 工作流，一个多任务并行开发变得简单多了。当一个新任务下发时，我们仅需要将当前任务的分支简单收尾一下，回到主分支再开辟一个新任务的分支就可以开发新的任务了。</p>
+<h2 id="关于-add"><a href="#关于-add" class="headerlink" title="关于 add"></a>关于 add</h2><p>add 指令除了 <code>git add 文件名</code> 这种用法外，还可以使用 <code>add .</code> 来直接把工作目录下的所有改动全部放进暂存区</p>
+<p>add 添加的是文件改动，而不是文件名。也就是说,对文件修改之后通过 add 放入暂存区，<strong>再修改一次该文件，然后执行 commit，第二次的修改并没有提交</strong>，原因是第二次改动了内容没有重新 add。</p>
+<ul>
+<li><p>add 也支持匹配表达式，如 <code>add *.java</code></p>
+</li>
+<li><p>add 文件进暂存区，又不想 add 了，使用：<code>git reset HEAD filename</code></p>
+</li>
+</ul>
+<h2 id="看看我改了什么"><a href="#看看我改了什么" class="headerlink" title="看看我改了什么"></a>看看我改了什么</h2><ul>
+<li><p>查看历史记录 <code>git log</code></p>
+</li>
+<li><p>查看详细历史记录 <code>git log -p</code></p>
+</li>
+<li><p>查看概要历史记录 <code>git log --stat</code></p>
+</li>
+<li><p>查看当前（HEAD指向的） commit 的信息 <code>git show</code></p>
+</li>
+<li><p>查看指定 commit 的信息：<code>git show &lt;commit的引用&gt;</code></p>
+</li>
+<li><p>查看指定 commit 中的某个文件的改动：<code>git show 2edc shopping-list.txt</code></p>
+</li>
+<li><p>查看工作区和暂存区的区别：<code>git diff</code></p>
+</li>
+<li><p>查看暂存区和上一条提交的区别：<code>git diff --staged</code></p>
+</li>
+<li><p>查看工作目录和上一条 commit 的区别：<code>git diff HEAD</code></p>
+</li>
+</ul>
+<h2 id="不喜欢-merge-的分叉？用-rebase-把"><a href="#不喜欢-merge-的分叉？用-rebase-把" class="headerlink" title="不喜欢 merge 的分叉？用 rebase 把"></a>不喜欢 merge 的分叉？用 rebase 把</h2><blockquote>
+<p>rebase —— 给当前 commit 序列重新设置基础点（也就是父 commit）。就是说，把指定的 commit 以及所在的 commit 串，以指定的目标 commit 为基础（头），重新作为一次提交。</p>
+</blockquote>
+<p>例如：下面是一个 <code>merge</code> 操作: <code>git merge branch1</code></p>
+<p><img src="/post_image/git_img/15fdea7b6646a1f3.gif" alt></p>
+<p>如果把 <code>merge</code> 换成 <code>rebase</code>：</p>
+<pre><code>git checkout branch1 
+git rebase master
+</code></pre><p><img src="/post_image/git_img/1600abd620a8e28c.gif" alt></p>
+<p>可以看到，通过 rebase，将 commit 5 和 commit 6 这个 commit 串，从原有的父节点 commit 2 移到现在的父节点 commit 4。通过这样，让原本分叉的提交历史重新回到了一条线。这种 [ 重新设置基础点 ] 的操作，就是 <code>rebase</code> 的含义。</p>
+<p>在 branch1 分支 <code>rebase</code> master 之后，branch1 跑到 master 前面变成了同一条线，但是实际上还是两个<strong>彼此独立</strong>的分支，只不过 branch1 现在是以 master 的 HEAD（即：commit 4） 作为 <code>基础点（commit 串的头）</code>。<strong>master 的 HEAD 是 <code>commit 4</code>，branch1 的 HEAD 是 <code>commit 8</code>，并且 branch1 的 commits 领先于 master 的 commits。</strong></p>
+<p>我们希望用 rebase 之后能实现和 merge 一样的合并两条分支的效果，那么怎么做呢？其实还是需要用到 <code>merge</code> 操作，<strong>当前分支（master）与目标分支（branch1）没有分叉，并且当前 HEAD 落后于目标分支的 commit，使用 <code>merge</code>，将 HEAD 移到目标的 commit</strong>，这就是前面学到过的 <a href="#head-落后于目标-commit">Fast-Forward</a>。</p>
+<pre><code>git checkout master # 还需先切换回 master
+git merge branch1
+</code></pre><p><img src="/post_image/git_img/160149e054fe485c.gif" alt></p>
+<p>[ 蒙圈了怎么办，演示一把： ]</p>
+<pre><code>-----------&lt; 新建一个分支 &gt;-----------
+git branch branch1 
+-----------&lt; 在 master 创建一个提交 &gt;-----------
+touch a.txt 
+git add a.txt
+git commit -m &quot;add a.txt&quot;
+-----------&lt; 在 branch1 创建一个提交 &gt;-----------
+git checkout branch1
+touch b.txt / touch c.txt
+git add b.txt c.txt
+git commit -m &quot;add b.txt c.txt&quot;
+-----------&lt; 想把 branch1 合并到 master 但是不想有分叉 &gt;-----------
+# 注意：必须先切换到被合并的分支！
+git checkout branch1
+git rebase master
+</code></pre><p>[ 此时，branch1 和 master 属于同一条线，但是 branch1 领先于 master：]</p>
+<p><img src="/post_image/git_img/微信图片_20181005232508.png" alt></p>
+<p>[ branch1 的新提交是 a.txt / b.txt ，master 的新提交是 a.txt，此时合并到 master：<code>git checkout master / git merge branch1</code>]</p>
+<p><img src="/post_image/git_img/微信图片_20181005233749.png" alt></p>
+<p>[ 可以看出是一个快速前移操作，此时的日志：master 已经移到了最新的 commit]</p>
+<p><img src="/post_image/git_img/微信图片_20181005233932.png" alt></p>
+<p><strong><em>注意事项</em></strong></p>
+<ul>
+<li><p>merge 操作是在合并分支上进行的；</p>
+</li>
+<li><p>rebase 操作是在 <strong>被合并</strong> 分支上进行的，这点很重要。</p>
+</li>
+<li><p>rebase 是带着当前 commit 移到别的 commit 上「去」，而 merge 则是把别的 commit 合并过「来」</p>
+</li>
+</ul>
+<p>“ 为什么要在被合并分支 <code>branch1</code> 上执行 rebase，在合并分支 <code>master</code>上执行 merge，而不是直接在 <code>master</code>上执行 rebase 呢？”</p>
+<p>—— 简单的理解就是：这两种 rebase 本身就是两种不同的情况，如果在 master 上 rebase：<code>git checkout master / git rebase branch1</code> ，<strong>master 就会带着它的 commit 串内容作为新的 commit 跑到 branch1 的 HEAD 前面去啦！</strong> master 跑到了 branch1 这条线上，master 的 commit 的内容还是以前的内容，但是却不是同一个 commit 了，只不过是内容相同的另外一个 commit罢了。而如果远程仓库有之前 master 的 commit，但是在本地仓库中找不到远程库对应的这个 commit，会因为远程库含有本地没有的 commit 导致 push 失败！</p>
+<p><strong><em>应用场景</em></strong></p>
+<blockquote>
+<p>你自己开发分支一直在做，然后某一天，你想把主线的修改合到你的分支上，做一次集成，这种情况就用 rebase 比较好。把你的提交都放在主线修改的头上。</p>
+</blockquote>
+<p>参考：<a href="https://www.jianshu.com/p/4079284dd970" target="_blank" rel="noopener">git rebase 还是 merge的使用场景最通俗的解释</a></p>
+<h2 id="修正-commit"><a href="#修正-commit" class="headerlink" title="修正 commit"></a>修正 commit</h2><p>用 <code>commit --amend</code> 修复当前提交的错误。在 commit 一条提交之后发现写错了，我要买：“机械键盘”，可以使用 <code>commit --amend</code> 指令来修正本次提交的错误。git 不会在当前 commit 上增加 commit ，而是把当前 commit 里的内容和暂存区的内容合并起来形成一个新的 commit，<strong>用新的 commit 把当前的 commit 替换掉</strong>。</p>
+<p>[ 我们在购物清单中添加一个：“薄膜键盘”，提交之后发现写错了… 于是将内容重新修改，并重新 add 到暂存区，使用 commit –amend 指令覆盖当前提交：]</p>
+<p><img src="/post_image/git_img/微信图片_20181006105607.png" alt></p>
+<p>修正之后可以发现只有一条 commit 记录。</p>
+<h2 id="修正指定-commit"><a href="#修正指定-commit" class="headerlink" title="修正指定 commit"></a>修正指定 commit</h2><blockquote>
+<p>交互式 rebase：<code>git rebase -i &lt;指定 commit 链的头&gt;</code> <br><br>所谓交互式 rebase，就是在 rebase 的操作执行之前，指定要 rebase 的 commit 链中的每一个 commit 是否需要进一步修改。</p>
+</blockquote>
+<pre><code>-------&lt; 第一次提交 &gt;-------
+我们在文件 rebase-i.txt 中添加一行
+aaaaa
+后执行提交：git add rebase-i.txt / git commit -m &quot;aaaaa&quot;
+-------&lt; 第二次提交 &gt;-------
+在文件 rebase-i.txt 中又添加一行
+bbbbb
+后执行提交：git add rebase-i.txt / git commit -m &quot;bbbbb&quot;
+</code></pre><p>查看日志：</p>
+<p><img src="/post_image/git_img/微信图片_20181006122541.png" alt></p>
+<p>但是发现 “aaaaa” 这个提交的内容写错了，想要修改这次提交。由于不是最新的提交，不能使用 commit –amend 来修正。</p>
+<blockquote>
+<p>可以使用 rabse，不过此时的 rebase 是在同一条基线上，也叫 [原地 rebase]，通过原地变基，指定一个 commit ，将其所在的 commits 串从父基础点断开。然后对该 commits 串中的每一个 commit 修改后重新挂在原来的父基础点。</p>
+</blockquote>
+<p>使用 <code>git rebase -i HEAD^^</code> or <code>git rebase -i HEAD~2</code> 来指定从哪个 commit 开始变基。（rebase 之前需要将工作空间新的修改放入暂存区，所以现在有了三条提交。）</p>
+<p><img src="/post_image/git_img/微信图片_20181006124918.png" alt></p>
+<p>我们要修正指定的 commit，将需要被修正的 commit 对应的操作由 <code>pick</code> 改为 <code>edit</code>（应用当前的提交，但是停下来修正）：</p>
+<p><img src="/post_image/git_img/微信图片_20181006125849.png" alt></p>
+<p><img src="/post_image/git_img/微信截图_20181006130312.png" alt></p>
+<p>根据提示信息：rebase 已经停到了 “aaaaa” 这个提交，现在可以修正这个提交：</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修改 aaaaa 为 aaaaa_amend</span><br><span class="line">git commit --amend # 应用这个修复</span><br></pre></td></tr></table></figure>
+<p>修复了第一个之后，执行：<code>git rebase --continue</code> 继续执行第二个：第二个也是修复，对文件修改 amend 之后继续 continue ，第三个 commit 是默认操作是 pick（应用当前的提交），不执行任何操作，至此rebase完毕。</p>
+<p><img src="/post_image/git_img/微信图片_20181006131703.png" alt></p>
+<h2 id="撤销-commit-——-reset"><a href="#撤销-commit-——-reset" class="headerlink" title="撤销 commit —— reset"></a>撤销 commit —— reset</h2><p>git add 后撤销：</p>
+<ul>
+<li><p>撤销所有add文件 <code>git reset HEAD .</code></p>
+</li>
+<li><p>撤销单个add文件 <code>git reset HEAD -filename</code></p>
+</li>
+</ul>
+<p>git commit 后撤销：</p>
+<ul>
+<li><p>只回退 commit 的信息，保留修改代码：<code>git reset --soft head</code></p>
+</li>
+<li><p>回退到上次 commit 版本，不保留修改代码：<code>git reset --hard head^</code></p>
+</li>
+</ul>
+<p><code>HEAD</code>：回退到当前版本（啥也没干）</p>
+<p><code>HEAD^</code> ：回退到上一个版本</p>
+<blockquote>
+<p>reset 本质上不是撤销提交，而是移动 HEAD ，并且「捎带」上 HEAD 所指向的 branch（如果有的话），用来重置 HEAD 以及它所指向的 branch 的位置。</p>
+</blockquote>
+<p><code>reset --hard HEAD^</code> 之所以起到了撤销前一个 commit 的效果，是因为它把 HEAD 和它所指向的 branch 一起移动到了当前 commit 的父 commit 上，从而起到了「撤销」的效果：</p>
+<p><img src="/post_image/git_img/15fe19c8a3235853.gif" alt></p>
+<p>注意：</p>
+<p><code>--hard</code>： <strong>添加这个参数会抛弃当前工作区的修改</strong></p>
+<p><code>--soft</code>： <strong>添加这个参数会回退到之前的版本，但是保留当前工作区的修改，可以重新提交</strong></p>
+<h2 id="撤销指定-commit-——-rebase-i"><a href="#撤销指定-commit-——-rebase-i" class="headerlink" title="撤销指定 commit —— rebase -i"></a>撤销指定 commit —— rebase -i</h2><p>现有三条提交，要撤销第二条提交：</p>
+<p><img src="/post_image/git_img/微信图片_20181006153002.png" alt></p>
+<p><code>git rebase -i HEAD~3</code> 操作当前 commit 所在 commits 链中三条 commit：</p>
+<p><img src="/post_image/git_img/微信图片_20181006153145.png" alt></p>
+<p>撤销某个 commit ，将这一行删除即可。此时第二条 commit 被删掉了：</p>
+<p><img src="/post_image/git_img/微信图片_20181006153842.png" alt></p>
+<h2 id="撤销已-push-的-commit-——-revert"><a href="#撤销已-push-的-commit-——-revert" class="headerlink" title="撤销已 push 的 commit —— revert"></a>撤销已 push 的 commit —— revert</h2><p><code>git revert</code> 撤销某次操作，此次操作之前和之后的 commit 和 history 都会保留，并且把这次撤销作为一次最新的提交。</p>
+<p>比如我们我们对文件<code>rebase-i.txt</code>添加两次修改并提交两次后 push 到远程库：</p>
+<p><img src="/post_image/git_img/微信图片_20181006162144.png" alt></p>
+<p>我们要撤销前一次提交:”bbb”，也就是删除文件中的“bbb”这一行：<code>git revert HEAD</code></p>
+<p><img src="/post_image/git_img/微信图片_20181006162338.png" alt></p>
+<p>可以看到执行完之后增加了一条新的 commit，它的内容和最新的 commit 是相反的，从而和最新的 commit 相互抵消，达到撤销的效果。</p>
+<blockquote>
+<p>把新的 commit 再 push 上去，这个 commit 的内容就被撤销了。它和前面所介绍的撤销方式 <code>reset</code> 相比，最主要的区别是，这次改动只是被「反转」了，并没有在历史中消失掉，你的历史中会存在两条 commit ：一个原始 commit ，一个对它的反转 commit。</p>
+</blockquote>
+<h2 id="checkout-——-不止可以签出分支"><a href="#checkout-——-不止可以签出分支" class="headerlink" title="checkout —— 不止可以签出分支"></a>checkout —— 不止可以签出分支</h2><p>前面学习过，使用：<code>git checkout &lt;branch-name&gt;</code> 可以切换到指定分支，即：把 HEAD 指向指定的 <code>branch</code>，然后签出这个 <code>branch</code> 所对应的 commit 的工作目录。 </p>
+<p>实际上 checkout 的本质是签出指定的 commit，不止可以切换 branch，也可以直接指定 commit 作为参数，来把 HEAD 移动到指定的 commit。</p>
+<blockquote>
+<p>对于签出（checkout）的概念，简单的理解就是切换分支并在本地仓库中取出指定分支的内容到工作目录。</p>
+</blockquote>
+<p>[ 演示：]</p>
+<pre><code>创建一个文件abc.txt并作为一个提交
+</code></pre><p><img src="/post_image/git_img/image_4.png" alt></p>
+<pre><code>使用 reset 撤回提交（不保留修改代码）： git reset --hard HEAD^
+</code></pre><p>可以看到刚刚的提交被撤销了，HEAD 带着 master 一起指向了上一条 commit：</p>
+<p><img src="/post_image/git_img/image_5.png" alt></p>
+<pre><code>如果用 checkout 来撤销提交：git checkout HEAD^
+</code></pre><p><img src="/post_image/git_img/image_6.png" alt></p>
+<p>可以看到，HEAD 已经和刚刚它指向的 branch -&gt; master 脱离了，此时如果继续提交更改，HEAD 就会跟着新的 commit 跑，而 master 依旧停到原地。当我们切换 master 之后，HEAD会因为没有所属分支而提示：“你有n个提交没有连接到分支,可以通过：<code>git branch &lt;new-branch-name&gt; commitID</code> 将新提交放到新创建的分支上去。然后可以将该分支合并到 master。”</p>
+<h2 id="stash-临时存放工作目录的改动"><a href="#stash-临时存放工作目录的改动" class="headerlink" title="stash 临时存放工作目录的改动"></a>stash 临时存放工作目录的改动</h2><ul>
+<li><p>保存工作目录的修改（不包含未 add 过的文件）并清空工作目录：<code>git stash</code></p>
+</li>
+<li><p>恢复保存过的修改：<code>git stash pop</code></p>
+</li>
+</ul>
+<p>包含未 add 过的文件使用：<code>git stash -u</code></p>
+<p><strong>切换分支之前提交当前分支的修改，免去了不必要的麻烦，也没必要使用 stash 了。</strong></p>
+<h2 id="恢复误删的-branch"><a href="#恢复误删的-branch" class="headerlink" title="恢复误删的 branch"></a>恢复误删的 branch</h2><blockquote>
+<p><code>reflog</code> 是 “reference log” 的缩写，使用它可以查看 Git 仓库中的引用的移动记录。如果不指定引用，它会显示 HEAD 的移动记录。</p>
+</blockquote>
+<p>恢复指定 branch ，只需要查看 branch 最后一次移动的记录，那么其之前的一个 commit 就是删除之前的数据，使用 checkout 签出这个 commit 的内容到新的分支。实际上不会恢复分支，而是恢复分支里的内容并放到新的分支。使用这个方法，不仅可以恢复分支，还可以执行其他操作，比如恢复 reset 的数据。</p>
+<pre><code>假如误删了 branch1，那么可以查看一下 HEAD 的移动历史：
+git reflog
+</code></pre><p><img src="/post_image/git_img/15fe3de05468c613.jpg" alt></p>
+<pre><code>HEAD 的最后一次移动行为是「从 branch1 移动到 master」。而在这之后，branch1 就被删除了。所以它之前的那个 commit 就是 branch1 被删除之前的位置了，也就是第二行的 c08de9a。
+</code></pre><p>现在就可以切换回 c08de9a，然后重新创建 branch1:</p>
+<pre><code>git checkout c08de9a
+git checkout -b branch1
+</code></pre><p>这样分支里的内容就已经恢复到新建的同名分支里面了。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/git/">git</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/13/解决使用 bootstrap 更新操作时-模态框回显传值问题/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">解决使用 bootstrap 更新操作时-模态框回显传值问题</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/09/13/Spring-Annotation-development/">
+                <span class="level-item">Spring Annotation development</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'Just Do It...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/tou.jpg" alt="harry.zh">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        not just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#版本控制系统（VCS）">
+        <span class="has-mr-6">1</span>
+        <span>版本控制系统（VCS）</span>
+        </a></li><li>
+        <a class="is-flex" href="#分布式版本控制系统（DVCS）">
+        <span class="has-mr-6">2</span>
+        <span>分布式版本控制系统（DVCS）</span>
+        </a></li><li>
+        <a class="is-flex" href="#快速上手">
+        <span class="has-mr-6">3</span>
+        <span>快速上手</span>
+        </a></li><li>
+        <a class="is-flex" href="#本地初始化仓库并推送到-GitHub">
+        <span class="has-mr-6">4</span>
+        <span>本地初始化仓库并推送到 GitHub</span>
+        </a></li><li>
+        <a class="is-flex" href="#关联-GitHub-与本机的-SSH-Key">
+        <span class="has-mr-6">5</span>
+        <span>关联 GitHub 与本机的 SSH Key</span>
+        </a></li><li>
+        <a class="is-flex" href="#git-pull">
+        <span class="has-mr-6">6</span>
+        <span>git pull</span>
+        </a></li><li>
+        <a class="is-flex" href="#HEAD-master-branch-理解">
+        <span class="has-mr-6">7</span>
+        <span>HEAD / master / branch 理解</span>
+        </a></li><li>
+        <a class="is-flex" href="#branch-xx-checkout-branch-xx-checkout-d-xx-branch-d-xx-branch-a">
+        <span class="has-mr-6">8</span>
+        <span>branch xx / checkout branch xx / checkout -d xx / branch -d xx / branch -a</span>
+        </a></li><li>
+        <a class="is-flex" href="#push-的本质">
+        <span class="has-mr-6">9</span>
+        <span>push 的本质</span>
+        </a></li><li>
+        <a class="is-flex" href="#git-merge-lt-被合并分支-gt">
+        <span class="has-mr-6">10</span>
+        <span>git merge &lt;被合并分支&gt;</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#冲突（conflict）">
+        <span class="has-mr-6">10.1</span>
+        <span>冲突（conflict）</span>
+        </a></li><li>
+        <a class="is-flex" href="#HEAD-领先于目标-commit">
+        <span class="has-mr-6">10.2</span>
+        <span>HEAD 领先于目标 commit</span>
+        </a></li><li>
+        <a class="is-flex" href="#HEAD-落后于目标-commit">
+        <span class="has-mr-6">10.3</span>
+        <span>HEAD 落后于目标 commit</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Feature-Branching-工作流">
+        <span class="has-mr-6">11</span>
+        <span>Feature Branching 工作流</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#代码审阅（branch-commit-push-review-merge）">
+        <span class="has-mr-6">11.1</span>
+        <span>代码审阅（branch / commit / push / review / merge）</span>
+        </a></li><li>
+        <a class="is-flex" href="#pull-request">
+        <span class="has-mr-6">11.2</span>
+        <span>pull request</span>
+        </a></li><li>
+        <a class="is-flex" href="#一人多任务">
+        <span class="has-mr-6">11.3</span>
+        <span>一人多任务</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#关于-add">
+        <span class="has-mr-6">12</span>
+        <span>关于 add</span>
+        </a></li><li>
+        <a class="is-flex" href="#看看我改了什么">
+        <span class="has-mr-6">13</span>
+        <span>看看我改了什么</span>
+        </a></li><li>
+        <a class="is-flex" href="#不喜欢-merge-的分叉？用-rebase-把">
+        <span class="has-mr-6">14</span>
+        <span>不喜欢 merge 的分叉？用 rebase 把</span>
+        </a></li><li>
+        <a class="is-flex" href="#修正-commit">
+        <span class="has-mr-6">15</span>
+        <span>修正 commit</span>
+        </a></li><li>
+        <a class="is-flex" href="#修正指定-commit">
+        <span class="has-mr-6">16</span>
+        <span>修正指定 commit</span>
+        </a></li><li>
+        <a class="is-flex" href="#撤销-commit-——-reset">
+        <span class="has-mr-6">17</span>
+        <span>撤销 commit —— reset</span>
+        </a></li><li>
+        <a class="is-flex" href="#撤销指定-commit-——-rebase-i">
+        <span class="has-mr-6">18</span>
+        <span>撤销指定 commit —— rebase -i</span>
+        </a></li><li>
+        <a class="is-flex" href="#撤销已-push-的-commit-——-revert">
+        <span class="has-mr-6">19</span>
+        <span>撤销已 push 的 commit —— revert</span>
+        </a></li><li>
+        <a class="is-flex" href="#checkout-——-不止可以签出分支">
+        <span class="has-mr-6">20</span>
+        <span>checkout —— 不止可以签出分支</span>
+        </a></li><li>
+        <a class="is-flex" href="#stash-临时存放工作目录的改动">
+        <span class="has-mr-6">21</span>
+        <span>stash 临时存放工作目录的改动</span>
+        </a></li><li>
+        <a class="is-flex" href="#恢复误删的-branch">
+        <span class="has-mr-6">22</span>
+        <span>恢复误删的 branch</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="Git 实用指南" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 harry&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

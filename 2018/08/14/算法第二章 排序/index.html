@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>算法第二章 排序 - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="第二章 排序待排序的元素需要实现 Java 的 Comparable 接口，该接口有 compareTo() 方法，可以用它来判断两个元素的大小关系。 定义算法模板类API 1234567891011121314151617181920212223242526272829303132333435363738394041424344public abstract class Example &amp;#12">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法第二章 排序">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/算法第二章 排序/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="第二章 排序待排序的元素需要实现 Java 的 Comparable 接口，该接口有 compareTo() 方法，可以用它来判断两个元素的大小关系。 定义算法模板类API 1234567891011121314151617181920212223242526272829303132333435363738394041424344public abstract class Example &amp;#12">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/random/6.jpg">
+<meta property="og:updated_time" content="2018-11-05T10:55:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法第二章 排序">
+<meta name="twitter:description" content="第二章 排序待排序的元素需要实现 Java 的 Comparable 接口，该接口有 compareTo() 方法，可以用它来判断两个元素的大小关系。 定义算法模板类API 1234567891011121314151617181920212223242526272829303132333435363738394041424344public abstract class Example &amp;#12">
+<meta name="twitter:image" content="http://yoursite.com/img/random/6.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="算法第二章 排序" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/img/random/6.jpg" alt="算法第二章 排序">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-13T16:00:00.000Z">2018-08-14</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    an hour read (About 6962 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                算法第二章 排序
+            
+        </h1>
+        <div class="content">
+            <h1 id="第二章-排序"><a href="#第二章-排序" class="headerlink" title="第二章 排序"></a>第二章 排序</h1><p>待排序的元素需要实现 Java 的 Comparable 接口，该接口有 compareTo() 方法，可以用它来判断两个元素的大小关系。</p>
+<p>定义算法模板类API</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 具体排序算法实现</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 对元素进行比较</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> first &lt; second ? true : false</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">less</span><span class="hljs-params">(Comparable first, Comparable second)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> first.compareTo(second) &lt; <span class="hljs-number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 把两个元素交换位置</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exch</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        Comparable tem = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = tem;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 返回序列是否有序（asc）</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isSorted</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (less(a[i], a[i - <span class="hljs-number">1</span>])) &#123;</span><br><span class="line">                <span class="hljs-comment">// 后面的元素 &lt; 前面的元素 不是升序排列 返回false</span></span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            StdOut.print(a[i] + <span class="hljs-string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        StdOut.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>首先在数组中找到最小的元素，将其和第一个元素交换；然后继续在第一个元素之后的元素中寻找最小元素，将其和第二个元素交换… 循环往复直到将整个数组排序。</p>
+<ul>
+<li>外循环遍历数组的每个当前元素</li>
+<li>内循环遍历当前元素之后的所有元素寻找最小值</li>
+</ul>
+<h3 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h3><p>优点：数据移动次数最少，选择排序的交换次数和数组长度N成<code>线性关系</code>，其他排序算法不具备该特征。</p>
+<p>缺点：运行时间与输入（整个序列的值）无关，一个值相同的或有序的序列和一个随机无序的序列进行排序的时间一样长。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Selection</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> N = a.length;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> minIndex = i;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; N; j++) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (less(a[j], a[minIndex])) &#123;</span><br><span class="line">                    minIndex = j; <span class="hljs-comment">// 如果后续元素小于最小元素，把后续元素索引赋给最小元素索引。</span></span><br><span class="line">                &#125;</span><br><span class="line">                exch(a, i, minIndex); <span class="hljs-comment">// 交换原最小元素与新最小元素位置</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] a = <span class="hljs-keyword">new</span> In().readAllStrings();</span><br><span class="line">        <span class="hljs-keyword">new</span> Selection().sort(a);</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">assert</span> <span class="hljs-title">isSorted</span><span class="hljs-params">(a)</span></span>; <span class="hljs-comment">// 验证：确认排序后的算法是有序的，当序列元素相同时无法通过验证。</span></span><br><span class="line">        show(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>将当前元素插入到当前元素之前的合适位置</p>
+<p>首先从数组的第二个元素（目标元素）开始，当目标元素小于前面的元素，交换两者位置（否则不变）；然后目标元素变为第三个元素，将其与第二个元素比较，若小则交换位置（此时目标元素索引为1），再将其与第一个元素对比，循环往复…</p>
+<ul>
+<li>外循环遍历每一个需要插入的目标元素</li>
+<li>内循环将目标元素与其左边的每一个元素对比、交换位置，直至目标元素被插入到了合适的位置。</li>
+<li>目标元素（a[i]）从左到右移动时，其左侧的元素始终时有序的，当其移动到了最右边，数组也完成了排序。</li>
+</ul>
+<h3 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h3><p>插入排序所需的时间取决于数组中元素的初始位置。因为当元素有序时不会进行交换，对于一个元素很大的且元素有序（或接近有序）的序列进行排序会比随机顺序的序列进行排序要快得多。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Insertion</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> N = a.length;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="hljs-comment">// 将当前元素 a[i] 与 其左边的所有元素对比、交换位置</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt; <span class="hljs-number">0</span> &amp;&amp; less(a[j], a[j - <span class="hljs-number">1</span>]); j--) &#123;</span><br><span class="line">                <span class="hljs-comment">// 后面的元素比前面的元素小才进行排序</span></span><br><span class="line">                exch(a, j, j - <span class="hljs-number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大幅度提高插入排序的速度，只需要在内循环中将较大的元素向右移动而不总是交换两个元素（这样访问数组的次数会减半），实现见 <a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_1elementary_sorts/Ex25.java" target="_blank" rel="noopener">练习</a>。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ex25</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = a.length;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            Comparable target = a[i]; <span class="hljs-comment">// 保存目标元素的值</span></span><br><span class="line">            <span class="hljs-keyword">int</span> j; <span class="hljs-comment">// 保存目标元素应该插入的位置</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (j = i; j &gt; <span class="hljs-number">0</span> &amp;&amp; less(target, a[j - <span class="hljs-number">1</span>]); j--) &#123;</span><br><span class="line">                a[j] = a[j - <span class="hljs-number">1</span>]; <span class="hljs-comment">// 前驱元素后移</span></span><br><span class="line">            &#125;</span><br><span class="line">            a[j] = target;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="选择排序与插入排序比较"><a href="#选择排序与插入排序比较" class="headerlink" title="选择排序与插入排序比较"></a>选择排序与插入排序比较</h2><p>从直观上来说：</p>
+<ul>
+<li>选择排序不会访问索引左侧的元素（每次都是从目标元素的索引右边遍历所有元素取最小值进而与目标元素交换位置）</li>
+<li>插入排序不会访问索引右侧的元素（每次都是目标元素与其左边的每一个元素做对比进而交换位置）</li>
+</ul>
+<p>首先规定输入模型：数组中的元素随机排序，且主键值不重复。</p>
+<p>速度对比：</p>
+<ul>
+<li>1000条数据排序100次，选择排序花费0.4s，插入排序花费0.1s；</li>
+<li>10000条数据排序100次，选择排序花费43.6s，插入排序花费10.2s；</li>
+</ul>
+<p>结论：</p>
+<p>对于随机排序的无重复主键，插入排序和选择排序的运行时间都是平方级别的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SortCompare</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">time</span><span class="hljs-params">(String alg, Comparable[] a)</span> </span>&#123;</span><br><span class="line">        StopWatch watch = <span class="hljs-keyword">new</span> StopWatch();</span><br><span class="line">        <span class="hljs-keyword">if</span> (alg.equals(<span class="hljs-string">"Insertion"</span>)) &#123;</span><br><span class="line">            <span class="hljs-keyword">new</span> Insertion().sort(a);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (alg.equals(<span class="hljs-string">"Selection"</span>)) &#123;</span><br><span class="line">            <span class="hljs-keyword">new</span> Selection().sort(a);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> watch.elapsedTime();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//使用alg算法将长度为N的数组排序T次</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">timeRandomInput</span><span class="hljs-params">(String alg, <span class="hljs-keyword">int</span> N, <span class="hljs-keyword">int</span> T)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">double</span> total = <span class="hljs-number">0.0</span>;</span><br><span class="line">        Double[] a = <span class="hljs-keyword">new</span> Double[N]; <span class="hljs-comment">// 目标数组</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> t = <span class="hljs-number">0</span>; t &lt; T; t++) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">                a[i] = StdRandom.uniform(); <span class="hljs-comment">// 生成随机值</span></span><br><span class="line">            &#125;</span><br><span class="line">            total += time(alg, a); <span class="hljs-comment">// 计算T次时间总和</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String alg1 = args[<span class="hljs-number">0</span>];</span><br><span class="line">        String alg2 = args[<span class="hljs-number">1</span>];</span><br><span class="line">        <span class="hljs-keyword">int</span> N = Integer.parseInt(args[<span class="hljs-number">2</span>]);</span><br><span class="line">        <span class="hljs-keyword">int</span> T = Integer.parseInt(args[<span class="hljs-number">3</span>]);</span><br><span class="line">        <span class="hljs-keyword">double</span> t1 = timeRandomInput(alg1, N, T); <span class="hljs-comment">// 算法1的总时间</span></span><br><span class="line">        <span class="hljs-keyword">double</span> t2 = timeRandomInput(alg2, N, T); <span class="hljs-comment">// 算法2的总时间</span></span><br><span class="line">        StdOut.printf(<span class="hljs-string">"the %s algorithm takes %.1f seconds.\n"</span>, alg2, t2); </span><br><span class="line">        StdOut.printf(<span class="hljs-string">"the %s algorithm takes %.1f seconds.\n"</span>, alg1, t1); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>希尔排序是插入排序的增强版，是为了改进插入排序对于处理大规模乱序数组排序速度过慢的问题。实质上是<code>分组插入排序</code>，该方法又称<code>缩小增量排序</code>。</p>
+<blockquote>
+<p>该方法的基本思想是：先将整个待排元素序列分割成若干个子序列（由相隔某个“增量”的元素组成的）分别进行直接插入排序，然后依次缩减增量再进行排序，待整个序列中的元素基本有序（增量足够小）时，再对全体元素进行一次直接插入排序。因为直接插入排序在元素基本有序的情况下（接近最好情况），效率是很高的，因此希尔排序在时间效率上比前两种方法有较大提高。</p>
+</blockquote>
+<p>序列分组轨迹图：</p>
+<p>参考：<a href="https://blog.csdn.net/IWantToHitRen/article/details/51583047" target="_blank" rel="noopener">https://blog.csdn.net/IWantToHitRen/article/details/51583047</a></p>
+<p>对于希尔排序和插入排序速度的对比：</p>
+<ul>
+<li>10000条数据排序100次，插入排序用时12.3s，希尔排序用时0.3s!；</li>
+<li>50000条数据排序100次，插入排序用时380.7s，希尔排序用时1.8s!；</li>
+</ul>
+<p>以下是结合网上对希尔排序的理解实现的算法以及《算法 第四版》原文中的算法。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Shell</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 根据网上总结自己实现的算法</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> N = a.length;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> gap = N / <span class="hljs-number">2</span>; gap &gt; <span class="hljs-number">0</span>; gap /= <span class="hljs-number">2</span>) &#123;  <span class="hljs-comment">// gap：增量（步数），每次循环增量减少一倍，直至增量为1（此时对全部元素进行插入排序）完成排序。</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; gap; i++) &#123; <span class="hljs-comment">// 把整体序列分为若干子序列。a[i]是每一组的第一个元素</span></span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + gap; j &lt; N; j += gap) &#123; <span class="hljs-comment">// 每间隔一个增量，获得一个该组的元素。</span></span><br><span class="line">                    <span class="hljs-keyword">int</span> tarIndex = j; <span class="hljs-comment">// 目标元素索引，当前元素索引。</span></span><br><span class="line">                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = tarIndex; k &gt; i &amp;&amp; less(a[k], a[k - gap]); k -= gap) &#123; <span class="hljs-comment">// 对子序列进行插入排序，将该元素与本组左边所有元素进行比较。</span></span><br><span class="line">                        exch(a, k, k - gap);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 原文的算法，增量使用了递增序列，有时间再来理解。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort3</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> N = a.length;</span><br><span class="line">        <span class="hljs-keyword">int</span> h = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (h &lt; N / <span class="hljs-number">3</span>) &#123;</span><br><span class="line">            h = <span class="hljs-number">3</span> * h + <span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">while</span> (h &gt;= <span class="hljs-number">1</span>) &#123;</span><br><span class="line">            <span class="hljs-comment">// 子数组插入排序</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = h; i &lt; N; i++) &#123;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt;= h &amp;&amp; less(a[j], a[j - h]); j -= h) &#123;</span><br><span class="line">                    exch(a, j, j - h);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            h = h / <span class="hljs-number">3</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>归并排序的核心是归并操作，归并排序每次将数组 <code>递归的</code> 拆分成两半分别排序，再将两半的结果 <code>合并</code> 起来最终实现整个数组的排序。</p>
+<h3 id="归并操作"><a href="#归并操作" class="headerlink" title="归并操作"></a>归并操作</h3><p>归并操作的前提是数组的两边是分别 <code>有序</code> 的，将一个“两边有序的数组”合并成一个“整体有序的数组”。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Merge</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Comparable aux[]; <span class="hljs-comment">// 辅助数组，用于合并操作。</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//TODO sort()</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(Comparable[] a, Comparable[] aux, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> mid, <span class="hljs-keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> le = lo;</span><br><span class="line">        <span class="hljs-keyword">int</span> ri = mid + <span class="hljs-number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = lo; k &lt;= hi; k++) &#123;</span><br><span class="line">            aux[k] = a[k];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = lo; k &lt;= hi; k++) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (le &gt; mid) &#123;</span><br><span class="line">                a[k] = aux[ri++]; <span class="hljs-comment">// 左边元素用尽，将右边元素一个一个放入a[]</span></span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ri &gt; hi) &#123;</span><br><span class="line">                a[k] = aux[le++]; <span class="hljs-comment">// 右边元素用尽，将左边元素一个一个放入a[]</span></span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (less(aux[ri], aux[le])) &#123;</span><br><span class="line">                a[k] = aux[ri++]; <span class="hljs-comment">// 右边元素小于左边元素，右边元素放入a[]，右边元素索引+1</span></span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                a[k] = aux[le++]; <span class="hljs-comment">// 左边元素小于右边元素，左边元素放入a[]，左边元素索引+1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自顶向下归并排序"><a href="#自顶向下归并排序" class="headerlink" title="自顶向下归并排序"></a>自顶向下归并排序</h3><p>归并排序不断（递归）的将大数组插拆分为两半，直到不可再拆（小数组仅剩“左右”两个元素），再将两边的数组合并成一个整体有序的大数组。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Merge</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Comparable aux[]; <span class="hljs-comment">// 辅助数组，用于合并操作。</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        aux = <span class="hljs-keyword">new</span> Comparable[a.length];</span><br><span class="line">        sort(a, <span class="hljs-number">0</span>, a.length - <span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (hi &lt;= lo) <span class="hljs-keyword">return</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> mid = lo + (hi - lo) / <span class="hljs-number">2</span>;</span><br><span class="line">        sort(a, lo, mid); <span class="hljs-comment">// 左半边排序</span></span><br><span class="line">        sort(a, mid + <span class="hljs-number">1</span>, hi); <span class="hljs-comment">// 右半边排序</span></span><br><span class="line">        merge(a, aux, lo, mid, hi); <span class="hljs-comment">// 合并子数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每一个节点都是 merge() 操作形成的子数组。当数组不可再分（递归到了最小情况），merge()通过交换前后元素实现排序。</p>
+<p><img src="/post_image/alg_img/4.jpg" alt="Alt text"></p>
+<h4 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h4><p><a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_2mergesort/Ex11.java" target="_blank" rel="noopener">对于小规模数组使用插入排序</a></p>
+<p><a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_2mergesort/Ex11.java" target="_blank" rel="noopener">测试数组是否有序</a></p>
+<p>有参考价值博客：<a href="http://www.cnblogs.com/chengxiao/p/6194356.html" target="_blank" rel="noopener">图解排序算法(四)之归并排序</a></p>
+<h3 id="自底向上归并排序"><a href="#自底向上归并排序" class="headerlink" title="自底向上归并排序"></a>自底向上归并排序</h3><p>先归并微型数组，再成对归并得到的子数组，直到归并形成一个大数组，排序结束。</p>
+<ul>
+<li><p>第一轮：将大数组的每一个元素当作一个子数组（最小的子数组），<code>两两归并</code> 子数组（将大小为1的子数组归并成大小为2的子数组）。</p>
+</li>
+<li><p>第二轮：一轮归并之后每个子数组存在 2 个元素，再 <code>四四归并</code> 子数组（将大小为2的子数组归并为大小为4的子数组）。</p>
+</li>
+<li><p>第三轮：二轮归并之后每个子数组存在 4 个元素，再 <code>八八归并</code> 子数组（将大小为4的子数组归并为大小为8的子数组）。</p>
+</li>
+<li><p>…… 如此往复，直到子数组大小 &gt;= 待排序的大数组，完成了排序。</p>
+</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MergeBU</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Comparable aux[];</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> N = a.length;</span><br><span class="line">        aux = <span class="hljs-keyword">new</span> Comparable[N];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> sz = <span class="hljs-number">1</span>; sz &lt; N; sz = sz + sz) &#123; <span class="hljs-comment">// 控制子数组大小呈倍数递增</span></span><br><span class="line">            <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">             * 遍历每个子数组</span></span><br><span class="line"><span class="hljs-comment">             *  lo                                  每个子数组的第一个元素</span></span><br><span class="line"><span class="hljs-comment">             *  lo &lt; N - sz                         控制最后一个子数组的开头</span></span><br><span class="line"><span class="hljs-comment">             *  lo = lo + sz + sz                   跳到下一个子数组开头</span></span><br><span class="line"><span class="hljs-comment">             *  Math.min(lo + sz + sz - 1, N - 1)   最后一个子数组的大小有可能不是sz的整数倍，lo + sz + sz - 1可能会出现数组越界。</span></span><br><span class="line"><span class="hljs-comment">             */</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>; lo &lt; N - sz; lo = lo + sz + sz) &#123;</span><br><span class="line">                <span class="hljs-keyword">int</span> mid = lo + sz - <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">int</span> hi = Math.min(lo + sz + sz - <span class="hljs-number">1</span>, N - <span class="hljs-number">1</span>);</span><br><span class="line">                merge(a, aux, lo, mid, hi);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">assert</span> <span class="hljs-title">isSorted</span><span class="hljs-params">(a)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可视图：<br><img src="/post_image/alg_img/5.jpg" alt="Alt text"></p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序同归并排序一样是一种分治的排序算法。它通过 <code>切分</code> 递归的将数组分为两个部分，对两个部分分别排序，并保证左边的元素都 &lt;= <code>切点</code>，右边的元素都 &gt;= <code>切点</code>。  </p>
+<p>每次切分都能保证子数组左边的元素小于切点，右边的元素大于切点。通过递归，对左半边和右半边数组再次切分，最终达到整个数组的有序。</p>
+<p>切分算法：</p>
+<ul>
+<li><p>切点定为子数组的第一个元素（可以是任意元素）</p>
+</li>
+<li><p>指针 i 从左往右扫描 <code>大于</code> 切点的值，找到即退出扫描；指针 j 从右往左扫描 <code>小于</code> 切点的值，找到即退出扫描。</p>
+</li>
+<li><p>交换 a[i] 与 a[j] 的位置，小的值放在左边，大的值放在右边。</p>
+</li>
+<li><p>若 i 扫描完毕找不到最大值，说明 切点 就是最大值；若 j 扫描完毕找不到最小值，说明 切点 就是最小值</p>
+</li>
+<li><p>为什么指针相遇<code>(i &gt;= j)</code>切分结束？因为相遇了代表所有元素都已遍历完毕。</p>
+</li>
+<li><p>指针相遇（双向扫描完毕）之后，交换 切点(v) 与 a[j] 的值，此时a[j]是最后一个小于 v 的值，而切点到了数组中间，最后返回切点索引。</p>
+</li>
+</ul>
+<p>博客参考，对于理解很有帮助：<a href="http://developer.51cto.com/art/201403/430986.htm" target="_blank" rel="noopener">坐在马桶上看算法：快速排序</a></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Quick</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        StdRandom.shuffle(a);</span><br><span class="line">        sort(a, <span class="hljs-number">0</span>, a.length - <span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (hi &lt;= lo) <span class="hljs-keyword">return</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> j = partition(a, lo, hi); <span class="hljs-comment">// 切分</span></span><br><span class="line">        sort(a, lo, j - <span class="hljs-number">1</span>); <span class="hljs-comment">// 左半边排序</span></span><br><span class="line">        sort(a, j + <span class="hljs-number">1</span>, hi); <span class="hljs-comment">// 右半边排序</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> i = lo, j = hi + <span class="hljs-number">1</span>; <span class="hljs-comment">// 左右扫描的指针</span></span><br><span class="line">        Comparable v = a[lo]; <span class="hljs-comment">// 切分的元素</span></span><br><span class="line">        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span> (less(a[++i], v)) &#123; <span class="hljs-comment">// 指针 i 从左往右扫描大于v的值</span></span><br><span class="line">                <span class="hljs-keyword">if</span> (i == hi) <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">while</span> (less(v, a[--j])) &#123; <span class="hljs-comment">// 指针 j 从右往左扫描小于v的值</span></span><br><span class="line">                <span class="hljs-keyword">if</span> (j == lo) <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i &gt;= j) <span class="hljs-keyword">break</span>; <span class="hljs-comment">// 为什么 i &gt;= j 退出外循环？</span></span><br><span class="line">            exch(a, i, j); <span class="hljs-comment">// 小值放左边，大值放右边。</span></span><br><span class="line">        &#125;</span><br><span class="line">        exch(a, lo, j);</span><br><span class="line">        <span class="hljs-keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快速排序最好的情况下是每次都正好能将数组对半分，这样递归调用次数才是最少的。</p>
+<p>最坏的情况下，第一次从最小的元素切分，第二次从第二小的元素切分，如此这般。为了防止数组最开始就是有序的，在进行快速排序时需要随机打乱数组。</p>
+<h3 id="改进-1"><a href="#改进-1" class="headerlink" title="改进"></a>改进</h3><ol>
+<li><p>对于小数组，使用插入排序。只需将递归结束条件从 <code>if (hi &lt;= lo) return;</code> 改为：<code>if (hi &lt;= lo + 15) { new Insertion().sort(a); return; }</code></p>
+</li>
+<li><p>三取样切分：选取较优的切点元素来提高性能。将子数组的一小部分元素中的中位数作为切点来切分数组效果为好，一般取3个元素。参考：<a href="http://www.cnblogs.com/chengxiao/p/6262208.html" target="_blank" rel="noopener">图解排序算法(五)之快速排序——三数取中法</a></p>
+</li>
+<li><p>对于含有大量重复元素的数组，该算法还是会继续切分数组，增加不必要的性能开销。解决方案：三向切分算法：<a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_3quicksort/Quick3way.java" target="_blank" rel="noopener">Quick3way.java</a></p>
+</li>
+</ol>
+<p>以上改进 均未！实现！太搞脑子了😣~~~</p>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>在某些拥有大量输入N（数十亿甚至无限）的用例中，需要在大量输入中取最大（或最小）的前M个值。解决这种需求，数组排序的代价特别高昂，原因有2点：1. 数据量特别大，不可能将十亿个数放进数组排序，有可能内存都装不下；2. 只需要取前M的有序的值，并不需要将所有数据排序，甚至都无法获取全部的数据。</p>
+<p>优先队列可以解决这类问题，有了优先队列，只需要创建一个大小为M的队列即可代替创建大小为总数据量N的数组。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MaxPQ()</td>
+<td>创建一个优先队列</td>
+</tr>
+<tr>
+<td>MaxPQ(int max)</td>
+<td>创建一个初始容量的优先队列</td>
+</tr>
+<tr>
+<td>MaxPQ(Key[] arr)</td>
+<td>用arr[]中的元素创建一个优先队列</td>
+</tr>
+<tr>
+<td>void insert(Key v)</td>
+<td>向优先队列插入一个元素</td>
+</tr>
+<tr>
+<td>Key max()</td>
+<td>返回最大元素</td>
+</tr>
+<tr>
+<td>Key delMax()</td>
+<td>删除最大元素</td>
+</tr>
+<tr>
+<td>boolean isEmpty()</td>
+<td>判断是否为空</td>
+</tr>
+<tr>
+<td>int size()</td>
+<td>查看队列大小</td>
+</tr>
+</tbody>
+</table>
+<h3 id="初级实现"><a href="#初级实现" class="headerlink" title="初级实现"></a>初级实现</h3><p>基于无序数组的优先队列：<a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_4priority_queues/MaxPQ4DisArray.java" target="_blank" rel="noopener">MaxPQ4DisArray.java</a></p>
+<p>基于有序数组的优先队列：<a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_4priority_queues/MaxPQ4Array.java" target="_blank" rel="noopener">MaxPQ4Array.java</a></p>
+<p>基于无序链表栈的优先队列：<a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_4priority_queues/MaxPQ4Linked.java" target="_blank" rel="noopener">MaxPQ4Linked.java</a></p>
+<h3 id="基于堆的优先队列"><a href="#基于堆的优先队列" class="headerlink" title="基于堆的优先队列"></a>基于堆的优先队列</h3><h4 id="二叉堆的定义与表示法"><a href="#二叉堆的定义与表示法" class="headerlink" title="二叉堆的定义与表示法"></a>二叉堆的定义与表示法</h4><blockquote>
+<p>二叉堆（完全二叉树，之不过在这叫做堆）是一种基于数组的数据结构。既然是树形结构，必然有一个根节点，根节点下面挂着（一个或）两个子节点，每个子节点作为父节点又挂着两个子节点。同级节点之间无关顺序，父节点大于等于子节点。当一个二叉树的每个节点都大于等于它的两个子节点时，被称之为“堆有序”。</p>
+</blockquote>
+<p><strong>如何用数组存储具有层级顺序关系的二叉堆呢？</strong></p>
+<p>首先，二叉堆在数组中按索引位置 <code>1</code> 开始存储（不使用数组的第一个元素）</p>
+<p>在一个堆中位置 <code>k</code> 的节点的父节点的位置为 <code>k/2</code>，而它的两个子节点的位置分别为 <code>k*2</code>, <code>K*2+1</code>，这样就可以通过计算索引在树中上下移动。</p>
+<p>二叉堆表示：</p>
+<p><img src="/post_image/alg_img/6.jpg" alt="Alt text"></p>
+<p>二叉堆在数组中的存储结构：</p>
+<p><img src="/post_image/alg_img/7.jpg" alt="Alt text"></p>
+<p>用长度为 N+1 的数组 pq[] 来表示一个大小为 N 的堆，因为堆元素存放与 pq[1]到pq[N]之中，所以实际数组的长度要是堆的元素大小<code>+1</code>。</p>
+<h4 id="由下至上的堆有序化（上浮）"><a href="#由下至上的堆有序化（上浮）" class="headerlink" title="由下至上的堆有序化（上浮）"></a>由下至上的堆有序化（上浮）</h4><p>当堆的有序化因为某个节点变得比其父节点更大而被打破，我们需要交换该节点和其父节点来修复堆。交换后该节点比它的两个子节点（一个是交换之前的父节点，另一个比它更小，因为是旧父节点的子节点）都要大了，但该节点仍然有可能比现在的父节点要大，所以需要再一次交换，使得该节点不断上浮直到遇到了更大的节点或到达堆顶。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxPQ</span>&lt;<span class="hljs-title">Key</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Key</span>&gt;&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">IMaxPQ</span>&lt;<span class="hljs-title">Key</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//......</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">1</span> &amp;&amp; less(k / <span class="hljs-number">2</span>, k)) &#123; </span><br><span class="line">            exch(k / <span class="hljs-number">2</span>, k);</span><br><span class="line">            k = k / <span class="hljs-number">2</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="由上至下的堆有序化（下沉）"><a href="#由上至下的堆有序化（下沉）" class="headerlink" title="由上至下的堆有序化（下沉）"></a>由上至下的堆有序化（下沉）</h4><p>下沉与上浮相反，当有序状态因为某个节点变得比它的两个（或其中之一）子节点要小被打破，那么需要交换该节点与其较大的一个子节点来保持平衡。倘若交换之后该节点仍比现在的子节点之一要大，继续交换，直至向下交换到该节点的子节点都比它小或到达堆的底部。</p>
+<p>疑问：“父节点怎么会变得比子节点要小呢？添加一个元素在数组末尾时会通过上浮移动到合适的位置的啊。”  — 这跟删除最大元素的算法有关，移除堆顶元素时，会用数组的最后一个元素替补最大元素，所以此时存在元素下沉的必要。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxPQ</span>&lt;<span class="hljs-title">Key</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Key</span>&gt;&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">IMaxPQ</span>&lt;<span class="hljs-title">Key</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//......</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sink</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (<span class="hljs-number">2</span> * k &lt;= N) &#123; </span><br><span class="line">            <span class="hljs-keyword">int</span> j = <span class="hljs-number">2</span> * k; </span><br><span class="line">            <span class="hljs-keyword">if</span> (j &lt; N &amp;&amp; less(j, j + <span class="hljs-number">1</span>)) j++; </span><br><span class="line">            <span class="hljs-keyword">if</span> (!less(k, j)) <span class="hljs-keyword">break</span>; </span><br><span class="line">            exch(k, j);</span><br><span class="line">            k = j; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>堆的上浮与下沉：</p>
+<p><img src="/post_image/alg_img/8.jpg" alt="Alt text"></p>
+<h4 id="优先队列实现"><a href="#优先队列实现" class="headerlink" title="优先队列实现"></a>优先队列实现</h4><p>理解了上浮和下沉，优先队列核心的两个api就能实现了，对于 <code>插入元素</code>，只需将元素添加到数组末尾，增加堆的大小并让新元素上浮到合适的位置；对于 <code>删除最大元素</code>，我们从数组顶端去除最大元素，并将数组最后一个元素放到顶端，减少堆的大小并让元素下沉到合适的位置即可。</p>
+<p><img src="/post_image/alg_img/9.jpg" alt="Alt text"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxPQ</span>&lt;<span class="hljs-title">Key</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Key</span>&gt;&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">IMaxPQ</span>&lt;<span class="hljs-title">Key</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> Key[] pq; <span class="hljs-comment">// 基于堆的完全二叉树</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> N; <span class="hljs-comment">// 堆元素数量</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(Key v)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (N == pq.length - <span class="hljs-number">1</span>) resize(pq.length * <span class="hljs-number">2</span>);</span><br><span class="line">        pq[++N] = v;</span><br><span class="line">        swim(N);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Key <span class="hljs-title">delMax</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (isEmpty()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NoSuchElementException(<span class="hljs-string">"Priority queue underflow"</span>);</span><br><span class="line">        Key max = pq[<span class="hljs-number">1</span>];</span><br><span class="line">        exch(<span class="hljs-number">1</span>, N--);</span><br><span class="line">        pq[N + <span class="hljs-number">1</span>] = <span class="hljs-keyword">null</span>; <span class="hljs-comment">// 防止对象游离</span></span><br><span class="line">        sink(<span class="hljs-number">1</span>);</span><br><span class="line">        <span class="hljs-keyword">if</span> (N &gt; <span class="hljs-number">0</span> &amp;&amp; (pq.length - <span class="hljs-number">1</span>) / <span class="hljs-number">4</span> == N) resize(pq.length / <span class="hljs-number">2</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Key <span class="hljs-title">max</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (isEmpty()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NoSuchElementException(<span class="hljs-string">"Priority queue underflow"</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> pq[<span class="hljs-number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">resize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> max)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">assert</span> max &gt; N;</span><br><span class="line">        Key[] temp = (Key[]) <span class="hljs-keyword">new</span> Comparable[max];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; N + <span class="hljs-number">1</span>; i++) &#123;</span><br><span class="line">            temp[i] = pq[i];</span><br><span class="line">        &#125;</span><br><span class="line">        pq = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基于堆的优先队列API能够保证插入元素和删除最大元素的用时和队列的大小仅成对数关系。</p>
+<h4 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h4><p>二叉树存储的不是元素值，而是元素值的key；通过这个 key 在元素数组 element[] 中找到元素值；用keyIndex[]存储key的索引。</p>
+<p>先补点智商，干了这碗鸡汤：<a href="https://www.cnblogs.com/nullzx/p/6624731.html" target="_blank" rel="noopener">索引优先队列的工作原理与简易实现</a></p>
+<p>提醒：前方高能！！！<a href="https://github.com/yuzh233/Algorithms/blob/master/src/chapter_2/_4priority_queues/IndexMinPQ.java" target="_blank" rel="noopener">传送门</a></p>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>以优先队列实现的排序算法，将原始数组元素放入一个优先队列中，由于在队列中可以轻易的获得最大值，每次获取的最大值可以组成一个递减序列。如果获取的最大值不删除，而是将其和队列的最后一个元素交换，第二次将新的最大值与数组的倒数第二个值交换，循环往复，直至数组元素遍历完，排序完成。</p>
+<h3 id="堆的构建"><a href="#堆的构建" class="headerlink" title="堆的构建"></a>堆的构建</h3><p>将原始数组元素组成一个完全二叉树结构，一个简单的方式就是将数组 <code>从左至右</code> 执行 <code>上浮</code> 操作，直至每个元素放到了合适的位置。</p>
+<p>上浮操作生成堆会扫描数组的每一个元素，更好的方式是 <code>从右至左</code> 执行 <code>下沉</code> 操作，它只需要扫描数组一半的元素，因为不需要比较叶子节点。</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>交换堆顶元素和最后一个元素，每次交换之后重新下沉以维持堆的有序状态。</p>
+<p>由于在堆结构中不使用数组的第一个位置的元素，导致原始数组的第一个元素值必须为null，要以正常存储的方式使用堆排序，只需要在 less() 和 exch() 中将传入的索引-1即可。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Heap</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = a.length - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-comment">// 构造堆</span></span><br><span class="line">        sinkGenerationHead(a, n);</span><br><span class="line"><span class="hljs-comment">//        swimGenerationHead(a, n);</span></span><br><span class="line">        <span class="hljs-comment">// 堆排序</span></span><br><span class="line">        <span class="hljs-keyword">while</span> (n &gt; <span class="hljs-number">1</span>) &#123;</span><br><span class="line">            exch(a, <span class="hljs-number">1</span>, n--);</span><br><span class="line">            sink(a, <span class="hljs-number">1</span>, n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//下沉生成大顶堆（最优）</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sinkGenerationHead</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n / <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">1</span>; i--) &#123; <span class="hljs-comment">// 从右到左</span></span><br><span class="line">            sink(a, i, n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 上浮生成大顶堆</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swimGenerationHead</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; n; k++) &#123; <span class="hljs-comment">// 必须是从左到右</span></span><br><span class="line">            swim(a, k, n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sink</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (<span class="hljs-number">2</span> * k &lt;= n) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> j = <span class="hljs-number">2</span> * k;</span><br><span class="line">            <span class="hljs-keyword">if</span> (j &lt; n &amp;&amp; less(a, j, j + <span class="hljs-number">1</span>))</span><br><span class="line">                j++;</span><br><span class="line">            <span class="hljs-keyword">if</span> (!less(a, k, j))</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            exch(a, k, j);</span><br><span class="line">            k = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">1</span> &amp;&amp; less(a, k / <span class="hljs-number">2</span>, k)) &#123;</span><br><span class="line">            exch(a, k / <span class="hljs-number">2</span>, k);</span><br><span class="line">            k = k / <span class="hljs-number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">less</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> a[i].compareTo(a[j]) &lt; <span class="hljs-number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exch</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        Comparable tem = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = tem;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Comparable[] a = <span class="hljs-keyword">new</span> Comparable[]&#123;<span class="hljs-keyword">null</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>&#125;;</span><br><span class="line">        Heap heap = <span class="hljs-keyword">new</span> Heap();</span><br><span class="line">        heap.sort(a);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            StdOut.print(a[i] + <span class="hljs-string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在java中的排序都是基于指针的，除了原始数据类型以外，我们操作的都是数据的引用（指针），而非数据本身。指针排序增加了一层间接性，因为数组保存的是待排序对象的引用，而非对象本身。</p>
+<p>在一些情况下，对于排序之后的数据要求不可改变键值，如果能修改，那么数组将不再有序。类似的，优先队列在能改变键值的情况下也不太可能正常工作（索引优先队列能改变键值并维持有序是每次改变之后都进行上浮下沉操作）。限定排序元素不可变可以使用java的不可变数据类型，如八大封装类型和String，以及自定义的不可变数据类型（不可变类型：实例变量以private、final修饰；不提供setter方法；提供带参构造器以初始化实例变量）。</p>
+<p>在java中实现任意数据类型排序的方法就是实现Comparable接口，重写其compareTo方法。但当我们对该数据类型的排序方法有多个时，我们可以创建一个比较器对象，使其实现Comparator接口，重写compare方法，进行比较时根据需求传入不同Comparator接口的实现即可。</p>
+<p>如果一个排序算法能够保留数组中重复元素的相对位置则可以被称之为 <code>稳定的</code>，对于排序算法稳定性的要求在某些场景尤为重要。</p>
+<p>对于前面学习过的各种排序算法的性能特点如下：</p>
+<table>
+<thead>
+<tr>
+<th>算 法</th>
+<th>是否稳定</th>
+<th>是否为原地排序</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>备 注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>选择排序</td>
+<td>否</td>
+<td>是</td>
+<td>N^2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>插入排序</td>
+<td>是</td>
+<td>是</td>
+<td>介于N和N^2之间</td>
+<td>1</td>
+<td>取决于输入元素的排列情况</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>否</td>
+<td>是</td>
+<td>NlogN? N^(6/5)?</td>
+<td>1</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>否</td>
+<td>是</td>
+<td>NlogN</td>
+<td>lgN</td>
+<td>运行效率由概率提供保证</td>
+</tr>
+<tr>
+<td>三向快速排序</td>
+<td>否</td>
+<td>是</td>
+<td>介于N和NlogN之间</td>
+<td>lgN</td>
+<td>运行效率由概率保证，同时也取决于输入元素的分布情况</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>是</td>
+<td>否</td>
+<td>NlogN</td>
+<td>N</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>否</td>
+<td>是</td>
+<td>NlogN</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>大多数情况下，快速排序是最好的选择。但是如果稳定性很重要而空间不是问题的情况下，归并排序可能是最好的。</p>
+<p>java 函数库中对原始数据类型使用三向切分快速排序，对于引用类型使用归并排序。这么做也印证着用速度和空间（对于原始数据类型）来换取稳定性（对于引用类型）。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/数据结构/">数据结构</a>, <a class="has-link-grey -link" href="/tags/算法/">算法</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/09/01/线程高级/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">线程高级</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/08/05/算法第一章 基础/">
+                <span class="level-item">算法第一章 基础</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'Just Do It...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/tou.jpg" alt="harry.zh">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        not just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#第二章-排序">
+        <span class="has-mr-6">1</span>
+        <span>第二章 排序</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#选择排序">
+        <span class="has-mr-6">1.1</span>
+        <span>选择排序</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#算法分析">
+        <span class="has-mr-6">1.1.1</span>
+        <span>算法分析</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#插入排序">
+        <span class="has-mr-6">1.2</span>
+        <span>插入排序</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#算法分析-1">
+        <span class="has-mr-6">1.2.1</span>
+        <span>算法分析</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#选择排序与插入排序比较">
+        <span class="has-mr-6">1.3</span>
+        <span>选择排序与插入排序比较</span>
+        </a></li><li>
+        <a class="is-flex" href="#希尔排序">
+        <span class="has-mr-6">1.4</span>
+        <span>希尔排序</span>
+        </a></li><li>
+        <a class="is-flex" href="#归并排序">
+        <span class="has-mr-6">1.5</span>
+        <span>归并排序</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#归并操作">
+        <span class="has-mr-6">1.5.1</span>
+        <span>归并操作</span>
+        </a></li><li>
+        <a class="is-flex" href="#自顶向下归并排序">
+        <span class="has-mr-6">1.5.2</span>
+        <span>自顶向下归并排序</span>
+        </a></li><li>
+        <a class="is-flex" href="#自底向上归并排序">
+        <span class="has-mr-6">1.5.3</span>
+        <span>自底向上归并排序</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#快速排序">
+        <span class="has-mr-6">1.6</span>
+        <span>快速排序</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#改进-1">
+        <span class="has-mr-6">1.6.1</span>
+        <span>改进</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#优先队列">
+        <span class="has-mr-6">1.7</span>
+        <span>优先队列</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#API">
+        <span class="has-mr-6">1.7.1</span>
+        <span>API</span>
+        </a></li><li>
+        <a class="is-flex" href="#初级实现">
+        <span class="has-mr-6">1.7.2</span>
+        <span>初级实现</span>
+        </a></li><li>
+        <a class="is-flex" href="#基于堆的优先队列">
+        <span class="has-mr-6">1.7.3</span>
+        <span>基于堆的优先队列</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#堆排序">
+        <span class="has-mr-6">1.8</span>
+        <span>堆排序</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#堆的构建">
+        <span class="has-mr-6">1.8.1</span>
+        <span>堆的构建</span>
+        </a></li><li>
+        <a class="is-flex" href="#排序">
+        <span class="has-mr-6">1.8.2</span>
+        <span>排序</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#总结">
+        <span class="has-mr-6">1.9</span>
+        <span>总结</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
+                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
+                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/03/成员变量与局部变量/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/img/random/69.jpg" alt="成员变量与局部变量">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time></div>
+                    <a href="/2018/11/03/成员变量与局部变量/" class="has-link-black-ter is-size-6">成员变量与局部变量</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="算法第二章 排序" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 harry&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
