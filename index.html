@@ -142,8 +142,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+        <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
         </a>
     </div>
     
@@ -151,7 +151,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time>
+                <time class="level-item has-text-grey" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/docker/">docker</a>
@@ -161,7 +161,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 minutes read (About 1756 words)
+                    10 minutes read (About 1558 words)
                 </span>
                 
                 
@@ -170,18 +170,31 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/">Docker 补救指南（二）—— 网络管理</a>
+                <a class="has-link-black-ter" href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/">Docker 补救指南（三）—— Docker Swarm</a>
             
         </h1>
         <div class="content">
-            <h1 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h1><p>Docker 默认使用 <strong>bridge</strong>（单主机互联）和 <strong>overlay</strong>（可跨主机互联）两种<strong>网络驱动</strong>来进行容器的网络管理。如果需要，用户可以自定义网络驱动插件进行 Docker 的网络管理。以下内容针对 Docker 默认的网络管理和自定义网络管理进行演示学习。</p>
+            <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>Docker Swarm 是一个创建和管理 Docker 集群的工具，该工具主要用于 Docker 的集群管理和容器编排。其特点有下：</p>
+<ul>
+<li>方便创建和管理集群</li>
+<li>可拓展</li>
+<li>可实现期望的状态调节</li>
+<li>集群中多主机网络自动拓展管理</li>
+<li>提供服务发现功能</li>
+<li>可实现负载均衡</li>
+<li>安全性强</li>
+<li>支持延迟更新和服务回滚</li>
+</ul>
+<blockquote>
+<p>Docker Swarm 是 Docker 官方在 Docker1.12 后自带支持的新型容器集群管理工具。在此之前比较成熟的容器集群管理工具有 Google 的 Kubernetes 和 Apache 的分布式管理框架 Mesos 等。</p>
+</blockquote>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -233,9 +246,6 @@
         </h1>
         <div class="content">
             <h1 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h1><p>Docker 默认使用 <strong>bridge</strong>（单主机互联）和 <strong>overlay</strong>（可跨主机互联）两种<strong>网络驱动</strong>来进行容器的网络管理。如果需要，用户可以自定义网络驱动插件进行 Docker 的网络管理。以下内容针对 Docker 默认的网络管理和自定义网络管理进行演示学习。</p>
-<h2 id="查看指令"><a href="#查看指令" class="headerlink" title="查看指令"></a>查看指令</h2><p>不管其他细节，先看有哪些常用命令：</p>
-<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Usage:	docker network COMMAND</span><br><span class="line">Manage networks</span><br><span class="line">Commands:</span><br><span class="line">  connect     Connect a container to a network</span><br><span class="line">  create      Create a network</span><br><span class="line">  disconnect  Disconnect a container from a network</span><br><span class="line">  inspect     Display detailed information on one or more networks</span><br><span class="line">  ls          List networks</span><br><span class="line">  prune       Remove all unused networks</span><br><span class="line">  rm          Remove one or more networks</span><br><span class="line">Run <span class="hljs-string">'docker network COMMAND --help'</span> <span class="hljs-keyword">for</span> more information on a <span class="hljs-built_in">command</span>.</span><br></pre></td></tr></table></figure>
-<p>可以看到对于网络的操作大概都有这些操作：<code>连接、创建、取消连接、查看细节、查看列表、移除。</code></p>
         </div>
         
         
@@ -790,10 +800,10 @@
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/0/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/0/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -850,7 +860,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         34
@@ -860,7 +870,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         4
@@ -870,7 +880,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         27
@@ -880,7 +890,7 @@
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -956,7 +966,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -1001,7 +1011,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
         <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
     </div>
@@ -1015,21 +1025,21 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
-                    <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
+                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -1121,7 +1131,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1211,7 +1221,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1424,21 +1434,21 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
-                    <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
+                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -1530,7 +1540,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1620,7 +1630,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1990,10 +2000,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
