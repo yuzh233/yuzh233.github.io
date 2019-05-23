@@ -152,8 +152,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+        <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
         </a>
     </div>
     
@@ -161,7 +161,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time>
+                <time class="level-item has-text-grey" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/docker/">docker</a>
@@ -171,7 +171,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 minutes read (About 1557 words)
+                    12 minutes read (About 1756 words)
                 </span>
                 
                 
@@ -180,103 +180,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/">Docker 补救指南（三）—— Docker Swarm</a>
+                <a class="has-link-black-ter" href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/">Docker 补救指南（二）—— 网络管理</a>
             
         </h1>
         <div class="content">
-            <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>Docker Swarm 是一个创建和管理 Docker 集群的工具，该工具主要用于 Docker 的集群管理和容器编排。其特点有下：</p>
-<ul>
-<li>方便创建和管理集群</li>
-<li>可拓展</li>
-<li>可实现期望的状态调节</li>
-<li>集群中多主机网络自动拓展管理</li>
-<li>提供服务发现功能</li>
-<li>可实现负载均衡</li>
-<li>安全性强</li>
-<li>支持延迟更新和服务回滚</li>
-</ul>
-<blockquote>
-<p>Docker Swarm 是 Docker 官方在 Docker1.12 后自带支持的新型容器集群管理工具。在此之前比较成熟的容器集群管理工具有 Google 的 Kubernetes 和 Apache 的分布式管理框架 Mesos 等。</p>
-</blockquote>
-<p><strong><a href="https://yeasy.gitbooks.io/docker_practice/content/swarm_mode/overview.html" target="_blank" rel="noopener">核心概念：节点、服务、任务的描述</a></strong></p>
-<h1 id="搭建-Swarm-集群"><a href="#搭建-Swarm-集群" class="headerlink" title="搭建 Swarm 集群"></a>搭建 Swarm 集群</h1><p><strong>环境准备</strong></p>
-<ul>
-<li><p>三台装有 Docker 的主机，版本要求是 1.12 以上。</p>
-</li>
-<li><p>集群管理节点的 IP 必须固定，保证其他工作节点能够访问该管理节点。</p>
-</li>
-<li><p>集群节点之间必须使用相同的协议并保证以下端口可用：</p>
-<ul>
-<li>用于集群管理通信的 TCP 接口 <strong>2377</strong></li>
-<li>用于节点间通信的 TCP/UDP 端口 <strong>7946</strong></li>
-<li>用于覆盖网络流量的 UDP 端口 <strong>4789</strong></li>
-</ul>
-</li>
-</ul>
-<p>由于主机有限，这里使用本地 Mac 主机和云端 ECS 主机，出口 IP 分别为：</p>
-<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本地（<span class="hljs-selector-tag">worker</span>）：113<span class="hljs-selector-class">.246</span><span class="hljs-selector-class">.94</span><span class="hljs-selector-class">.216</span></span><br><span class="line">远程（<span class="hljs-selector-tag">manager</span>）：120<span class="hljs-selector-class">.78</span><span class="hljs-selector-class">.69</span><span class="hljs-selector-class">.82</span></span><br></pre></td></tr></table></figure>
-<p><strong>常用命令：</strong><br><figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">Usage</span>:  docker swarm COMMAND</span><br><span class="line"></span><br><span class="line">Manage Swarm</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">Commands:</span></span><br><span class="line">  ca          Display and rotate the root CA</span><br><span class="line">  init        Initialize a swarm</span><br><span class="line">  join        Join a swarm as a node and/or manager</span><br><span class="line">  join-token  Manage join tokens</span><br><span class="line">  leave       Leave the swarm</span><br><span class="line">  unlock      Unlock swarm</span><br><span class="line">  unlock-key  Manage the unlock key</span><br><span class="line">  update      Update the swarm</span><br><span class="line"></span><br><span class="line">Run 'docker swarm COMMAND --help' for more information on a command.</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建-Docker-Swarm-集群"><a href="#创建-Docker-Swarm-集群" class="headerlink" title="创建 Docker Swarm 集群"></a>创建 Docker Swarm 集群</h2><p>在 manager 创建一个集群：<strong>docker swarm init –advertise-addr 120.78.69.82</strong></p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518111019.png" alt></p>
-<p>集群创建成功，当前节点默认成为了管理节点。查看集群中的所有节点：<strong>docker node ls</strong></p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518111234.png" alt="当前只有一个管理节点"></p>
-<p>接下来，让工作节点加入 Swarm 集群，使用：<strong>docker swarm join</strong><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz90qcppq4b8dajq7j3uz ~]# docker swarm join --help</span><br><span class="line"></span><br><span class="line">Usage:  docker swarm join [OPTIONS] HOST:PORT</span><br><span class="line"></span><br><span class="line">Join a swarm as a node <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> manager</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">      --advertise-addr string   Advertised<span class="hljs-built_in"> address </span>(format: &lt;ip|interface&gt;[:port])</span><br><span class="line">      --availability string     Availability of the node (<span class="hljs-string">"active"</span>|<span class="hljs-string">"pause"</span>|<span class="hljs-string">"drain"</span>) (default <span class="hljs-string">"active"</span>)</span><br><span class="line">      --data-path-addr string  <span class="hljs-built_in"> Address </span><span class="hljs-keyword">or</span><span class="hljs-built_in"> interface </span><span class="hljs-keyword">to</span> use <span class="hljs-keyword">for</span> data path traffic (format: &lt;ip|interface&gt;)</span><br><span class="line">      --listen-addr node-addr   Listen<span class="hljs-built_in"> address </span>(format: &lt;ip|interface&gt;[:port]) (default 0.0.0.0:2377)</span><br><span class="line">      --token string            Token <span class="hljs-keyword">for</span> entry into the swarm</span><br></pre></td></tr></table></figure></p>
-<p><em>有很多种方式加入集群，这里使用创建集群成功之后的提示命令就可以了。如果忘记了加入集群的指令，可以使用 <strong>docker swarm join-tokens [worker / manager] 查看加入集群的 token 信息：</strong></em></p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518112303.png" alt></p>
-<p>工作节点加入集群，在工作节点终端执行：</p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518112434.png" alt></p>
-<p>此时在工作节点上可以看到该集群中有两个节点，注意：工作节点不能执行 docker swarm 的其他命令，只能执行 <strong>docker swarm leave</strong> 离开此集群。</p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518112710.png" alt></p>
-<h2 id="向-Docker-Swarm-部署服务"><a href="#向-Docker-Swarm-部署服务" class="headerlink" title="向 Docker Swarm 部署服务"></a>向 Docker Swarm 部署服务</h2><p>使用 <strong>docker service</strong> 来管理 Swarm 集群中的服务，此命令只能在管理节点执行。</p>
-<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz90qcppq4b8dajq7j3uz ~]<span class="hljs-comment"># docker service --help</span></span><br><span class="line"></span><br><span class="line">Usage:  docker service COMMAND</span><br><span class="line"></span><br><span class="line">Manage services</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  <span class="hljs-keyword">create</span>      <span class="hljs-keyword">Create</span> a <span class="hljs-keyword">new</span> service</span><br><span class="line">  inspect     Display detailed information <span class="hljs-keyword">on</span> one <span class="hljs-keyword">or</span> more services</span><br><span class="line">  <span class="hljs-keyword">logs</span>        <span class="hljs-keyword">Fetch</span> the <span class="hljs-keyword">logs</span> <span class="hljs-keyword">of</span> a service <span class="hljs-keyword">or</span> task</span><br><span class="line">  ls          <span class="hljs-keyword">List</span> services</span><br><span class="line">  ps          <span class="hljs-keyword">List</span> the tasks <span class="hljs-keyword">of</span> one <span class="hljs-keyword">or</span> more services</span><br><span class="line">  rm          Remove one <span class="hljs-keyword">or</span> more services</span><br><span class="line">  <span class="hljs-keyword">rollback</span>    Revert changes <span class="hljs-keyword">to</span> a service<span class="hljs-string">'s configuration</span></span><br><span class="line"><span class="hljs-string">  scale       Scale one or multiple replicated services</span></span><br><span class="line"><span class="hljs-string">  update      Update a service</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">Run '</span>docker service COMMAND <span class="hljs-comment">--help' for more information on a command.</span></span><br></pre></td></tr></table></figure>
-<p>在 Docker Swarm 集群中运行一个 nginx 的服务：<strong>docker service create –replicas 1 -p 8086:80 –name swarm-nginx nginx</strong></p>
-<ul>
-<li><code>--replicas 1</code> 指定该服务的副本数量</li>
-<li><code>--name</code> 与创建容器一样</li>
-<li><code>-p</code> 与创建容器一样</li>
-</ul>
-<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS: Docker 服务管理的命令与容器管理类似，只不过一个是 docker service，一个是 docker contianer。但有个别服务的特例命令如：<span class="hljs-comment">--replicas</span></span><br></pre></td></tr></table></figure>
-<p>接下来可以查看集群中的服务列表：<strong>docker service ls</strong></p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518114355.png" alt></p>
-<p>查看服务在集群上的分配和运行情况：<strong>docker service ps swarm-nginx</strong></p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518115036.png" alt></p>
-<blockquote>
-<p>由前面知道：一个服务是多个任务的集合，任务是 Swarm 中的最小调度单元，一个任务可以看作是单个容器。<br>我们运行一个服务之后，Swarm 分配任务到不同的副本执行，在不同副本中的体现可以查看容器运行情况。</p>
-</blockquote>
-<p>任务被分配到了工作节点，通过查看容器进程可以看到：</p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518115639.png" alt></p>
-<p>在集群中部署的服务，如果只运行一个副本，就无法体现集群的优势。一旦该机器或副本奔溃，该服务就无法访问，所以通常一个服务会创建多个副本。</p>
-<p>添加副本的命令是：<strong>docker service scale 服务名=数量</strong></p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518120449.png" alt></p>
-<p>添加副本之后再查看服务运行情况：</p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518120559.png" alt></p>
-<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS：Docker Swarm 部署服务下的容器，默认网络方式都是使用 overlay 驱动的 ingress 网络，一般情况下我们会自定义一个基于 overlay 覆盖网络驱动的网络。使用方式与创建容器一样，都是指定 `<span class="hljs-comment">--network 网络名`</span></span><br></pre></td></tr></table></figure>
-<p>最终，两个节点都运行着我们的 nginx 服务，打开浏览器分别访问：</p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518165502.png" alt></p>
-<p>故意 down 掉一个容器（本地容器），查看是否动态分配了节点？</p>
-<p><img src="http://img.yuzh.xyz/docker-note/20190518220055.png" alt></p>
-<p>down 掉一个容器之后，过不了多久又开启了一个容器。Docker Swarm 始终保持 swarm-nginx 服务有两个节点运行。</p>
-<p><strong>删除服务：docker service rm 服务名</strong></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>集群管理命令：</p>
-<ul>
-<li><strong>docker swarm init –advertise-addr [IP]</strong></li>
-<li><strong>docker node ls</strong></li>
-<li><strong>docker swarm join</strong></li>
-<li><strong>docker swarm join-tokens [worker / manager]</strong></li>
-<li><strong>docker swarm leave</strong></li>
-</ul>
-<p>集群服务命令：</p>
-<ul>
-<li><strong>docker service create -p [port:port] –replicas n [镜像名:TAG/ID]</strong></li>
-<li><strong>docker service ls [服务名/ID]</strong></li>
-<li><strong>docker service inspect [服务名/ID]</strong></li>
-<li><strong>docker service ps [服务名/ID]</strong></li>
-<li><strong>docker service scale=[n] [服务名/ID]</strong></li>
-<li><strong>docker service rm [服务名/ID]</strong></li>
-</ul>
-
+            <h1 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h1><p>Docker 默认使用 <strong>bridge</strong>（单主机互联）和 <strong>overlay</strong>（可跨主机互联）两种<strong>网络驱动</strong>来进行容器的网络管理。如果需要，用户可以自定义网络驱动插件进行 Docker 的网络管理。以下内容针对 Docker 默认的网络管理和自定义网络管理进行演示学习。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/#more">Read More</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -626,16 +544,16 @@
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
+                    <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -1035,16 +953,16 @@
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
+                    <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>

@@ -312,7 +312,7 @@
 <p>那么怎么让容器以<strong>守护式容器启动</strong>，但是避免前台没事可做导致容器自动关闭呢？简单的方式有：<strong>让后台运行的容器前台一直打印日志</strong>，这样就避免了前台没事可做导致容器退出😂。</p>
 <figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># docker run -d centos /bin/bash -c "while true; do echo hello harry!; sleep 1; done"</span></span><br><span class="line">2b8e4a0014ab7cb435ecc19f171daf027c1291fa24b77ae52132ba9c225962d8</span><br><span class="line"><span class="hljs-comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line">2b8e4a0014ab        centos              <span class="hljs-string">"/bin/bash -c 'while…"</span>   3 seconds ago       Up 3 seconds                            angry_aryabhata</span><br></pre></td></tr></table></figure>
 <p>可以看到此时容器正在以后台运行，但是没有关闭。解释一下 <code>/bin/bash</code>，</p>
-<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果 -c 选项存在，命令就从字符串中读取。如果字符串后有参数，他们将会被分配到参数的位置上，从$0开始。</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果 -c 选项存在，命令就从字符串中读取。如果字符串后有参数，他们将会被分配到参数的位置上，从<span class="hljs-variable">$0</span>开始。</span><br></pre></td></tr></table></figure>
 <h2 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h2><p><strong>docker logs -f -t –tail 容器ID</strong></p>
 <p>optins：</p>
 <ul>
@@ -1136,16 +1136,16 @@
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
+                    <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -1545,16 +1545,16 @@
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
+                    <a href="/2019/05/12/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
