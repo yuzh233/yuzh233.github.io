@@ -142,6 +142,141 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2018/10/30/单例设计模式/" class="image is-7by1">
+            <img class="thumbnail" src="/post_image/interview-img/singledog.png" alt="单例设计模式">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-30T04:00:00.000Z">2018-10-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 767 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/30/单例设计模式/">单例设计模式</a>
+            
+        </h1>
+        <div class="content">
+            <p>单例设计模式，即某个类在整个系统中只能有一个实例对象可被获取和使用的代码模式。<br>例如：代表JVM运行环境的Runtime类</p>
+<p>要点：</p>
+<ol>
+<li><p>某个类只能有一个实例；</p>
+<ul>
+<li>构造器私有化</li>
+</ul>
+</li>
+<li><p>是它必须自行创建这个实例；</p>
+<ul>
+<li>含有一个该类的静态变量来保存这个唯一的实例</li>
+</ul>
+</li>
+<li><p>是它必须自行向整个系统提供这个实例;</p>
+<ul>
+<li>对外提供获取该实例对象的方式：（1）直接暴露（2）用静态变量的get方法获取</li>
+</ul>
+</li>
+</ol>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/30/单例设计模式/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/30/自增变量/" class="image is-7by1">
+            <img class="thumbnail" src="/img/random/66.jpg" alt="自增变量">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-30T03:52:00.000Z">2018-10-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 332 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/30/自增变量/">自增变量</a>
+            
+        </h1>
+        <div class="content">
+            <p>先看一段代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;                          <span class="hljs-comment">// i = 1</span></span><br><span class="line">        i = i++;                            <span class="hljs-comment">// i = 1</span></span><br><span class="line">        <span class="hljs-keyword">int</span> j = i++;                        <span class="hljs-comment">// j = 1</span></span><br><span class="line">        <span class="hljs-keyword">int</span> k = i + ++i * i++;              <span class="hljs-comment">// k = 11</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"i = "</span> + i); </span><br><span class="line">        System.out.println(<span class="hljs-string">"j = "</span> + j); </span><br><span class="line">        System.out.println(<span class="hljs-string">"k = "</span> + k); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/30/自增变量/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2018/10/28/基于 Spring Boot 技术栈构建企业级博客系统的开发记录/" class="image is-7by1">
             <img class="thumbnail" src="/img/random/96.jpg" alt="基于 Spring Boot 技术栈构建企业级博客系统的开发记录">
         </a>
@@ -609,129 +744,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/08/05/算法第一章 基础/" class="image is-7by1">
-            <img class="thumbnail" src="/img/random/7.jpg" alt="算法第一章 基础">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-04T16:00:00.000Z">2018-08-05</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    37 minutes read (About 5614 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/05/算法第一章 基础/">算法第一章 基础</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="第一章-基础"><a href="#第一章-基础" class="headerlink" title="第一章 基础"></a>第一章 基础</h1><h2 id="基础编程模型"><a href="#基础编程模型" class="headerlink" title="基础编程模型"></a>基础编程模型</h2><h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p>从标准输出流中打印随机生成的数值，“%.2f\n”表示输出两位小数精度的浮点型数值并换行。</p>
-<p>cmd运行需要注意的几个地方：</p>
-<ol>
-<li><p>我们的工程一般使用utf-8编码，但是windows系统默认gbk编码，所以编译javac会出现“找不到gbk编码的字符映射”。解决办法：编译时指定参数 <code>-encoding utf-8</code></p>
-</li>
-<li><p>“找不到某个类”，程序中引用了非当前目录的jar文件，在本路径编译会找不到jar包，需要执行参数：<code>-Djava.ext.dirs=jar包作为路径</code>。</p>
-</li>
-<li><p>“无法运行主类”，检查是否配置了classpath环境变量，<code>CLASSPATH=&quot;.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar;&quot;</code></p>
-</li>
-<li><p>如果被编译类有包，需要在该包下执行编译和运行，最终该类的编译和运行命令：</p>
-<p> javac -Djava.ext.dirs=D:\IdeaProjects\Algorithms\lib -encoding utf-8 chapter_1/programming_model/RandomSeq.java<br> java -Djava.ext.dirs=D:\IdeaProjects\Algorithms\lib chapter_1/programming_model/RandomSeq 10 1 100</p>
-</li>
-</ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/08/05/算法第一章 基础/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/07/29/IDEA-Maven-Tomcat插件实现热部署/" class="image is-7by1">
-            <img class="thumbnail" src="/img/random/16.jpg" alt="IDEA+Maven+Tomcat插件实现热部署">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-29T06:28:21.000Z">2018-07-29</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 768 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/07/29/IDEA-Maven-Tomcat插件实现热部署/">IDEA+Maven+Tomcat插件实现热部署</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="傻了吧唧的"><a href="#傻了吧唧的" class="headerlink" title="傻了吧唧的"></a>傻了吧唧的</h1><p>其实不是什么大问题，但是这几天脑子有点混乱，情绪很低迷，搞得自己很郁闷。😔<br>切记戒骄戒躁，遇到问题不要心急，静下心来，佛系调bug~~😵</p>
-<p>一直都把热部署的概念搞错了，热部署是指项目发布到服务器之后，以不重启服务器为前提本地重新打包发布到服务器上面运行。</p>
-<p>说起来很好理解，但是本地tomcat热部署和Maven的Tomcat插件热部署还是有些区别的，一直没走出这个误区，静下心来想下真傻😔</p>
-<h1 id="Tomcat本地热部署"><a href="#Tomcat本地热部署" class="headerlink" title="Tomcat本地热部署"></a>Tomcat本地热部署</h1><p><strong>本地启动服务器，本地重新打包发布，run和redeploy是同一个工具</strong><br>本地启动tomcat服务，不重启服务器的前提下更新war包资源。<br>配置很简单<br><img src="/post_image/2018-7-29/1.jpg" alt="Alt text"><br>当需要更新资源时点击右上角选择<code>redeploy</code>重新发布即可。<br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/29/IDEA-Maven-Tomcat插件实现热部署/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -800,7 +812,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        32
+                        34
                     </p>
                 </div>
             </div>
@@ -820,7 +832,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        28
+                        27
                     </p>
                 </div>
             </div>
@@ -920,7 +932,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/interview/">
@@ -950,7 +962,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
     </div>
 </div>
 
@@ -967,16 +979,54 @@
         
         <article class="media">
             
-            <a href="/2019/05/11/Docker补救指南/" class="media-left">
+            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
+                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
+                    <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time></div>
-                    <a href="/2019/05/11/Docker补救指南/" class="has-link-black-ter is-size-6">Docker 补救指南</a>
+                    <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="has-link-black-ter is-size-6">Docker 补救指南（一）—— 基础使用</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -1022,44 +1072,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
-                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
-                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1078,7 +1090,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1186,7 +1198,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1313,13 +1325,6 @@
                     <a class="tags has-addons" href="/tags/分布式/">
                         <span class="tag">分布式</span>
                         <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/微服务/">
-                        <span class="tag">微服务</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1383,16 +1388,54 @@
         
         <article class="media">
             
-            <a href="/2019/05/11/Docker补救指南/" class="media-left">
+            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
+                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
+                    <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time></div>
-                    <a href="/2019/05/11/Docker补救指南/" class="has-link-black-ter is-size-6">Docker 补救指南</a>
+                    <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="has-link-black-ter is-size-6">Docker 补救指南（一）—— 基础使用</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -1438,44 +1481,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time></div>
-                    <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="has-link-black-ter is-size-6">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time></div>
-                    <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="has-link-black-ter is-size-6">数据库常用事务传播行为与隔离级别</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1494,7 +1499,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1602,7 +1607,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1729,13 +1734,6 @@
                     <a class="tags has-addons" href="/tags/分布式/">
                         <span class="tag">分布式</span>
                         <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/微服务/">
-                        <span class="tag">微服务</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
