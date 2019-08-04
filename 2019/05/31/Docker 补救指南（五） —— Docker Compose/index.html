@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Docker 补救指南（五）—— Docker Compose - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="What It Is？ reference：Overview of Docker Compose  Compose 是一个定义和运行多个容器的 Docker 应用。在 Compose，你可以使用一个 YAML 文件配置你的应用的（多个）服务。然后，使用一条命令你可以创建和启动所有的服务从你的配置中。要学习更多的关于 Compose 的特性，请参看：特性列表">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 补救指南（五）—— Docker Compose">
+<meta property="og:url" content="http://yoursite.com/2019/05/31/Docker 补救指南（五） —— Docker Compose/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="What It Is？ reference：Overview of Docker Compose  Compose 是一个定义和运行多个容器的 Docker 应用。在 Compose，你可以使用一个 YAML 文件配置你的应用的（多个）服务。然后，使用一条命令你可以创建和启动所有的服务从你的配置中。要学习更多的关于 Compose 的特性，请参看：特性列表">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.yuzh.xyz/blog48.jpg">
+<meta property="og:updated_time" content="2019-06-21T12:57:36.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 补救指南（五）—— Docker Compose">
+<meta name="twitter:description" content="What It Is？ reference：Overview of Docker Compose  Compose 是一个定义和运行多个容器的 Docker 应用。在 Compose，你可以使用一个 YAML 文件配置你的应用的（多个）服务。然后，使用一条命令你可以创建和启动所有的服务从你的配置中。要学习更多的关于 Compose 的特性，请参看：特性列表">
+<meta name="twitter:image" content="http://img.yuzh.xyz/blog48.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="Docker 补救指南（五）—— Docker Compose" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Katalog" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog48.jpg" alt="Docker 补救指南（五）—— Docker Compose">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-30T16:00:00.000Z">2019-05-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker-note/">docker-note</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 minutes membaca (Sekitar 1596 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Docker 补救指南（五）—— Docker Compose
+            
+        </h1>
+        <div class="content">
+            <h1 id="What-It-Is？"><a href="#What-It-Is？" class="headerlink" title="What It Is？"></a>What It Is？</h1><blockquote>
+<p>reference：<a href="https://docs.docker.com/compose/overview/" target="_blank" rel="noopener">Overview of Docker Compose</a></p>
+</blockquote>
+<p>Compose 是一个定义和运行多个容器的 Docker 应用。在 Compose，你可以使用一个 YAML 文件配置你的应用的（多个）服务。然后，使用一条命令你可以创建和启动所有的服务从你的配置中。要学习更多的关于 Compose 的特性，请参看：<a href="https://docs.docker.com/compose/overview/#features" target="_blank" rel="noopener">特性列表</a><br><a id="more"></a><br>Compose 工作在所有环境：生产、开发、测试，以及 CLI 工作流。你可以学习更所的用例在：<a href="https://docs.docker.com/compose/overview/#common-use-cases" target="_blank" rel="noopener">Comm Use Cases</a></p>
+<p>Compose 的使用基本上是以下三个设置的过程：</p>
+<ul>
+<li>使用 Dockerfile 定义你的应用环境，它可以复制到任何地方。</li>
+<li>在 docker-compose.yml 中定义组成你的应用的服务，他们可以在隔离的环境下共同运行。</li>
+<li>运行 <code>docker-compose up</code> 启动 Compose，运行你的整个 app</li>
+</ul>
+<p>一个 docker-compose.yml 文件看起来像这样：</p>
+<pre><code>version: &apos;3&apos;
+services:
+  web:
+    build: .
+    ports:
+    - &quot;5000:5000&quot;
+    volumes:
+    - .:/code
+    - logvolume01:/var/log
+    links:
+    - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+</code></pre><p>关于更多 compose 文件信息，请查看：<a href="https://docs.docker.com/compose/compose-file/" target="_blank" rel="noopener">Compose file reference.</a></p>
+<p>compose 有管理你应用整个生命周期的命令：</p>
+<ul>
+<li>启动、停止、重新构建服务</li>
+<li>查看所有运行中服务的状态</li>
+<li>正在运行的服务的日志输出流</li>
+<li>在服务上运行一次性命令。</li>
+</ul>
+<p><strong>特性：</strong><br>有效的 Compose 功能有：</p>
+<ul>
+<li>单个主机上多个隔离的环境</li>
+<li>保存数据卷数据当容器被创建</li>
+<li>仅重新创建已更改的容器</li>
+<li>变量和环境更改</li>
+</ul>
+<p>……</p>
+<h1 id="How-To-Do-It？"><a href="#How-To-Do-It？" class="headerlink" title="How To Do It？"></a>How To Do It？</h1><p>一个较为详细的微服务项目所需要的 docker-compose.yml 及主要一级关键字：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">version:</span> <span class="hljs-string">'3'</span></span><br><span class="line"><span class="hljs-comment"># 用来声明服务，在该节点之下配置多个服务。</span></span><br><span class="line"><span class="hljs-attr">service:</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment"># web 服务</span></span><br><span class="line"><span class="hljs-attr">    web:</span></span><br><span class="line"><span class="hljs-attr">        image:</span> <span class="hljs-string">id/imagename:lable</span></span><br><span class="line">		<span class="hljs-comment"># 指定重启策略（on：默认值，若启动失败不做任何动作 / always：会一直重新启动 / on-failure：服务提示失败错误后会重新启动 / unless-stopped：只有服务在停止后才会重启）</span></span><br><span class="line"><span class="hljs-attr">        restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">        container_name:</span> <span class="hljs-string">my-web-container_name</span></span><br><span class="line"><span class="hljs-attr">        ports:</span></span><br><span class="line"><span class="hljs-bullet">            -</span> <span class="hljs-number">8080</span><span class="hljs-string">:8080</span></span><br><span class="line">    	<span class="hljs-comment"># 指定网络，该网络引用下面的配置。</span></span><br><span class="line"><span class="hljs-attr">        networks:</span></span><br><span class="line"><span class="hljs-bullet">            -</span> <span class="hljs-string">example-net</span></span><br><span class="line">        <span class="hljs-comment"># 服务依赖，指定服务启动顺序。（3版本之后该属性被忽略）</span></span><br><span class="line"><span class="hljs-attr">        depends_on:</span></span><br><span class="line"><span class="hljs-bullet">            -</span> <span class="hljs-string">db</span></span><br><span class="line">        <span class="hljs-comment"># 服务 swarm 集群部署，非集群下无效。</span></span><br><span class="line"><span class="hljs-attr">        deploy:</span></span><br><span class="line">			<span class="hljs-comment"># 服务副本数量</span></span><br><span class="line"><span class="hljs-attr">            replicas:</span> <span class="hljs-number">2</span></span><br><span class="line">			<span class="hljs-comment"># 集群环境下的重启策略，属性值与上面的一样</span></span><br><span class="line"><span class="hljs-attr">            restart_policy:</span></span><br><span class="line"><span class="hljs-attr">                condition:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment"># 数据库服务</span></span><br><span class="line"><span class="hljs-attr">    db:</span></span><br><span class="line"><span class="hljs-attr">        images:</span> <span class="hljs-attr">mysql:5.6</span></span><br><span class="line"><span class="hljs-attr">        restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">        container_name:</span> <span class="hljs-string">mysql-container</span></span><br><span class="line"><span class="hljs-attr">        ports:</span></span><br><span class="line"><span class="hljs-bullet">            -</span> <span class="hljs-number">3306</span><span class="hljs-string">:3306</span></span><br><span class="line"><span class="hljs-attr">        volumes:</span></span><br><span class="line"><span class="hljs-attr">            - example-mysql:</span> <span class="hljs-string">/var/lib/mysql</span></span><br><span class="line"><span class="hljs-attr">        networks:</span></span><br><span class="line"><span class="hljs-attr">            - example-net:</span></span><br><span class="line">        <span class="hljs-comment"># 环境变量</span></span><br><span class="line"><span class="hljs-attr">        environment:</span></span><br><span class="line"><span class="hljs-attr">            MYSQL_ROOT_PASSWORD:</span> <span class="hljs-string">root</span></span><br><span class="line"><span class="hljs-attr">            MYSQL_DATABASE:</span> <span class="hljs-string">mysql_database</span></span><br><span class="line"><span class="hljs-attr">        deploy:</span></span><br><span class="line"><span class="hljs-attr">            replicas:</span> <span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">            restart_policy:</span></span><br><span class="line"><span class="hljs-attr">                condition:</span> <span class="hljs-string">on-failure</span></span><br><span class="line">			<span class="hljs-comment"># 该服务只有管理节点才能启动</span></span><br><span class="line"><span class="hljs-attr">            placement:</span></span><br><span class="line"><span class="hljs-attr">                constraints:</span> <span class="hljs-string">[node.role</span> <span class="hljs-string">==</span> <span class="hljs-string">manager]</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">networks:</span></span><br><span class="line"><span class="hljs-attr">    example-net:</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">volumes:</span></span><br><span class="line"><span class="hljs-attr">    example-mysql:</span></span><br></pre></td></tr></table></figure>
+<p>关于 docker-compose 文件的所有细节，参考：<a href="https://docs.docker.com/compose/compose-file/" target="_blank" rel="noopener">https://docs.docker.com/compose/compose-file/</a></p>
+<h1 id="微服务下的-Docker-部署"><a href="#微服务下的-Docker-部署" class="headerlink" title="微服务下的 Docker 部署"></a>微服务下的 Docker 部署</h1><h2 id="准备微服务测试项目"><a href="#准备微服务测试项目" class="headerlink" title="准备微服务测试项目"></a>准备微服务测试项目</h2><p>四个微服务，分别是：</p>
+<ul>
+<li><code>euraka-server</code></li>
+<li><code>gateway-zuul</code></li>
+<li><code>microservice-orderservice</code></li>
+<li><code>microservice-userservice</code></li>
+</ul>
+<h2 id="编写-Dockerfile"><a href="#编写-Dockerfile" class="headerlink" title="编写 Dockerfile"></a>编写 Dockerfile</h2><p>分别为四个基础服务提供 Dockerfile 用以构建镜像上传到远程仓库，四个 Dockerfile 都是类似的：</p>
+<p>euraka-server:<br><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8-jre</span><br><span class="line">MAINTAINER harry&lt;yuzh233@gmail.com&gt;</span><br><span class="line"></span><br><span class="line">ADD ./target/microservice-eureka-server-0.0.1-SNAPSHOT.jar /app/microservice-eureka-service.jar</span><br><span class="line">CMD [<span class="hljs-string">"java"</span>, <span class="hljs-string">"-Xmx200m"</span>, <span class="hljs-string">"-jar"</span>, <span class="hljs-string">"/app/microservice-eureka-service.jar"</span>]</span><br><span class="line"></span><br><span class="line">EXPOSE 8761</span><br></pre></td></tr></table></figure></p>
+<p>gateway-zuul:<br><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8-jre</span><br><span class="line">MAINTAINER harry&lt;yuzh233@gmail.com&gt;</span><br><span class="line"></span><br><span class="line">ADD ./target/microservice-gateway-zuul-0.0.1-SNAPSHOT.jar /app/microservice-gateway-zuul.jar</span><br><span class="line">CMD [<span class="hljs-string">"java"</span>, <span class="hljs-string">"-Xmx200m"</span>, <span class="hljs-string">"-jar"</span>, <span class="hljs-string">"/app/microservice-gateway-zuul.jar"</span>]</span><br><span class="line"></span><br><span class="line">EXPOSE 8050</span><br></pre></td></tr></table></figure></p>
+<p>microservice-orderservice:<br><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8-jre</span><br><span class="line">MAINTAINER harry&lt;yuzh233@gmail.com&gt;</span><br><span class="line"></span><br><span class="line">ADD ./target/microservice-orderservice-0.0.1-SNAPSHOT.jar /app/microservice-orderservice.jar</span><br><span class="line">CMD [<span class="hljs-string">"java"</span>, <span class="hljs-string">"-Xmx200m"</span>, <span class="hljs-string">"-jar"</span>, <span class="hljs-string">"/app/microservice-orderservice.jar"</span>]</span><br><span class="line"></span><br><span class="line">EXPOSE 7900</span><br></pre></td></tr></table></figure></p>
+<p>microservice-userservice:<br><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8-jre</span><br><span class="line"></span><br><span class="line">MAINTAINER harry&lt;yuzh233@gmail.com&gt;</span><br><span class="line"></span><br><span class="line">ADD ./target/microservice-userservice-0.0.1-SNAPSHOT.jar  /app/microservice-userservice.jar</span><br><span class="line"></span><br><span class="line">EXPOSE 8030</span><br><span class="line"></span><br><span class="line">CMD [<span class="hljs-string">"java"</span>, <span class="hljs-string">"-Xmx200m"</span>, <span class="hljs-string">"-jar"</span>, <span class="hljs-string">"/app/microservice-userservice.jar"</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><p>构建后面需要部署的基础镜像，有了镜像后可以通过执行 <code>docker run</code> 命令一一启动，但是对于微服务项目来说逐个启动效率不免有点太低，我们可以通过 docker-compose 快速启动。</p>
+<p>关于镜像的构建与推送，可以使用 maven 的 dockerfile 插件 👉 <a href>笔记</a></p>
+<p>举例：<br><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;com.spotify&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;dockerfile-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.4.3&lt;/version&gt;</span><br><span class="line">	&lt;executions&gt;</span><br><span class="line">		&lt;execution&gt;</span><br><span class="line">			&lt;id&gt;default&lt;/id&gt;</span><br><span class="line">			&lt;!-- 如果不指定 phase 则会使用默认的 goals，即：package -&gt; build, deploy -&gt; push --&gt;</span><br><span class="line">			&lt;phase&gt;install&lt;/phase&gt;</span><br><span class="line">			&lt;goals&gt;</span><br><span class="line">				&lt;goal&gt;build&lt;/goal&gt;</span><br><span class="line">				&lt;goal&gt;push&lt;/goal&gt;</span><br><span class="line">			&lt;/goals&gt;</span><br><span class="line">		&lt;/execution&gt;</span><br><span class="line">	&lt;/executions&gt;</span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;repository&gt;registry.cn-hangzhou.aliyuncs.com/yuzh/<span class="hljs-variable">$&#123;artifactId&#125;</span>&lt;/repository&gt;</span><br><span class="line">		&lt;tag&gt;<span class="hljs-variable">$&#123;project.version&#125;</span>&lt;/tag&gt;</span><br><span class="line">		&lt;useMavenSettingsForAuth&gt;<span class="hljs-literal">true</span>&lt;/useMavenSettingsForAuth&gt;</span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<p><em>NOTE：需要先安装 JDK 和 MAVEN 环境。</em></p>
+<h2 id="非集群环境下的部署"><a href="#非集群环境下的部署" class="headerlink" title="非集群环境下的部署"></a>非集群环境下的部署</h2><p><strong>一）登陆远程服务器，拉取镜像。</strong></p>
+<p>如果是在镜像上传的主机上运行，则默认存在了。</p>
+<p><strong>二）准备 docker-compose.yml</strong></p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">version:</span> <span class="hljs-string">"3"</span></span><br><span class="line"><span class="hljs-attr">services:</span></span><br><span class="line">  <span class="hljs-comment"># 第一个服务</span></span><br><span class="line"><span class="hljs-attr">  mysql:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">mysql</span></span><br><span class="line"><span class="hljs-attr">    restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-number">3336</span><span class="hljs-string">:3306</span> <span class="hljs-comment"># 容器外可以通过 3336 连接到容器内的服务端</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span></span><br><span class="line"><span class="hljs-attr">      - microservice-mysql:</span><span class="hljs-string">/var/lib/mysql</span></span><br><span class="line"><span class="hljs-attr">    networks:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">microservice-net</span></span><br><span class="line"><span class="hljs-attr">    environment:</span></span><br><span class="line"><span class="hljs-attr">      MYSQL_ROOT_PASSWORD:</span> <span class="hljs-string">harry@admin</span></span><br><span class="line"><span class="hljs-attr">      MYSQL_DATABASE:</span> <span class="hljs-string">microservice_mallmanagement</span></span><br><span class="line"><span class="hljs-attr">    deploy:</span></span><br><span class="line"><span class="hljs-attr">      replicas:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># 副本数量</span></span><br><span class="line"><span class="hljs-attr">      restart_policy:</span> <span class="hljs-comment"># 重启策略</span></span><br><span class="line"><span class="hljs-attr">        condition:</span> <span class="hljs-string">on-failure</span> <span class="hljs-comment"># 失败时重启</span></span><br><span class="line"><span class="hljs-attr">      placement:</span></span><br><span class="line"><span class="hljs-attr">        constraints:</span> <span class="hljs-string">[node.role</span> <span class="hljs-string">==</span> <span class="hljs-string">manager]</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment"># 第二个服务</span></span><br><span class="line"><span class="hljs-attr">  eureka-server:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/yuzh/microservice-eureka-server:0.0.1-SNAPSHOT</span></span><br><span class="line"><span class="hljs-attr">    restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-number">8761</span><span class="hljs-string">:8761</span></span><br><span class="line"><span class="hljs-attr">    networks:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">microservice-net</span></span><br><span class="line"><span class="hljs-attr">    deploy:</span></span><br><span class="line"><span class="hljs-attr">      replicas:</span> <span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">      restart_policy:</span></span><br><span class="line"><span class="hljs-attr">        condition:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment"># 第三个服务</span></span><br><span class="line"><span class="hljs-attr">  gateway-zuul:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/yuzh/microservice-gateway-zuul:0.0.1-SNAPSHOT</span></span><br><span class="line"><span class="hljs-attr">    restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-number">8050</span><span class="hljs-string">:8050</span></span><br><span class="line"><span class="hljs-attr">    networks:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">microservice-net</span></span><br><span class="line"><span class="hljs-attr">    depends_on:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">eureka-server</span></span><br><span class="line"><span class="hljs-attr">    deploy:</span></span><br><span class="line"><span class="hljs-attr">      replicas:</span> <span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">      restart_policy:</span></span><br><span class="line"><span class="hljs-attr">        condition:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">      placement:</span></span><br><span class="line"><span class="hljs-attr">        constraints:</span> <span class="hljs-string">[node.role</span> <span class="hljs-string">==</span> <span class="hljs-string">manager]</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment"># 第四个服务</span></span><br><span class="line"><span class="hljs-attr">  order-service:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/yuzh/microservice-orderservice:0.0.1-SNAPSHOT</span></span><br><span class="line"><span class="hljs-attr">    restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-number">7900</span><span class="hljs-string">:7900</span></span><br><span class="line"><span class="hljs-attr">    networks:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">microservice-net</span></span><br><span class="line"><span class="hljs-attr">    depends_on:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">mysql</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">eureka-server</span></span><br><span class="line"><span class="hljs-attr">    deploy:</span></span><br><span class="line"><span class="hljs-attr">      replicas:</span> <span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">      restart_policy:</span></span><br><span class="line"><span class="hljs-attr">        condition:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment"># 第五个服务</span></span><br><span class="line"><span class="hljs-attr">  user-service:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/yuzh/microservice-userservice:0.0.1-SNAPSHOT</span></span><br><span class="line"><span class="hljs-attr">    restart:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-number">8030</span><span class="hljs-string">:8030</span></span><br><span class="line"><span class="hljs-attr">    networks:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">microservice-net</span></span><br><span class="line"><span class="hljs-attr">    depends_on:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">mysql</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">eureka-server</span></span><br><span class="line"><span class="hljs-attr">    deploy:</span></span><br><span class="line"><span class="hljs-attr">      replicas:</span> <span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">      restart_policy:</span></span><br><span class="line"><span class="hljs-attr">        condition:</span> <span class="hljs-string">on-failure</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment"># 第六个服务</span></span><br><span class="line"><span class="hljs-attr">  visualizer:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">dockersamples/visualizer:stable</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-number">8081</span><span class="hljs-string">:8080</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span></span><br><span class="line"><span class="hljs-attr">    deploy:</span></span><br><span class="line"><span class="hljs-attr">      placement:</span></span><br><span class="line"><span class="hljs-attr">        constraints:</span> <span class="hljs-string">[node.role</span> <span class="hljs-string">==</span> <span class="hljs-string">manager]</span></span><br><span class="line"><span class="hljs-attr">    networks:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">microservice-net</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">networks:</span></span><br><span class="line"><span class="hljs-attr">  microservice-net:</span></span><br><span class="line"><span class="hljs-attr">volumes:</span></span><br><span class="line"><span class="hljs-attr">  microservice-mysql:</span></span><br></pre></td></tr></table></figure>
+<p><em>note: Mysql 容器运行的一些细节，可见 《Docker 补救指南（一）—— 基础使用》 的 <code>Mysql 容器</code> 部分。</em></p>
+<p><strong>三）在 docker-compose.yml 目录下执行：<code>docker-compose up</code></strong></p>
+<p>如需停止：<code>docker-compose down</code></p>
+<h2 id="集群环境下的部署"><a href="#集群环境下的部署" class="headerlink" title="集群环境下的部署"></a>集群环境下的部署</h2><p><strong>一）登陆远程仓库</strong></p>
+<p><strong>二）部署服务</strong></p>
+<pre><code>docker stack deploy -c docker-compose-swarm.yml --with-registry-auth mall-management
+</code></pre><ul>
+<li><code>-c</code>：指定 docker-compose 文件地址</li>
+<li><code>--with-registry-auth</code>：通知所有服务节点要到指定的私有仓库拉取镜像</li>
+<li>mall-management：集群服务的总名称</li>
+</ul>
+<p><strong>三）管理命令</strong></p>
+<p>查看所有集群服务：</p>
+<pre><code>docker stack ps
+</code></pre><p>删除指定集群服务：</p>
+<pre><code>docker stack rm XX
+</code></pre><p>更多命令：</p>
+<pre><code>docker stack --help
+</code></pre>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/docker/">docker</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/31/[20190531] maven | password encryption/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">20190531 maven | password encryption</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/30/Docker 补救指南（四）—— dockerfile-maven-plugin/">
+                <span class="level-item">Docker 补救指南（四）—— dockerfile-maven-plugin</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'more than just code.'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        more than just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Artikel
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        59
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Kategori
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tag
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                IKUTI</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+<!-- <div class="card widget column-left is-sticky" id="toc"> -->
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Katalog
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#What-It-Is？">
+        <span class="has-mr-6">1</span>
+        <span>What It Is？</span>
+        </a></li><li>
+        <a class="is-flex" href="#How-To-Do-It？">
+        <span class="has-mr-6">2</span>
+        <span>How To Do It？</span>
+        </a></li><li>
+        <a class="is-flex" href="#微服务下的-Docker-部署">
+        <span class="has-mr-6">3</span>
+        <span>微服务下的 Docker 部署</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#准备微服务测试项目">
+        <span class="has-mr-6">3.1</span>
+        <span>准备微服务测试项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#编写-Dockerfile">
+        <span class="has-mr-6">3.2</span>
+        <span>编写 Dockerfile</span>
+        </a></li><li>
+        <a class="is-flex" href="#构建镜像">
+        <span class="has-mr-6">3.3</span>
+        <span>构建镜像</span>
+        </a></li><li>
+        <a class="is-flex" href="#非集群环境下的部署">
+        <span class="has-mr-6">3.4</span>
+        <span>非集群环境下的部署</span>
+        </a></li><li>
+        <a class="is-flex" href="#集群环境下的部署">
+        <span class="has-mr-6">3.5</span>
+        <span>集群环境下的部署</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Tautan
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Kategori
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/docker-note/">
+            <span class="level-start">
+                <span class="level-item">docker-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Awan tag
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="Docker 补救指南（五）—— Docker Compose" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 张 瑜&nbsp;
+                Powered by Hexo & Icarus<br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">湘ICP备 18020713号</a>
+                </p>
+                
+                <p></p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

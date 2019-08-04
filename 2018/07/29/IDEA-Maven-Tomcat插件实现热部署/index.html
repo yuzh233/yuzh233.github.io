@@ -8,19 +8,19 @@
 
 
     <meta name="description" content="傻了吧唧的其实不是什么大问题，但是这几天脑子有点混乱，情绪很低迷，搞得自己很郁闷。😔切记戒骄戒躁，遇到问题不要心急，静下心来，佛系调bug~~😵 一直都把热部署的概念搞错了，热部署是指项目发布到服务器之后，以不重启服务器为前提本地重新打包发布到服务器上面运行。 说起来很好理解，但是本地tomcat热部署和Maven的Tomcat插件热部署还是有些区别的，一直没走出这个误区，静下心来想下真傻😔">
-<meta name="keywords" content="idea,maven,tomcat">
+<meta name="keywords" content="maven,idea,tomcat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDEA+Maven+Tomcat插件实现热部署">
 <meta property="og:url" content="http://yoursite.com/2018/07/29/IDEA-Maven-Tomcat插件实现热部署/index.html">
 <meta property="og:site_name" content="harry&#39;s blog">
 <meta property="og:description" content="傻了吧唧的其实不是什么大问题，但是这几天脑子有点混乱，情绪很低迷，搞得自己很郁闷。😔切记戒骄戒躁，遇到问题不要心急，静下心来，佛系调bug~~😵 一直都把热部署的概念搞错了，热部署是指项目发布到服务器之后，以不重启服务器为前提本地重新打包发布到服务器上面运行。 说起来很好理解，但是本地tomcat热部署和Maven的Tomcat插件热部署还是有些区别的，一直没走出这个误区，静下心来想下真傻😔">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/img/random/16.jpg">
-<meta property="og:updated_time" content="2018-11-05T10:55:29.000Z">
+<meta property="og:image" content="http://img.yuzh.xyz/blog/21.jpg">
+<meta property="og:updated_time" content="2019-06-19T06:03:31.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IDEA+Maven+Tomcat插件实现热部署">
 <meta name="twitter:description" content="傻了吧唧的其实不是什么大问题，但是这几天脑子有点混乱，情绪很低迷，搞得自己很郁闷。😔切记戒骄戒躁，遇到问题不要心急，静下心来，佛系调bug~~😵 一直都把热部署的概念搞错了，热部署是指项目发布到服务器之后，以不重启服务器为前提本地重新打包发布到服务器上面运行。 说起来很好理解，但是本地tomcat热部署和Maven的Tomcat插件热部署还是有些区别的，一直没走出这个误区，静下心来想下真傻😔">
-<meta name="twitter:image" content="http://yoursite.com/img/random/16.jpg">
+<meta name="twitter:image" content="http://img.yuzh.xyz/blog/21.jpg">
 
 
 
@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/vs.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
 
 
     
@@ -126,12 +126,12 @@
                     
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                <a class="navbar-item is-hidden-tablet catalogue" title="Katalog" href="javascript:;">
                     <i class="fas fa-list-ul"></i>
                 </a>
                 
                 
-                <a class="navbar-item search" title="Search" href="javascript:;">
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -147,7 +147,7 @@
     
     <div class="card-image">
         <span class="image is-7by1">
-            <img class="thumbnail" src="/img/random/16.jpg" alt="IDEA+Maven+Tomcat插件实现热部署">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="IDEA+Maven+Tomcat插件实现热部署">
         </span>
     </div>
     
@@ -161,7 +161,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 768 words)
+                    5 minutes membaca (Sekitar 768 kata)
                 </span>
                 
                 
@@ -240,7 +240,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
         
 <div id="valine-thread" class="content"></div>
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
@@ -274,7 +274,7 @@
                 <div>
                     
                         <figure class="image is-128x128 has-mb-6">
-                            <img class="is-rounded" src="/images/tou.jpg" alt="harry.zh">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
                         </figure>
                     
                     
@@ -300,37 +300,37 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Artikel
                     </p>
                     <p class="title has-text-weight-normal">
-                        34
+                        59
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Kategori
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        8
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Tag
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        31
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
-                Follow</a>
+                IKUTI</a>
         </div>
         
         
@@ -377,7 +377,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Catalogue
+                Katalog
             </h3>
             <ul class="menu-list"><li>
         <a class="is-flex" href="#傻了吧唧的">
@@ -423,7 +423,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            Tautan
         </h3>
         <ul class="menu-list">
         
@@ -450,7 +450,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Kategori
             </h3>
             <ul class="menu-list">
             <li>
@@ -462,17 +462,49 @@
                 <span class="level-item tag">2</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/docker/">
+        <a class="level is-marginless" href="/categories/docker-note/">
             <span class="level-start">
-                <span class="level-item">docker</span>
+                <span class="level-item">docker-note</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/interview/">
             <span class="level-start">
                 <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">9</span>
@@ -495,9 +527,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Awan tag
         </h3>
-        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
     </div>
 </div>
 
@@ -509,23 +541,23 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Terbaru
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -533,18 +565,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="media-left">
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
-                    <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -552,18 +584,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="media-left">
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time></div>
-                    <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="has-link-black-ter is-size-6">Docker 补救指南（一）—— 基础使用</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -571,18 +603,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+            <a href="/2019/07/15/终端走代理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -590,18 +622,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        
                     </p>
                 </div>
             </div>
@@ -615,9 +647,42 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Arsip
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -625,7 +690,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -705,7 +770,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Tag
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -733,7 +798,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -759,9 +831,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -789,14 +868,21 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -832,6 +918,13 @@
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -918,23 +1011,23 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Terbaru
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -942,18 +1035,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="media-left">
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
-                    <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -961,18 +1054,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="media-left">
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time></div>
-                    <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="has-link-black-ter is-size-6">Docker 补救指南（一）—— 基础使用</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -980,18 +1073,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+            <a href="/2019/07/15/终端走代理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -999,18 +1092,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        
                     </p>
                 </div>
             </div>
@@ -1024,9 +1117,42 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Arsip
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -1034,7 +1160,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1114,7 +1240,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Tag
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1142,7 +1268,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1168,9 +1301,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1198,14 +1338,21 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1241,6 +1388,13 @@
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1438,7 +1592,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1472,7 +1626,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1484,11 +1638,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
             },
             CONTENT_URL: '/content.json',
         };

@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>20190622 spring-boot | part3(17~22) - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Spring Boot Reference Guide2.1.5.RELEASEhttps://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-spring-beans-and-dependency-injection.html  Part III. Using Spring Boot  17 Spr">
+<meta name="keywords" content="spring-boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20190622 spring-boot | part3(17~22)">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/[20190622] spring-boot | part3(17~22)/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="Spring Boot Reference Guide2.1.5.RELEASEhttps://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-spring-beans-and-dependency-injection.html  Part III. Using Spring Boot  17 Spr">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.yuzh.xyz/blog/wallhaven-201451.jpg">
+<meta property="og:updated_time" content="2019-07-05T03:32:45.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20190622 spring-boot | part3(17~22)">
+<meta name="twitter:description" content="Spring Boot Reference Guide2.1.5.RELEASEhttps://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-spring-beans-and-dependency-injection.html  Part III. Using Spring Boot  17 Spr">
+<meta name="twitter:image" content="http://img.yuzh.xyz/blog/wallhaven-201451.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="20190622 spring-boot | part3(17~22)" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Katalog" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-201451.jpg" alt="20190622 spring-boot | part3(17~22)">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-21T16:00:00.000Z">2019-06-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/spring-boot/">spring-boot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    42 minutes membaca (Sekitar 6301 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                20190622 spring-boot | part3(17~22)
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Spring Boot Reference Guide<br>2.1.5.RELEASE<br><a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-spring-beans-and-dependency-injection.html" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-spring-beans-and-dependency-injection.html</a></p>
+</blockquote>
+<p></p><h1 style="color:green; text-align:center;">Part III. Using Spring Boot</h1><br><!-- TOC --><p></p>
+<ul>
+<li><a href="#17-spring-bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5">17 Spring Bean 依赖注入</a></li>
+<li><a href="#18-%E4%BD%BF%E7%94%A8-springbootapplication-%E6%B3%A8%E8%A7%A3">18. 使用 @SpringBootApplication 注解</a></li>
+<li><a href="#19-%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8">19. 运行你的应用</a><ul>
+<li><a href="#191-%E4%BB%8E-ide-%E8%BF%90%E8%A1%8C">19.1 从 IDE 运行</a></li>
+<li><a href="#192-%08%E4%BD%9C%E4%B8%BA%E6%89%93%E5%8C%85%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C">19.2 作为打包应用程序运行</a></li>
+<li><a href="#193-%E4%BD%BF%E7%94%A8-maven-%E6%8F%92%E4%BB%B6">19.3 使用 Maven 插件</a></li>
+<li><a href="#194-%E4%BD%BF%E7%94%A8-gradle-%E6%8F%92%E4%BB%B6">19.4 使用 Gradle 插件</a></li>
+<li><a href="#195-%E7%83%AD%E9%83%A8%E7%BD%B2">19.5 热部署</a></li>
+</ul>
+</li>
+<li><a href="#20-%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7">20. 开发者工具</a><ul>
+<li><a href="#201-%E9%BB%98%E8%AE%A4%E5%B1%9E%E6%80%A7">20.1 默认属性</a></li>
+<li><a href="#202-%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF">20.2 自动重启</a><ul>
+<li><a href="#2021-%E5%9C%A8%E7%8A%B6%E6%80%81%E8%AF%84%E4%BC%B0condition-evaluation%E4%B8%AD%E8%AE%B0%E5%BD%95%08%E5%8F%98%E5%8C%96">20.2.1. 在状态评估（condition evaluation）中记录变化</a></li>
+<li><a href="#2022-%E6%8E%92%E9%99%A4%E8%B5%84%E6%BA%90">20.2.2. 排除资源</a></li>
+<li><a href="#2023-%E7%9B%91%E8%A7%86%E9%A2%9D%E5%A4%96%E7%9A%84%E8%B7%AF%E5%BE%84">20.2.3. 监视额外的路径</a></li>
+<li><a href="#2024-%E7%A6%81%E7%94%A8%E9%87%8D%E5%90%AF">20.2.4. 禁用重启</a></li>
+<li><a href="#2025-%E4%BD%BF%E7%94%A8%E8%A7%A6%E5%8F%91%E6%96%87%E4%BB%B6">20.2.5. 使用触发文件</a></li>
+<li><a href="#2026-%E5%AE%9A%E5%88%B6%E9%87%8D%E5%90%AF%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8">20.2.6. 定制重启类加载器</a></li>
+<li><a href="#2027-%E5%B7%B2%E7%9F%A5%E9%99%90%E5%88%B6">20.2.7. 已知限制</a></li>
+</ul>
+</li>
+<li><a href="#203-%E7%83%AD%E5%8A%A0%E8%BD%BD">20.3 热加载</a></li>
+<li><a href="#204-%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE">20.4 全局设置</a></li>
+<li><a href="#205-%E8%BF%9C%E7%A8%8B%E5%BA%94%E7%94%A8">20.5 远程应用</a><ul>
+<li><a href="#2051-%E8%BF%90%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BA%94%E7%94%A8%E5%AE%A2%E6%88%B7%E7%AB%AF">20.5.1 运行远程应用客户端</a></li>
+<li><a href="#2052-%E8%BF%9C%E7%A8%8B%E6%9B%B4%E6%96%B0">20.5.2 远程更新</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#21-%E4%B8%BA%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%89%93%E5%8C%85%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8">21. 为生产环境打包你的应用</a></li>
+<li><a href="#22-%08%E4%B8%8B%E4%B8%80%E6%AD%A5%E6%98%AF%E4%BB%80%E4%B9%88">22. 下一步是什么</a></li>
+</ul>
+<!-- /TOC -->
+<a id="more"></a>
+<h1 id="17-Spring-Bean-依赖注入"><a href="#17-Spring-Bean-依赖注入" class="headerlink" title="17 Spring Bean 依赖注入"></a>17 Spring Bean 依赖注入</h1><p>你可以免费使用任意标准的 Spring 框架技术来定义的你的 bean 和管理依赖注入。为了简单，我们经常发现使用 @ComponentScan （查找你的 bean）和使用 @Autowired （做依赖注入）效果很好（work well）。<br><!-- more --><br>如果按照上面的建议构造你的代码（在根包中定位应用程序类），你可以无理由的（without arguments）添加 @ComponentScan。你应用的所有组件（@Component、@Service、@Repository、@Controller）都会自动注册到 Spring bean里。</p>
+<p>以下实例展示了一个 @Service bean，它使用控制器注入以获得必要的 <code>RiskAssessor</code> bean：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.example.service;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Service</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DatabaseAccountService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">AccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> RiskAssessor riskAssessor;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Autowired</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DatabaseAccountService</span><span class="hljs-params">(RiskAssessor riskAssessor)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.riskAssessor = riskAssessor;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">// ...</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果这个 bean 有一个控制器，你可以省略 @Autowired，如以下所示：<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Service</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DatabaseAccountService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">AccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> RiskAssessor riskAssessor;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DatabaseAccountService</span><span class="hljs-params">(RiskAssessor riskAssessor)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.riskAssessor = riskAssessor;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">// ...</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意，如果使用控制器注入让 riskAssessor 字段标记为 final。这表明（indicating）它随后（subsequently）不能被修改。</p>
+</blockquote>
+<h1 id="18-使用-SpringBootApplication-注解"><a href="#18-使用-SpringBootApplication-注解" class="headerlink" title="18. 使用 @SpringBootApplication 注解"></a>18. 使用 @SpringBootApplication 注解</h1><p>许多 Spring Boot 的开发者喜欢他们的应用使用自动配置，组件扫描和能够（be able to）在他们的主类上定义额外的（extra）的配置。一个单一的 @SpringBootApplication 注解就可以被用于启用这些三个特性，他们是：</p>
+<ul>
+<li><code>@EnableAutoConfiguration</code>：开启<a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-auto-configuration.html" target="_blank" rel="noopener">Spring Boot 的自动配置机制</a></li>
+<li><code>@ComponentScan</code>：对应用程序所在的包启用 @Component 扫描（<a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-structuring-your-code.html" target="_blank" rel="noopener">最佳实战</a>）</li>
+<li><code>@Configuration</code>：允许在上下文注册额外的 bean 或者导入额外的配置类</li>
+</ul>
+<p>这个 @SpringBootApplication 注解等价于（equivalent）使用 @Configuration，@EnableAutoConfiguration，和 @ComponentScan 他们的默认属性，如下所示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.example.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span> <span class="hljs-comment">// same as @Configuration @EnableAutoConfiguration @ComponentScan</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(Application.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>@SpringBootApplication 同样提供别名定义 @EnableAutoConfiguration，和 @ComponentScan 的属性</p>
+</blockquote>
+<p>这些功能都不是强制性的（mandatory），你可以选择通过打开任何的特性来替换这个单个注解。例如：你可能不想在你的应用中使用注解扫描：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.example.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.ComponentScan;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Import;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="hljs-meta">@Import</span>(&#123; MyConfig.class, MyAnotherConfig.class &#125;)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">			SpringApplication.run(Application.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，Application 就像其他的 Spring Boot 应用一样除了 @Component 注解类不会被监测到，用户定义的 bean 被显式的导入（见 @Import）。</p>
+<h1 id="19-运行你的应用"><a href="#19-运行你的应用" class="headerlink" title="19. 运行你的应用"></a>19. 运行你的应用</h1><p>打包你的应用作为一个 jar 和使用内嵌的 HTTP 服务器的一个最大的优势是：你可以像其他应用程序一样运行你的应用。Spring Boot 的调试也同样简单，你不需要任何特定的 IDE 插件或拓展程序。</p>
+<blockquote>
+<p>这个章节只涵盖基于包的 jar，如果你选择打包你的应用作为一个 war 包文件，你可以参考服务器和 IDE 文档。</p>
+</blockquote>
+<h2 id="19-1-从-IDE-运行"><a href="#19-1-从-IDE-运行" class="headerlink" title="19.1 从 IDE 运行"></a>19.1 从 IDE 运行</h2><p>你可以从你的 IDE 作为一个简单的 Java 应用运行 Spring Boot。然而，你首先需要导入你的项目。导入的步骤的不同（vary）依赖于（depending on）你的 IDE 和构建系统。大多数 IDE 可以直接导入 maven 项目。例如：Eclipse 用户可以选择 <code>import</code> -&gt; <code>existing maven projects</code> 从文件菜单。</p>
+<p>如果你不想直接导入你的项目到你的 IDE，你可以通过使用构建插件生成 IDE 元数据。Maven 包含了 IDEA 和 Eclipse 插件。gradle 为各种（various） ide 提供插件。</p>
+<blockquote>
+<p>如果你不小心（accidentally）运行了你的应用程序两次，你可以查看“端口已被使用”错误。STS 用户可以使用 <code>Relaunch</code> 按钮而不是（rather than）<code>Run</code> 按钮以确保（ensure）任何存在的实例是关闭的。</p>
+</blockquote>
+<h2 id="19-2-作为打包应用程序运行"><a href="#19-2-作为打包应用程序运行" class="headerlink" title="19.2 作为打包应用程序运行"></a>19.2 作为打包应用程序运行</h2><p>如果你使用 Spring Boot Maven 或 Gradle 插件创建一个可执行 jar，你可以运行你的应用使用 <code>java -jar</code>，如以下所示：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar target/myapplication-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+<p>还可以在启用远程调试支持的情况下运行打包应用程序。这样做可以使你依附一个调试器到你的应用程序，如以下所示：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,<span class="hljs-built_in">suspend</span>=n \</span><br><span class="line">       -jar target/myapplication-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+<h2 id="19-3-使用-Maven-插件"><a href="#19-3-使用-Maven-插件" class="headerlink" title="19.3 使用 Maven 插件"></a>19.3 使用 Maven 插件</h2><p>Spring Boot Maven 插件包含一个 <code>run</code> 目标可以使用它快速启动编译和运行你的应用。应用程序以分解形式（exploded）运行，如在你的 IDE 一样。以下的一个例子展示了一个典型的 maven 命令运行你的 spring boot 应用：</p>
+<pre><code>mvn spring-boot:run
+</code></pre><p>你可能想要使用 <code>MAVEN_OPTS</code> 操作系统环境变量，如下所示：</p>
+<pre><code>export MAVEN_OPTS=-Xmx1024m
+</code></pre><h2 id="19-4-使用-Gradle-插件"><a href="#19-4-使用-Gradle-插件" class="headerlink" title="19.4 使用 Gradle 插件"></a>19.4 使用 Gradle 插件</h2><p>Spring Boot Gradle 插件同样包含 <code>bootRun</code> 任务可以被使用来分解式的运行你的应用。每当你应用 <code>org.springframework.boot</code> 和 <code>java</code> 插件时都会添加 <code>bootRun</code>，如下所示：</p>
+<pre><code>gradle bootRun
+</code></pre><p>你可能想要使用 <code>JAVA_OPTS</code> 操作系统环境变量，如下所示：</p>
+<pre><code>export JAVA_OPTS=-Xmx1024m
+</code></pre><h2 id="19-5-热部署"><a href="#19-5-热部署" class="headerlink" title="19.5 热部署"></a>19.5 热部署</h2><p>由于 Spring Boot 应用只是一个普通的（plain）的 Java 应用，JVM 热部署可以开箱即用（work out of the box）。JVM 热部署有点受限于（somewhat limited with）它可以替换的字节码。更多的编译解决方案，可以使用 <a href="https://zeroturnaround.com/software/jrebel/" target="_blank" rel="noopener">JRebel</a></p>
+<p><code>spring-boot-devtools</code> 模块同样包括了支持应用快速重启。查看本章节后面的（later in this chapter）<a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/html/using-boot-devtools.html" target="_blank" rel="noopener">20 章 —— 开发工具</a> 和 <a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/html/howto-hotswapping.html" target="_blank" rel="noopener">如何使用热部署</a> 获得更多细节。</p>
+<h1 id="20-开发者工具"><a href="#20-开发者工具" class="headerlink" title="20. 开发者工具"></a>20. 开发者工具</h1><p>Spring Boot 包含了额外的工具集，可以使你的应用开发体验稍微愉快（pleasant）一点。<code>spring-boot-devtools</code> 模块可以被添加到任意项目中以提供额外的开发时特性。要包含测试工具支持，添加模块依赖到你的构建中，如下展示了 Maven 和 Gradle 的清单：</p>
+<p>Maven：<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-devtools<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">optional</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">optional</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Gradle:<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">configurations &#123;</span><br><span class="line">	developmentOnly</span><br><span class="line">	runtimeClasspath &#123;</span><br><span class="line">		extendsFrom developmentOnly</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">	developmentOnly("org.springframework.boot:spring-boot-devtools")</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>开发者工具在你运行完整打包的应用时自动禁用。如果你的类从 <code>java -jar</code> 启动，或者如果你从特定的类加载器开始，那么认为（considered）它是一个生产应用。如果不是这种情况（如果你的应用是从容器运行），认为排除了开发者工具或者设置了系统属性：<code>-Dspring.devtools.restart.enabled=false</code></p>
+</blockquote>
+<blockquote>
+<p>在Maven中将依赖项标记为可选的，或者在Gradle中使用定制的“只开发”配置(如上面所示)是防止DevTools被临时应用到使用您的项目的其他模块的最佳实践。</p>
+</blockquote>
+<blockquote>
+<p>默认情况下重新打包不会包含开发者工具。如果你想使用某些远程开发特性，你需要禁用 <code>excludeDevtools</code> 属性以包含它。这个属性同时支持 Maven 和 Gradle 插件。</p>
+</blockquote>
+<h2 id="20-1-默认属性"><a href="#20-1-默认属性" class="headerlink" title="20.1 默认属性"></a>20.1 默认属性</h2><p>一些类库通过支持使用 Spring Boot 使用缓存来提高性能（improve performance），例如：模版引擎缓存编译的模版以避免（avoid）重复（repeatedly）解析模版文件。同样，当服务静态资源时 Spring MVC  可以添加 HTTP 缓存头到响应信息中。</p>
+<p>缓存在生产中是非常有益的（beneficial），然而它在开发环境则会适得其反（counter-productive），阻止（preventing）你看到你刚刚在应用程序中产生的更改。由于这个原因，spring-boot-devtools 默认禁用缓存选项。</p>
+<p>缓存选项通常在你的 <code>application.properties</code> 文件里面设置。例如：Thymeleaf 提供了 <code>spring.thymeleaf.cache</code> 属性，而不用手动设置这些属性，spring-boot-devtools 模块自动合理应用开发时配置。</p>
+<p>因为你需要更多信息关于 web 请求的信息在开发 spring mvc 和 spring WebFlux 应用时，开发者工具将会为 web 日志记录开启 debug 的日志记录。这将会给你进来的请求的信息，处理中程序，返回结果等。如果你希望记录所有请求的细节（可能包含敏感信息），你可以打开 <code>spring-http.log-request-detail</code> 配置属性。</p>
+<blockquote>
+<p>如果你不想应用该默认属性你可以在你的 application.properties 中设置 spring-http.log-request-detail 为 false。</p>
+</blockquote>
+<blockquote>
+<p>应用于 devtools 的所有的属性列表，查看 <a href="https://github.com/spring-projects/spring-boot/tree/v2.1.6.RELEASE/spring-boot-project/spring-boot-devtools/src/main/java/org/springframework/boot/devtools/env/DevToolsPropertyDefaultsPostProcessor.java" target="_blank" rel="noopener">DevToolsPropertyDefaultsPostProcessor.</a></p>
+</blockquote>
+<h2 id="20-2-自动重启"><a href="#20-2-自动重启" class="headerlink" title="20.2 自动重启"></a>20.2 自动重启</h2><p>使用 spring-boot-devtools 的应用会自动重启，每当类路径下的文件改变。在 IDE 工作时，这是一个有用的特性，因为它为代码改变提供类快速的反馈循环。作为默认，指向（point to）类路径下的所有条目都会被监视为了更改。注意某些资源如：静态资源和视图模版，<a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-devtools.html#using-boot-devtools-restart-exclude" target="_blank" rel="noopener">不需要重新启动应用</a>。</p>
+<p><strong>触发重启</strong><br>当 DevTools 监视类路径下的资源，触发重启的唯一方式是更新其类路径。导致（cause）类路径更新的方式依赖于你使用的 IDE。在 Eclipse 中，保存和修改文件导致类路径更新和出发重启。在 IDEA，编译项目有同样的效果。</p>
+<blockquote>
+<p>只要此分叉被打开，你可以同样启动你的应用通过使用支持的构建插件，因为 DevTools 需要一个独立的应用程序加载器来正确操作。作为默认，Gradle 和 Maven 在类路径上检测到 DevTools 时会这样做。</p>
+</blockquote>
+<blockquote>
+<p>与 LiveReload 工作时自动重启工作良好，<a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-devtools.html#using-boot-devtools-livereload" target="_blank" rel="noopener">查看 LiveReload 章节获得更多细节</a>。如果你使用 JReble，自动重启会禁用，有利于（in favor of）类的动态加载。其他 devtools 的特性如：LiveReload 和 属性覆盖可以一直使用。</p>
+</blockquote>
+<blockquote>
+<p>DevTools 依赖于应用程序上下文的 shutdown 钩子来在重启期间关闭它。 如果禁用了 shutdown 挂钩，则无法正常工作。</p>
+</blockquote>
+<blockquote>
+<p>当决定在类路径上的条目是否应该在更改时触发重新启动时，Devztools 自动忽略名为 spring-boot, spring-boot-devtools, spring-boot-autoconfigure, spring-boot-actuator, spring-boot-starter 的项目。</p>
+</blockquote>
+<blockquote>
+<p>DevTools 需要通过 ApplicationContext 来定制 ResourceLoader。如果您的应用已经提供来一个，它将被包裹起来。不支持直接覆盖 ApplicationContext 上的 getResource 方法。</p>
+</blockquote>
+<p><strong>重启和重新加载</strong><br>Spring Boot 程序提供的重新启动技术使用了两个类加载器。不会改变的类（例如：第三方jar）被加载到（loaded into）基类加载器中。你正在积极开发的类被加载到重启类加载器。当应用程序重启，该重启类加载器会被丢掉（thrown away）并重新创建一个新的。这种方法意味着应用程序重启通常比“冷启动”快得多，因为基类装入器已经可用并已填充。</p>
+<p>如果发现重新启动对应用程序来说不够快，或者遇到类加载问题。你可以考虑重新选择技术如从 ZeroTurnaround 获得 JReble。这些工作是通过在加载类时重写类来完成的，以使它们更易于重新加载。</p>
+<h3 id="20-2-1-在状态评估（condition-evaluation）中记录变化"><a href="#20-2-1-在状态评估（condition-evaluation）中记录变化" class="headerlink" title="20.2.1. 在状态评估（condition evaluation）中记录变化"></a>20.2.1. 在状态评估（condition evaluation）中记录变化</h3><p>作为默认，每当你的应用重启，将记录显示状态评估增量的报表。该报告展示了你的应用的自动配置的改变如增加或删除bean，设置配置属性。</p>
+<p>要禁用日志记录报告，设置以下属性：</p>
+<pre><code>spring.devtools.restart.log-condition-evaluation-delta=false
+</code></pre><h3 id="20-2-2-排除资源"><a href="#20-2-2-排除资源" class="headerlink" title="20.2.2. 排除资源"></a>20.2.2. 排除资源</h3><p>某些资源当他们改变时没有必要触发重启。如：Thymeleaf 模版可以就地（in-place）编辑，默认情况下，改变 /META-INF/maven, /META-INF/resources, /resources, /static, /public, or /templates 中的资源不会触发重启但会触发 <a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/using-boot-devtools.html#using-boot-devtools-livereload" target="_blank" rel="noopener">live reload</a>。 如果你想定制这些排除项，你可以使用 <code>spring.devtools.restart.exclude</code> 属性。如：要仅仅排除 <code>/static</code> 和 <code>/public</code> 你需要设置以下命令：</p>
+<pre><code>spring.devtools.restart.exclude=static/**,public/**
+</code></pre><blockquote>
+<p>如果你要保持默认值并添加额外的排除项，使用 <code>spring.devtools.restart.additional-exclude</code> 作为替换。</p>
+</blockquote>
+<h3 id="20-2-3-监视额外的路径"><a href="#20-2-3-监视额外的路径" class="headerlink" title="20.2.3. 监视额外的路径"></a>20.2.3. 监视额外的路径</h3><p>你可能想要你的应用程序重启或重加载当你不在类路径下改变文件。要这样做，使用 <code>spring.devtools.restart.additional-paths</code> 属性配置额外的路径并监视。前面描述的是控制在额外路径下的更改是否会触发完全重新启动或重新加载。</p>
+<h3 id="20-2-4-禁用重启"><a href="#20-2-4-禁用重启" class="headerlink" title="20.2.4. 禁用重启"></a>20.2.4. 禁用重启</h3><p>如果你不想使用重启特性，你可以通过 <code>spring.devtools.restart.enabled</code> 属性禁用它。大多数情况下，你可以在你的 <code>application.properties</code> 设置这个属性。（这样做仍然初始化时重启类加载器，但是他不会监视文件更改）</p>
+<p>如果你想要完全禁用重启支持（例如：他在特定的类库中不能工作），你需要在调用 <code>SpringApplication.run(…​),</code> 之前设置 <code>spring.devtools.restart.enabled</code> 系统属性为 false，如下所示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">	System.setProperty(<span class="hljs-string">"spring.devtools.restart.enabled"</span>, <span class="hljs-string">"false"</span>);</span><br><span class="line">	SpringApplication.run(MyApp.class, args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="20-2-5-使用触发文件"><a href="#20-2-5-使用触发文件" class="headerlink" title="20.2.5. 使用触发文件"></a>20.2.5. 使用触发文件</h3><p>如果你工作的 IDE 不断的（continuouslt）编译改变文件，你可能希望仅在特定时间内触发重启。要这样做，你可以使用“触发文件”，这是一个特殊的文件，当您想要实际触发重新启动检查时，必须修改该文件。更改文件只会触发检查，只有在 Devtools 检测到必须执行某些操作时才会重新启动。</p>
+<p>使用触发文件，设置 <code>spring.devtools.restart.trigger-file</code> 属性为触发文件的路径。</p>
+<blockquote>
+<p>你可能想要设置 spring.devtools.restart.trigger-file 作为一个全局设置，这样所有的项目都以同样的方式运作。</p>
+</blockquote>
+<h3 id="20-2-6-定制重启类加载器"><a href="#20-2-6-定制重启类加载器" class="headerlink" title="20.2.6. 定制重启类加载器"></a>20.2.6. 定制重启类加载器</h3><p>如在前面的“重启和重加载”章节所述，重启功能是使用两个类加载器实现的。对于更多的应用，这种方法（approack）工作良好。然而，它有时会导致一些类加载问题。</p>
+<p>作为默认，你的 IDE 中任何打开的项目都加载类“重启”类加载器，任何普通的（regular）的 jar 文件都带有“基础”类加载器。如果你在多模块项目中工作，并且不是每个项目都导入到了 IDE，你可能需要定制一些东西。要这样做的话，你可以创建一个 <code>META-INF/spring-devtools.properties</code> 文件。</p>
+<p>该 <code>spring-devtools.properties</code>  文件可以包含有 <code>restart.exclude</code> 和 <code>restart.include</code> 前缀的属性。include 元素下的项都会被拉取（pulled up）到 “重启” 类加载器，exclude 元素下的项都被推进到（pushed down）“基础”类加载器。该属性值是应用在类路径下的正则模式，如下所示：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">restart.exclude.companycommonlibs=/mycorp-common-[\\w\\d-\.]+\.jar</span></span><br><span class="line"><span class="hljs-string">restart.include.projectcommon=/mycorp-myproj-[\\w\\d-\.]+\.jar</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>所有的属性关键字都是必须的。只要（as long as）属性以 <code>restart.include</code> 或 <code>resatrt.exclude</code> 开头都被考虑进去。</p>
+</blockquote>
+<blockquote>
+<p>加载类路径中的所有 META-INF/Spring-devtools.properties。您可以在项目中或项目所消耗的库中打包文件。</p>
+</blockquote>
+<h3 id="20-2-7-已知限制"><a href="#20-2-7-已知限制" class="headerlink" title="20.2.7. 已知限制"></a>20.2.7. 已知限制</h3><p>重启功能（functionality）不适用使用标准 <code>ObjectInputStream</code> 反序列化的对象。如果你需要反序列化对象，你可能需要使用 Spring 的 ConfigurableObjectInputStream 结合于（in combination with）<code>Thread.currentThread().getContextClassLoader()</code>。<br><br>不幸的是（Unfortunately），一些第三方类库在不考虑类加载器上下文的情况下反序列化。如果你发现一些问题，你需要请求原作者解决。</p>
+<h2 id="20-3-热加载"><a href="#20-3-热加载" class="headerlink" title="20.3 热加载"></a>20.3 热加载</h2><p>Spring Boot Devtools 模块包括一个内嵌的 LiverLoad 服务器，当资源被改变时，它可以用来触发浏览器刷新。livereload.com 免费提供 LiveReload 浏览器插件 Chrome、Firefox，Safari版。</p>
+<p>如果你想当你的应用启动时启动 LiveReload，你可以设置 <code>spring.devtools.livereload.enabled</code> 属性为 false。</p>
+<blockquote>
+<p>一次（at a time）只能运行一个LiveReload服务器。在你的应用启动之前，确保没有其他的 LiveReload 服务器在运行。如果你从你的 IDE 启动了多个应用程序，只有第一个 LiveReload 会提供支持。</p>
+</blockquote>
+<h2 id="20-4-全局设置"><a href="#20-4-全局设置" class="headerlink" title="20.4 全局设置"></a>20.4 全局设置</h2><p>你可以通过在你的 <code>$HOME</code> 文件夹下添加一个名为 <code>.spring-boot-devtools.properties</code> 的文件来配置开发工具的全局设置（注意文件名从 . 开始）。添加到这个文件的所有属性会应用到所有的 Spring Boot 应用程序，在你的机器上使用开发工具。如：要配置永远使用 触发文件 重启，你需要添加以下属性：</p>
+<p><strong>~/.spring-boot-devtools.properties.</strong></p>
+<pre><code>spring.devtools.reload.trigger-file=.reloadtrigger
+</code></pre><blockquote>
+<p>在.spring-boot-devtools.properties中激活的配置文件不会影响（affect）<a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties" target="_blank" rel="noopener">特定于配置文件</a>的加载。</p>
+</blockquote>
+<h2 id="20-5-远程应用"><a href="#20-5-远程应用" class="headerlink" title="20.5 远程应用"></a>20.5 远程应用</h2><p>Spring Boot 开发者工具没有限制于本地开发，你同样可以在运行的远程应用上使用一些特性功能。远程支持是可选的，要开启它，你需要确保 devtools 包含在重新打包后的归档文件中，如下列表所示：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">excludeDevtools</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">excludeDevtools</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果你需要设置 spring.devtools.remote.secret 属性，如下所示：</p>
+<pre><code>spring.devtools.remote.secret=mysecret
+</code></pre><blockquote>
+<p>在远程应用开启 spring-boot-devtools 是有安全风险的（risk）。你应该永远都不开启对生产环境的支持。</p>
+</blockquote>
+<p>远程开发工具提供以下两个单元的支持：一个服务器断点，接受在你的 IDE 中运行的应用和连接。当 spring.devtools.remote.secret 属性被设置了该服务组件会自动开启。客户端组件必须手动运行。</p>
+<h3 id="20-5-1-运行远程应用客户端"><a href="#20-5-1-运行远程应用客户端" class="headerlink" title="20.5.1 运行远程应用客户端"></a>20.5.1 运行远程应用客户端</h3><p>该远程客户端应用被设计为在你的 IDE 中运行。你需要运行 <code>org.springframework.boot.devtools.RemoteSpringApplication</code> 使用和你连接的远程个项目相同的类路径。该应用程序所需的唯一参数是需要连接到的远程服务器的 URL。</p>
+<p>如，如果你使用 Eclipse 或 STS，并且你有一个名为 my-app 的项目被部署到了云服务器，你可这样做：</p>
+<ul>
+<li>从 Run  菜单构建 Run Configurations…</li>
+<li>创建一个新的 Java Application 启动配置</li>
+<li>浏览 my-app 应用</li>
+<li>使用 org.springframework.boot.devtools.RemoteSpringApplication 作为主类</li>
+<li>添加 <a href="https://myapp.cfapps.io" target="_blank" rel="noopener">https://myapp.cfapps.io</a> 到 程序参数。（或者不管您的远程URL是什么）</li>
+</ul>
+<p>正在运行的远程客户端可能类似于下列列表：</p>
+<pre><code>.   ____          _                                              __ _ _
+/\\ / ___&apos;_ __ _ _(_)_ __  __ _          ___               _      \ \ \ \
+( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` |        | _ \___ _ __  ___| |_ ___ \ \ \ \
+\\/  ___)| |_)| | | | | || (_| []::::::[]   / -_) &apos;  \/ _ \  _/ -_) ) ) ) )
+&apos;  |____| .__|_| |_|_| |_\__, |        |_|_\___|_|_|_\___/\__\___|/ / / /
+=========|_|==============|___/===================================/_/_/_/
+:: Spring Boot Remote :: 2.1.6.RELEASE
+
+2015-06-10 18:25:06.632  INFO 14938 --- [           main] o.s.b.devtools.RemoteSpringApplication   : Starting RemoteSpringApplication on pwmbp with PID 14938 (/Users/pwebb/projects/spring-boot/code/spring-boot-devtools/target/classes started by pwebb in /Users/pwebb/projects/spring-boot/code/spring-boot-samples/spring-boot-sample-devtools)
+2015-06-10 18:25:06.671  INFO 14938 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@2a17b7b6: startup date [Wed Jun 10 18:25:06 PDT 2015]; root of context hierarchy
+2015-06-10 18:25:07.043  WARN 14938 --- [           main] o.s.b.d.r.c.RemoteClientConfiguration    : The connection to http://localhost:8080 is insecure. You should use a URL starting with &apos;https://&apos;.
+2015-06-10 18:25:07.074  INFO 14938 --- [           main] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2015-06-10 18:25:07.130  INFO 14938 --- [           main] o.s.b.devtools.RemoteSpringApplication   : Started RemoteSpringApplication in 0.74 seconds (JVM running for 1.105)
+</code></pre><blockquote>
+<p>因为远程客户端使用与实际应用程序相同的类路径，所以它可以直接的读取你的应用配置 。这是Spring.devtools.remote.secret属性的读取和传递到服务器进行身份验证的方式。</p>
+</blockquote>
+<blockquote>
+<p>总是建议使用 https:// 作为连接协议，因此，通信是加密的（traffic is encrypted），密码不能被截获（intercepted）。</p>
+</blockquote>
+<blockquote>
+<p>如果你使用代理访问远程应用，配置 spring.devtools.remote.proxy.host 和 spring.devtools.remote.proxy.port 属性。</p>
+</blockquote>
+<h3 id="20-5-2-远程更新"><a href="#20-5-2-远程更新" class="headerlink" title="20.5.2 远程更新"></a>20.5.2 远程更新</h3><p>远程客户端以与本地重新启动相同的方式监视应用程序类路径以进行更改。任何更新的资源被推到远程应用程序，（如果需要的话）触发重新启动。如果你需要迭代本地没有的云服务功能，这样十分有用。远程更新和重新启动要比完整的（full）重建和部署周期快得多（quicker than）。</p>
+<blockquote>
+<p>只有当远程客户端在运行时才会监视文件，如果你在远程客户端其中之前改变文件，它不会推送到远程服务器。</p>
+</blockquote>
+<h1 id="21-为生产环境打包你的应用"><a href="#21-为生产环境打包你的应用" class="headerlink" title="21. 为生产环境打包你的应用"></a>21. 为生产环境打包你的应用</h1><p>可执行 jar 可用于生产部署，因为他们是独立的（self-contained），它们也非常适合（ideally suited）基于云的部署。</p>
+<p>如需要额外的“生产准备”特性，例如健康，升级，和度量 Rest 或者 JMX 端点，考虑添加 spring-boot-actuator。查看 <a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/production-ready.html" target="_blank" rel="noopener">第四章 Spring Boot 监控：生产可读的特性 </a> 获得更多细节。</p>
+<h1 id="22-下一步是什么"><a href="#22-下一步是什么" class="headerlink" title="22. 下一步是什么"></a>22. 下一步是什么</h1><p>你现在应该理解如何使用 Spring Boot 和一些遵循的最佳实践。现在可以深入学习特定的 Spring Boot 特性，或者你可以跳过前面（ahead），阅读关于 “生产可读” 各方面的 Spring Boot。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/spring-boot/">spring-boot</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/01/[20190701] spring-boot | part4(1~2)/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">20190701 spring-boot | part4(1~2)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/22/SSH-别名登陆/">
+                <span class="level-item">Linux - SSH-别名登陆</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'more than just code.'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        more than just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Artikel
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        59
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Kategori
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tag
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                IKUTI</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+<!-- <div class="card widget column-left is-sticky" id="toc"> -->
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Katalog
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1</span>
+        <span>Part III. Using Spring Boot</span>
+        </a></li><li>
+        <a class="is-flex" href="#17-Spring-Bean-依赖注入">
+        <span class="has-mr-6">2</span>
+        <span>17 Spring Bean 依赖注入</span>
+        </a></li><li>
+        <a class="is-flex" href="#18-使用-SpringBootApplication-注解">
+        <span class="has-mr-6">3</span>
+        <span>18. 使用 @SpringBootApplication 注解</span>
+        </a></li><li>
+        <a class="is-flex" href="#19-运行你的应用">
+        <span class="has-mr-6">4</span>
+        <span>19. 运行你的应用</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#19-1-从-IDE-运行">
+        <span class="has-mr-6">4.1</span>
+        <span>19.1 从 IDE 运行</span>
+        </a></li><li>
+        <a class="is-flex" href="#19-2-作为打包应用程序运行">
+        <span class="has-mr-6">4.2</span>
+        <span>19.2 作为打包应用程序运行</span>
+        </a></li><li>
+        <a class="is-flex" href="#19-3-使用-Maven-插件">
+        <span class="has-mr-6">4.3</span>
+        <span>19.3 使用 Maven 插件</span>
+        </a></li><li>
+        <a class="is-flex" href="#19-4-使用-Gradle-插件">
+        <span class="has-mr-6">4.4</span>
+        <span>19.4 使用 Gradle 插件</span>
+        </a></li><li>
+        <a class="is-flex" href="#19-5-热部署">
+        <span class="has-mr-6">4.5</span>
+        <span>19.5 热部署</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#20-开发者工具">
+        <span class="has-mr-6">5</span>
+        <span>20. 开发者工具</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#20-1-默认属性">
+        <span class="has-mr-6">5.1</span>
+        <span>20.1 默认属性</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-自动重启">
+        <span class="has-mr-6">5.2</span>
+        <span>20.2 自动重启</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#20-2-1-在状态评估（condition-evaluation）中记录变化">
+        <span class="has-mr-6">5.2.1</span>
+        <span>20.2.1. 在状态评估（condition evaluation）中记录变化</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-2-排除资源">
+        <span class="has-mr-6">5.2.2</span>
+        <span>20.2.2. 排除资源</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-3-监视额外的路径">
+        <span class="has-mr-6">5.2.3</span>
+        <span>20.2.3. 监视额外的路径</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-4-禁用重启">
+        <span class="has-mr-6">5.2.4</span>
+        <span>20.2.4. 禁用重启</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-5-使用触发文件">
+        <span class="has-mr-6">5.2.5</span>
+        <span>20.2.5. 使用触发文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-6-定制重启类加载器">
+        <span class="has-mr-6">5.2.6</span>
+        <span>20.2.6. 定制重启类加载器</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-2-7-已知限制">
+        <span class="has-mr-6">5.2.7</span>
+        <span>20.2.7. 已知限制</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#20-3-热加载">
+        <span class="has-mr-6">5.3</span>
+        <span>20.3 热加载</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-4-全局设置">
+        <span class="has-mr-6">5.4</span>
+        <span>20.4 全局设置</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-5-远程应用">
+        <span class="has-mr-6">5.5</span>
+        <span>20.5 远程应用</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#20-5-1-运行远程应用客户端">
+        <span class="has-mr-6">5.5.1</span>
+        <span>20.5.1 运行远程应用客户端</span>
+        </a></li><li>
+        <a class="is-flex" href="#20-5-2-远程更新">
+        <span class="has-mr-6">5.5.2</span>
+        <span>20.5.2 远程更新</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#21-为生产环境打包你的应用">
+        <span class="has-mr-6">6</span>
+        <span>21. 为生产环境打包你的应用</span>
+        </a></li><li>
+        <a class="is-flex" href="#22-下一步是什么">
+        <span class="has-mr-6">7</span>
+        <span>22. 下一步是什么</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Tautan
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Kategori
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/docker-note/">
+            <span class="level-start">
+                <span class="level-item">docker-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Awan tag
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="20190622 spring-boot | part3(17~22)" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 张 瑜&nbsp;
+                Powered by Hexo & Icarus<br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">湘ICP备 18020713号</a>
+                </p>
+                
+                <p></p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

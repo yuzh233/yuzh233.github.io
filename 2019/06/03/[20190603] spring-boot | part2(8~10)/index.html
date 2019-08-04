@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>20190603 spring-boot | part2(8~10) - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Spring Boot Reference Guide2.1.5.RELEASEhttps://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started  Part II. Getting Started    8. Introducing Spring Boot 9. System R">
+<meta name="keywords" content="spring-boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20190603 spring-boot | part2(8~10)">
+<meta property="og:url" content="http://yoursite.com/2019/06/03/[20190603] spring-boot | part2(8~10)/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="Spring Boot Reference Guide2.1.5.RELEASEhttps://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started  Part II. Getting Started    8. Introducing Spring Boot 9. System R">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.yuzh.xyz/blog/89.jpg">
+<meta property="og:updated_time" content="2019-07-05T03:32:45.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20190603 spring-boot | part2(8~10)">
+<meta name="twitter:description" content="Spring Boot Reference Guide2.1.5.RELEASEhttps://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started  Part II. Getting Started    8. Introducing Spring Boot 9. System R">
+<meta name="twitter:image" content="http://img.yuzh.xyz/blog/89.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="20190603 spring-boot | part2(8~10)" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Katalog" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/89.jpg" alt="20190603 spring-boot | part2(8~10)">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-02T16:00:00.000Z">2019-06-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/spring-boot/">spring-boot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    33 minutes membaca (Sekitar 4903 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                20190603 spring-boot | part2(8~10)
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Spring Boot Reference Guide<br>2.1.5.RELEASE<br><a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started</a></p>
+</blockquote>
+<h1 style="color:green; text-align:center;">Part II. Getting Started</h1>
+
+<!-- TOC -->
+<ul>
+<li><a href="#8-introducing-spring-boot">8. Introducing Spring Boot</a></li>
+<li><a href="#9-system-requirements">9. System Requirements</a><ul>
+<li><a href="#91-servlet-containers">9.1 Servlet Containers</a></li>
+</ul>
+</li>
+<li><a href="#10-installing-spring-boot">10. Installing Spring Boot</a><ul>
+<li><a href="#101-installation-instructions-for-the-java-developer">10.1 Installation Instructions for the Java Developer</a><ul>
+<li><a href="#1011-maven-installation">10.1.1 Maven Installation</a></li>
+<li><a href="#1012-gradle-installation">10.1.2 Gradle Installation</a></li>
+</ul>
+</li>
+<li><a href="#102-installing-the-spring-boot-cli">10.2 Installing the Spring Boot CLI</a><ul>
+<li><a href="#1021-manual-installation">10.2.1 Manual Installation</a></li>
+<li><a href="#1022-installation-with-sdkman">10.2.2 Installation with SDKMAN!</a></li>
+<li><a href="#1023-osx-homebrew-installation">10.2.3 OSX Homebrew Installation</a></li>
+<li><a href="#1024-macports-installation">10.2.4 MacPorts Installation</a></li>
+<li><a href="#1025-command-line-completion">10.2.5 Command-line Completion</a></li>
+<li><a href="#1026-windows-scoop-installation">10.2.6 Windows Scoop Installation</a></li>
+<li><a href="#1027-quick-start-spring-cli-example">10.2.7 Quick-start Spring CLI Example</a></li>
+<li><a href="#103-upgrading-from-an-earlier-version-of-spring-boot">10.3 Upgrading from an Earlier Version of Spring Boot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#8-%08spring-boot-%E4%BB%8B%E7%BB%8D">8. spring boot 介绍</a></li>
+<li><a href="#9-%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">9. 系统要求</a><ul>
+<li><a href="#91-%08servlet-%E5%AE%B9%E5%99%A8">9.1 Servlet 容器</a></li>
+</ul>
+</li>
+<li><a href="#10-%E5%AE%89%E8%A3%85-spring-boot">10. 安装 spring boot</a><ul>
+<li><a href="#101-java-%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D">10.1 java 开发者的安装介绍</a><ul>
+<li><a href="#1011-maven-%E5%AE%89%E8%A3%85">10.1.1 Maven 安装</a></li>
+<li><a href="#1012-%E7%BB%A7%E6%89%BF-gradle">10.1.2 继承 Gradle</a></li>
+</ul>
+</li>
+<li><a href="#102-%E5%AE%89%E8%A3%85-spring-boot-cli%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7">10.2 安装 Spring Boot CLI（命令行工具）</a><ul>
+<li><a href="#1021-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85">10.2.1 手动安装</a></li>
+<li><a href="#1022--sdkman-%E5%AE%89%E8%A3%85">10.2.2  SDKMAN 安装</a></li>
+<li><a href="#1023-osx-homebrew-%E5%AE%89%E8%A3%85">10.2.3 OSX Homebrew 安装</a></li>
+<li><a href="#1024-macports-%E5%AE%89%E8%A3%85">10.2.4 MacPorts 安装</a></li>
+<li><a href="#1025-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%AF%91">10.2.5 命令行编译</a></li>
+<li><a href="#1026-windows-scoop-%E5%AE%89%E8%A3%85">10.2.6 Windows Scoop 安装</a></li>
+<li><a href="#1027-spring-cli-%E6%A1%88%E4%BE%8B%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">10.2.7 Spring CLI 案例快速开始</a></li>
+</ul>
+</li>
+<li><a href="#103-%E4%BB%8E-springboot-%E7%9A%84%E6%97%A9%E6%9C%9Fearlier%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7">10.3 从 SpringBoot 的早期（Earlier）版本升级</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<a id="more"></a>
+<p>If you are getting started with Spring Boot, or “Spring” in general, start by reading this section. It answers the basic “what?”, “how?” and “why?” questions. It includes an introduction to Spring Boot, along with installation instructions. We then walk you through building your first Spring Boot application, discussing some core principles as we go.</p>
+<h1 id="8-Introducing-Spring-Boot"><a href="#8-Introducing-Spring-Boot" class="headerlink" title="8. Introducing Spring Boot"></a>8. Introducing Spring Boot</h1><p>Spring Boot makes it easy to create stand-alone, production-grade Spring-based Applications that you can run. We take an opinionated view of the Spring platform and third-party libraries, so that you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.</p>
+<p>You can use Spring Boot to create Java applications that can be started by using java -jar or more traditional war deployments. We also provide a command line tool that runs “spring scripts”.</p>
+<p>Our primary goals are:</p>
+<ul>
+<li>Provide a radically faster and widely accessible getting-started experience for all Spring development.</li>
+<li>Be opinionated out of the box but get out of the way quickly as requirements start to diverge from the defaults.</li>
+<li>Provide a range of non-functional features that are common to large classes of projects (such as embedded servers, security, metrics, health checks, and externalized configuration).</li>
+<li>Absolutely no code generation and no requirement for XML configuration.</li>
+</ul>
+<h1 id="9-System-Requirements"><a href="#9-System-Requirements" class="headerlink" title="9. System Requirements"></a>9. System Requirements</h1><p>Spring Boot 2.1.5.RELEASE requires Java 8 and is compatible up to Java 11 (included). Spring Framework 5.1.7.RELEASE or above is also required.</p>
+<p>Explicit build support is provided for the following build tools:</p>
+<table>
+<thead>
+<tr>
+<th>Build Tool</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maven</td>
+<td>3.3+</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>4.4+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-1-Servlet-Containers"><a href="#9-1-Servlet-Containers" class="headerlink" title="9.1 Servlet Containers"></a>9.1 Servlet Containers</h2><p>Spring Boot supports the following embedded servlet containers:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Servlet Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tomcat 9.0</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td>Jetty 9.4</td>
+<td>3.1</td>
+</tr>
+<tr>
+<td>Undertow 2.0</td>
+<td>4.0</td>
+</tr>
+</tbody>
+</table>
+<p>You can also deploy Spring Boot applications to any Servlet 3.1+ compatible container.</p>
+<h1 id="10-Installing-Spring-Boot"><a href="#10-Installing-Spring-Boot" class="headerlink" title="10. Installing Spring Boot"></a>10. Installing Spring Boot</h1><p>Spring Boot can be used with “classic” Java development tools or installed as a command line tool. Either way, you need Java SDK v1.8 or higher. Before you begin, you should check your current Java installation by using the following command:</p>
+<figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java -<span class="hljs-built_in">version</span></span><br></pre></td></tr></table></figure>
+<p>If you are new to Java development or if you want to experiment with Spring Boot, you might want to try the Spring Boot CLI (Command Line Interface) first. Otherwise, read on for “classic” installation instructions.</p>
+<h2 id="10-1-Installation-Instructions-for-the-Java-Developer"><a href="#10-1-Installation-Instructions-for-the-Java-Developer" class="headerlink" title="10.1 Installation Instructions for the Java Developer"></a>10.1 Installation Instructions for the Java Developer</h2><p>You can use Spring Boot in the same way as any standard Java library. To do so, include the appropriate spring-boot-*.jar files on your classpath. Spring Boot does not require any special tools integration, so you can use any IDE or text editor. Also, there is nothing special about a Spring Boot application, so you can run and debug a Spring Boot application as you would any other Java program.</p>
+<p>Although you could copy Spring Boot jars, we generally recommend that you use a build tool that supports dependency management (such as Maven or Gradle).</p>
+<h3 id="10-1-1-Maven-Installation"><a href="#10-1-1-Maven-Installation" class="headerlink" title="10.1.1 Maven Installation"></a>10.1.1 Maven Installation</h3><p>Spring Boot is compatible with Apache Maven 3.3 or above. If you do not already have Maven installed, you can follow the instructions at maven.apache.org.</p>
+<blockquote>
+<p>On many operating systems, Maven can be installed with a package manager. If you use OSX Homebrew, try <code>brew install maven</code>. Ubuntu users can run <code>sudo apt-get install maven</code>. Windows users with Chocolatey can run <code>choco install maven</code>from an elevated (administrator) prompt.</p>
+</blockquote>
+<p>Spring Boot dependencies use the <code>org.springframework.boot</code> <code>groupId</code>. Typically, your Maven POM file inherits from the <code>spring-boot-starter-parent</code> project and declares dependencies to one or more [“Starters”]. Spring Boot also provides an optional [Maven plugin] to create executable jars.</p>
+<p>The following listing shows a typical <code>pom.xml</code> file:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.example<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>myproject<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">&lt;!-- Inherit defaults from Spring Boot --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.5.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">&lt;!-- Add typical dependencies for a web application --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">&lt;!-- Package as an executable jar --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The <code>spring-boot-starter-parent</code> is a great way to use Spring Boot, but it might not be suitable all of the time. Sometimes you may need to inherit from a different parent POM, or you might not like our default settings. In those cases, see Section 13.2.2, [“Using Spring Boot without the Parent POM”] for an alternative solution that uses an <code>import</code> scope.</p>
+</blockquote>
+<h3 id="10-1-2-Gradle-Installation"><a href="#10-1-2-Gradle-Installation" class="headerlink" title="10.1.2 Gradle Installation"></a>10.1.2 Gradle Installation</h3><p>Spring Boot is compatible with Gradle 4.4 and later. If you do not already have Gradle installed, you can follow the instructions at gradle.org.</p>
+<p>Spring Boot dependencies can be declared by using the <code>org.springframework.boot</code> <code>group</code>. Typically, your project declares dependencies to one or more “Starters”. Spring Boot provides a useful Gradle plugin that can be used to simplify dependency declarations and to create executable jars.</p>
+<figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Gradle Wrapper</span><br><span class="line"></span><br><span class="line">The Gradle Wrapper provides <span class="hljs-selector-tag">a</span> nice way of “obtaining” Gradle when you need to build <span class="hljs-selector-tag">a</span> project. It is <span class="hljs-selector-tag">a</span> small script and library that you commit alongside your <span class="hljs-selector-tag">code</span> to bootstrap the build process. See docs<span class="hljs-selector-class">.gradle</span><span class="hljs-selector-class">.org</span>/<span class="hljs-number">4.2</span>.<span class="hljs-number">1</span>/userguide/gradle_wrapper<span class="hljs-selector-class">.html</span> <span class="hljs-keyword">for</span> <span class="hljs-selector-tag">details</span>.</span><br></pre></td></tr></table></figure>
+<p>More details on getting started with Spring Boot and Gradle can be found in the Getting Started section of the Gradle plugin’s reference guide.</p>
+<h2 id="10-2-Installing-the-Spring-Boot-CLI"><a href="#10-2-Installing-the-Spring-Boot-CLI" class="headerlink" title="10.2 Installing the Spring Boot CLI"></a>10.2 Installing the Spring Boot CLI</h2><p>The Spring Boot CLI (Command Line Interface) is a command line tool that you can use to quickly prototype with Spring. It lets you run [Groovy] scripts, which means that you have a familiar Java-like syntax without so much boilerplate code.</p>
+<p>You do not need to use the CLI to work with Spring Boot, but it is definitely the quickest way to get a Spring application off the ground.</p>
+<h3 id="10-2-1-Manual-Installation"><a href="#10-2-1-Manual-Installation" class="headerlink" title="10.2.1 Manual Installation"></a>10.2.1 Manual Installation</h3><p>You can download the Spring CLI distribution from the Spring software repository:</p>
+<ul>
+<li>spring-boot-cli-2.1.5.RELEASE-bin.zip</li>
+<li>spring-boot-cli-2.1.5.RELEASE-bin.tar.gz</li>
+</ul>
+<p>Cutting edge snapshot distributions are also available.</p>
+<p>Once downloaded, follow the INSTALL.txt instructions from the unpacked archive. In summary, there is a <code>spring</code> script (<code>spring.bat</code> for Windows) in a <code>bin/</code> directory in the <code>.zip</code> file. Alternatively, you can use <code>java -jar</code> with the <code>.jar</code> file (the script helps you to be sure that the classpath is set correctly).</p>
+<h3 id="10-2-2-Installation-with-SDKMAN"><a href="#10-2-2-Installation-with-SDKMAN" class="headerlink" title="10.2.2 Installation with SDKMAN!"></a>10.2.2 Installation with SDKMAN!</h3><p>SDKMAN! (The Software Development Kit Manager) can be used for managing multiple versions of various binary SDKs, including Groovy and the Spring Boot CLI. Get SDKMAN! from sdkman.io and install Spring Boot by using the following commands:</p>
+<figure class="highlight armasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sdk install springboot</span><br><span class="line">$ spring --version</span><br><span class="line"><span class="hljs-symbol">Spring</span> <span class="hljs-keyword">Boot </span><span class="hljs-built_in">v2</span>.<span class="hljs-number">1</span>.<span class="hljs-number">5</span>.RELEASE</span><br></pre></td></tr></table></figure>
+<p>If you develop features for the CLI and want easy access to the version you built, use the following commands:</p>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sdk install springboot dev /path/<span class="hljs-keyword">to</span>/spring-boot/spring-boot-cli/target/spring-boot-cli-2.1.5.RELEASE-bin/spring-2.1.5.RELEASE/</span><br><span class="line">$ sdk<span class="hljs-built_in"> default </span>springboot dev</span><br><span class="line">$ spring --version</span><br><span class="line">Spring CLI v2.1.5.RELEASE</span><br></pre></td></tr></table></figure>
+<p>The preceding instructions install a local instance of <code>spring</code> called the <code>dev</code> instance. It points at your target build location, so every time you rebuild Spring Boot, <code>spring</code> is up-to-date.</p>
+<p>You can see it by running the following command:</p>
+<figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sdk ls springboot</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line">Available Springboot Versions</span><br><span class="line">================================================================================</span><br><span class="line">&gt; + dev</span><br><span class="line"><span class="hljs-bullet">* </span>2.1.5.RELEASE</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line">+ - local version</span><br><span class="line"><span class="hljs-bullet">* </span>- installed</span><br><span class="line">&gt; - currently in use</span><br><span class="line">================================================================================</span><br></pre></td></tr></table></figure>
+<h3 id="10-2-3-OSX-Homebrew-Installation"><a href="#10-2-3-OSX-Homebrew-Installation" class="headerlink" title="10.2.3 OSX Homebrew Installation"></a>10.2.3 OSX Homebrew Installation</h3><p>If you are on a Mac and use Homebrew, you can install the Spring Boot CLI by using the following commands:</p>
+<figure class="highlight armasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="hljs-keyword">brew </span>tap pivotal/tap</span><br><span class="line">$ <span class="hljs-keyword">brew </span>install springboot</span><br></pre></td></tr></table></figure>
+<p>Homebrew installs <code>spring</code> to <code>/usr/local/bin.</code></p>
+<blockquote>
+<p>If you do not see the formula, your installation of brew might be out-of-date. In that case, run <code>brew update</code> and try again.</p>
+</blockquote>
+<h3 id="10-2-4-MacPorts-Installation"><a href="#10-2-4-MacPorts-Installation" class="headerlink" title="10.2.4 MacPorts Installation"></a>10.2.4 MacPorts Installation</h3><p>If you are on a Mac and use MacPorts, you can install the Spring Boot CLI by using the following command:</p>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="hljs-built_in"> port </span>install spring-boot-cli</span><br></pre></td></tr></table></figure>
+<h3 id="10-2-5-Command-line-Completion"><a href="#10-2-5-Command-line-Completion" class="headerlink" title="10.2.5 Command-line Completion"></a>10.2.5 Command-line Completion</h3><p>The Spring Boot CLI includes scripts that provide command completion for the <code>BASH</code> and <code>zsh</code> shells. You can <code>source</code> the script (also named <code>spring</code>) in any shell or put it in your personal or system-wide bash completion initialization. On a Debian system, the system-wide scripts are in <code>/shell-completion/bash</code> and all scripts in that directory are executed when a new shell starts. For example, to run the script manually if you have installed by using SDKMAN!, use the following commands:</p>
+<figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ . ~/.sdkman/candidates/springboot/current/<span class="hljs-keyword">shell</span>-completion/bash/spring</span><br><span class="line">$ spring &lt;HIT <span class="hljs-keyword">TAB</span> HERE&gt;</span><br><span class="line">  grab  <span class="hljs-keyword">help</span>  jar  <span class="hljs-keyword">run</span>  <span class="hljs-keyword">test</span>  <span class="hljs-keyword">version</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>If you install the Spring Boot CLI by using Homebrew or MacPorts, the command-line completion scripts are automatically registered with your shell.</p>
+</blockquote>
+<h3 id="10-2-6-Windows-Scoop-Installation"><a href="#10-2-6-Windows-Scoop-Installation" class="headerlink" title="10.2.6 Windows Scoop Installation"></a>10.2.6 Windows Scoop Installation</h3><p>If you are on a Windows and use <code>Scoop</code>, you can install the Spring Boot CLI by using the following commands:</p>
+<figure class="highlight mipsasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="hljs-keyword">scoop </span><span class="hljs-keyword">bucket </span><span class="hljs-keyword">add </span><span class="hljs-keyword">extras</span></span><br><span class="line"><span class="hljs-keyword">&gt; </span><span class="hljs-keyword">scoop </span><span class="hljs-keyword">install </span>springboot</span><br></pre></td></tr></table></figure>
+<p>Scoop installs <code>spring</code> to <code>~/scoop/apps/springboot/current/bin</code>.</p>
+<blockquote>
+<p>If you do not see the app manifest, your installation of scoop might be out-of-date. In that case, run scoop update and try again.</p>
+</blockquote>
+<h3 id="10-2-7-Quick-start-Spring-CLI-Example"><a href="#10-2-7-Quick-start-Spring-CLI-Example" class="headerlink" title="10.2.7 Quick-start Spring CLI Example"></a>10.2.7 Quick-start Spring CLI Example</h3><p>You can use the following web application to test your installation. To start, create a file called <code>app.groovy</code>, as follows:</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThisWillActuallyRun</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/"</span>)</span><br><span class="line">	<span class="hljs-function">String <span class="hljs-title">home</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-string">"Hello World!"</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Then run it from a shell, as follows:</p>
+<figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ spring <span class="hljs-keyword">run</span><span class="hljs-bash"> app.groovy</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The first run of your application is slow, as dependencies are downloaded. Subsequent runs are much quicker.</p>
+</blockquote>
+<p>Open localhost:8080 in your favorite web browser. You should see the following output:</p>
+<figure class="highlight erlang-repl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+<h3 id="10-3-Upgrading-from-an-Earlier-Version-of-Spring-Boot"><a href="#10-3-Upgrading-from-an-Earlier-Version-of-Spring-Boot" class="headerlink" title="10.3 Upgrading from an Earlier Version of Spring Boot"></a>10.3 Upgrading from an Earlier Version of Spring Boot</h3><p>If you are upgrading from an earlier release of Spring Boot, check the [“migration guide” on the project wiki] that provides detailed upgrade instructions. Check also the [“release notes”] for a list of “new and noteworthy” features for each release.</p>
+<p>When upgrading to a new feature release, some properties may have been renamed or removed. Spring Boot provides a way to analyze your application’s environment and print diagnostics at startup, but also temporarily migrate properties at runtime for you. To enable that feature, add the following dependency to your project:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-properties-migrator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Properties that are added late to the environment, such as when using <code>@PropertySource</code>, will not be taken into account.</p>
+</blockquote>
+<blockquote>
+<p>Once you’re done with the migration, please make sure to remove this module from your project’s dependencies.</p>
+</blockquote>
+<p>To upgrade an existing CLI installation, use the appropriate package manager command (for example, <code>brew upgrade</code>) or, if you manually installed the CLI, follow the [standard instructions], remembering to update your <code>PATH</code> environment variable to remove any older references.</p>
+<hr>
+<p>如果您通过 spring boot、通用的 spring 获得快速开始。阅读这个章节，它会回答你基于 “是什么？”，“怎么样？”，“为什么？”的问题。它包含了 Spring boot 的介绍，以及（along with）安装说明。然后我们（we then）引导你（walk you）通过构建你的第一个 spring boot 应用，讨论（discussing）一些核心原则（principles）。</p>
+<h1 id="8-spring-boot-介绍"><a href="#8-spring-boot-介绍" class="headerlink" title="8. spring boot 介绍"></a>8. spring boot 介绍</h1><p>spring boot 使得单体应用创建变得简单。你可以运行生产级别（grage）基于 spring 的应用。我们对Spring平台和第三方库有自己的看法，所以你可以最小化的获得开始。大多数 spring boot 应用只需要很少的配置。</p>
+<p>你可以使用 spring boot 创建 java 应用，那样你可以使用 <code>java -jar</code> 或者 更多传统（traditional）的 war 包部署。我们同样提供命令行工具运行“spring 脚本”。</p>
+<p>我们主要的目标是：</p>
+<ul>
+<li>为所有的 spring 开发提供一种更加快速（pradically faster）和广泛访问（widly accessiblw）的快速开始体验。</li>
+<li>开箱即用（Be opinionated out of the box），但随着需求（requirements）开始偏离（diverge）默认值而迅速摆脱困境。</li>
+<li>提供一些（a range of）非功能性（non-functional）的特性，（这些特性）是大型项目通用的。例如嵌入式服务器、安全、测量、健康检查和外部化配置。</li>
+<li>确实没有没有代码生成和 xml 配置的要求。</li>
+</ul>
+<h1 id="9-系统要求"><a href="#9-系统要求" class="headerlink" title="9. 系统要求"></a>9. 系统要求</h1><p>Spring Boot 2.1.5.RELEASE 需要 java 8，向上兼容（compatible up） java 11（包括）。Spring Framework 5.1.7.RELEASE 或更高版本同样是必须的。</p>
+<p>为以下构建工具提供了显式（Explicit）构建支持：</p>
+<table>
+<thead>
+<tr>
+<th>Build Tool</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maven</td>
+<td>3.3+</td>
+<td></td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>4.4+</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-1-Servlet-容器"><a href="#9-1-Servlet-容器" class="headerlink" title="9.1 Servlet 容器"></a>9.1 Servlet 容器</h2><p>spring boot 提供了以下嵌入式服务器：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Servlet Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tomcat 9.0</td>
+<td>4.0</td>
+<td></td>
+</tr>
+<tr>
+<td>Jetty 9.4</td>
+<td>3.1</td>
+<td></td>
+</tr>
+<tr>
+<td>Undertow 2.0</td>
+<td>4.0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>你可以同样部署 spring boot 应用到兼容 servlet 3.1+ 的容器。</p>
+<h1 id="10-安装-spring-boot"><a href="#10-安装-spring-boot" class="headerlink" title="10. 安装 spring boot"></a>10. 安装 spring boot</h1><p>spring boot 可以使用“经典的”的java部署工具或者安装命令行工具。<br>无论哪种方式（either way），你需要 jdk 1.8 或更高的版本。在开始之前，你需要使用以下命令检查你当前的java安装。</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>如果你是 java 开发新手，或者你想尝试（experiment） spring boot。你可能首先想要尝试 <a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started-installing-the-cli" target="_blank" rel="noopener">Spring Boot CLI</a>（命令行接口）。否则，请阅读经典的安装介绍。</p>
+<h2 id="10-1-java-开发者的安装介绍"><a href="#10-1-java-开发者的安装介绍" class="headerlink" title="10.1 java 开发者的安装介绍"></a>10.1 java 开发者的安装介绍</h2><p>你可以像使用任意标准 java 类库同样的方式（in the same way as）一样使用 spring boot。这样做，包含一个合适的 <code>spring-boot-*.jar</code> 的文件在你的类路径下。spring boot 不需要与任何特定工具集成，所以你可以使用任一 IDE 或文本编辑器。同样，Spring boot 也没有特定的应用。因此，你可以像使用其他java程序一样运行或调试 spring boot 应用。</p>
+<p>虽然（although）你可以拷贝 spring boot 的jar，我们通常建议（generally recommend）您使用支持依赖管理的构建工具。</p>
+<h3 id="10-1-1-Maven-安装"><a href="#10-1-1-Maven-安装" class="headerlink" title="10.1.1 Maven 安装"></a>10.1.1 Maven 安装</h3><p>Spring Boot 兼容 Apache Maven 3.3 或更高版本。如果你还没有（not alreay）安装 Maven，你可以按照 maven.apache.org 操作使用。</p>
+<blockquote>
+<p>在一些操作系统上，maven 可以通过包管理安装。如果你使用 OSX Homebrew，尝试 <code>brew install maven</code>。Ubuntu 用户可以运行 <code>sudo apt-get inst6all maven</code>，巧克力 window 用户可以从管理员提示符运行 <code>choco install maven</code> 。</p>
+</blockquote>
+<p>Spring Boot 依赖使用 <code>org.springframework.boot</code> 的 groupId，通常（typically），你的 maven pom 文件继承 <code>spring-boot-starter-parent</code> 父项目，向一个或多个“启动器”声明依赖。Spring Boot 提供可选的 maven 插件创建可执行jar。</p>
+<p>以下列表展示了一个典型的 <code>pom.xml</code> 文件：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.example<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>myproject<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">&lt;!-- 默认继承 spring boot --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.5.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">&lt;!-- 添加 web 应用的典型依赖项 --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">&lt;!-- 打包为可执行 jar --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>spring-boot-starters-parent 是使用 Spring Boot 的好的方式，但是它不可能适合（suitable）所有情况。有的时候你可能需要继承不同的父 pom，或者你可能不需要我们的默认设置。在那些情况下（in those cases），查看“13.2.2章，在没有 parent pom 下使用 spring boot，对于使用 <code>import</code> 域的可代替（alternative）方案。</p>
+</blockquote>
+<h3 id="10-1-2-继承-Gradle"><a href="#10-1-2-继承-Gradle" class="headerlink" title="10.1.2 继承 Gradle"></a>10.1.2 继承 Gradle</h3><p>Spring Boot 兼容 Gradle 4.4 和更高版本，如果你还没有安装 Gradle，你可以在 gradle.org 找到使用说明。</p>
+<p>spring boot 依赖项可以通过使用 <code>org.springframework.boot</code> 这一 group 来申明（declared），通常，你的项目声明依赖关系为一个或多个“启动器”。Spring boot 提供可用的 gradle 插件，它可以简化依赖声明和创建可执行jar。</p>
+<blockquote>
+<p><strong>Gradle Wrapper</strong><br>当你需要构建一个项目时 Gradle Wrapper 提供了一种好的方式“获得”Gradle。它是一个小脚本和库，您可以与代码一起（alongside）提交以引导（bootstrap）构建过程。更多详情请查看 <a href="https://docs.gradle.org/4.2.1/userguide/gradle_wrapper.html" target="_blank" rel="noopener">https://docs.gradle.org/4.2.1/userguide/gradle_wrapper.html</a></p>
+</blockquote>
+<p>更多获得 spring boot 和 Gradle 的信息可以在 Gradle 插件的参考指南的 <a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/gradle-plugin/reference/html/#getting-started" target="_blank" rel="noopener">“快速开始章节”</a> 找到。</p>
+<h2 id="10-2-安装-Spring-Boot-CLI（命令行工具）"><a href="#10-2-安装-Spring-Boot-CLI（命令行工具）" class="headerlink" title="10.2 安装 Spring Boot CLI（命令行工具）"></a>10.2 安装 Spring Boot CLI（命令行工具）</h2><p>Spring Boot 命令行接口是一个命令行工具，你可以使用 Spring 快速原型。它允许你运行 Groovy 脚本，这意味着你有一个熟悉的类似（familiar）Java的语法没有这么多的样板代码（boilerplate code）。</p>
+<p>你不必非要使用 CLI 在 Spring Boot 中，但这绝对（difinitely）是获得 Spring 应用程序的最快方法。</p>
+<h3 id="10-2-1-手动安装"><a href="#10-2-1-手动安装" class="headerlink" title="10.2.1 手动安装"></a>10.2.1 手动安装</h3><p>你可以从spring软件仓库下载 Spring CLI 发行版：</p>
+<ul>
+<li>spring-boot-cli-2.1.5.RELEASE-bin.zip</li>
+<li>spring-boot-cli-2.1.5.RELEASE-bin.tar.gz</li>
+</ul>
+<p>最新的（cutting edge）快照版本同样可用。</p>
+<p>下载完成后，按照 <a href="https://raw.githubusercontent.com/spring-projects/spring-boot/v2.1.5.RELEASE/spring-boot-project/spring-boot-cli/src/main/content/INSTALL.txt" target="_blank" rel="noopener">INSTALL.txt</a> 引导从解压缩归档。总之，<code>.zip</code> 文件中的 <code>bin/</code> 目录下有一个 <code>spring</code> 脚本。或者（Alternatively），你可以在 jar 文件中使用 java -jar（脚本帮助您确保正确设置了类路径）</p>
+<h3 id="10-2-2-SDKMAN-安装"><a href="#10-2-2-SDKMAN-安装" class="headerlink" title="10.2.2  SDKMAN 安装"></a>10.2.2  SDKMAN 安装</h3><p>SDKMAN!（一个软件开发工具包管理器）可以用来管理多个各种（various）版本的 SDK，包含 Groovy 和 Spring Boot CLI。从 sdkman.io 获得 SDKMAN 并从以下命令安装：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sdk install springboot</span><br><span class="line">$ spring --version</span><br><span class="line">Spring Boot v2.1.5.RELEASE</span><br></pre></td></tr></table></figure>
+<p>如果你通过 CLI 开发功能，并且想要快速访问你构建的版本，使用以下命令行：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sdk install springboot dev /path/to/spring-boot/spring-boot-cli/target/spring-boot-cli-2.1.5.RELEASE-bin/spring-2.1.5.RELEASE/</span><br><span class="line">$ sdk default springboot dev</span><br><span class="line">$ spring --version</span><br><span class="line">Spring CLI v2.1.5.RELEASE</span><br></pre></td></tr></table></figure>
+<p>前面的指令（preceding instructions）安装了一个名为（called） <code>dev</code> 的本地 <code>spring</code> 实例。它指向了你的构建路径，所以每当你重新构建 Spring Boot，<code>spring</code> 都是最新的。</p>
+<p>通过运行以下命令可以看到它：<br><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sdk ls springboot</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line">Available Springboot Versions</span><br><span class="line">================================================================================</span><br><span class="line">&gt; + dev</span><br><span class="line">* 2.1.5.RELEASE</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line">+ - <span class="hljs-built_in">local</span> version</span><br><span class="line">* - installed</span><br><span class="line">&gt; - currently <span class="hljs-keyword">in</span> use</span><br><span class="line">================================================================================</span><br></pre></td></tr></table></figure></p>
+<h3 id="10-2-3-OSX-Homebrew-安装"><a href="#10-2-3-OSX-Homebrew-安装" class="headerlink" title="10.2.3 OSX Homebrew 安装"></a>10.2.3 OSX Homebrew 安装</h3><p><br>如果你在 Mac 上使用 Homebrew，你可以通过以下命令安装 Spring Boot CLI：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew tap pivotal/tap</span><br><span class="line">$ brew install springboot</span><br></pre></td></tr></table></figure>
+<p>Homebrew 安装 <code>spring</code> 到了 <code>/usr/local/bin.</code></p>
+<blockquote>
+<p>如果你看不到公式（formula），您安装的 brew 可能过时。那样的话（in that case），再次运行 <code>run update</code>。</p>
+</blockquote>
+<h3 id="10-2-4-MacPorts-安装"><a href="#10-2-4-MacPorts-安装" class="headerlink" title="10.2.4 MacPorts 安装"></a>10.2.4 MacPorts 安装</h3><p>如果你在 mac 上使用 MacPorts，你可以使用以下命令安装 Spring Boot CLI：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo port install spring-boot-cli</span><br></pre></td></tr></table></figure>
+<h3 id="10-2-5-命令行编译"><a href="#10-2-5-命令行编译" class="headerlink" title="10.2.5 命令行编译"></a>10.2.5 命令行编译</h3><p>Spring Boot CLI包含为 BASH 和 zsh shell 提供命令完成的脚本。你可以在任何 shell 中获得脚本（也称之为 spring），或者将其放入个人或系统范围的bash完成初始化。在 Debian 系统上，该系统范围内的脚本在 <code>/shell-completion/bash</code>，并且当新shell启动时，该目录中的所有脚本都将被执行。例如：如果你使用 SDKMAN 安装了脚本，可以通过以下命令手动运行该脚本：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ . ~/.sdkman/candidates/springboot/current/shell-completion/bash/spring</span><br><span class="line">$ spring &lt;HIT TAB HERE&gt;</span><br><span class="line">  grab  <span class="hljs-built_in">help</span>  jar  run  <span class="hljs-built_in">test</span>  version</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果你使用 Homebrew 或 MacPorts 安装的 Spring Boot CLI，该命令行编译脚本将自动注册到你的 shell。</p>
+</blockquote>
+<h3 id="10-2-6-Windows-Scoop-安装"><a href="#10-2-6-Windows-Scoop-安装" class="headerlink" title="10.2.6 Windows Scoop 安装"></a>10.2.6 Windows Scoop 安装</h3><p>如果你在 Windows 上面使用 Scoop，你可以通过以下命令安装 Spring Boot CLI：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scoop bucket add extras</span><br><span class="line">scoop install springboot</span><br></pre></td></tr></table></figure>
+<p>Scoop 安装 <code>spring</code> 到了 <code>~/scoop/apps/springboot/current/bin.</code></p>
+<blockquote>
+<p>如果您没有看到应用程序清单（app manifest），你安装的 scoop 可能不是最新版。这样的话，运行 scoop update 然后重试。</p>
+</blockquote>
+<h3 id="10-2-7-Spring-CLI-案例快速开始"><a href="#10-2-7-Spring-CLI-案例快速开始" class="headerlink" title="10.2.7 Spring CLI 案例快速开始"></a>10.2.7 Spring CLI 案例快速开始</h3><p>你可以使用以下 Web 应用测试你的安装，开始，创建一个名为 <code>app.groovy</code> 的文件，如下：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThisWillActuallyRun</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/"</span>)</span><br><span class="line">	String home() &#123;</span><br><span class="line">		<span class="hljs-string">"Hello World!"</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后从脚本运行，如下：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring run app.groovy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在下载依赖项时首次运行会很慢，随后的运行会很快速。</p>
+</blockquote>
+<p>在你喜爱的浏览器上打开 localhost:8080，你可以看到以下输出：</p>
+<figure class="highlight erlang-repl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+<h2 id="10-3-从-SpringBoot-的早期（Earlier）版本升级"><a href="#10-3-从-SpringBoot-的早期（Earlier）版本升级" class="headerlink" title="10.3 从 SpringBoot 的早期（Earlier）版本升级"></a>10.3 从 SpringBoot 的早期（Earlier）版本升级</h2><p>如果你从早期的 spring boot 发行版升级，从项目的 wiki 上点击 “迁移指南”，它提供了更详细的说明。另请查看“发行说明”，了解每个版本的“新的和值得注意的（noteworthy）”功能列表。</p>
+<p>当升级到了最新发行版，一些属性可能已经（have been）重命名或者删除。Spring Boot 提供一种方式分析的你的应用环境，和在启动时打印诊断（diagnostics），还可以（but also）在运行时（runtime）临时（temporarily）迁移（migrate）属性。要打开这个功能，添加以下依赖到你的项目：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-properties-migrator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>晚加入到环境之后的属性，例如 <code>@PropertySource</code>，将不会被考虑在内。<br>一旦你完成了迁移，请确保从项目中移除该模块。</p>
+</blockquote>
+<p>要更新已存在的 CLI 安装，使用适当的包管理器命令（例如：brew update）或者，如果你手动安装CLI，从请遵守（follow）标准说明，记住更新PATH环境变量以删除任何旧的引用。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/spring-boot/">spring-boot</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/08/[20190608] spring-boot | part2(11~12)/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">20190608 spring-boot | part2(11~12)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/02/[20190602] spring-boot | part1/">
+                <span class="level-item">20190602 spring-boot | part1</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'more than just code.'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        more than just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Artikel
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        59
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Kategori
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tag
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                IKUTI</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+<!-- <div class="card widget column-left is-sticky" id="toc"> -->
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Katalog
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1</span>
+        <span>Part II. Getting Started</span>
+        </a></li><li>
+        <a class="is-flex" href="#8-Introducing-Spring-Boot">
+        <span class="has-mr-6">2</span>
+        <span>8. Introducing Spring Boot</span>
+        </a></li><li>
+        <a class="is-flex" href="#9-System-Requirements">
+        <span class="has-mr-6">3</span>
+        <span>9. System Requirements</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#9-1-Servlet-Containers">
+        <span class="has-mr-6">3.1</span>
+        <span>9.1 Servlet Containers</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-Installing-Spring-Boot">
+        <span class="has-mr-6">4</span>
+        <span>10. Installing Spring Boot</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-Installation-Instructions-for-the-Java-Developer">
+        <span class="has-mr-6">4.1</span>
+        <span>10.1 Installation Instructions for the Java Developer</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-1-Maven-Installation">
+        <span class="has-mr-6">4.1.1</span>
+        <span>10.1.1 Maven Installation</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-1-2-Gradle-Installation">
+        <span class="has-mr-6">4.1.2</span>
+        <span>10.1.2 Gradle Installation</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-2-Installing-the-Spring-Boot-CLI">
+        <span class="has-mr-6">4.2</span>
+        <span>10.2 Installing the Spring Boot CLI</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-2-1-Manual-Installation">
+        <span class="has-mr-6">4.2.1</span>
+        <span>10.2.1 Manual Installation</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-2-Installation-with-SDKMAN">
+        <span class="has-mr-6">4.2.2</span>
+        <span>10.2.2 Installation with SDKMAN!</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-3-OSX-Homebrew-Installation">
+        <span class="has-mr-6">4.2.3</span>
+        <span>10.2.3 OSX Homebrew Installation</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-4-MacPorts-Installation">
+        <span class="has-mr-6">4.2.4</span>
+        <span>10.2.4 MacPorts Installation</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-5-Command-line-Completion">
+        <span class="has-mr-6">4.2.5</span>
+        <span>10.2.5 Command-line Completion</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-6-Windows-Scoop-Installation">
+        <span class="has-mr-6">4.2.6</span>
+        <span>10.2.6 Windows Scoop Installation</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-7-Quick-start-Spring-CLI-Example">
+        <span class="has-mr-6">4.2.7</span>
+        <span>10.2.7 Quick-start Spring CLI Example</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-3-Upgrading-from-an-Earlier-Version-of-Spring-Boot">
+        <span class="has-mr-6">4.2.8</span>
+        <span>10.3 Upgrading from an Earlier Version of Spring Boot</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#8-spring-boot-介绍">
+        <span class="has-mr-6">5</span>
+        <span>8. spring boot 介绍</span>
+        </a></li><li>
+        <a class="is-flex" href="#9-系统要求">
+        <span class="has-mr-6">6</span>
+        <span>9. 系统要求</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#9-1-Servlet-容器">
+        <span class="has-mr-6">6.1</span>
+        <span>9.1 Servlet 容器</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-安装-spring-boot">
+        <span class="has-mr-6">7</span>
+        <span>10. 安装 spring boot</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-java-开发者的安装介绍">
+        <span class="has-mr-6">7.1</span>
+        <span>10.1 java 开发者的安装介绍</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-1-Maven-安装">
+        <span class="has-mr-6">7.1.1</span>
+        <span>10.1.1 Maven 安装</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-1-2-继承-Gradle">
+        <span class="has-mr-6">7.1.2</span>
+        <span>10.1.2 继承 Gradle</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-2-安装-Spring-Boot-CLI（命令行工具）">
+        <span class="has-mr-6">7.2</span>
+        <span>10.2 安装 Spring Boot CLI（命令行工具）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-2-1-手动安装">
+        <span class="has-mr-6">7.2.1</span>
+        <span>10.2.1 手动安装</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-2-SDKMAN-安装">
+        <span class="has-mr-6">7.2.2</span>
+        <span>10.2.2  SDKMAN 安装</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-3-OSX-Homebrew-安装">
+        <span class="has-mr-6">7.2.3</span>
+        <span>10.2.3 OSX Homebrew 安装</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-4-MacPorts-安装">
+        <span class="has-mr-6">7.2.4</span>
+        <span>10.2.4 MacPorts 安装</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-5-命令行编译">
+        <span class="has-mr-6">7.2.5</span>
+        <span>10.2.5 命令行编译</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-6-Windows-Scoop-安装">
+        <span class="has-mr-6">7.2.6</span>
+        <span>10.2.6 Windows Scoop 安装</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-7-Spring-CLI-案例快速开始">
+        <span class="has-mr-6">7.2.7</span>
+        <span>10.2.7 Spring CLI 案例快速开始</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-3-从-SpringBoot-的早期（Earlier）版本升级">
+        <span class="has-mr-6">7.3</span>
+        <span>10.3 从 SpringBoot 的早期（Earlier）版本升级</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Tautan
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Kategori
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/docker-note/">
+            <span class="level-start">
+                <span class="level-item">docker-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Awan tag
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="20190603 spring-boot | part2(8~10)" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 张 瑜&nbsp;
+                Powered by Hexo & Icarus<br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">湘ICP备 18020713号</a>
+                </p>
+                
+                <p></p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

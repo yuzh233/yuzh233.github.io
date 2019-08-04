@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>20190531 maven | password encryption - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="reference：https://maven.apache.org/guides/mini/guide-encryption.html   Introduction How to create a master password How to encrypt server passwords How to keep the master password on removable drive T">
+<meta name="keywords" content="maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20190531 maven | password encryption">
+<meta property="og:url" content="http://yoursite.com/2019/05/31/[20190531] maven | password encryption/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="reference：https://maven.apache.org/guides/mini/guide-encryption.html   Introduction How to create a master password How to encrypt server passwords How to keep the master password on removable drive T">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.yuzh.xyz/blog/104.jpg">
+<meta property="og:updated_time" content="2019-07-05T03:32:45.023Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20190531 maven | password encryption">
+<meta name="twitter:description" content="reference：https://maven.apache.org/guides/mini/guide-encryption.html   Introduction How to create a master password How to encrypt server passwords How to keep the master password on removable drive T">
+<meta name="twitter:image" content="http://img.yuzh.xyz/blog/104.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="20190531 maven | password encryption" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Katalog" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/104.jpg" alt="20190531 maven | password encryption">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-30T16:00:00.000Z">2019-05-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/maven/">maven</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20 minutes membaca (Sekitar 3045 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                20190531 maven | password encryption
+            
+        </h1>
+        <div class="content">
+            <p>reference：<a href="https://maven.apache.org/guides/mini/guide-encryption.html" target="_blank" rel="noopener">https://maven.apache.org/guides/mini/guide-encryption.html</a></p>
+<hr>
+<ol>
+<li>Introduction</li>
+<li>How to create a master password</li>
+<li>How to encrypt server passwords</li>
+<li>How to keep the master password on removable drive</li>
+<li>Tips<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1>Maven 2.1.0+ now supports server password <strong>encryption</strong>. The main use case, <strong>addressed by this solution</strong> is:</li>
+</ol>
+<ul>
+<li>multiple users share the <strong>same</strong> build machine (server, CI box)</li>
+<li>some users have the <strong>privilege</strong> to deploy Maven <strong>artifacts</strong> to repositories, some don’t.<ul>
+<li><strong>this applies to</strong> any server operations, requiring authorization, not only deployment</li>
+</ul>
+</li>
+<li><code>settings.xml</code> is shared between users</li>
+</ul>
+<p>The <strong>implemented</strong> solution adds the following <strong>capabilities</strong>:</p>
+<ul>
+<li>authorized users have an <strong>additional</strong> <code>settings-security.xml</code> file in their <code>${user.home}/.m2</code> folder<ul>
+<li>this file <strong>either contains</strong> encrypted master password, used to encrypt other passwords</li>
+<li>or it can contain a <strong>relocation</strong> - reference to another file, possibly on removable storage</li>
+<li>this password is created <strong>first via</strong> CLI for now</li>
+</ul>
+</li>
+<li>server <strong>entries</strong> in the <code>settings.xml</code> have passwords and/or keystore passphrases encrypted<ul>
+<li>for now - this is done via CLI after master password has been created and stored in <strong>appropriate</strong> location</li>
+</ul>
+</li>
+</ul>
+<h1 id="How-to-create-a-master-password"><a href="#How-to-create-a-master-password" class="headerlink" title="How to create a master password"></a>How to create a master password</h1><p>Use the following command line:</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-master-password &lt;password&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Note: Since Maven 3.2.1 the password argument should <strong>no longer</strong> be used (see Tips below for more information). Maven will <strong>prompt</strong> for the password. <strong>Earlier</strong> versions of Maven will not prompt for a password, so it must be <strong>typed</strong> on the command-line in <strong>plaintext</strong>.</p>
+<p>This command will <strong>produce</strong> an <strong>encrypted</strong> version of the password, something like</p>
+<figure class="highlight clojure hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+9EF1iFQyJQ=&#125;</span><br></pre></td></tr></table></figure>
+<p>Store this password in the <code>${user.home}/.m2/settings-security.xml</code>; it should look like</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">master</span>&gt;</span>&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+9EF1iFQyJQ=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">master</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>When this is done, you can start <strong>encrypting</strong> existing server passwords.</p>
+<h1 id="How-to-encrypt-server-passwords"><a href="#How-to-encrypt-server-passwords" class="headerlink" title="How to encrypt server passwords"></a>How to encrypt server passwords</h1><p>You will <strong>have to </strong>use the following command line:</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-password &lt;password&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Note:<strong>Just like</strong> <code>--encrypt-master-password</code> the password argument should <strong>no longer</strong> be used since Maven 3.2.1 (see <a href="https://maven.apache.org/guides/mini/guide-encryption.html#Tips" target="_blank" rel="noopener">Tips below for more information.</a>).</p>
+<p>This command will produce an encrypted version of it, something like</p>
+<figure class="highlight clojure hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;COQLCE6DU6GtcS5P=&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Cut-n-paste</strong> it into your <code>settings.xml</code> file in the server section. This will look like:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>my.server<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>&#123;COQLCE6DU6GtcS5P=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Please note</strong> that password can contain any information <strong>outside of</strong> the <strong>curly brackets</strong>, so that the following will still work:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>my.server<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>Oleg reset this password on 2009-03-11, expires on 2009-04-11 &#123;COQLCE6DU6GtcS5P=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Then you can use, say, deploy plugin, to write to this server:</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy:deploy-file -Durl=https://maven.corp.com/repo \</span><br><span class="line">                       -DrepositoryId=my.server \</span><br><span class="line">                       -Dfile=your-artifact-1.0.jar \</span><br></pre></td></tr></table></figure>
+<h1 id="How-to-keep-the-master-password-on-removable-drive"><a href="#How-to-keep-the-master-password-on-removable-drive" class="headerlink" title="How to keep the master password on removable drive"></a>How to keep the master password on removable drive</h1><p>Create the master password <strong>exactly as</strong> <strong>described above</strong>, and store it on a removable drive, for instance on OSX, my USB drive mounts as /Volumes/mySecureUsb, so I store</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">master</span>&gt;</span>&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+9EF1iFQyJQ=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">master</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>in the file <code>/Volumes/mySecureUsb/secure/settings-security.xml</code></p>
+<p>And then I create <code>${user.home}/.m2/settings-security.xml</code> with the following content:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">relocation</span>&gt;</span>/Volumes/mySecureUsb/secure/settings-security.xml<span class="hljs-tag">&lt;/<span class="hljs-name">relocation</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>This <strong>assures</strong> that <strong>encryption</strong> will only work when the usb drive is mounted by OS. <strong>This addresses a</strong> use case where only <strong>certain</strong> people are authorized to deploy and are issued these devices.</p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><h2 id="Escaping-curly-brace-literals-in-your-password-Since-Maven-2-2-0"><a href="#Escaping-curly-brace-literals-in-your-password-Since-Maven-2-2-0" class="headerlink" title="Escaping curly-brace literals in your password (Since: Maven 2.2.0)"></a>Escaping curly-brace literals in your password (Since: Maven 2.2.0)</h2><p><strong>At times</strong>, you might find that your password (or the encrypted form of it) may <strong>actually</strong> contain ‘{‘ or ‘}’ as a <strong>literal</strong> value. If you added <strong>such a</strong> password as-is to your settings.xml file, you would find that Maven does <strong>strange</strong> things with it. <strong>Specifically</strong>, Maven will <strong>treat</strong> all the characters <strong>preceding</strong> the ‘{‘ <strong>literal</strong>, and all the characters after the ‘}’ literal, as comments. <strong>Obviously</strong>, this is not the <strong>behavior</strong> you want in <strong>such a situation</strong>. What you really need is a way of <strong><em>escaping the curly-brace literals</em></strong> in your password.</p>
+<p>Starting in Maven 2.2.0, you can do just this, with the <strong>widely used</strong> ‘\‘ <strong>escape character</strong>. If your password looks like this:</p>
+<figure class="highlight gcode hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jSMOW<span class="hljs-symbol">noPFgsHVpMvz5</span>VrIt<span class="hljs-number">5</span>kRbzGpI<span class="hljs-number">8</span>u+&#123;EF<span class="hljs-number">1</span>iFQyJQ=</span><br></pre></td></tr></table></figure>
+<p>Then, the value you would add to your settings.xml would look like this:</p>
+<figure class="highlight clojure hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+\&#123;EF1iFQyJQ=&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Password-Security"><a href="#Password-Security" class="headerlink" title="Password Security"></a>Password Security</h2><p>Editing <code>settings.xml</code> and running the above commands can <strong>still leave</strong> your password stored locally in plaintext. You may want to check the following locations:</p>
+<ul>
+<li>Shell history (e.g. by running <code>history</code>). You may want to clear your history after encrypting the above passwords</li>
+<li>Editor caches (e.g. <code>~/.viminfo</code>)</li>
+</ul>
+<p><strong>Also note</strong> that the encrypted passwords can be <strong>decrypted by</strong> someone that has the master password and settings security file. Keep this file secure (or stored <strong>separately</strong>) if you <strong>expect</strong> the <strong>possibility</strong> that the <code>settings.xml</code> file may be <strong>retrieved</strong>.</p>
+<h2 id="Password-Escaping-on-different-platforms"><a href="#Password-Escaping-on-different-platforms" class="headerlink" title="Password Escaping on different platforms"></a>Password Escaping on different platforms</h2><p>On some platforms it might be <strong>neccessary</strong> to <strong>quote</strong> your password based on the content of your password in <strong>particular</strong> having <strong>special characters</strong> like <code>%</code>, <code>!</code>, <code>$</code> etc. in there. For example on Windows you have to be carefull about things like the following:</p>
+<p>The following example will not work on Windows:</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-master-password a!$%^b</span></span><br></pre></td></tr></table></figure>
+<p>whereas the following will work on Windows:</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-master-password "a!$%^b"</span></span><br></pre></td></tr></table></figure>
+<p>If you are on a linux/unix platform you should <strong>use single quotes</strong> for the above master password <strong>otherwise</strong> you will be <strong>astonished</strong> that the usage of the master-password will not work (caused by the dollar sign and furthermore the exclamation mark).</p>
+<h2 id="Prompting-for-Password"><a href="#Prompting-for-Password" class="headerlink" title="Prompting for Password"></a>Prompting for Password</h2><p>In Maven before version 3.2.1 you <strong>have to</strong> give the password on command line as argument which means you might need to <strong>escape</strong> your password. <strong>In addition</strong> usually the shell stores the full history of commands you have entered, <strong>therefore</strong> anyone with access to your computer could <strong>restore</strong> the password from the shell`s history.</p>
+<p>Starting with Maven 3.2.1 the password is an optional argument which means if you <strong>omit</strong> the password you will be <strong>prompted</strong> for it which <strong>prevents</strong> all the <strong>issues mentioned above</strong>.</p>
+<p><strong>Therefore</strong> we <strong>strongly recommend</strong> to use Maven 3.2.1 and above to <strong>prevent</strong> problems with escaping special characters and <strong>of course</strong> security issues <strong>related</strong> to bash history or environment issues in relationship with the password.</p>
+<hr>
+<ol>
+<li>导言（introduction）</li>
+<li>如何创建主密码</li>
+<li>如何加密服务密码</li>
+<li>如何在可移动设备（on removable driver）上保存主密码</li>
+<li>小贴士</li>
+</ol>
+<h1 id="导言（introduction）"><a href="#导言（introduction）" class="headerlink" title="导言（introduction）"></a>导言（introduction）</h1><p>Maven 2.1.0+ 开始支持服务密码加密。主要用例，解决方案（addressed by solution）是：</p>
+<ul>
+<li>所有用户共享相同（same）的构建机器（server，CI box）</li>
+<li><p>一些用户拥有部署 maven 制品（artifacts）到仓库的特权（privilege）。而一些人不能</p>
+<ul>
+<li>这适用于（this applies to）任何需要授权的服务器操作，而不仅仅是部署。</li>
+<li><code>setting.xml</code> 在用户之间分享</li>
+</ul>
+</li>
+</ul>
+<p>实现的（implemented）解决方案添加了以下功能（capablities）：</p>
+<ul>
+<li><p>认证的用户拥有额外的（additional）<code>setting-security.xml</code> 文件在他们的 <code>${user.home}/.m2</code> 目录</p>
+<ul>
+<li>这个文件要么包含（either contains）加密的主密码，用于加密其他密码</li>
+<li>或者它可以包含一个迁移（relocaton）- 引用到另一个文件，也许在可移动存储设备上</li>
+<li>这个密码先通过（first via） CLI 创建</li>
+</ul>
+</li>
+<li><p><code>setting.xml</code> 中的服务条目加密了密码 或 密钥仓库密码</p>
+<ul>
+<li>现在，主密码被创建并存储到了合适（appropriate）的位置，这是通过 CLI 完成的。</li>
+</ul>
+</li>
+</ul>
+<h1 id="如何创建主密码"><a href="#如何创建主密码" class="headerlink" title="如何创建主密码"></a>如何创建主密码</h1><p>使用以下命令</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-master-password &lt;password&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：从 <span class="hljs-selector-tag">maven</span> 3<span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.1</span> 开始这个密码参数不再（<span class="hljs-selector-tag">should</span> <span class="hljs-selector-tag">no</span> <span class="hljs-selector-tag">longer</span>）使用（查看以下的提示获得更多信息）。<span class="hljs-selector-tag">maven</span> 将提示（<span class="hljs-selector-tag">prompt</span>）输入密码。早期（<span class="hljs-selector-tag">Earlier</span>）版本的 <span class="hljs-selector-tag">maven</span> 不会提示输入密码，所以必须在命令行输入明文密码。</span><br></pre></td></tr></table></figure>
+<p>这个命令将会产生一个密码加密之后的版本，比如下面这样：</p>
+<figure class="highlight clojure hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+9EF1iFQyJQ=&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>${user.home}/.m2/settings-security.xml</code> 中存储该密码，像下面这样：</p>
+<blockquote>
+<p>译注：如果没有 settings-security.xml 文件自己创建即可。把内容复制进去。</p>
+</blockquote>
+<figure class="highlight dust hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">settingsSecurity</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">master</span>&gt;</span></span><span class="hljs-template-variable">&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+9EF1iFQyJQ=&#125;</span><span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">master</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">settingsSecurity</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>当上述步骤完成之后，你可以开始加密服务器密码了。</p>
+<h1 id="如何加密服务密码"><a href="#如何加密服务密码" class="headerlink" title="如何加密服务密码"></a>如何加密服务密码</h1><p>你必须使用以下命令：</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-password &lt;password&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提示：就像 <span class="hljs-selector-tag">mvn</span> <span class="hljs-selector-tag">--encrypt-master-password</span>  一样。这个密码参数从 <span class="hljs-selector-tag">maven</span> 3<span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.1</span> 开始不再使用（见文档）</span><br></pre></td></tr></table></figure>
+<p>这个命令会产生一个密码加密后的版本，如：</p>
+<figure class="highlight clojure hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;COQLCE6DU6GtcS5P=&#125;</span><br></pre></td></tr></table></figure>
+<p>剪切粘贴到您 <code>setting.xml</code> 文件的服务节点，如下：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>my.server<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>&#123;COQLCE6DU6GtcS5P=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>请注意：密码可以在花括号外（outside of the curly brackets）包含任意信息。所以以下仍然可以工作：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>my.server<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>Oleg reset this password on 2009-03-11, expires on 2009-04-11 &#123;COQLCE6DU6GtcS5P=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后，您可以使用，比如说，部署插件。要写入此服务器，请执行以下操作:</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy:deploy-file -Durl=https://maven.corp.com/repo \</span><br><span class="line">                       -DrepositoryId=my.server \</span><br><span class="line">                       -Dfile=your-artifact-1.0.jar \</span><br></pre></td></tr></table></figure>
+<h1 id="如何在可移动设备上保存主密码"><a href="#如何在可移动设备上保存主密码" class="headerlink" title="如何在可移动设备上保存主密码"></a>如何在可移动设备上保存主密码</h1><p>和上文所述（described above）的一样（exactly as）创建主密码，然后存储到可移动设备中，以 OSX 为例，我的 USB 驱动挂载在 <code>/Volumes/mySecureUsb</code>，所以我存储（以下内容）：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">master</span>&gt;</span>&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+9EF1iFQyJQ=&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">master</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>到 <code>/Volumes/mySecureUsb/secure/settings-security.xml</code></p>
+<p>然后我创建 <code>${user.home}/.m2/settings-security.xml</code> ，内容如下：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">relocation</span>&gt;</span>/Volumes/mySecureUsb/secure/settings-security.xml<span class="hljs-tag">&lt;/<span class="hljs-name">relocation</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">settingsSecurity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这保证了只有当 usb 驱动挂载到了操作系统上（OS）上，加密才能工作。这解决了（this addresses a）一个用例，其中只有特定（certain）的人被授权部署和发布（issued）这些设备。</p>
+<h1 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h1><p><strong>在您的密码中转义（escaping）花括号（curly-brace）文本（literals）</strong></p>
+<p>有时（as time），你可能发现你的密码（或以此加密的）可能确实包含 <code>{</code> 或 <code>}</code> 作为文字值。</p>
+<blockquote>
+<p>译注：maven 加密的密码最外层都有花括号包围，通常我们加密后的密码都是：<strong>{jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+EF1iFQyJQ==}</strong> 的形式，密码是 jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+EF1iFQyJQ==。<br>\<br>但可能不排除有这样的密码，他们密码中间就包含了花括号：<strong>jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+{EF1iFQyJQ=</strong>，外面再被一个大括号包围，就成了这样：<strong>{jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+{EF1iFQyJQ=}</strong></p>
+</blockquote>
+<p>如果你将这样（such a）的密码原样（as-is）的放在你的 <code>settings.xml</code> 中，你会发现 maven 对此做了一些奇怪（strange）的事情。具体的说（Specifically），maven 会处理（treat） <code>{</code> 字面符之前（preceding）所有的文本（Literals），和处理 <code>}</code> 字面符之后的所有字符。作为评论，很明显的（Obviusly），这种情况（sush a siluation）下，这不是您想要的行为（behavior）。你真正需要的是一种转义（escaping）你密码中的花括号的方法。</p>
+<p>从 maven 2.2.0 起，你可以这样做，与广泛使用的（widely used）的 <code>\</code> 转义字符（escape character）。如果你的密码看起来是这样的：</p>
+<figure class="highlight gcode hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jSMOW<span class="hljs-symbol">noPFgsHVpMvz5</span>VrIt<span class="hljs-number">5</span>kRbzGpI<span class="hljs-number">8</span>u+&#123;EF<span class="hljs-number">1</span>iFQyJQ=</span><br></pre></td></tr></table></figure>
+<p>那么，你可以像这样添加值到你的 <code>settings.xml</code> 中:</p>
+<figure class="highlight clojure hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;jSMOWnoPFgsHVpMvz5VrIt5kRbzGpI8u+\&#123;EF1iFQyJQ=&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>密码安全</strong></p>
+<p>编辑 <code>settings.xml</code> 并运行以上命令依然可以以明文（plaintext）的形式保存（leave）你的密码到本地，你可能需要检查以下位置：</p>
+<ul>
+<li>shell 历史（例如：运行 <code>history</code>）。你可能想要在加密（encrying）上述密码（above password）之后清除你的历史记录</li>
+<li>编辑器缓存。（例如：<code>~/.viminfo</code>）</li>
+</ul>
+<p>同样注意（note），加密后的密码可以被拥有主密码和设置安全文件的某些人（someone）解密（decrypted by 被解密）。保持这个文件安全（或分别存储）,如果你希望可以（expect polibility 期待可能性）检索（retried） <code>settings.xml</code> 文件的话。</p>
+<p><strong>不同平台的密码转义符</strong></p>
+<p>在一些平台上，你可能（neccessary）需要基于（base on）你的密码内容添加引号（quote），特别是（in particular）含有特殊字符的比如：<code>%</code>,<code>!</code>,<code>$</code>。例如在 window 上你需要小心比如像以下这种：</p>
+<p>以下案例在 Windows 上将不起作用：</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-master-password a!$%^b</span></span><br></pre></td></tr></table></figure>
+<p>然而（whereas），以下内容适用于 Windows：</p>
+<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="hljs-comment">--encrypt-master-password "a!$%^b"</span></span><br></pre></td></tr></table></figure>
+<p>如果你在Linux/Unix平台上，你应该使用上面的主密码的单引号。否则你会惊讶的（astonished）发现使用主密码将不起作用（由美元符号（dollar sign）和感叹号（exclamation mark）引起）。</p>
+<p><strong>密码输入提示</strong></p>
+<p>在 maven 3.2.1 之前你必须在命令行参数上给定密码，这意味着你可能需要转义（escape）你的密码。此外（in addition），通常 shell 会存储你在命令行输入的完整历史。所以（therefore）任何人访问你电脑的人都可以通过 shell 的历史恢复（restore）你的密码。</p>
+<p>从 Maven 3.2.1 开始，密码是一个可选参数，这意味着如果省略（omit）密码，系统将提示（prompted）您输入密码，这将阻止（prevents）上述（above）提过（mentioned）的所有问题（issues）。</p>
+<blockquote>
+<p>译注：使用 mvn –encrypt-master-password 不带密码参数，会要求输入密码。这个输入是不可见的，命令行没有记录的。</p>
+</blockquote>
+<p>因此，我们强烈建议（srongly recommend）使用 Maven 3.2.1 及更高版本来防止（prevent）转义特殊字符的问题，当然（of course）还有与bash历史相关的安全问题或与密码相关的环境问题。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/maven/">maven</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/01/[20190601] spring-boot | overview/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">20190601 spring-boot | overview</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/31/Docker 补救指南（五） —— Docker Compose/">
+                <span class="level-item">Docker 补救指南（五）—— Docker Compose</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'more than just code.'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        more than just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Artikel
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        59
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Kategori
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tag
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                IKUTI</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+<!-- <div class="card widget column-left is-sticky" id="toc"> -->
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Katalog
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Introduction">
+        <span class="has-mr-6">1</span>
+        <span>Introduction</span>
+        </a></li><li>
+        <a class="is-flex" href="#How-to-create-a-master-password">
+        <span class="has-mr-6">2</span>
+        <span>How to create a master password</span>
+        </a></li><li>
+        <a class="is-flex" href="#How-to-encrypt-server-passwords">
+        <span class="has-mr-6">3</span>
+        <span>How to encrypt server passwords</span>
+        </a></li><li>
+        <a class="is-flex" href="#How-to-keep-the-master-password-on-removable-drive">
+        <span class="has-mr-6">4</span>
+        <span>How to keep the master password on removable drive</span>
+        </a></li><li>
+        <a class="is-flex" href="#Tips">
+        <span class="has-mr-6">5</span>
+        <span>Tips</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Escaping-curly-brace-literals-in-your-password-Since-Maven-2-2-0">
+        <span class="has-mr-6">5.1</span>
+        <span>Escaping curly-brace literals in your password (Since: Maven 2.2.0)</span>
+        </a></li><li>
+        <a class="is-flex" href="#Password-Security">
+        <span class="has-mr-6">5.2</span>
+        <span>Password Security</span>
+        </a></li><li>
+        <a class="is-flex" href="#Password-Escaping-on-different-platforms">
+        <span class="has-mr-6">5.3</span>
+        <span>Password Escaping on different platforms</span>
+        </a></li><li>
+        <a class="is-flex" href="#Prompting-for-Password">
+        <span class="has-mr-6">5.4</span>
+        <span>Prompting for Password</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#导言（introduction）">
+        <span class="has-mr-6">6</span>
+        <span>导言（introduction）</span>
+        </a></li><li>
+        <a class="is-flex" href="#如何创建主密码">
+        <span class="has-mr-6">7</span>
+        <span>如何创建主密码</span>
+        </a></li><li>
+        <a class="is-flex" href="#如何加密服务密码">
+        <span class="has-mr-6">8</span>
+        <span>如何加密服务密码</span>
+        </a></li><li>
+        <a class="is-flex" href="#如何在可移动设备上保存主密码">
+        <span class="has-mr-6">9</span>
+        <span>如何在可移动设备上保存主密码</span>
+        </a></li><li>
+        <a class="is-flex" href="#小提示">
+        <span class="has-mr-6">10</span>
+        <span>小提示</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Tautan
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Kategori
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/docker-note/">
+            <span class="level-start">
+                <span class="level-item">docker-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Awan tag
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="20190531 maven | password encryption" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 张 瑜&nbsp;
+                Powered by Hexo & Icarus<br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">湘ICP备 18020713号</a>
+                </p>
+                
+                <p></p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

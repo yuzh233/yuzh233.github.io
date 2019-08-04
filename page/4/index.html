@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/vs.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
 
 
     
@@ -126,7 +126,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Search" href="javascript:;">
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -142,8 +142,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2018/06/19/spring与aspectJ版本冲突问题/" class="image is-7by1">
-            <img class="thumbnail" src="/img/random/11.jpg" alt="spring与aspectJ版本冲突问题">
+        <a href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-252102.jpg" alt="源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题">
         </a>
     </div>
     
@@ -151,13 +151,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-19T15:09:25.000Z">2018-06-19</time>
+                <time class="level-item has-text-grey" datetime="2018-11-06T07:53:00.000Z">2018-11-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 91 words)
+                    4 minutes membaca (Sekitar 544 kata)
                 </span>
                 
                 
@@ -166,75 +170,18 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/06/19/spring与aspectJ版本冲突问题/">spring与aspectJ版本冲突问题</a>
+                <a class="has-link-black-ter" href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/">源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题</a>
             
         </h1>
         <div class="content">
-            <p>版本冲突真是让人脑阔疼。<br>用这个</p>
-<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.2.7&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>代替这个</p>
-<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.7&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.7&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>maven会自动处理spring与aspect的依赖关系。依赖了 <code>aspectwearer.jar</code>，没有引用 <code>aspectjrt.jar</code>  但是也可以用，主要是可以看到aspect的版本号，以便于手动加入想要的aspect包。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/06/16/Linux下部署个人站点后的运行问题/" class="image is-7by1">
-            <img class="thumbnail" src="/img/random/15.jpg" alt="Linux下部署个人站点后的运行问题">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-16T01:55:06.000Z">2018-06-16</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 minutes read (About 1955 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/16/Linux下部署个人站点后的运行问题/">Linux下部署个人站点后的运行问题</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="Linux下部署个人站点后的运行问题"><a href="#Linux下部署个人站点后的运行问题" class="headerlink" title="Linux下部署个人站点后的运行问题"></a>Linux下部署个人站点后的运行问题</h1><blockquote>
-<p>&nbsp;&nbsp;昨天已经把个人站点部署在linux成功并可以发布运行，有一个问题，就是当退出远程登陆SSH之后，hexo的进程会被杀死导致无法访问，今天早上看了几篇博客之后知道怎么回事了，做一下记录。</p>
-</blockquote>
-<h2 id="1、进程杀死原因"><a href="#1、进程杀死原因" class="headerlink" title="1、进程杀死原因"></a>1、进程杀死原因</h2><h3 id="1-1、进程与会话"><a href="#1-1、进程与会话" class="headerlink" title="1.1、进程与会话"></a>1.1、进程与会话</h3><ul>
-<li>进程组： 一个或多个进程的集合，每一个进程组都有唯一一个进程组ID，即进程组</li>
-<li>会话期： 一个或多个进程组的集合，有唯一一个会话期首进程（session leader）。会话期ID为首进程的ID。</li>
-<li>控制进程: 与控制终端（如ssh）连接的会话期首进程叫做控制进程。当前与终端交互的进程称为前台进程组， 其余进程组称为后台进程组。</li></ul>
+            <h2 id="Post-乱码"><a href="#Post-乱码" class="headerlink" title="Post 乱码"></a>Post 乱码</h2><p>Spring MVC 提供 CharacterEncodingFilter 拦截请求处理编码格式问题<br></p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/16/Linux下部署个人站点后的运行问题/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2018/11/06/源码角度分析 CharacterEncodingFilter 解决 Post 请求中文乱码问题/#more">Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -253,8 +200,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2018/06/15/Linux下搭建Hexo博客环境/" class="image is-7by1">
-            <img class="thumbnail" src="/img/random/14.jpg" alt="Linux下搭建Hexo博客环境">
+        <a href="/2018/11/04/数据库常用事务传播行为与隔离级别/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/jay-wennington-2250-unsplash.jpg" alt="数据库常用事务传播行为与隔离级别">
         </a>
     </div>
     
@@ -262,13 +209,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-15T13:25:39.000Z">2018-06-15</time>
+                <time class="level-item has-text-grey" datetime="2018-11-03T16:26:00.000Z">2018-11-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 minutes read (About 996 words)
+                    9 minutes membaca (Sekitar 1353 kata)
                 </span>
                 
                 
@@ -277,21 +228,57 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/06/15/Linux下搭建Hexo博客环境/">Linux下搭建Hexo博客环境</a>
+                <a class="has-link-black-ter" href="/2018/11/04/数据库常用事务传播行为与隔离级别/">数据库常用事务传播行为与隔离级别</a>
             
         </h1>
         <div class="content">
-            <h1 id="Linux下搭建Hexo博客环境"><a href="#Linux下搭建Hexo博客环境" class="headerlink" title="Linux下搭建Hexo博客环境"></a>Linux下搭建Hexo博客环境</h1><blockquote>
-<p>前不久在自己电脑上搭建了基于 Github+Hexo 的个人博客，今天试着在Linux下搭建hexo环境并通过域名解析本地IP运行起来。刚好前几天在阿里云买了ECS云服务器和域名，还不是很熟练，不用白不用。😄</p>
-</blockquote>
-<h2 id="Steps-1-：安装Git"><a href="#Steps-1-：安装Git" class="headerlink" title="Steps 1 ：安装Git"></a>Steps 1 ：安装Git</h2>
+            <h2 id="事务传播行为"><a href="#事务传播行为" class="headerlink" title="事务传播行为"></a>事务传播行为</h2><p>当事务方法被另一个事务方法调用时，必须指定事务应该如何传播。例如：方法可能继续在现有事务中运行，也可能开启一个新的事务，并在自己的事务中运行。</p>
+<p>事务传播行为由事务传播属性指定，以下是 Spring 支持的 7 种传播行为：</p>
+<table>
+<thead>
+<tr>
+<th>传播属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REQUIRED*</td>
+<td>如果由事务在运行，当前的方法就在这个事务内运行。否则，就开启一个新的事务，并在自己的事务中运行。</td>
+</tr>
+<tr>
+<td>REQUIRES_NEW*</td>
+<td>当前方法必须启动新事务，并在自己的事务中运行。如果有事务正在运行，将该事务挂起。</td>
+</tr>
+<tr>
+<td>SUPPORTS</td>
+<td>如果有事务在运行，当前的方法就在这个事务中运行。否则它可以不运行在事务中。（有事务环境可以运行在事务，没有也行）</td>
+</tr>
+<tr>
+<td>NOT_SUPPORT</td>
+<td>当前的方法不应该运行在事务中，如果有运行的事务，将它挂起。</td>
+</tr>
+<tr>
+<td>MANDATORY</td>
+<td>当前方法必须运行在事务内部，如果没有正在运行的事务，就抛出异常。</td>
+</tr>
+<tr>
+<td>NERVER</td>
+<td>当前的方法不应该运行在事务中，如果有运行的事务，就抛出异常。</td>
+</tr>
+<tr>
+<td>NESTED</td>
+<td>如果有事务在运行，当前的方法就应该在这个事务的嵌套事务中运行。否则，就开启一个新的事务，并在它自己的事务内运行。</td>
+</tr>
+</tbody>
+</table>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/15/Linux下搭建Hexo博客环境/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2018/11/04/数据库常用事务传播行为与隔离级别/#more">Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -310,8 +297,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2018/06/09/First Post/" class="image is-7by1">
-            <img class="thumbnail" src="/img/random/3.jpg" alt="First Post">
+        <a href="/2018/11/03/成员变量与局部变量/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/69.jpg" alt="成员变量与局部变量">
         </a>
     </div>
     
@@ -319,13 +306,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-09T09:00:17.000Z">2018-06-09</time>
+                <time class="level-item has-text-grey" datetime="2018-11-03T05:12:00.000Z">2018-11-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    16 minutes read (About 2419 words)
+                    7 minutes membaca (Sekitar 1031 kata)
                 </span>
                 
                 
@@ -334,22 +325,452 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/06/09/First Post/">First Post</a>
+                <a class="has-link-black-ter" href="/2018/11/03/成员变量与局部变量/">成员变量与局部变量</a>
             
         </h1>
         <div class="content">
-            <h1 id="第一篇，心情却不是很好。"><a href="#第一篇，心情却不是很好。" class="headerlink" title="第一篇，心情却不是很好。"></a>第一篇，心情却不是很好。</h1><blockquote>
-<p>&emsp;&emsp;起初只是室友不经意间的一句话，说：某某人现在在自学，还参加了学校的软件杯比赛，还报名了培训班，说应该学的比我还要好的多了。当时听完心里挺不舒服的，想说点什么证明自己来怼他，不过还是算了，毕竟我们关系还不错，没必要为了这点小事伤了和气显得自己多小气的样子，我知道和他辩解没有用，我也不想怪他什么，毕竟软件这个专业只有自己真心投入了才知道过程的艰辛。可是今天这种情况让我有点莫名的心酸…</p>
-</blockquote>
-<p>&emsp; &emsp;和往常一样一起吃完中午饭回来，路上看到他的许多同学去上课。说点题外的：大二了，这垃圾学校知道自己教学水平不行和培训机构合作怂恿同学们去培训，培训还得自己出钱。培训老师抓住大多数人的普遍心理让他们醒悟过来觉得现在开始学习，四个月后轻轻松松就可以学到所有技术点，然后坐着办公室拿高薪，敲着小代码，喝着下午茶，过着轻轻松松的生活，好不惬意… 一个个积极的报名去培训上课。我不想说培训机构有什么不好，我自己这两年学习过来的资料大多数都是培训机构的，论师资力量这垃圾学校是没得比的。</p>
-<p>&emsp; &emsp;回来的路上自然的聊起培训的事，说什么记不太清，反正字里行间意思就是说他们多努力，多自觉的样子，周末还一个个去上课，这就算了，拿我比较干什么！心里压抑的情绪顿时忍不住了，我说没什么了不起的，他们要是自觉想学的话也不会想到现在去报班，如果不是大二培训机构隔三岔五的来洗脑会有这么多 <code>焕然大悟</code>、<code>怎么就要毕业了</code>、<code>再不学习来不及了</code>、<code>我还什么都没学到怎么找工作</code>的同志们回头赎罪的吗？<br></p>
+            <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> s;</span><br><span class="line">    <span class="hljs-keyword">int</span> i;</span><br><span class="line">    <span class="hljs-keyword">int</span> j;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;</span><br><span class="line">        i++;</span><br><span class="line">        j++;</span><br><span class="line">        s++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        j++;</span><br><span class="line">        i++;</span><br><span class="line">        s++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Demo1 obj1 = <span class="hljs-keyword">new</span> Demo1();</span><br><span class="line">        Demo1 obj2 = <span class="hljs-keyword">new</span> Demo1();</span><br><span class="line">        obj1.test(<span class="hljs-number">10</span>);</span><br><span class="line">        obj1.test(<span class="hljs-number">20</span>);</span><br><span class="line">        obj2.test(<span class="hljs-number">30</span>);</span><br><span class="line">        System.out.println(obj1.i + <span class="hljs-string">","</span> + obj1.j + <span class="hljs-string">","</span> + obj1.s);</span><br><span class="line">        System.out.println(obj2.i + <span class="hljs-string">","</span> + obj2.j + <span class="hljs-string">","</span> + obj2.s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/09/First Post/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2018/11/03/成员变量与局部变量/#more">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/30/方法的参数传递机制/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/67.jpg" alt="方法的参数传递机制">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-30T13:59:00.000Z">2018-10-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes membaca (Sekitar 452 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/30/方法的参数传递机制/">方法的参数传递机制</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;</span><br><span class="line">        String str = <span class="hljs-string">"hello"</span>;</span><br><span class="line">        Integer num = <span class="hljs-number">200</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] arr = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;</span><br><span class="line">        MyData my = <span class="hljs-keyword">new</span> MyData();</span><br><span class="line"></span><br><span class="line">        change(i, str, num, arr, my);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="hljs-string">"i = "</span> + i);</span><br><span class="line">        System.out.println(<span class="hljs-string">"str = "</span> + str);</span><br><span class="line">        System.out.println(<span class="hljs-string">"num = "</span> + num);</span><br><span class="line">        System.out.println(<span class="hljs-string">"arr = "</span> + Arrays.toString(arr));</span><br><span class="line">        System.out.println(<span class="hljs-string">"my.a = "</span> + my.a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-keyword">int</span> j, String s, Integer n, <span class="hljs-keyword">int</span>[] a, MyData m)</span> </span>&#123;</span><br><span class="line">        j += <span class="hljs-number">1</span>;</span><br><span class="line">        s += <span class="hljs-string">"world"</span>;</span><br><span class="line">        n += <span class="hljs-number">1</span>;</span><br><span class="line">        a[<span class="hljs-number">0</span>] += <span class="hljs-number">1</span>;</span><br><span class="line">        m.a += <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyData</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/30/方法的参数传递机制/#more">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/30/类初始化和实例初始化/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/27.jpg" alt="类初始化和实例初始化">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-30T05:48:00.000Z">2018-10-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes membaca (Sekitar 1091 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/30/类初始化和实例初始化/">类初始化和实例初始化</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/post_image/interview-img/image_40.png" alt="用例代码"></p>
+<p>运行结果：</p>
+<pre><code>(5)(1)(10)(6)(9)(3)(2)(9)(8)(7)
+(9)(3)(2)(9)(8)(7)
+</code></pre><p>以上代码考察的知识点有三个：</p>
+<ul>
+<li><p>类的初始化过程</p>
+</li>
+<li><p>实例初始化过程</p>
+</li>
+<li><p>方法的重写</p>
+</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/30/类初始化和实例初始化/#more">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/30/单例设计模式/" class="image is-7by1">
+            <img class="thumbnail" src="/post_image/interview-img/singledog.png" alt="单例设计模式">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-30T04:00:00.000Z">2018-10-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes membaca (Sekitar 767 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/30/单例设计模式/">单例设计模式</a>
+            
+        </h1>
+        <div class="content">
+            <p>单例设计模式，即某个类在整个系统中只能有一个实例对象可被获取和使用的代码模式。<br>例如：代表JVM运行环境的Runtime类</p>
+<p>要点：</p>
+<ol>
+<li><p>某个类只能有一个实例；</p>
+<ul>
+<li>构造器私有化</li>
+</ul>
+</li>
+<li><p>是它必须自行创建这个实例；</p>
+<ul>
+<li>含有一个该类的静态变量来保存这个唯一的实例</li>
+</ul>
+</li>
+<li><p>是它必须自行向整个系统提供这个实例;</p>
+<ul>
+<li>对外提供获取该实例对象的方式：（1）直接暴露（2）用静态变量的get方法获取</li>
+</ul>
+</li>
+</ol>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/30/单例设计模式/#more">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/30/自增变量/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/66.jpg" alt="自增变量">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-30T03:52:00.000Z">2018-10-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes membaca (Sekitar 332 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/30/自增变量/">自增变量</a>
+            
+        </h1>
+        <div class="content">
+            <p>先看一段代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;                          <span class="hljs-comment">// i = 1</span></span><br><span class="line">        i = i++;                            <span class="hljs-comment">// i = 1</span></span><br><span class="line">        <span class="hljs-keyword">int</span> j = i++;                        <span class="hljs-comment">// j = 1</span></span><br><span class="line">        <span class="hljs-keyword">int</span> k = i + ++i * i++;              <span class="hljs-comment">// k = 11</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"i = "</span> + i); </span><br><span class="line">        System.out.println(<span class="hljs-string">"j = "</span> + j); </span><br><span class="line">        System.out.println(<span class="hljs-string">"k = "</span> + k); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/30/自增变量/#more">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/28/基于 Spring Boot 技术栈构建企业级博客系统的开发记录/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog96.jpg" alt="基于 Spring Boot 技术栈构建企业级博客系统的开发记录">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-28T15:45:00.000Z">2018-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/spring-boot/">spring-boot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    an hour membaca (Sekitar 8528 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/28/基于 Spring Boot 技术栈构建企业级博客系统的开发记录/">基于 Spring Boot 技术栈构建企业级博客系统的开发记录</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/post_image/blog-img/image_39.png" alt="博客首页"></p>
+<blockquote>
+<p><strong>基于 Spring Boot 技术栈构建企业级博客系统的开发记录</strong><br>- 该项目构建基于 Gradle，目的在于通过博客系统的开发了解企业级开发的完整流程，学习掌握 Spring Boot 及其周边前沿技术。<br>- preview：<a href="http://blog.yuzh.xyz" target="_blank" rel="noopener">http://blog.yuzh.xyz</a><br></p></blockquote>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/28/基于 Spring Boot 技术栈构建企业级博客系统的开发记录/#more">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/13/如何给通过脚本添加的 元素注册事件/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/70.jpg" alt="如何给通过脚本添加的元素注册事件">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-12T16:00:00.000Z">2018-10-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/bug-fix/">bug-fix</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds membaca (Sekitar 65 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/13/如何给通过脚本添加的 元素注册事件/">如何给通过脚本添加的元素注册事件</a>
+            
+        </h1>
+        <div class="content">
+            <p>前端弱渣，记录一下问题解决：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 事件冒泡：给动态添加的 html 元素注册事件</span></span><br><span class="line">$(<span class="hljs-string">"body"</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-string">".blog-edit-user"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123; </span><br><span class="line">    <span class="hljs-comment">// .blog-edit-user 是需要被注册事件的元素标签</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://www.jb51.net/article/120018.htm" target="_blank" rel="noopener">https://www.jb51.net/article/120018.htm</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/10/13/解决使用 bootstrap 更新操作时-模态框回显传值问题/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/71.jpg" alt="解决使用 bootstrap 更新操作时-模态框回显传值问题">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-12T16:00:00.000Z">2018-10-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/bug-fix/">bug-fix</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes membaca (Sekitar 516 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/13/解决使用 bootstrap 更新操作时-模态框回显传值问题/">解决使用 bootstrap 更新操作时-模态框回显传值问题</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="回顾-ModelAndView"><a href="#回顾-ModelAndView" class="headerlink" title="回顾 ModelAndView"></a>回顾 ModelAndView</h2><p>之前的印象中，我使用 ModelAndView 的场景是在需要重定向页面时带上参数。最近在做博客系统开发时学到了新的一招，就是 ModelAndView 不仅可以跳转页面，还可以”跳转”页面的部分内容！比如这样：<code>new ModelAndView(&quot;users/list :: #user_div&quot;,map);</code> —— 这句话的意思是找到 user/list.html 将其中的指定 div 的 html 代码作为字符串返回值输出出去（如果这个 div 有取值标签将会被赋值）。如果是同步请求将会输出到浏览器实现刷新，如果是异步则会作为 data 的字符串文本数据（html代码）</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/13/解决使用 bootstrap 更新操作时-模态框回显传值问题/#more">Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -370,10 +791,10 @@
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Sebelumnya</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Next</a>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Berikutnya</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -384,6 +805,10 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
             
             <li><a class="pagination-link is-current" href="/page/4/">4</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
             
         </ul>
     </nav>
@@ -404,7 +829,7 @@
                 <div>
                     
                         <figure class="image is-128x128 has-mb-6">
-                            <img class="is-rounded" src="/images/tou.jpg" alt="harry.zh">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
                         </figure>
                     
                     
@@ -430,37 +855,37 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Artikel
                     </p>
                     <p class="title has-text-weight-normal">
-                        34
+                        59
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Kategori
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        8
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Tag
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        31
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
-                Follow</a>
+                IKUTI</a>
         </div>
         
         
@@ -509,7 +934,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            Tautan
         </h3>
         <ul class="menu-list">
         
@@ -536,7 +961,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Kategori
             </h3>
             <ul class="menu-list">
             <li>
@@ -548,17 +973,49 @@
                 <span class="level-item tag">2</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/docker/">
+        <a class="level is-marginless" href="/categories/docker-note/">
             <span class="level-start">
-                <span class="level-item">docker</span>
+                <span class="level-item">docker-note</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/interview/">
             <span class="level-start">
                 <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">9</span>
@@ -581,9 +1038,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Awan tag
         </h3>
-        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 12.5px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 20px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
     </div>
 </div>
 
@@ -595,23 +1052,23 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Terbaru
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -619,18 +1076,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="media-left">
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
-                    <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -638,18 +1095,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="media-left">
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time></div>
-                    <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="has-link-black-ter is-size-6">Docker 补救指南（一）—— 基础使用</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -657,18 +1114,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+            <a href="/2019/07/15/终端走代理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -676,18 +1133,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        
                     </p>
                 </div>
             </div>
@@ -701,9 +1158,42 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Arsip
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -711,7 +1201,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -791,7 +1281,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Tag
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -819,7 +1309,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -845,9 +1342,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -875,14 +1379,21 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -918,6 +1429,13 @@
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1004,23 +1522,23 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Terbaru
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="media-left">
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/51.jpg" alt="Docker 补救指南（三）—— Docker Swarm">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-17T16:00:00.000Z">2019-05-18</time></div>
-                    <a href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/" class="has-link-black-ter is-size-6">Docker 补救指南（三）—— Docker Swarm</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -1028,18 +1546,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="media-left">
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/65.jpg" alt="Docker 补救指南（二）—— 网络管理">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T16:00:00.000Z">2019-05-12</time></div>
-                    <a href="/2019/05/12/Docker 补救指南（二）—— 网络管理/" class="has-link-black-ter is-size-6">Docker 补救指南（二）—— 网络管理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        
                     </p>
                 </div>
             </div>
@@ -1047,18 +1565,18 @@
         
         <article class="media">
             
-            <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="media-left">
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time></div>
-                    <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="has-link-black-ter is-size-6">Docker 补救指南（一）—— 基础使用</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -1066,18 +1584,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="media-left">
+            <a href="/2019/07/15/终端走代理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="has-link-black-ter is-size-6">根据树的前序和后序表达式构造唯一树</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
                     </p>
                 </div>
             </div>
@@ -1085,18 +1603,18 @@
         
         <article class="media">
             
-            <a href="/2018/11/08/树的三种遍历方式/" class="media-left">
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/img/sujin/wallhaven-204334.jpg" alt="树的三种遍历方式">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time></div>
-                    <a href="/2018/11/08/树的三种遍历方式/" class="has-link-black-ter is-size-6">树的三种遍历方式</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/interview/">interview</a>
+                        
                     </p>
                 </div>
             </div>
@@ -1110,9 +1628,42 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Arsip
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -1120,7 +1671,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1200,7 +1751,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Tag
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1228,7 +1779,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1254,9 +1812,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1284,14 +1849,21 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1327,6 +1899,13 @@
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1524,7 +2103,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1558,7 +2137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1570,11 +2149,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
             },
             CONTENT_URL: '/content.json',
         };

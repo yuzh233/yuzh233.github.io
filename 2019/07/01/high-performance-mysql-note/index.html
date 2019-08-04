@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>高性能 MySql —— 学习笔记 - harry&#39;s blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="读《高性能 MYSQL》笔记，仅用回顾复习作用，不能具备参考价值。  Table Of Contens    第一章 架构与历史 Mysql 逻辑架构： 并发控制 读写锁 锁粒度   事务 隔离级别     第四章 Schema 与 数据类型优化 整数类型 实数类型 字符串类型 时间类型 位类型 特殊类型 Schema 设计的陷阱 范式与反范式   第五章 创建高性能的索引 索引的类型">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能 MySql —— 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/01/high-performance-mysql-note/index.html">
+<meta property="og:site_name" content="harry&#39;s blog">
+<meta property="og:description" content="读《高性能 MYSQL》笔记，仅用回顾复习作用，不能具备参考价值。  Table Of Contens    第一章 架构与历史 Mysql 逻辑架构： 并发控制 读写锁 锁粒度   事务 隔离级别     第四章 Schema 与 数据类型优化 整数类型 实数类型 字符串类型 时间类型 位类型 特殊类型 Schema 设计的陷阱 范式与反范式   第五章 创建高性能的索引 索引的类型">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.yuzh.xyz/blog/wallhaven-50284.jpg">
+<meta property="og:updated_time" content="2019-07-16T10:30:10.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能 MySql —— 学习笔记">
+<meta name="twitter:description" content="读《高性能 MYSQL》笔记，仅用回顾复习作用，不能具备参考价值。  Table Of Contens    第一章 架构与历史 Mysql 逻辑架构： 并发控制 读写锁 锁粒度   事务 隔离级别     第四章 Schema 与 数据类型优化 整数类型 实数类型 字符串类型 时间类型 位类型 特殊类型 Schema 设计的陷阱 范式与反范式   第五章 创建高性能的索引 索引的类型">
+<meta name="twitter:image" content="http://img.yuzh.xyz/blog/wallhaven-50284.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/star.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/star.png" alt="高性能 MySql —— 学习笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Katalog" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    an hour membaca (Sekitar 8251 kata)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                高性能 MySql —— 学习笔记
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>读《高性能 MYSQL》笔记，仅用回顾复习作用，不能具备参考价值。</p>
+</blockquote>
+<h1>Table Of Contens</h1>
+
+<!-- TOC -->
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2">第一章 架构与历史</a><ul>
+<li><a href="#mysql-%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84">Mysql 逻辑架构：</a></li>
+<li><a href="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6">并发控制</a><ul>
+<li><a href="#%E8%AF%BB%E5%86%99%E9%94%81">读写锁</a></li>
+<li><a href="#%E9%94%81%E7%B2%92%E5%BA%A6">锁粒度</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E5%8A%A1">事务</a><ul>
+<li><a href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB">隔离级别</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-schema-%E4%B8%8E-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96">第四章 Schema 与 数据类型优化</a><ul>
+<li><a href="#%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B">整数类型</a></li>
+<li><a href="#%08%E5%AE%9E%E6%95%B0%E7%B1%BB%E5%9E%8B">实数类型</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B">字符串类型</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B">时间类型</a></li>
+<li><a href="#%E4%BD%8D%E7%B1%BB%E5%9E%8B">位类型</a></li>
+<li><a href="#%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B">特殊类型</a></li>
+<li><a href="#%08%08schema-%E8%AE%BE%E8%AE%A1%E7%9A%84%08%E9%99%B7%E9%98%B1">Schema 设计的陷阱</a></li>
+<li><a href="#%E8%8C%83%E5%BC%8F%E4%B8%8E%E5%8F%8D%E8%8C%83%E5%BC%8F">范式与反范式</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95">第五章 创建高性能的索引</a><ul>
+<li><a href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E7%B1%BB%E5%9E%8B">索引的类型</a><ul>
+<li><a href="#b-tree-%E7%B4%A2%E5%BC%95">B-Tree 索引</a></li>
+<li><a href="#%E5%93%88%E5%B8%8C%E7%B4%A2%E5%BC%95">哈希索引</a></li>
+<li><a href="#%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95r-tree">空间数据索引（R-Tree）</a></li>
+<li><a href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95">全文索引</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BC%98%E7%82%B9">索引的优点</a></li>
+<li><a href="#%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A9%E7%94%A8%E7%B4%A2%E5%BC%95">正确的创建和利用索引</a><ul>
+<li><a href="#%E7%8B%AC%E7%AB%8B%E7%9A%84%E5%88%97">独立的列</a></li>
+<li><a href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%E5%92%8C%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9%E6%80%A7">前缀索引和索引选择性</a></li>
+</ul>
+</li>
+<li><a href="#%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E7%B4%A2%E5%BC%95%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F">选择合适的索引列的顺序</a></li>
+<li><a href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95">聚簇索引</a></li>
+<li><a href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95">覆盖索引</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%08%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">第六章 查询性能优化</a><ul>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E6%85%A2%E7%9A%84%E5%9B%A0%E7%B4%A0">查询慢的因素</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE">优化数据访问</a><ul>
+<li><a href="#%E6%98%AF%E5%90%A6%E8%AF%B7%E6%B1%82%E4%BA%86%E4%B8%8D%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E6%8D%AE">是否请求了不需要的数据</a></li>
+<li><a href="#mysql-%E6%98%AF%E5%90%A6%E5%9C%A8%E6%89%AB%E6%8F%8F%E9%A2%9D%E5%A4%96%E7%9A%84%E8%AE%B0%E5%BD%95">Mysql 是否在扫描额外的记录</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%8D%E6%9E%84%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F">重构查询方式</a><ul>
+<li><a href="#%E4%B8%80%E4%B8%AA%E5%A4%8D%E6%9D%82%E6%9F%A5%E8%AF%A2%E8%BF%98%E6%98%AF%E5%A4%9A%E4%B8%AA%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2">一个复杂查询还是多个简单查询</a></li>
+<li><a href="#%E5%88%87%E5%88%86%E6%9F%A5%E8%AF%A2">切分查询</a></li>
+<li><a href="#%E5%88%86%E8%A7%A3%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2">分解关联查询</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E6%89%A7%E8%A1%8C%E7%9A%84%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%08%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6">查询执行的基础（查询的内部机制）</a></li>
+<li><a href="#mysql-%E5%AE%A2%E6%88%B7%E7%AB%AF--%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE">Mysql 客户端 / 服务端通信协议</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98">查询缓存</a></li>
+<li><a href="#%08%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%A4%84%E7%90%86">查询优化处理</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<a id="more"></a>
+<h1 id="第一章-架构与历史"><a href="#第一章-架构与历史" class="headerlink" title="第一章 架构与历史"></a>第一章 架构与历史</h1><h2 id="Mysql-逻辑架构："><a href="#Mysql-逻辑架构：" class="headerlink" title="Mysql 逻辑架构："></a>Mysql 逻辑架构：</h2><p><img src="http://img.yuzh.xyz/mysql/20190701200305.png" alt="mysql服务器的逻辑架构图"></p>
+<ul>
+<li><p>第一层是连接处理，并非是 Mysql 独有，大多数应用都有类似的架构。比如连接、授权、安全等。</p>
+</li>
+<li><p>第二层是 Mysql 核心功能层，包括解析、分析、优化、缓存以及内置函数（日期、时间、数学、加密）等。所有<code>跨存储引擎的功能</code>也在这一层实现如：触发器、视图、存储过程等。</p>
+</li>
+<li><p>第三层包含存储引擎，负责 Mysql 中数据的存储与提取。每一种存储引擎都有各自的优势与劣势，mysql 服务器通过 API 与存储引擎通信，这些 API 屏蔽了不同存储引擎之间的差异，使得这些差异对上层的查询透明。存储引擎不会去解析 SQL，不同存储引擎之间也不会互相通信，只是响应上层 mysql 服务器的请求。</p>
+</li>
+</ul>
+<h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>只要有多个查询在同一时刻操作数据，就有会有并发问题。Mysql 可以从<code>服务层</code>和<code>存储引擎层</code>控制并发。</p>
+<h3 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h3><p><code>读写锁</code>也称为共享锁和排它锁，读锁是共享的（互不阻塞的），多个连接可以同时读取同一份资源而不产生并发问题；写锁是排它的（一个写锁会阻塞其他写锁和读锁），这有这样才会保证给定时间内只有一个用户可以执行操作，并防止其他用户读取正在写入的数据。</p>
+<h3 id="锁粒度"><a href="#锁粒度" class="headerlink" title="锁粒度"></a>锁粒度</h3><p>加锁操作（如：加锁、检查锁是否释放、释放锁等）都是会消耗系统资源的，如果花费大量的时间来管理锁而不是存储数据，那么系统性能也会受到影响。</p>
+<p>因此一种提高并发性能的方案是让锁定对象更有选择性，尽量锁定部分数据而不是全部资源。锁定的资源越少，并发控制的性能越高。</p>
+<p><code>锁策略</code>是指在锁的开销和数据安全之间寻求平衡。Mysql 提供多种选择，每一个存储引擎都实现了自己的锁策略和锁粒度。</p>
+<p><strong>表锁</strong><br>Mysql 最基本的锁策略，也是锁开销最小的策略，对数据的写操作（插入、更新、删除）会锁定整张表。当拥有一个写锁时，将阻塞其他连接对数据的读写操作，直至写锁释放。读锁是互不阻塞的。</p>
+<p><strong>行锁</strong><br>行锁可以最大程序的支持并发，同时也带来了锁的开销。行级锁只在存储引擎中实现，mysql 服务器层没有实现，服务器层不了解存储引擎的锁实现。</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务是一组原子性的 SQL 查询，是一个独立的工作单元。事务中的 SQL 语句要么全部成功，要么全部失败。</p>
+<p>一个良好的事务处理系统必须具备 ACID 标准，不基于 ACID 标准谈事务的概念是没有意义的。</p>
+<p><strong>ACID 即：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。</strong></p>
+<p>「原子性」</p>
+<p>一个事务被视为一个独立的工作单元，事务中的操作要么提交成功，要么全部失败回滚，不可能只执行其中一部分操作。</p>
+<p>「一致性」</p>
+<p>数据库总是从一个状态到另一个状态的变化。若事务提交成功，A 状态到了 B 状态；若事务执行失败，回到 A 状态；不存在第三种状态 C。</p>
+<p>「隔离型」</p>
+<p><strong>通常来说</strong>，一个事务所做的修改在提交成功之前，对其他事务是不可见的。隔离性是四个性质中最复杂的一个，其中细分了许多 <strong>「隔离级别」</strong>。</p>
+<p>「持久性」</p>
+<p>一旦事务提交了，所做的修改将永久保存到数据库中，即使系统崩溃，修改的数据也不会丢失。当然这是理想的情况，很多时候不能够保证 100% 的持久性。</p>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><p>SQL 标准定义了四种隔离级别，每一种级别中都规定了一个事务所做的修改，哪些在事务内和事务见是可见的，哪些是不可见的。较低的隔离通常可以执行更高 的并发，系统开销也会更低。</p>
+<p><strong>「READ UNCOMMIT 未提交读」</strong><br>事务中的修改，即使没有提交，对其他事务也是可见的。这也叫做脏读（drity read），这个级别会导致很多问题，很少使用这个级别。并且从性能上来说，read uncommit 不会比其他级别高出多少，但是缺少了其他级别的很多优势。</p>
+<p><strong>「READ COMMIT 提交读」</strong><br>大多数数据库隔离级别都是 read commit，但 Mysql 不是。</p>
+<p>read commit 满足事务隔离性的基本定义，一个事务开始时只能看到已经提交的事务所做的修改。</p>
+<p>read commit 也叫做「不可重复读」，两次执行相同的查询，可能得到不同的结果。</p>
+<p><strong>「REPEATABLE READ 可重复读」</strong><br>Mysql 的默认隔离级别。</p>
+<p>该级别解决的脏读并且支持可重复读（同个事务中多次读取同样的记录的结果是一致的）。不过无法解决「幻读」问题，即当一个事务读取某个范围的记录时，另一个事务插入了新的记录，该事务再次读取会出现幻行。</p>
+<p>不过 InnDB 存储引擎通过多版本并发控制（MVVC）解决了幻读。</p>
+<p><strong>「SERIALIZABLE 可串行化」</strong><br>最高的隔离级别，强制事务串行执行。serializable 会给每一行数据加锁，所以可能导致大量超时和锁占用。除非非常需要确保数据一致性并且不需要并发情况，否则不考虑使用该级别。</p>
+<p>各个隔离级别比较：</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读可能性</th>
+<th>不可重复读可能性</th>
+<th>幻读可能性</th>
+<th>加锁读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMIT</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>READ COMMIT</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>PEREATABLE READ</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<h1 id="第四章-Schema-与-数据类型优化"><a href="#第四章-Schema-与-数据类型优化" class="headerlink" title="第四章 Schema 与 数据类型优化"></a>第四章 Schema 与 数据类型优化</h1><p>选择数据类型的几种原则：</p>
+<p><strong>1）更小的通常更好</strong><br>更小的数据类型速度越快，占用更少的磁盘、内存和 CPU 缓存。但最好确保数据类型将不会扩充，因为扩大数据类型的范围是十分耗时和消耗资源的操作。</p>
+<p><strong>2）简单就好</strong><br>简单的数据类型通常需要更少的 CPU 周期。整型比字符型的操作代价要低，这是由于字符型的校对和排序规则比整型更复杂导致的。</p>
+<p>能用 Mysql 内置的时间类型就不用字符串，用整型存储 IP 地址不要用字符串。</p>
+<p><strong>3）避免使用 NULL</strong><br>可为 NULL 的列会使得索引、索引统计、比较变得复杂，Mysql 需要更多的空间对 NUll 列做特殊处理。</p>
+<p>NULL 列不要用作索引。</p>
+<h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><p>数字类型分为整数和实数，整数的几种 MYSQL 类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>占用位数</th>
+<th>字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TINYINT</td>
+<td>8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>24</td>
+<td>3</td>
+</tr>
+<tr>
+<td>INT</td>
+<td>32</td>
+<td>4</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>64</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>整数类型分为有符号和无符号（UNSIGNED），无符号表示不支持负数。使用无符号大约可以使存储空间提高一倍。</p>
+<p>有符号和无符号使用相同的存储空间，具有相同的性能，可以根据实际情况选择。</p>
+<p>Mysql 中可以给整数指定宽度，如 INT(11)，但对大多数应用来说是没有意义的。它没有限制数的存储范围，而只是规定在一些 MYSQL 客户端工具中显示的字符的宽度。对于存储和计算来收，INT(1) 和 INT(11) 是没有区别的。</p>
+<h2 id="实数类型"><a href="#实数类型" class="headerlink" title="实数类型"></a>实数类型</h2><p>实数是带有小数的数字。MYSQL 中支持的类型有 <strong>「浮点类型（float /  double）」</strong> 和 <strong>「Decimal 类型」</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节数</th>
+<th>位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>32</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8</td>
+<td>64</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>16</td>
+<td>128</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>浮点类型是不精确类型，不支持精确计算，存储同样范围的值占用空间较 decimal 少；</p>
+</li>
+<li><p>decimal 类型是精确类型，可存储精确小数，支持精确计算（Mysql 5.0 开始），但计算代价较高。</p>
+</li>
+</ul>
+<p><code>decimal(a,b)</code></p>
+<ul>
+<li>a 指定小数点左边和右边可以存储的十进制数字的最大个数，最大精度38。</li>
+<li>b 指定小数点右边可以存储的十进制数字的最大个数。小数位数必须是从 0 到 a 之间的值。默认小数位数是 0。</li>
+</ul>
+<p>建议：</p>
+<p><strong>1. 只指定数值类型，不指定精度。</strong></p>
+<p><strong>2. 尽量在只对小数计算时才使用 Decimal，数据量大情况下最好是使用  BIGINT 代替 DECIMAL。</strong> 小数按倍数相乘之后存入数据库，取出时按倍数相除即可。</p>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><p><strong>VARCHAR &amp; CHAR</strong><br>varchar 比 char 更节省空间，一定程度上也提高了性能，因为仅使用必要的空间。但由于行是变长的，做更新操作可能时会比 vhar 多做一些额外操作。</p>
+<p>char 是变长的，根据定义的字符串的长度分配固定的空间，当存储的值少于固定长度时以空格填充。char 类型适合用于存储长度短、值的长度固定的如 MD5 加密后的密码，因为是定长的，不易产生碎片，特定类型的数值存储效率比 varchar 要高。</p>
+<p><strong>BINARY &amp; VARBINARY</strong><br>binary 和 varbinary 与 char 和 varchar 类似，只不过 binary、varbinary 存储的是二进制字符串。二进制字符串与普通字符串类似，不过存储的是字节码而不是字符。</p>
+<p><strong>BLOB &amp; TEXT</strong><br>存储大数据量的字符串类型，分别存储二进制大字符串和普通文本大字符串。</p>
+<ul>
+<li>BLOB 类型有：TINYBLOB、SMALLBLOB、BLOB、MEDIUMBLOB、BIGBLOB。</li>
+<li>TEXT 类型有：TINYTEXT、SMALLTEXT、TEXT、MEDIUMTEXT、BIGTEXT。</li>
+</ul>
+<h2 id="时间类型"><a href="#时间类型" class="headerlink" title="时间类型"></a>时间类型</h2><p><strong>DATETIME</strong><br>能保存较大范围的值，从 1001 年到 9999 年，精度为秒。与时区无关，使用 8 个字节存储。</p>
+<p><strong>TIMESTAMP</strong><br>该类型保存了从 1970 年 1 月 1 日午夜以来的描述，表示的范围为 1970 年到 2038 年。只占用 4 个字节。与时区相关。</p>
+<p><strong>除了特殊情况之外，尽量使用 TIMESTAMP，因为它比 DATETIME 空间利用效率更高。</strong></p>
+<h2 id="位类型"><a href="#位类型" class="headerlink" title="位类型"></a>位类型</h2><p>Mysql 5.0 之前，BIT 与 TINYINT 没有区别，MYSQL 5.0 之后这两者是不同的数据类型。</p>
+<p>BIT 最大支持 64 个位，Mysql 将 BIT 视为字符串类型，当检索 bit(1) 时，返回的是二进制 的 0 或 1 的字符串，而不是数字。</p>
+<p>注意：在数字上下文中检索时，会将字符串转为数字。如：存储值为 b’00111001’（二进制等于57）的列检索时会得到 57 的字符串，然后根据 57 在 ASCII 码中的位置得出数字 9。这通常不是我们需要的。<strong>因此应尽量避免使用这个类型。</strong></p>
+<h2 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h2><p>如 IP 地址，应该用无符号整数来存储。IP 之间的小数点只是为了让人们利于区分，MYSQL 提供 <code>INET_ATON()</code> 和 <code>INET_NTOA()</code> 函数在这两者之间转换。</p>
+<h2 id="Schema-设计的陷阱"><a href="#Schema-设计的陷阱" class="headerlink" title="Schema 设计的陷阱"></a>Schema 设计的陷阱</h2><ol>
+<li>避免设计太多的列</li>
+<li>避免滥用枚举</li>
+<li>避免太多的关联</li>
+<li>尽量避免设计可为 NULL 的列，但有时必须这样做。</li>
+</ol>
+<h2 id="范式与反范式"><a href="#范式与反范式" class="headerlink" title="范式与反范式"></a>范式与反范式</h2><p>范式的优点：</p>
+<ul>
+<li>范式化的更新操作通常比反范式化要快。</li>
+<li>范式化很少有重复数据。</li>
+<li>范式化的表通常更小，可以更好的放在内存里，执行会更快。</li>
+<li>有很少的数据意味着检索列时需要更少的 DISTINCT 或者 GROUP BY 语句。</li>
+</ul>
+<p>范式的缺点：<br>通常需要关联，代价昂贵 ，可能使得索引策略无效。</p>
+<p><strong>最佳的设计是混合范式化与反范式化</strong></p>
+<h1 id="第五章-创建高性能的索引"><a href="#第五章-创建高性能的索引" class="headerlink" title="第五章 创建高性能的索引"></a>第五章 创建高性能的索引</h1><p>索引是存储引擎用于快速找到记录的一种数据结构，设计良好的索引比不好的索引可能要好几个量级。在 Mysql 中，存储引擎先在索引中搜索对应的值，再根据匹配的索引记录找到对应的数据行。</p>
+<p>索引可以包含一个或多个列，如果包含多个列，那么列的顺序十分重要，因为 Mysql 只能高效的使用索引最左前缀的列。创建一个包含多列的索引和创建多个只包含一个列的索引是大不相同的。</p>
+<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><p>索引有很多类型，不同的类型可以为不同的场景提供更好的性能。在 Mysql 中，索引是存储在存储引擎层而不是在服务层实现的，所以没有统一的索引标准。</p>
+<h3 id="B-Tree-索引"><a href="#B-Tree-索引" class="headerlink" title="B-Tree 索引"></a>B-Tree 索引</h3><p>B-TREE 索引是大多数 MYSQL 存储引擎使用的索引类型，InnoDB 使用就是 B-TREE。这类索引适用于「全键值」「键值范围」「键前缀」查找，键前缀查找只适用于根据最左前缀查找。B-Tree 是最常见的索引，支持按顺序存储数据，所以可以用来做 GROUP BY 和 ORDER BY 操作。以下查询类型使用 B-Tree 会十分有效：</p>
+<p><strong>1）全值匹配</strong><br>利用索引中所有的列进行匹配的查询。</p>
+<p><strong>2）匹配最左前缀</strong><br>对于多个列组成的索引，匹配最左列的查询使用 b-tree 效率很高。</p>
+<p><strong>3）匹配列前缀</strong><br>匹配某个列的值的开头部分，如 first_name 是最左列，查找姓从 J 开头的人的查询会走索引。这里的匹配列前缀是在最左前缀前提下的。</p>
+<p><strong>4）精确匹配某一列并范围匹配另外一列</strong><br>这些必须都是索引列的一部分。</p>
+<p><strong>5）只访问索引的查询</strong><br>查询只访问索引，不访问其他数据行。</p>
+<p>因为索引数的节点都是有序的，所以除了按值查找之外，还可以用来查询之中的 ORDER BY 操作。如果 ORDER BY 字句满足上述查询要求，那么索引也可以满足对应的排序需求。</p>
+<p><strong>B-Tree 的限制：</strong></p>
+<ul>
+<li>不是按最左列的查询不会走索引。</li>
+<li>不是列前缀的查询也不会走索引，如查找名字以 J 结尾的用户。</li>
+<li>不能跳过索引中的列查询。即如果查询条件中只包含索引的第一列和最后一列，那么索引只会利用第一列。</li>
+<li>如果查询中有某个列的范围查找，则右边的所有列都无法利用索引优化查找。</li>
+</ul>
+<p><strong>B-Tree 索引中，索引列的顺序对索引的查询效率十分重要，有时需要用相同的列但不同的顺序建立索引来满足不同的查询要求。</strong></p>
+<h3 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h3><p>基于哈希表实现，只有精确匹配所有列的查询才会有效。对于每一行数据，存储引擎都会对其中所有的索引列计算一个哈希码。哈希索引将所有的哈希吗存储在索引中，同时在哈希表中保存指向每个数据行的指针。</p>
+<p>在 Mysql 中，只有 Memory 引擎显式支持哈希索引。</p>
+<h3 id="空间数据索引（R-Tree）"><a href="#空间数据索引（R-Tree）" class="headerlink" title="空间数据索引（R-Tree）"></a>空间数据索引（R-Tree）</h3><p>MyISAM 引擎支持 R-Tree，可用作地理位置数据存储。这种索引无需前缀查询，可以从所有纬度来检索数据，但必须使用 Mysql 的 GIS 相关函数的支持，Mysql 对此支持并不完善，大部人很少使用这个特性。</p>
+<h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>全文索引是一种特殊类型的索引，它查找的是文本中的关键字而不是比较索引中的值。</p>
+<h2 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h2><p>索引可以让服务器快速定位到表的指定位置，并且根据索引的数据结构的不同，也存在一些附加作用。</p>
+<p>其优点有：</p>
+<ol>
+<li>大大减少服务器需要扫描的数据量</li>
+<li>可以帮助服务器避免排序和临时表</li>
+<li>可以将随机 I/O 变为顺序 I/O</li>
+</ol>
+<h2 id="正确的创建和利用索引"><a href="#正确的创建和利用索引" class="headerlink" title="正确的创建和利用索引"></a>正确的创建和利用索引</h2><h3 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h3><p>如果查询的列不是独立的，则 Mysql 不会使用索引。“独立的列”是指索引列不能是表达式的一部分，也不能是函数的参数 。</p>
+<h3 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h3><p>有时候索引列是很长的字符串，这会让索引变得大而慢，虽然 MYSQL 可能会隐式的转换成哈希索引，但有时候不足够，另一种方案是采用「前缀索引」。</p>
+<p>顾名思义，前缀索引是指 <strong>索引只索引列的前面部分值</strong>。创建前缀索引需要注意的地方是分配合理的前缀大小，前缀大小决定着<strong>索引选择性</strong>。</p>
+<p>索引选择性是指通过该前缀索引能够过滤掉的行数，选择性越高，过滤的行数越多。例如：唯一索引的选择性是 1，因为通过唯一索引能够精确定位到某一条数据。这是最好的索引选择性，性能也是最好的。</p>
+<p>对 BLOB、TEXT、很长的 varchar 必须使用前缀索引，长文本创建前缀索引关键点在于分配多少大小的前缀以保证足够高的选择性，但同时又不能太长（以便节约空间）。</p>
+<p>创建前缀索引的语法：</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- column 是列名</span><br><span class="line">- n 是前缀索引字符宽度</span><br><span class="line"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> ...... <span class="hljs-keyword">add</span> <span class="hljs-keyword">key</span>(<span class="hljs-keyword">column</span>(n));</span><br></pre></td></tr></table></figure>
+<h2 id="选择合适的索引列的顺序"><a href="#选择合适的索引列的顺序" class="headerlink" title="选择合适的索引列的顺序"></a>选择合适的索引列的顺序</h2><p>当不考虑排序和分组的时候，可以将选择性最高的列放在索引最前列。</p>
+<h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>如果一个索引包含查询中所有的列，称之为「覆盖索引」。</p>
+<p>……</p>
+<h1 id="第六章-查询性能优化"><a href="#第六章-查询性能优化" class="headerlink" title="第六章 查询性能优化"></a>第六章 查询性能优化</h1><p>数据库性能的优化是个大工程，<strong>库表结构优化、索引优化、查询优化</strong> 需要一个不漏。</p>
+<h2 id="查询慢的因素"><a href="#查询慢的因素" class="headerlink" title="查询慢的因素"></a>查询慢的因素</h2><p>如果把查询看作一个任务，那么一个查询实际上是由许多个子任务组成。每个子任务都会消耗一定的时间。优化查询时间，实际上是优化子任务的查询，要么消除其中一些没有必要的子任务，要么减少子任务的查询时间，要么让子任务运行的更快。</p>
+<p>除了一个查询含有多个子任务会导致慢之外，<strong>网络、CPU计算、数据统计、执行分析、锁等待</strong> 等因素也是导致查询慢的重要原因。</p>
+<h2 id="优化数据访问"><a href="#优化数据访问" class="headerlink" title="优化数据访问"></a>优化数据访问</h2><p>查询性能低下最基本的原因是访问的数据太多，大部分的性能低下的查询都可以通过减少访问的数据量来优化，以下两个步骤很有效：</p>
+<ol>
+<li>确认应用程序是否在 <strong>检索</strong> 大量超过需要的数据。这通常意味着访问了大量不需要的行，有时候也可能是访问了太多的列。</li>
+<li>确认 Mysql 服务器层是否在 <strong>分析</strong> 大量超过需要的数据行。</li>
+</ol>
+<h3 id="是否请求了不需要的数据"><a href="#是否请求了不需要的数据" class="headerlink" title="是否请求了不需要的数据"></a>是否请求了不需要的数据</h3><p>有些查询会请求超过实际需要的数据，然后这些多余的数据会被应用程序丢弃。这会给 Mysql 服务器带来额外的负担，并增加网络开销，也会消耗应用服务器 CPU 和内存的资源。在设计查询中需要注意以下几点：</p>
+<ul>
+<li><strong>避免查询不需要的数据。</strong> 推荐使用 LIMIT。</li>
+<li><strong>多表关联查询时返回全部列。</strong> 应该只取需要的数据。</li>
+<li><strong>总是取出全部列。</strong> 这样做不仅会让优化器无法使用「覆盖索引」扫描优化，还会为服务器带来额外的 I/O、内存和 CPU消耗。</li>
+<li><strong>重复性的查询相同的数据</strong> 这类情况下考虑使用应用层缓存。</li>
+</ul>
+<h3 id="Mysql-是否在扫描额外的记录"><a href="#Mysql-是否在扫描额外的记录" class="headerlink" title="Mysql 是否在扫描额外的记录"></a>Mysql 是否在扫描额外的记录</h3><p>确定查询只返回需要的数据以后，下一个应该注意的是看查询为了返回结果是否扫描了过多的数据。对于 Mysql，有以下几个简单的衡量指标：</p>
+<ul>
+<li>响应时间</li>
+<li>扫描的行数</li>
+<li>返回的行数</li>
+</ul>
+<p><strong>响应时间</strong><br>响应时间是服务时间和排队时间的总和。服务时间是指数据库真正处理这个查询花费的时间，排队时间是指服务器因为等待某些资源而没有真正执行查询的时间，可能是等 I/O 操作完成，也可能是等行锁释放等等。</p>
+<p><strong>扫描的行数返回的行数</strong><br>理想情况下扫描的行数和返回的行数应该是相同的，但实际情况是很少的。一般扫描的行数与返回的行数的比率很小，通常在 1:1 和 10:1 之间。</p>
+<p><strong>扫描的行数和访问类型</strong><br>Mysql 有好几种方式可以查找并返回同一行结果，不同的方式扫描的行数不经相同，有的不需要扫描。</p>
+<p>EXPAIN 语句中的 type 列表示访问类型。访问类型有：全表扫描、索引扫描、范围扫描、唯一索引扫描、常数引用等。这些访问方式速度从慢到快，扫描的行数从小到大。</p>
+<p>如果发现查询需要扫描大量的数据但只返回少数的行，通常可以尝试采用以下技巧去优化：</p>
+<ul>
+<li>使用索引覆盖扫描，把需要用到的列都放到索引中，这样存储引擎无需回表获取对应的行就可以返回结果了。</li>
+<li>改变库表结构。如使用单独的「汇总表」</li>
+<li>重写这个复杂查询，让 Mysql 优化器以更优化的方式执行查询。</li>
+</ul>
+<h2 id="重构查询方式"><a href="#重构查询方式" class="headerlink" title="重构查询方式"></a>重构查询方式</h2><p>优化有问题的查询，并不是说一定需要从 Mysql 获取一摸一样的结果集，而是找到一个更优的方式获得结果。比如将查询转换另外一种写法使得性能更好，或者修改应用程序代码换一种方式获得同样的结果。</p>
+<h3 id="一个复杂查询还是多个简单查询"><a href="#一个复杂查询还是多个简单查询" class="headerlink" title="一个复杂查询还是多个简单查询"></a>一个复杂查询还是多个简单查询</h3><p>尽量使用少的查询是好的，但是有时候将一个大的查询分解为多个小查询也是很有必要的。</p>
+<h3 id="切分查询"><a href="#切分查询" class="headerlink" title="切分查询"></a>切分查询</h3><p>将一个大的查询分解成多个查询功能一样、只完成一小部分的小查询，每次只返回一小部分的查询结果。</p>
+<p>比如删除旧数据：定期删除大量数据时如果用一个大的语句一次性完成的化，可能需要锁住很多数据、沾满整个事务日志、耗尽系统资源、阻塞很多小的但重要的查询。因此将一个大的删除语句切分成多个小的删除语句可以尽可能小的影响 Mysql 的性能，同时还可以减少 Mysql 复制的延迟。</p>
+<h3 id="分解关联查询"><a href="#分解关联查询" class="headerlink" title="分解关联查询"></a>分解关联查询</h3><p>将一个关联查询分解，对每一个表进行一次单表查询，然后将结果在应用程序中做关联。使用分解关联查询有很多好处，如：</p>
+<ol>
+<li><strong>让缓存效率更高。</strong> 很多应用程序可以方便的缓存单表查询对应的结果对象（对多表关联查询的结果做缓存是不切实际的，因为往往多表查询的条件是不断变化的。而<strong>对单表做缓存可以最大程序上利用缓存</strong>）。而对于 Mysql 本身的查询缓存来说，如果关联的某个表发生变化就无法使用查询缓存了。</li>
+<li><strong>将查询拆解后，执行单个查询可以减少锁的竞争。</strong></li>
+<li><strong>在应用层做关联，可以更容易的对数据库进行拆分，更容易做到高性能和可拓展。</strong></li>
+<li><strong>查询本身效率也会提高。</strong></li>
+<li><strong>可以减少冗余记录的查询。</strong> 在应用层做关联查询，意味着对于某条记录应用只需要查询一次。而在数据库中做关联查询，则可能需要重复地访问一部分数据。从这点看，这样重构还可能会减少网络和内存的消耗。</li>
+<li>更深一步，这样做相当于在应用中实现了哈希关联，而不是使用 Mysql 的嵌套循环关联。某些场景哈希关联效率要高很多。</li>
+</ol>
+<h2 id="查询执行的基础（查询的内部机制）"><a href="#查询执行的基础（查询的内部机制）" class="headerlink" title="查询执行的基础（查询的内部机制）"></a>查询执行的基础（查询的内部机制）</h2><p>要想 MYSQL 能够以更高的性能运行查询，弄清楚 MYSQL 是如何优化和执行查询是很有必要的。</p>
+<p><img src="http://img.yuzh.xyz/blog/20190705172745.png" alt></p>
+<ol>
+<li>客户端发送一条查询语句给服务端</li>
+<li>服务端先检查缓存，如果命中了缓存，则立即返回存储在缓存中的结果。否则进行下一阶段。</li>
+<li>服务端进行 SQL 解析、预处理、再由优化器生成对应的执行计划。</li>
+<li>Mysql 根据优化器生成的执行计划，调用存储引擎的 API 执行查询。</li>
+<li>将结果返回给客户端。</li>
+</ol>
+<p>每一步都比想象的要复杂，其中查询优化器是最复杂最难理解的部分。</p>
+<h2 id="Mysql-客户端-服务端通信协议"><a href="#Mysql-客户端-服务端通信协议" class="headerlink" title="Mysql 客户端 / 服务端通信协议"></a>Mysql 客户端 / 服务端通信协议</h2><p>mysql 客户端和服务端之间的通信协议是「半双工」的，这意味着：任一时刻，要么是服务端向客户端发送数据，要么是客户端向服务端发送数据，两个动作不会同时发生。</p>
+<p>这种方式有一个限制就是没法对流量进行控制，当客户端向服务端请求一个大的数据量，就必须一直等待接收完服务端的响应，不可能说接收一半就断开连接。这也是为什么推荐使用 LIMIT 的原因之一了。</p>
+<h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><p>这是查询的第一阶段。在解析一个语句之前，如果查询缓存是打开的，那么 Mysql 会优先检查这个查询是否命中查询缓存中的数据。该检查是通过一个对大小写敏感的哈希查找来实现的，即使查询和缓存中的查询有一个字节不同，也不会匹配缓存结果，这种情况会进入一个阶段的处理。</p>
+<p>如果查询命中了缓存，Mysql 在返回结果之前则会检查该用户的权限。权限没有问题就会直接返回结果跳过其他阶段。</p>
+<h2 id="查询优化处理"><a href="#查询优化处理" class="headerlink" title="查询优化处理"></a>查询优化处理</h2><p>这是查询缓存之后的下一个阶段，</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/mysql/">mysql</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/15/终端走代理/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">终端走代理</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/01/[20190701] spring-boot | part4(1~2)/">
+                <span class="level-item">20190701 spring-boot | part4(1~2)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'IaNb4n1EqHakKzNDh6jR1qYJ-gzGzoHsz',
+        app_key: 'Hg7CxatEfuCfhqOsl7XYtEOv',
+        placeholder: 'more than just code.'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="http://img.yuzh.xyz/blog/tou.jpg" alt="harry.zh">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        harry.zh
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        more than just code.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Changsha, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Artikel
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        59
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Kategori
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tag
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
+                IKUTI</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/yuzh233/">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="/">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="/">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="/">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+<!-- <div class="card widget column-left is-sticky" id="toc"> -->
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Katalog
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1</span>
+        <span>Table Of Contens</span>
+        </a></li><li>
+        <a class="is-flex" href="#第一章-架构与历史">
+        <span class="has-mr-6">2</span>
+        <span>第一章 架构与历史</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Mysql-逻辑架构：">
+        <span class="has-mr-6">2.1</span>
+        <span>Mysql 逻辑架构：</span>
+        </a></li><li>
+        <a class="is-flex" href="#并发控制">
+        <span class="has-mr-6">2.2</span>
+        <span>并发控制</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#读写锁">
+        <span class="has-mr-6">2.2.1</span>
+        <span>读写锁</span>
+        </a></li><li>
+        <a class="is-flex" href="#锁粒度">
+        <span class="has-mr-6">2.2.2</span>
+        <span>锁粒度</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#事务">
+        <span class="has-mr-6">2.3</span>
+        <span>事务</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#隔离级别">
+        <span class="has-mr-6">2.3.1</span>
+        <span>隔离级别</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#第四章-Schema-与-数据类型优化">
+        <span class="has-mr-6">3</span>
+        <span>第四章 Schema 与 数据类型优化</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#整数类型">
+        <span class="has-mr-6">3.1</span>
+        <span>整数类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#实数类型">
+        <span class="has-mr-6">3.2</span>
+        <span>实数类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#字符串类型">
+        <span class="has-mr-6">3.3</span>
+        <span>字符串类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#时间类型">
+        <span class="has-mr-6">3.4</span>
+        <span>时间类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#位类型">
+        <span class="has-mr-6">3.5</span>
+        <span>位类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#特殊类型">
+        <span class="has-mr-6">3.6</span>
+        <span>特殊类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#Schema-设计的陷阱">
+        <span class="has-mr-6">3.7</span>
+        <span>Schema 设计的陷阱</span>
+        </a></li><li>
+        <a class="is-flex" href="#范式与反范式">
+        <span class="has-mr-6">3.8</span>
+        <span>范式与反范式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第五章-创建高性能的索引">
+        <span class="has-mr-6">4</span>
+        <span>第五章 创建高性能的索引</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#索引的类型">
+        <span class="has-mr-6">4.1</span>
+        <span>索引的类型</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#B-Tree-索引">
+        <span class="has-mr-6">4.1.1</span>
+        <span>B-Tree 索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#哈希索引">
+        <span class="has-mr-6">4.1.2</span>
+        <span>哈希索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#空间数据索引（R-Tree）">
+        <span class="has-mr-6">4.1.3</span>
+        <span>空间数据索引（R-Tree）</span>
+        </a></li><li>
+        <a class="is-flex" href="#全文索引">
+        <span class="has-mr-6">4.1.4</span>
+        <span>全文索引</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#索引的优点">
+        <span class="has-mr-6">4.2</span>
+        <span>索引的优点</span>
+        </a></li><li>
+        <a class="is-flex" href="#正确的创建和利用索引">
+        <span class="has-mr-6">4.3</span>
+        <span>正确的创建和利用索引</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#独立的列">
+        <span class="has-mr-6">4.3.1</span>
+        <span>独立的列</span>
+        </a></li><li>
+        <a class="is-flex" href="#前缀索引和索引选择性">
+        <span class="has-mr-6">4.3.2</span>
+        <span>前缀索引和索引选择性</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#选择合适的索引列的顺序">
+        <span class="has-mr-6">4.4</span>
+        <span>选择合适的索引列的顺序</span>
+        </a></li><li>
+        <a class="is-flex" href="#聚簇索引">
+        <span class="has-mr-6">4.5</span>
+        <span>聚簇索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#覆盖索引">
+        <span class="has-mr-6">4.6</span>
+        <span>覆盖索引</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第六章-查询性能优化">
+        <span class="has-mr-6">5</span>
+        <span>第六章 查询性能优化</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#查询慢的因素">
+        <span class="has-mr-6">5.1</span>
+        <span>查询慢的因素</span>
+        </a></li><li>
+        <a class="is-flex" href="#优化数据访问">
+        <span class="has-mr-6">5.2</span>
+        <span>优化数据访问</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#是否请求了不需要的数据">
+        <span class="has-mr-6">5.2.1</span>
+        <span>是否请求了不需要的数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#Mysql-是否在扫描额外的记录">
+        <span class="has-mr-6">5.2.2</span>
+        <span>Mysql 是否在扫描额外的记录</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#重构查询方式">
+        <span class="has-mr-6">5.3</span>
+        <span>重构查询方式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#一个复杂查询还是多个简单查询">
+        <span class="has-mr-6">5.3.1</span>
+        <span>一个复杂查询还是多个简单查询</span>
+        </a></li><li>
+        <a class="is-flex" href="#切分查询">
+        <span class="has-mr-6">5.3.2</span>
+        <span>切分查询</span>
+        </a></li><li>
+        <a class="is-flex" href="#分解关联查询">
+        <span class="has-mr-6">5.3.3</span>
+        <span>分解关联查询</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#查询执行的基础（查询的内部机制）">
+        <span class="has-mr-6">5.4</span>
+        <span>查询执行的基础（查询的内部机制）</span>
+        </a></li><li>
+        <a class="is-flex" href="#Mysql-客户端-服务端通信协议">
+        <span class="has-mr-6">5.5</span>
+        <span>Mysql 客户端 / 服务端通信协议</span>
+        </a></li><li>
+        <a class="is-flex" href="#查询缓存">
+        <span class="has-mr-6">5.6</span>
+        <span>查询缓存</span>
+        </a></li><li>
+        <a class="is-flex" href="#查询优化处理">
+        <span class="has-mr-6">5.7</span>
+        <span>查询优化处理</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Tautan
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Kategori
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/bug-fix/">
+            <span class="level-start">
+                <span class="level-item">bug-fix</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/docker-note/">
+            <span class="level-start">
+                <span class="level-item">docker-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/">
+            <span class="level-start">
+                <span class="level-item">english-learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/english-learning/maven/">
+            <span class="level-start">
+                <span class="level-item">maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/english-learning/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/interview/">
+            <span class="level-start">
+                <span class="level-item">interview</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux-note/">
+            <span class="level-start">
+                <span class="level-item">linux-note</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/spring-boot/">
+            <span class="level-start">
+                <span class="level-item">spring-boot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Awan tag
+        </h3>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Terbaru
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/01/centos7 上操作 mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190801211050_uidHfg_charles-pjAH2Ax4uWk-unsplash.jpeg" alt="centos7 上操作 mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T16:00:00.000Z">2019-08-01</time></div>
+                    <a href="/2019/08/01/centos7 上操作 mysql/" class="has-link-black-ter is-size-6">centos7 上操作 mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190728102331_b1ZZkJ_john-schnobrich-2FPjlAyMQTA-unsplash.jpeg" alt="mysql 命令行方式执行备份恢复">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T16:00:00.000Z">2019-07-28</time></div>
+                    <a href="/2019/07/28/mysql 命令行方式执行备份恢复/" class="has-link-black-ter is-size-6">mysql 命令行方式执行备份恢复</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/16/酷炫工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
+                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/终端走代理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
+                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Arsip
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tag
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aliyun/">
+                        <span class="tag">aliyun</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/aop/">
+                        <span class="tag">aop</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cokie/">
+                        <span class="tag">cokie</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dockerfile/">
+                        <span class="tag">dockerfile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeMarker/">
+                        <span class="tag">freeMarker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/github/">
+                        <span class="tag">github</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jms/">
+                        <span class="tag">jms</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jsonp/">
+                        <span class="tag">jsonp</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nio/">
+                        <span class="tag">nio</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/solr/">
+                        <span class="tag">solr</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-boot/">
+                        <span class="tag">spring-boot</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sso/">
+                        <span class="tag">sso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tomcat/">
+                        <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无关代码/">
+                        <span class="tag">无关代码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/集群/">
+                        <span class="tag">集群</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/star.png" alt="高性能 MySql —— 学习笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 张 瑜&nbsp;
+                Powered by Hexo & Icarus<br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">湘ICP备 18020713号</a>
+                </p>
+                
+                <p></p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/yuzh233">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Artikel',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
