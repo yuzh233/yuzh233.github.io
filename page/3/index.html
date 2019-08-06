@@ -126,7 +126,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -142,8 +142,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2019/05/31/[20190531] maven | password encryption/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/blog/104.jpg" alt="20190531 maven | password encryption">
+        <a href="/2019/06/03/[20190603] spring-boot | part2(8~10)/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/89.jpg" alt="20190603 spring-boot | part2(8~10)">
         </a>
     </div>
     
@@ -151,17 +151,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-30T16:00:00.000Z">2019-05-31</time>
+                <time class="level-item has-text-grey" datetime="2019-06-02T16:00:00.000Z">2019-06-03</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/maven/">maven</a>
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/spring-boot/">spring-boot</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    20 minutes membaca (Sekitar 3045 kata)
+                    33 minutes read (About 4903 words)
                 </span>
                 
                 
@@ -170,25 +170,219 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/05/31/[20190531] maven | password encryption/">20190531 maven | password encryption</a>
+                <a class="has-link-black-ter" href="/2019/06/03/[20190603] spring-boot | part2(8~10)/">20190603 spring-boot | part2(8~10)</a>
             
         </h1>
         <div class="content">
-            <p>reference：<a href="https://maven.apache.org/guides/mini/guide-encryption.html" target="_blank" rel="noopener">https://maven.apache.org/guides/mini/guide-encryption.html</a></p>
-<hr>
-<ol>
-<li>Introduction</li>
-<li>How to create a master password</li>
-<li>How to encrypt server passwords</li>
-<li>How to keep the master password on removable drive</li>
-<li>Tips</li></ol>
+            <blockquote>
+<p>Spring Boot Reference Guide<br>2.1.5.RELEASE<br><a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#getting-started</a></p>
+</blockquote>
+<h1 style="color:green; text-align:center;">Part II. Getting Started</h1>
+
+<!-- TOC -->
+<ul>
+<li><a href="#8-introducing-spring-boot">8. Introducing Spring Boot</a></li>
+<li><a href="#9-system-requirements">9. System Requirements</a><ul>
+<li><a href="#91-servlet-containers">9.1 Servlet Containers</a></li>
+</ul>
+</li>
+<li><a href="#10-installing-spring-boot">10. Installing Spring Boot</a><ul>
+<li><a href="#101-installation-instructions-for-the-java-developer">10.1 Installation Instructions for the Java Developer</a><ul>
+<li><a href="#1011-maven-installation">10.1.1 Maven Installation</a></li>
+<li><a href="#1012-gradle-installation">10.1.2 Gradle Installation</a></li>
+</ul>
+</li>
+<li><a href="#102-installing-the-spring-boot-cli">10.2 Installing the Spring Boot CLI</a><ul>
+<li><a href="#1021-manual-installation">10.2.1 Manual Installation</a></li>
+<li><a href="#1022-installation-with-sdkman">10.2.2 Installation with SDKMAN!</a></li>
+<li><a href="#1023-osx-homebrew-installation">10.2.3 OSX Homebrew Installation</a></li>
+<li><a href="#1024-macports-installation">10.2.4 MacPorts Installation</a></li>
+<li><a href="#1025-command-line-completion">10.2.5 Command-line Completion</a></li>
+<li><a href="#1026-windows-scoop-installation">10.2.6 Windows Scoop Installation</a></li>
+<li><a href="#1027-quick-start-spring-cli-example">10.2.7 Quick-start Spring CLI Example</a></li>
+<li><a href="#103-upgrading-from-an-earlier-version-of-spring-boot">10.3 Upgrading from an Earlier Version of Spring Boot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#8-%08spring-boot-%E4%BB%8B%E7%BB%8D">8. spring boot 介绍</a></li>
+<li><a href="#9-%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">9. 系统要求</a><ul>
+<li><a href="#91-%08servlet-%E5%AE%B9%E5%99%A8">9.1 Servlet 容器</a></li>
+</ul>
+</li>
+<li><a href="#10-%E5%AE%89%E8%A3%85-spring-boot">10. 安装 spring boot</a><ul>
+<li><a href="#101-java-%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D">10.1 java 开发者的安装介绍</a><ul>
+<li><a href="#1011-maven-%E5%AE%89%E8%A3%85">10.1.1 Maven 安装</a></li>
+<li><a href="#1012-%E7%BB%A7%E6%89%BF-gradle">10.1.2 继承 Gradle</a></li>
+</ul>
+</li>
+<li><a href="#102-%E5%AE%89%E8%A3%85-spring-boot-cli%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7">10.2 安装 Spring Boot CLI（命令行工具）</a><ul>
+<li><a href="#1021-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85">10.2.1 手动安装</a></li>
+<li><a href="#1022--sdkman-%E5%AE%89%E8%A3%85">10.2.2  SDKMAN 安装</a></li>
+<li><a href="#1023-osx-homebrew-%E5%AE%89%E8%A3%85">10.2.3 OSX Homebrew 安装</a></li>
+<li><a href="#1024-macports-%E5%AE%89%E8%A3%85">10.2.4 MacPorts 安装</a></li>
+<li><a href="#1025-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%AF%91">10.2.5 命令行编译</a></li>
+<li><a href="#1026-windows-scoop-%E5%AE%89%E8%A3%85">10.2.6 Windows Scoop 安装</a></li>
+<li><a href="#1027-spring-cli-%E6%A1%88%E4%BE%8B%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">10.2.7 Spring CLI 案例快速开始</a></li>
+</ul>
+</li>
+<li><a href="#103-%E4%BB%8E-springboot-%E7%9A%84%E6%97%A9%E6%9C%9Fearlier%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7">10.3 从 SpringBoot 的早期（Earlier）版本升级</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/31/[20190531] maven | password encryption/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/06/03/[20190603] spring-boot | part2(8~10)/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/06/02/[20190602] spring-boot | part1/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/83.jpg" alt="20190602 spring-boot | part1">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-01T16:00:00.000Z">2019-06-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/spring-boot/">spring-boot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1410 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/02/[20190602] spring-boot | part1/">20190602 spring-boot | part1</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Spring Boot Reference Guide<br>2.1.5.RELEASE<br><a href="https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/</a></p>
+</blockquote>
+<h1 style="color:green; text-align:center;">Part I. Spring Boot Documentation</h1>
+
+<!-- TOC -->
+<ul>
+<li><a href="#part-i-spring-boot-documentation">Part I. Spring Boot Documentation</a><ul>
+<li><a href="#1-about-the-documentation">1. About the Documentation</a></li>
+<li><a href="#2-getting-help">2. Getting Help</a></li>
+<li><a href="#3-first-steps">3. First Steps</a></li>
+<li><a href="#4-working-with-spring-boot">4. Working with Spring Boot</a></li>
+<li><a href="#5-learning-about-spring-boot-features">5. Learning about Spring Boot Features</a></li>
+<li><a href="#6-moving-to-production">6. Moving to Production</a></li>
+<li><a href="#7-advanced-topics">7. Advanced Topics</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83spring-boot-%E6%96%87%E6%A1%A3">第一单元：Spring Boot 文档</a><ul>
+<li><a href="#1-%E5%85%B3%E4%BA%8E%E6%96%87%E6%A1%A3">1. 关于文档</a></li>
+<li><a href="#2-%E8%8E%B7%E5%BE%97%E5%B8%AE%E5%8A%A9">2. 获得帮助</a></li>
+<li><a href="#3-%E7%AC%AC%E4%B8%80%E6%AD%A5">3. 第一步</a></li>
+<li><a href="#4-%E4%BD%BF%E7%94%A8-spring-boot-%E5%B7%A5%E4%BD%9C">4. 使用 spring boot 工作</a></li>
+<li><a href="#5-%E5%AD%A6%E4%B9%A0-spring-boot-%E7%9A%84%E7%89%B9%E6%80%A7%E5%8A%9F%E8%83%BD">5. 学习 spring boot 的特性功能</a></li>
+<li><a href="#6-%E7%A7%BB%E5%8A%A8%E5%88%B0%E7%94%9F%E4%BA%A7">6. 移动到生产</a></li>
+<li><a href="#7-%E9%AB%98%E7%BA%A7%E4%B8%BB%E9%A2%98">7. 高级主题</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/02/[20190602] spring-boot | part1/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/06/01/[20190601] spring-boot | overview/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/91.jpg" alt="20190601 spring-boot | overview">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-31T16:00:00.000Z">2019-06-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/spring-boot/">spring-boot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 323 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/01/[20190601] spring-boot | overview/">20190601 spring-boot | overview</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Spring Boot makes it easy to create stand-alone, <strong>production-grade</strong> Spring based Applications that you can “just run”.</p>
+<p>We <strong>take an opinionated view</strong> of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.<br></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/01/[20190601] spring-boot | overview/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -226,7 +420,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 minutes membaca (Sekitar 1596 kata)
+                    11 minutes read (About 1596 words)
                 </span>
                 
                 
@@ -249,7 +443,72 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/31/Docker 补救指南（五） —— Docker Compose/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/05/31/Docker 补救指南（五） —— Docker Compose/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/05/31/[20190531] maven | password encryption/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/104.jpg" alt="20190531 maven | password encryption">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-30T16:00:00.000Z">2019-05-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/english-learning/">english-learning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/english-learning/maven/">maven</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20 minutes read (About 3045 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/31/[20190531] maven | password encryption/">20190531 maven | password encryption</a>
+            
+        </h1>
+        <div class="content">
+            <p>reference：<a href="https://maven.apache.org/guides/mini/guide-encryption.html" target="_blank" rel="noopener">https://maven.apache.org/guides/mini/guide-encryption.html</a></p>
+<hr>
+<ol>
+<li>Introduction</li>
+<li>How to create a master password</li>
+<li>How to encrypt server passwords</li>
+<li>How to keep the master password on removable drive</li>
+<li>Tips</li></ol>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/05/31/[20190531] maven | password encryption/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -287,7 +546,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 minutes membaca (Sekitar 1076 kata)
+                    7 minutes read (About 1076 words)
                 </span>
                 
                 
@@ -307,7 +566,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/30/Docker 补救指南（四）—— dockerfile-maven-plugin/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/05/30/Docker 补救指南（四）—— dockerfile-maven-plugin/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -345,7 +604,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 minutes membaca (Sekitar 1054 kata)
+                    7 minutes read (About 1054 words)
                 </span>
                 
                 
@@ -366,7 +625,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/29/[20190529] dockerfile-plugin | authentication/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/05/29/[20190529] dockerfile-plugin | authentication/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -404,7 +663,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes membaca (Sekitar 563 kata)
+                    4 minutes read (About 563 words)
                 </span>
                 
                 
@@ -424,7 +683,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/28/[20190528] Announcing GitHub Sponsors 💖/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/05/28/[20190528] Announcing GitHub Sponsors 💖/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -462,7 +721,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 minutes membaca (Sekitar 1558 kata)
+                    10 minutes read (About 1558 words)
                 </span>
                 
                 
@@ -495,7 +754,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/05/18/Docker 补救指南（三）—— Docker Swarm/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -533,7 +792,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 minutes membaca (Sekitar 1755 kata)
+                    12 minutes read (About 1755 words)
                 </span>
                 
                 
@@ -553,193 +812,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/12/Docker 补救指南（二）—— 网络管理/#more">Selengkapnya</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/05/11/Docker 补救指南（一）—— 基础使用/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/docker-note/wallhaven-263173.jpg" alt="Docker 补救指南（一）—— 基础使用">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-10T16:00:00.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/docker-note/">docker-note</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    an hour membaca (Sekitar 12852 kata)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/11/Docker 补救指南（一）—— 基础使用/">Docker 补救指南（一）—— 基础使用</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="配置阿里云镜像加速"><a href="#配置阿里云镜像加速" class="headerlink" title="配置阿里云镜像加速"></a>配置阿里云镜像加速</h1><p>阿里云主页搜索 <a href="https://help.aliyun.com/product/60716.html?spm=a2c4g.11186623.6.540.10823864peBl6O" target="_blank" rel="noopener">容器镜像服务</a>，进入<a href="https://cr.console.aliyun.com/cn-shanghai/instances/mirrors" target="_blank" rel="noopener">「镜像仓库管理控制台」</a>，根据说明文档操作即可。</p>
-<h1 id="学会使用帮助命令"><a href="#学会使用帮助命令" class="headerlink" title="学会使用帮助命令"></a>学会使用帮助命令</h1><p>查看版本：</p>
-<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<p>查看docker安装信息：</p>
-<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-<p>查看命令说明：</p>
-<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker --<span class="hljs-built_in">help</span></span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/11/Docker 补救指南（一）—— 基础使用/#more">Selengkapnya</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/11/08/根据树的前序和后序表达式构造唯一树/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-282224.jpg" alt="根据树的前序和后序表达式构造唯一树">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-08T12:53:00.000Z">2018-11-08</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes membaca (Sekitar 1076 kata)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/11/08/根据树的前序和后序表达式构造唯一树/">根据树的前序和后序表达式构造唯一树</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>原题是“根据树的前序和后序表达式求中序表达式”，构造出了树求中序表达式还是问题吗？</p>
-</blockquote>
-<p>构造树是需要一定技巧的，需要不断的递归分析。将大规模分为小规模，将每个小规模再细分，直到不可再分，树也就构建好了。就跟 <a href="http://yuzh.xyz/2018/08/14/%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E6%8E%92%E5%BA%8F/#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a> 一样</p>
-<p>前序和中序分别是：</p>
-<p><strong>pre: A B D E G C F</strong></p>
-<p><strong>on: D B G E A C F</strong><br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/11/08/根据树的前序和后序表达式构造唯一树/#more">Selengkapnya</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/11/08/树的三种遍历方式/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-204334.jpg" alt="树的三种遍历方式">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-08T03:46:00.000Z">2018-11-08</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/interview/">interview</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes membaca (Sekitar 904 kata)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/11/08/树的三种遍历方式/">树的三种遍历方式</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/post_image/interview-img/image_43.png" alt></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/11/08/树的三种遍历方式/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2019/05/12/Docker 补救指南（二）—— 网络管理/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -760,10 +833,10 @@
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Sebelumnya</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/4/">Berikutnya</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/4/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -775,9 +848,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -824,17 +897,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Artikel
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
-                        59
+                        62
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategori
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         8
@@ -844,17 +917,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tag
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
-                        31
+                        34
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
-                IKUTI</a>
+                SEGUIR</a>
         </div>
         
         
@@ -903,7 +976,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Tautan
+            Links
         </h3>
         <ul class="menu-list">
         
@@ -930,7 +1003,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategori
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -1007,9 +1080,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Awan tag
+            Nube de etiquetas
         </h3>
-        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lombook/" style="font-size: 10px;">lombook</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
     </div>
 </div>
 
@@ -1021,8 +1094,65 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/Atom 使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806170522_aPWU7F_63199486_p0.jpeg" alt="Atom 使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:18.120Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/Atom 使用/" class="has-link-black-ter is-size-6">Atom 使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/oh-my-zsh配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806172238_0vmLeT_wallhaven-310382.jpeg" alt="oh-my-zsh 配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:07.805Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/oh-my-zsh配置/" class="has-link-black-ter is-size-6">oh-my-zsh 配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190805215303_aXCEyp_wallhaven-259112.jpeg" alt="Lombook 插件与 xXxx 格式命名变量带来的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-05T13:54:00.672Z">2019-08-05</time></div>
+                    <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="has-link-black-ter is-size-6">Lombook 插件与 xXxx 格式命名变量带来的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1062,63 +1192,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/16/酷炫工具/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
-                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/终端走代理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
-                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1127,7 +1200,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1137,7 +1210,7 @@
                     <span class="level-item">August 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1250,7 +1323,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1265,6 +1338,13 @@
                     <a class="tags has-addons" href="/tags/aop/">
                         <span class="tag">aop</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/atom/">
+                        <span class="tag">atom</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1353,6 +1433,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/lombook/">
+                        <span class="tag">lombook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
                         <span class="tag is-grey">3</span>
@@ -1425,6 +1512,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tomcat/">
                         <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zsh/">
+                        <span class="tag">zsh</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1491,8 +1585,65 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/Atom 使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806170522_aPWU7F_63199486_p0.jpeg" alt="Atom 使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:18.120Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/Atom 使用/" class="has-link-black-ter is-size-6">Atom 使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/oh-my-zsh配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806172238_0vmLeT_wallhaven-310382.jpeg" alt="oh-my-zsh 配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:07.805Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/oh-my-zsh配置/" class="has-link-black-ter is-size-6">oh-my-zsh 配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190805215303_aXCEyp_wallhaven-259112.jpeg" alt="Lombook 插件与 xXxx 格式命名变量带来的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-05T13:54:00.672Z">2019-08-05</time></div>
+                    <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="has-link-black-ter is-size-6">Lombook 插件与 xXxx 格式命名变量带来的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1532,63 +1683,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/16/酷炫工具/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
-                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/终端走代理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
-                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1597,7 +1691,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1607,7 +1701,7 @@
                     <span class="level-item">August 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1720,7 +1814,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1735,6 +1829,13 @@
                     <a class="tags has-addons" href="/tags/aop/">
                         <span class="tag">aop</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/atom/">
+                        <span class="tag">atom</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1823,6 +1924,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/lombook/">
+                        <span class="tag">lombook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
                         <span class="tag is-grey">3</span>
@@ -1895,6 +2003,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tomcat/">
                         <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zsh/">
+                        <span class="tag">zsh</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2072,7 +2187,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+<a id="back-to-top" title="Back to Top" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2106,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -2118,11 +2233,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Artikel',
-                PAGES: 'Halaman',
-                CATEGORIES: 'Kategori',
-                TAGS: 'Tag',
-                UNTITLED: 'Tanpa Judul',
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };

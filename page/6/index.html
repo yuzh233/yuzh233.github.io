@@ -126,7 +126,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Pencarian" href="javascript:;">
+                <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -139,6 +139,200 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/07/27/分布式技术入坑指南（六）/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/9.jpg" alt="分布式技术入坑指南（六）">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-07-27T14:24:16.000Z">2018-07-27</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 minutes read (About 1684 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/07/27/分布式技术入坑指南（六）/">分布式技术入坑指南（六）</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="15-SSO单点登陆系统搭建"><a href="#15-SSO单点登陆系统搭建" class="headerlink" title="15. SSO单点登陆系统搭建"></a>15. SSO单点登陆系统搭建</h1><p><strong>模块划分：</strong></p>
+<ul>
+<li>sso.taotao.interface </li>
+<li>sso.taotao.service </li>
+<li>sso.taotao.web </li>
+</ul>
+<p><strong>两个问题：</strong></p>
+<ul>
+<li>不同域名之间Cookie是不能共享的，这也意味着用户在 <em>sso.taotao.com</em> 系统登陆之后，跳转到 <em>taotao.com</em> 后记录用户登陆凭证(token)的Cookie不存在，访问某些个人信息时提示重新登陆。</li>
+<li>不同域名之间的跨域请求是不会返回数据的，比如 <em>item.taotao.com</em> 下一个订单需要发送一个请求到 <em>sso.taotao.com</em> 校验当前用户是否登陆，请求发送成功并且会被处理，但是数据是返回不到 <em>item.taotao.com</em> 系统的。</li>
+</ul>
+<p><strong>解决办法：</strong></p>
+<ul>
+<li>设置Cookie的doMain属性</li>
+<li>以JSONP的方式请求获得数据</li></ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/07/27/分布式技术入坑指南（六）/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/07/26/分布式技术入坑指南（五）/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/4.jpg" alt="分布式技术入坑指南（五）">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-07-26T07:56:57.000Z">2018-07-26</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1301 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/07/26/分布式技术入坑指南（五）/">分布式技术入坑指南（五）</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>13.网页静态化之FreeMarker<br>14.反向代理/负载均衡服务器：Nginx</p>
+</blockquote>
+<h1 id="网页静态化"><a href="#网页静态化" class="headerlink" title="网页静态化"></a>网页静态化</h1><blockquote>
+<p><b>什么是静态化？</b><br>通过一些技术手段（Freemarker/valocity）将动态的页面（jsp,asp.net,php) 转换成静态的页面，通过浏览器直接访问静态页面。<br><b>为什么要静态化？</b></p>
+<ol>
+<li>通过浏览器直接访问静态的页面,不需要经过程序处理，它的访问速度高。稳定性好。</li>
+<li>更有效的防止安全漏洞问题，比如不易遭受黑客攻击。</li>
+<li>静态的页面更容易被搜索引擎收录。</li>
+</ol>
+</blockquote>
+<p>更多概念见笔记文档，快速入门及整合Spring访问项目学习仓库地址：<a href="https://github.com/yuzh233/FreeMarker" target="_blank" rel="noopener">https://github.com/yuzh233/FreeMarker</a><br></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/07/26/分布式技术入坑指南（五）/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2018/07/25/分布式技术入坑指南（四）/" class="image is-7by1">
+            <img class="thumbnail" src="http://img.yuzh.xyz/blog/2.jpg" alt="分布式技术入坑指南（四）">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-07-25T10:15:03.000Z">2018-07-25</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 minutes read (About 2356 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/07/25/分布式技术入坑指南（四）/">分布式技术入坑指南（四）</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="12-Java消息队列学习与使用"><a href="#12-Java消息队列学习与使用" class="headerlink" title="12.Java消息队列学习与使用"></a>12.Java消息队列学习与使用</h1><h2 id="ActiveMQ"><a href="#ActiveMQ" class="headerlink" title="ActiveMQ"></a>ActiveMQ</h2><p>官网：<a href="http://activemq.apache.org/" target="_blank" rel="noopener">http://activemq.apache.org/</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>解压</li>
+<li>cd到bin目录</li>
+<li>./activemq start</li>
+<li>访问，默认端口：8161</li>
+<li>默认用户名与密码：admin</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/07/25/分布式技术入坑指南（四）/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-image">
@@ -157,7 +351,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 minutes membaca (Sekitar 2714 kata)
+                    18 minutes read (About 2714 words)
                 </span>
                 
                 
@@ -182,7 +376,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/22/分布式技术入坑指南（三）/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2018/07/22/分布式技术入坑指南（三）/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -216,7 +410,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    17 minutes membaca (Sekitar 2512 kata)
+                    17 minutes read (About 2512 words)
                 </span>
                 
                 
@@ -247,7 +441,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/14/分布式技术入坑指南（二）/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2018/07/14/分布式技术入坑指南（二）/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -281,7 +475,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    26 minutes membaca (Sekitar 3963 kata)
+                    26 minutes read (About 3963 words)
                 </span>
                 
                 
@@ -303,7 +497,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/08/分布式技术入坑指南（一）/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2018/07/08/分布式技术入坑指南（一）/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -337,7 +531,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes membaca (Sekitar 623 kata)
+                    4 minutes read (About 623 words)
                 </span>
                 
                 
@@ -357,7 +551,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/06/dubbo监控中心-dubbo-admin-war的打包和部署/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2018/07/06/dubbo监控中心-dubbo-admin-war的打包和部署/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -391,7 +585,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes membaca (Sekitar 514 kata)
+                    3 minutes read (About 514 words)
                 </span>
                 
                 
@@ -415,7 +609,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/19/SpringAop中JoinPoint对象使用时出现的问题/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2018/06/19/SpringAop中JoinPoint对象使用时出现的问题/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -449,7 +643,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds membaca (Sekitar 91 kata)
+                    a few seconds read (About 91 words)
                 </span>
                 
                 
@@ -500,7 +694,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 minutes membaca (Sekitar 1955 kata)
+                    13 minutes read (About 1955 words)
                 </span>
                 
                 
@@ -526,122 +720,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/16/Linux下部署个人站点后的运行问题/#more">Selengkapnya</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/06/15/Linux下搭建Hexo博客环境/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/blog/14.jpg" alt="Linux下搭建Hexo博客环境">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-15T13:25:39.000Z">2018-06-15</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes membaca (Sekitar 996 kata)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/15/Linux下搭建Hexo博客环境/">Linux下搭建Hexo博客环境</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="Linux下搭建Hexo博客环境"><a href="#Linux下搭建Hexo博客环境" class="headerlink" title="Linux下搭建Hexo博客环境"></a>Linux下搭建Hexo博客环境</h1><blockquote>
-<p>前不久在自己电脑上搭建了基于 Github+Hexo 的个人博客，今天试着在Linux下搭建hexo环境并通过域名解析本地IP运行起来。刚好前几天在阿里云买了ECS云服务器和域名，还不是很熟练，不用白不用。😄</p>
-</blockquote>
-<h2 id="Steps-1-：安装Git"><a href="#Steps-1-：安装Git" class="headerlink" title="Steps 1 ：安装Git"></a>Steps 1 ：安装Git</h2>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/15/Linux下搭建Hexo博客环境/#more">Selengkapnya</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/06/09/First Post/" class="image is-7by1">
-            <img class="thumbnail" src="http://img.yuzh.xyz/blog/3.jpg" alt="First Post">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-09T09:00:17.000Z">2018-06-09</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    16 minutes membaca (Sekitar 2419 kata)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/09/First Post/">First Post</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="第一篇，心情却不是很好。"><a href="#第一篇，心情却不是很好。" class="headerlink" title="第一篇，心情却不是很好。"></a>第一篇，心情却不是很好。</h1><blockquote>
-<p>&emsp;&emsp;起初只是室友不经意间的一句话，说：某某人现在在自学，还参加了学校的软件杯比赛，还报名了培训班，说应该学的比我还要好的多了。当时听完心里挺不舒服的，想说点什么证明自己来怼他，不过还是算了，毕竟我们关系还不错，没必要为了这点小事伤了和气显得自己多小气的样子，我知道和他辩解没有用，我也不想怪他什么，毕竟软件这个专业只有自己真心投入了才知道过程的艰辛。可是今天这种情况让我有点莫名的心酸…</p>
-</blockquote>
-<p>&emsp; &emsp;和往常一样一起吃完中午饭回来，路上看到他的许多同学去上课。说点题外的：大二了，这垃圾学校知道自己教学水平不行和培训机构合作怂恿同学们去培训，培训还得自己出钱。培训老师抓住大多数人的普遍心理让他们醒悟过来觉得现在开始学习，四个月后轻轻松松就可以学到所有技术点，然后坐着办公室拿高薪，敲着小代码，喝着下午茶，过着轻轻松松的生活，好不惬意… 一个个积极的报名去培训上课。我不想说培训机构有什么不好，我自己这两年学习过来的资料大多数都是培训机构的，论师资力量这垃圾学校是没得比的。</p>
-<p>&emsp; &emsp;回来的路上自然的聊起培训的事，说什么记不太清，反正字里行间意思就是说他们多努力，多自觉的样子，周末还一个个去上课，这就算了，拿我比较干什么！心里压抑的情绪顿时忍不住了，我说没什么了不起的，他们要是自觉想学的话也不会想到现在去报班，如果不是大二培训机构隔三岔五的来洗脑会有这么多 <code>焕然大悟</code>、<code>怎么就要毕业了</code>、<code>再不学习来不及了</code>、<code>我还什么都没学到怎么找工作</code>的同志们回头赎罪的吗？<br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/09/First Post/#more">Selengkapnya</a>
+                <a class="button is-size-7 is-light" href="/2018/06/16/Linux下部署个人站点后的运行问题/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -662,10 +741,10 @@
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Sebelumnya</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Anterior</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/7/">Berikutnya</a>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/page/7/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -676,6 +755,8 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
             
             <li><a class="pagination-link is-current" href="/page/6/">6</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -722,17 +803,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Artikel
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
-                        59
+                        62
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategori
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         8
@@ -742,17 +823,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tag
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
-                        31
+                        34
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="http://github.com/yuzh233/" target="_blank">
-                IKUTI</a>
+                SEGUIR</a>
         </div>
         
         
@@ -801,7 +882,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Tautan
+            Links
         </h3>
         <ul class="menu-list">
         
@@ -828,7 +909,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategori
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -905,9 +986,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Awan tag
+            Nube de etiquetas
         </h3>
-        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
+        <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aop/" style="font-size: 11.67px;">aop</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/cokie/" style="font-size: 10px;">cokie</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/dockerfile/" style="font-size: 10px;">dockerfile</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/freeMarker/" style="font-size: 10px;">freeMarker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lombook/" style="font-size: 10px;">lombook</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nio/" style="font-size: 10px;">nio</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/solr/" style="font-size: 10px;">solr</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 18.33px;">spring-boot</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/分布式/" style="font-size: 16.67px;">分布式</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/无关代码/" style="font-size: 10px;">无关代码</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a>
     </div>
 </div>
 
@@ -919,8 +1000,65 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/Atom 使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806170522_aPWU7F_63199486_p0.jpeg" alt="Atom 使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:18.120Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/Atom 使用/" class="has-link-black-ter is-size-6">Atom 使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/oh-my-zsh配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806172238_0vmLeT_wallhaven-310382.jpeg" alt="oh-my-zsh 配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:07.805Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/oh-my-zsh配置/" class="has-link-black-ter is-size-6">oh-my-zsh 配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190805215303_aXCEyp_wallhaven-259112.jpeg" alt="Lombook 插件与 xXxx 格式命名变量带来的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-05T13:54:00.672Z">2019-08-05</time></div>
+                    <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="has-link-black-ter is-size-6">Lombook 插件与 xXxx 格式命名变量带来的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -960,63 +1098,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/16/酷炫工具/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
-                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/终端走代理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
-                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1025,7 +1106,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1035,7 +1116,7 @@
                     <span class="level-item">August 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1148,7 +1229,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1163,6 +1244,13 @@
                     <a class="tags has-addons" href="/tags/aop/">
                         <span class="tag">aop</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/atom/">
+                        <span class="tag">atom</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1251,6 +1339,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/lombook/">
+                        <span class="tag">lombook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
                         <span class="tag is-grey">3</span>
@@ -1323,6 +1418,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tomcat/">
                         <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zsh/">
+                        <span class="tag">zsh</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1389,8 +1491,65 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/Atom 使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806170522_aPWU7F_63199486_p0.jpeg" alt="Atom 使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:18.120Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/Atom 使用/" class="has-link-black-ter is-size-6">Atom 使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/oh-my-zsh配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190806172238_0vmLeT_wallhaven-310382.jpeg" alt="oh-my-zsh 配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T09:23:07.805Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/oh-my-zsh配置/" class="has-link-black-ter is-size-6">oh-my-zsh 配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img.yuzh.xyz/20190805215303_aXCEyp_wallhaven-259112.jpeg" alt="Lombook 插件与 xXxx 格式命名变量带来的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-05T13:54:00.672Z">2019-08-05</time></div>
+                    <a href="/2019/08/05/Lombook 插件与 xXxx 格式命名变量带来的问题/" class="has-link-black-ter is-size-6">Lombook 插件与 xXxx 格式命名变量带来的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1430,63 +1589,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/16/酷炫工具/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/21.jpg" alt="酷炫工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T16:00:00.000Z">2019-07-16</time></div>
-                    <a href="/2019/07/16/酷炫工具/" class="has-link-black-ter is-size-6">酷炫工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/终端走代理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/10.jpg" alt="终端走代理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T16:00:00.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/终端走代理/" class="has-link-black-ter is-size-6">终端走代理</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/linux-note/">linux-note</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/01/high-performance-mysql-note/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.yuzh.xyz/blog/wallhaven-50284.jpg" alt="高性能 MySql —— 学习笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T16:00:00.000Z">2019-07-01</time></div>
-                    <a href="/2019/07/01/high-performance-mysql-note/" class="has-link-black-ter is-size-6">高性能 MySql —— 学习笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1495,7 +1597,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1505,7 +1607,7 @@
                     <span class="level-item">August 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1618,7 +1720,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1633,6 +1735,13 @@
                     <a class="tags has-addons" href="/tags/aop/">
                         <span class="tag">aop</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/atom/">
+                        <span class="tag">atom</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1721,6 +1830,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/lombook/">
+                        <span class="tag">lombook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
                         <span class="tag is-grey">3</span>
@@ -1793,6 +1909,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tomcat/">
                         <span class="tag">tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zsh/">
+                        <span class="tag">zsh</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1970,7 +2093,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
+<a id="back-to-top" title="Back to Top" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2004,7 +2127,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu..">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -2016,11 +2139,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Artikel',
-                PAGES: 'Halaman',
-                CATEGORIES: 'Kategori',
-                TAGS: 'Tag',
-                UNTITLED: 'Tanpa Judul',
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };
